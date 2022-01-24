@@ -1,0 +1,8 @@
+--dir
+.
+--ignore=/vendor/bundle
+--ignore=/node_modules
+--ignore=/bin
+--ignore=/.cache
+--ignore=/public
+--ignore=/storage

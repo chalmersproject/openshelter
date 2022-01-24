@@ -1,0 +1,15 @@
+# See https://github.com/Shopify/tapioca
+
+gem:
+  doc: true
+  exclude:
+    - rake
+    - yard
+    - yard-sorbet
+    - thor
+    - pry
+    - pry-rails
+    - rubocop-shopify
+    - rubocop-rails
+    - rubocop-sorbet
+    - rails_semantic_logger

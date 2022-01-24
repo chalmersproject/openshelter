@@ -1,0 +1,45 @@
+# The behavior of RuboCop can be controlled via the .rubocop.yml
+# configuration file. It makes it possible to enable/disable
+# certain cops (checks) and to alter their behavior if they accept
+# any parameters. The file can be placed either in your home
+# directory or in some project directory.
+#
+# RuboCop will start looking for the configuration file in the directory
+# where the inspected file is and continue its way up to the root directory.
+#
+# See https://docs.rubocop.org/rubocop/configuration
+
+require:
+  - rubocop-sorbet
+  - rubocop-rails
+
+inherit_gem:
+  rubocop-shopify: rubocop.yml
+  prettier: rubocop.yml
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - Rakefile
+    - config.ru
+    - .cache/**/*
+    - build/**/*
+    - public/**/*
+    - bin/**/*
+    - log/**/*
+    - tmp/**/*
+    - storage/**/*
+    - sorbet/rbi/sorbet-typed/**/*
+    - sorbet/rbi/gems/**/*
+    - sorbet/rbi/dsl/**/*
+    - vendor/**/*
+    - node_modules/**/*
+
+Layout/LineLength:
+  Max: 80
+
+Style/Documentation:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma

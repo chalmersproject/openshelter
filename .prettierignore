@@ -1,0 +1,14 @@
+.cache/
+build/
+public/build/
+node_modules/
+bin/
+log/
+tmp/
+storage/
+vendor/
+sorbet/rbi/sorbet-typed/
+sorbet/rbi/gems/
+sorbet/rbi/dsl/
+package-lock.json
+yarn.lock

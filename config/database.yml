@@ -1,0 +1,26 @@
+default: &default
+  adapter: postgresql
+  host: localhost
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+production:
+  <<: *default
+  username: <%= Rails.application.credentials.dig(:database, :username) %>
+  password: <%= Rails.application.credentials.dig(:database, :password) %>
+  database: chalmers_production
+
+development: &development
+  <<: *default
+  host: postgres
+  username: postgres
+  password: postgres
+  database: chalmers_development
+
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+#
+# Do not set this db to the same as development or production.
+test:
+  <<: *development
+  database: chalmers_test

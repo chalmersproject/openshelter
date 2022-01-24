@@ -1,0 +1,111 @@
+{
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app_devcontainer",
+  "workspaceFolder": "/workspace",
+
+  // Set *default* container specific settings.json values on container create.
+  "settings": {
+    // Database tools
+    "sqltools.connections": [
+      {
+        "name": "development",
+        "driver": "PostgreSQL",
+        "server": "postgres",
+        "previewLimit": 50,
+        "port": 5432,
+        "database": "chalmers_development",
+        "username": "postgres",
+        "password": "postgres"
+      },
+      {
+        "name": "test",
+        "driver": "PostgreSQL",
+        "server": "postgres",
+        "previewLimit": 50,
+        "port": 5432,
+        "database": "chalmers_test",
+        "username": "postgres",
+        "password": "postgres"
+      }
+    ],
+
+    // Formatting
+    "editor.formatOnSave": true,
+    "[markdown]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[yaml]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[ruby]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+
+    // Git
+    "git.autofetch": true,
+    "gitlens.codeLens.enabled": false,
+
+    // Ruby
+    "ruby.useLanguageServer": false,
+    "ruby.useBundler": true,
+    "ruby.lint": { "rubocop": false },
+    "ruby.rubocop.useBundler": true,
+    "ruby.rubocop.onSave": true,
+
+    // Sorbet (for Ruby)
+    "sorbet.enabled": true,
+
+    // ESLint (for JS)
+    "eslint.packageManager": "yarn"
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "oderwat.indent-rainbow",
+    "visualstudioexptteam.vscodeintellicode",
+    "editorconfig.editorconfig",
+    "eamodio.gitlens",
+    "christian-kohler.path-intellisense",
+    "christian-kohler.npm-intellisense",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker",
+    "apollographql.vscode-apollo",
+    "redhat.vscode-yaml",
+    "mikestead.dotenv",
+    "mtxr.sqltools",
+    "mtxr.sqltools-driver-pg",
+    "rebornix.Ruby",
+    "wingrunr21.vscode-ruby",
+    "misogi.ruby-rubocop",
+    "sorbet.sorbet-vscode-extension"
+  ],
+
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "yarn install",
+
+  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  // "remoteUser": "vscode",
+  "features": {
+    "docker-from-docker": "20.10",
+    "git": "os-provided"
+  }
+}

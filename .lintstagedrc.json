@@ -1,0 +1,6 @@
+{
+  "*.{rb,js,jsx,ts,tsx,css,md,html,json,yaml,yml}": "yarn format:partial",
+  "*.rb": "yarn fix:rubocop",
+  "*.{js,jsx,ts,tsx}": "yarn fix:eslint",
+  "*.{ts,tsx}": "yarn lint:typescript"
+}

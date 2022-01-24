@@ -1,0 +1,40 @@
+version: "3"
+
+services:
+  app_devcontainer:
+    image: ghcr.io/chalmersproject/chalmersproject_com-devcontainer
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - app-vscode-extensions:/root/.vscode-server/extensions
+      - app-gems-cache:/usr/local/bundle
+      - app-yarn-cache:/usr/local/share/.cache/yarn/v6
+      - app-node-cache:/workspace/node_modules
+      - app-cache:/workspace/.cache
+      - app-build:/workspace/build
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ..:/workspace:cached
+    depends_on: ["postgres"]
+    command: sleep infinity
+    ports:
+      - 3000:3000
+
+  postgres:
+    image: postgres:14
+    volumes:
+      - postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - 5432:5432
+
+volumes:
+  app-vscode-extensions: null
+  app-gems-cache: null
+  app-yarn-cache: null
+  app-node-cache: null
+  app-build: null
+  app-cache: null
+  postgres: null
