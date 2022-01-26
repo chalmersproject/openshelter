@@ -1,5 +1,5 @@
 {
-  "*.{rb,js,jsx,ts,tsx,css,md,html,json,yaml,yml}": "yarn format:partial",
+  "*.{rb,js,jsx,ts,tsx,css,md,html,json,yaml,yml}": "yarn fmt:partial",
   "*.rb": "yarn fix:rubocop",
   "*.{js,jsx,ts,tsx}": "yarn fix:eslint",
   "*.{ts,tsx}": "yarn lint:typescript"

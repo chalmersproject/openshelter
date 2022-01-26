@@ -59,9 +59,21 @@ module Chalmers
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
+    # Configure sessions
+    config.session_store(:cookie_store, key: "session")
+    config.middleware.use(ActionDispatch::Cookies)
+    config.middleware.use(config.session_store, config.session_options)
+
+    # Configure middleware for Rails Admin
+    config.middleware.use(ActionDispatch::Flash)
+    config.middleware.use(Rack::MethodOverride)
+
     # Configure Active Record
     config.active_record.schema_migrations_table_name = "_migrations"
     config.active_record.internal_metadata_table_name = "_metadata"
+
+    # Configure Active Support
+    config.active_support.remove_deprecated_time_with_zone_name = true
 
     # Configure logging
     config.colorize_logging = true

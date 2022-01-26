@@ -12,7 +12,10 @@ class Rails::Conductor::BaseController
   def helpers; end
 
   module HelperMethods
+    include ::ActionText::ContentHelper
+    include ::ActionText::TagHelper
     include ::ActionController::Base::HelperMethods
+    include ::DeviseHelper
   end
 
   class HelperProxy < ::ActionView::Base

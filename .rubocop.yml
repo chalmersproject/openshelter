@@ -12,6 +12,7 @@
 require:
   - rubocop-sorbet
   - rubocop-rails
+  - rubocop-graphql
 
 inherit_gem:
   rubocop-shopify: rubocop.yml
@@ -34,6 +35,15 @@ AllCops:
     - sorbet/rbi/dsl/**/*
     - vendor/**/*
     - node_modules/**/*
+  Include:
+    - "**/*.rb"
+    - "**/*.rbi"
+    - "**/*.gemfile"
+    - "**/*.gemspec"
+    - "**/*.rake"
+    - "**/*.ru"
+    - "**/Gemfile"
+    - "**/Rakefile"
 
 Layout/LineLength:
   Max: 80
@@ -43,3 +53,7 @@ Style/Documentation:
 
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
+
+# You guys think I have time for this shit?
+GraphQL/ObjectDescription:
+  Enabled: false

@@ -3,13 +3,12 @@
 gem:
   doc: true
   exclude:
-    - rake
-    - yard
-    - yard-sorbet
-    - thor
     - pry
     - pry-rails
-    - rubocop-shopify
+    - rake
     - rubocop-rails
+    - rubocop-shopify
     - rubocop-sorbet
-    - rails_semantic_logger
+    - thor
+    - yard
+    - yard-sorbet

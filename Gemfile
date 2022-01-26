@@ -8,12 +8,29 @@ ruby "3.0.3"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.1"
 
+# Administrate app with Rails Admin
+gem "rails_admin", [">= 3.0.0.beta2", "< 4"]
+
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
 # Use Postgres as the database for Active Record
 gem "pg", "~> 1.2.3"
 gem "pg_search", "~> 2.3.6"
+
+# Expose a GraphQL API
+gem "graphql", "~> 1.13.6"
+gem "graphiql-rails", "~> 1.8.0"
+
+# Authenticate users with Devise
+gem "devise", "~> 4.8.1"
+
+# Authorize actions with Pundit
+gem "pundit", "~> 2.1.1"
+
+# Audit model changes with PaperTrail
+gem "paper_trail", "~> 12.2.0"
+# gem "paper_trail-association_tracking", "~> 2.1.3"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
@@ -65,6 +82,7 @@ gem "rubocop", group: :development, require: false
 gem "rubocop-shopify", group: :development, require: false
 gem "rubocop-sorbet", group: :development, require: false
 gem "rubocop-rails", group: :development, require: false
+gem "rubocop-graphql", group: :development, require: false
 gem "unparser", group: :development, require: false
 
 # Enable autoloading with zeitwerk

@@ -4681,8 +4681,9 @@ class ActiveSupport::Logger < ::Logger
     # logger = Logger.new(STDOUT)
     # ActiveSupport::Logger.logger_outputs_to?(logger, STDOUT)
     # # => true
-    def logger_outputs_to?(logger, *sources); end
+    def logger_outputs_to?(*args); end
 
+    def new(*args, **kwargs); end
     def silencer; end
     def silencer=(val); end
   end
@@ -6993,6 +6994,15 @@ end
 # vehicle.car?   # => true
 # vehicle.bike?  # => false
 class ActiveSupport::StringInquirer < ::String
+  sig { returns(T::Boolean) }
+  def development?; end
+
+  sig { returns(T::Boolean) }
+  def production?; end
+
+  sig { returns(T::Boolean) }
+  def test?; end
+
   private
 
   def method_missing(method_name, *arguments); end
@@ -11047,6 +11057,35 @@ class Integer < ::Numeric
   # 2.months # => 2 months
   def months; end
 
+  # Check whether the integer is evenly divisible by the argument.
+  #
+  # 0.multiple_of?(0)  # => true
+  # 6.multiple_of?(5)  # => false
+  # 10.multiple_of?(2) # => true
+  def multiple_of?(number); end
+
+  # Ordinal returns the suffix used to denote the position
+  # in an ordered sequence such as 1st, 2nd, 3rd, 4th.
+  #
+  # 1.ordinal     # => "st"
+  # 2.ordinal     # => "nd"
+  # 1002.ordinal  # => "nd"
+  # 1003.ordinal  # => "rd"
+  # -11.ordinal   # => "th"
+  # -1001.ordinal # => "st"
+  def ordinal; end
+
+  # Ordinalize turns a number into an ordinal string used to denote the
+  # position in an ordered sequence such as 1st, 2nd, 3rd, 4th.
+  #
+  # 1.ordinalize     # => "1st"
+  # 2.ordinalize     # => "2nd"
+  # 1002.ordinalize  # => "1002nd"
+  # 1003.ordinalize  # => "1003rd"
+  # -11.ordinalize   # => "-11th"
+  # -1001.ordinalize # => "-1001st"
+  def ordinalize; end
+
   # Returns a Duration instance matching the number of years provided.
   #
   # 2.years # => 2 years
@@ -11061,7 +11100,15 @@ end
 Integer::GMP_VERSION = T.let(T.unsafe(nil), String)
 
 module Kernel
+  # class_eval on an object acts like singleton_class.class_eval.
+  def class_eval(*args, &block); end
+
   private
+
+  # A shortcut to define a toplevel concern, not within a module.
+  #
+  # See Module::Concerning for more.
+  def concern(topic, &module_definition); end
 
   # Sets $VERBOSE to +true+ for the duration of the block and back to its
   # original value afterwards.
@@ -11092,6 +11139,11 @@ module Kernel
   def with_warnings(flag); end
 
   class << self
+    # A shortcut to define a toplevel concern, not within a module.
+    #
+    # See Module::Concerning for more.
+    def concern(topic, &module_definition); end
+
     # Sets $VERBOSE to +true+ for the duration of the block and back to its
     # original value afterwards.
     def enable_warnings(&block); end
@@ -12608,6 +12660,20 @@ end
 
 class Pathname
   def as_json(options = T.unsafe(nil)); end
+
+  # Returns the receiver if the named file exists otherwise returns +nil+.
+  # <tt>pathname.existence</tt> is equivalent to
+  #
+  # pathname.exist? ? pathname : nil
+  #
+  # For example, something like
+  #
+  # content = pathname.read if pathname.exist?
+  #
+  # becomes
+  #
+  # content = pathname.existence&.read
+  def existence; end
 end
 
 class Process::Status
@@ -12679,6 +12745,40 @@ class Regexp::Token < ::Struct
     def new(*_arg0); end
   end
 end
+
+module SecureRandom
+  extend ::Random::Formatter
+
+  class << self
+    # SecureRandom.base36 generates a random base36 string in lowercase.
+    #
+    # The argument _n_ specifies the length of the random string to be generated.
+    #
+    # If _n_ is not specified or is +nil+, 16 is assumed. It may be larger in the future.
+    # This method can be used over +base58+ if a deterministic case key is necessary.
+    #
+    # The result will contain alphanumeric characters in lowercase.
+    #
+    # p SecureRandom.base36 # => "4kugl2pdqmscqtje"
+    # p SecureRandom.base36(24) # => "77tmhrhjfvfdwodq8w7ev2m7"
+    def base36(n = T.unsafe(nil)); end
+
+    # SecureRandom.base58 generates a random base58 string.
+    #
+    # The argument _n_ specifies the length of the random string to be generated.
+    #
+    # If _n_ is not specified or is +nil+, 16 is assumed. It may be larger in the future.
+    #
+    # The result may contain alphanumeric characters except 0, O, I and l.
+    #
+    # p SecureRandom.base58 # => "4kUgL2pdQMSCQtjE"
+    # p SecureRandom.base58(24) # => "77TMHrHJFvFDwodq8w7Ev2m7"
+    def base58(n = T.unsafe(nil)); end
+  end
+end
+
+SecureRandom::BASE36_ALPHABET = T.let(T.unsafe(nil), Array)
+SecureRandom::BASE58_ALPHABET = T.let(T.unsafe(nil), Array)
 
 module Singleton
   mixes_in_class_methods ::Singleton::SingletonClassMethods
@@ -12828,6 +12928,14 @@ class String
   # See also +deconstantize+.
   def demodulize; end
 
+  # The inverse of <tt>String#include?</tt>. Returns true if the string
+  # does not include the other string.
+  #
+  # "hello".exclude? "lo" # => false
+  # "hello".exclude? "ol" # => true
+  # "hello".exclude? ?h   # => false
+  def exclude?(string); end
+
   # Returns the first character. If a limit is supplied, returns a substring
   # from the beginning of the string until it reaches the limit value. If the
   # given limit is greater than or equal to the string length, returns a copy of self.
@@ -12897,6 +13005,41 @@ class String
   # Converts String to a TimeWithZone in the current zone if Time.zone or Time.zone_default
   # is set, otherwise converts String to a Time via String#to_time
   def in_time_zone(zone = T.unsafe(nil)); end
+
+  # Indents the lines in the receiver:
+  #
+  # <<EOS.indent(2)
+  # def some_method
+  # some_code
+  # end
+  # EOS
+  # # =>
+  # def some_method
+  # some_code
+  # end
+  #
+  # The second argument, +indent_string+, specifies which indent string to
+  # use. The default is +nil+, which tells the method to make a guess by
+  # peeking at the first indented line, and fallback to a space if there is
+  # none.
+  #
+  # "  foo".indent(2)        # => "    foo"
+  # "foo\n\t\tbar".indent(2) # => "\t\tfoo\n\t\t\t\tbar"
+  # "foo".indent(2, "\t")    # => "\t\tfoo"
+  #
+  # While +indent_string+ is typically one space or tab, it may be any string.
+  #
+  # The third argument, +indent_empty_lines+, is a flag that says whether
+  # empty lines should be indented. Default is false.
+  #
+  # "foo\n\nbar".indent(2)            # => "  foo\n\n  bar"
+  # "foo\n\nbar".indent(2, nil, true) # => "  foo\n  \n  bar"
+  def indent(amount, indent_string = T.unsafe(nil), indent_empty_lines = T.unsafe(nil)); end
+
+  # Same as +indent+, except it indents the receiver in-place.
+  #
+  # Returns the indented string, or +nil+ if there was nothing to indent.
+  def indent!(amount, indent_string = T.unsafe(nil), indent_empty_lines = T.unsafe(nil)); end
 
   # Wraps the current string in the <tt>ActiveSupport::StringInquirer</tt> class,
   # which gives you a prettier way to test for equality.

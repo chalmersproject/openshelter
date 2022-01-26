@@ -72,6 +72,7 @@
 
     // Sorbet (for Ruby)
     "sorbet.enabled": true,
+    "sorbet.selectedLspConfigId": "beta",
 
     // ESLint (for JS)
     "eslint.packageManager": "yarn"
