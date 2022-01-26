@@ -35,7 +35,7 @@ module Remix
       request = Rack::Request.new(env)
       path = T.cast(request.path, String)
 
-      if path.start_with?("/api")
+      if path.start_with?("/api", "/admin", "/build/assets")
         @app.call(env)
       else
         super(env)

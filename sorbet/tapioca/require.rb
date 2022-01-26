@@ -5,11 +5,11 @@ require "safe_type"
 require "rubocop"
 
 # Patches
-require "./sorbet/lib/actionpack.rb"
-require "./sorbet/lib/activerecord.rb"
-require "./sorbet/lib/activesupport.rb"
-require "./sorbet/lib/graphql.rb"
-require "./sorbet/lib/graphiql-rails.rb"
+require_relative "./lib/actionpack.rb"
+require_relative "./lib/activerecord.rb"
+require_relative "./lib/activesupport.rb"
+require_relative "./lib/graphql.rb"
+require_relative "./lib/graphiql-rails.rb"
 
 # require 'active_support/core_ext/integer/time'
 # require 'fileutils'

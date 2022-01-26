@@ -13,12 +13,12 @@ class GraphQL::Backtrace
   Elem = type_member(fixed: T.untyped)
 end
 
-class GraphQL::Schema
-  class << self
-    sig { params(query_str: String, kwargs: T.untyped).returns(T::Hash[String, T.untyped]) }
-    def execute(query_str = T.unsafe(nil), **kwargs); end
-  end
-end
+# class GraphQL::Schema
+#   class << self
+#     sig { params(query_str: String, kwargs: T.untyped).returns(T::Hash[String, T.untyped]) }
+#     def execute(query_str = T.unsafe(nil), **kwargs); end
+#   end
+# end
 
 # class GraphQL::Schema::Enum < ::GraphQL::Schema::Member
 #   class << self

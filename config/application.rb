@@ -75,6 +75,9 @@ module Chalmers
     # Configure Active Support
     config.active_support.remove_deprecated_time_with_zone_name = true
 
+    # Configure assets
+    config.assets.prefix = "/build/assets"
+
     # Configure logging
     config.colorize_logging = true
   end

@@ -15,6 +15,38 @@ module GraphQL
   end
 end
 
+class GraphQL::Schema
+  class << self
+    extend T::Sig
+
+    sig do
+      params(
+          query_string: T.nilable(String),
+          query: T.nilable(String),
+          document: T.untyped,
+          context: T.nilable(T::Hash[T.untyped, T.untyped]),
+          variables: T.nilable(T::Hash[String, T.untyped]),
+          operation_name: T.nilable(String),
+          root_value: ::Object,
+          kwargs: T.untyped,
+        )
+        .returns(T::Hash[String, T.untyped])
+    end
+    def execute(
+      query_string = nil,
+      query: nil,
+      document: nil,
+      context: nil,
+      variables: nil,
+      operation_name: nil,
+      root_value: nil,
+      **kwargs
+    )
+      {}
+    end
+  end
+end
+
 class GraphQL::Schema::Enum
   class << self
     extend T::Sig

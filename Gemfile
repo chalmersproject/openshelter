@@ -20,6 +20,12 @@ gem "pg_search", "~> 2.3.6"
 
 # Expose a GraphQL API
 gem "graphql", "~> 1.13.6"
+
+# Render GraphiQL
+gem "sprockets", "~> 4.0.2"
+gem "sprockets-rails", "~> 3.4.2", require: "sprockets/railtie"
+gem "sassc", "~> 2.4.0"
+gem "sassc-rails", "~> 2.1.2"
 gem "graphiql-rails", "~> 1.8.0"
 
 # Authenticate users with Devise
@@ -45,7 +51,7 @@ gem "paper_trail", "~> 12.2.0"
 gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", require: false
@@ -89,6 +95,6 @@ gem "unparser", group: :development, require: false
 gem "zeitwerk", group: :development
 
 # Enable runtime debugging
-gem "debug", group: [:development, :test], platforms: [:mri, :mingw, :x64_mingw]
-gem "pry", group: [:development, :test]
+gem "debug", group: %i[development test], platforms: %i[mri mingw x64_mingw]
+gem "pry", group: %i[development test]
 gem "pry-rails", group: :development

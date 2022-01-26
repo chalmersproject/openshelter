@@ -57,3 +57,7 @@ Style/TrailingCommaInHashLiteral:
 # You guys think I have time for this shit?
 GraphQL/ObjectDescription:
   Enabled: false
+GraphQL/FieldDescription:
+  Enabled: false
+GraphQL/ExtractType:
+  Enabled: false

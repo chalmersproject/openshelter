@@ -18,9 +18,16 @@ module Types
           null: false,
           description: "An example field added by the generator"
 
+    field :test_signal_type, SignalTypeType, null: false
+
     sig { returns(String) }
     def test_field
       "Hello World!"
+    end
+
+    sig { returns(SignalType) }
+    def test_signal_type
+      ::SignalType::Bed
     end
   end
 end

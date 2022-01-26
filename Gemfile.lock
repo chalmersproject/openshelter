@@ -91,6 +91,7 @@ GEM
     diff-lcs (1.5.0)
     digest (3.1.0)
     erubi (1.10.0)
+    ffi (1.15.5)
     globalid (1.0.0)
       activesupport (>= 5.0)
     graphiql-rails (1.8.0)
@@ -251,6 +252,14 @@ GEM
       rubocop (>= 0.90.0)
     ruby-progressbar (1.11.0)
     safe_type (1.1.1)
+    sassc (2.4.0)
+      ffi (~> 1.9)
+    sassc-rails (2.1.2)
+      railties (>= 4.0.0)
+      sassc (>= 2.0)
+      sprockets (> 3.0)
+      sprockets-rails
+      tilt
     semantic_logger (4.9.0)
       concurrent-ruby (~> 1.0)
     sorbet (0.5.9542)
@@ -280,6 +289,7 @@ GEM
       thor (>= 0.19.2)
       yard-sorbet
     thor (1.2.1)
+    tilt (2.0.10)
     timeout (0.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -330,10 +340,14 @@ DEPENDENCIES
   rubocop-shopify
   rubocop-sorbet
   safe_type
+  sassc (~> 2.4.0)
+  sassc-rails (~> 2.1.2)
   semantic_logger (~> 4.9.0)
   sorbet (~> 0.5.9542)
   sorbet-runtime (~> 0.5.9542)
   spoom
+  sprockets (~> 4.0.2)
+  sprockets-rails (~> 3.4.2)
   tapioca
   tzinfo-data
   unparser
