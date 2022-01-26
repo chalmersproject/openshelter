@@ -8,6 +8,9 @@ ruby "3.0.3"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.1"
 
+# Proxy requests to Remix with rails-reverse-proxy
+gem "rails-reverse-proxy", "~> 0.10.1"
+
 # Administrate app with Rails Admin
 gem "rails_admin", [">= 3.0.0.beta2", "< 4"]
 
@@ -23,7 +26,7 @@ gem "graphql", "~> 1.13.6"
 
 # Render GraphiQL
 gem "sprockets", "~> 4.0.2"
-gem "sprockets-rails", "~> 3.4.2", require: "sprockets/railtie"
+gem "sprockets-rails", "~> 3.4.2"
 gem "sassc", "~> 2.4.0"
 gem "sassc-rails", "~> 2.1.2"
 gem "graphiql-rails", "~> 1.8.0"
@@ -62,9 +65,6 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making
 # cross-origin AJAX possible
 # gem "rack-cors"
-
-# Use Rack proxy to forward requests to Remix
-gem "rack-proxy", "~> 0.7.2"
 
 # Use Semantic Logger for logging
 gem "semantic_logger", "~> 4.9.0"

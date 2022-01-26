@@ -905,6 +905,8 @@ class ActiveModel::BlockValidator < ::ActiveModel::EachValidator
   def validate_each(record, attribute, value); end
 end
 
+ActiveModel::Callback = T.type_alias { T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])) }
+
 # == Active \Model \Callbacks
 #
 # Provides an interface for any class to have Active Record like callbacks.
@@ -1576,7 +1578,8 @@ class ActiveModel::Errors
   # # => {:base=>["either name or email must be present"]}
   # person.errors.details
   # # => {:base=>[{error: :name_or_email_blank}]}
-  def add(attribute, type = T.unsafe(nil), **options); end
+  sig { params(attribute: T.any(String, Symbol), type: T.any(String, Symbol), message: T.nilable(String)).returns(T.untyped) }
+  def add(attribute, type = T.unsafe(nil), message: T.unsafe(nil)); end
 
   # Returns +true+ if an error matches provided +attribute+ and +type+,
   # or +false+ otherwise. +type+ is treated the same as for +add+.
@@ -2687,6 +2690,8 @@ module ActiveModel::Serializers::JSON
   end
 end
 
+ActiveModel::Serializers::VERSION = T.let(T.unsafe(nil), String)
+
 # Raised when a validation cannot be corrected by end users and are considered
 # exceptional.
 #
@@ -3624,7 +3629,8 @@ module ActiveModel::Validations::ClassMethods
   # value.
   #
   # NOTE: Calling +validate+ multiple times on the same method will overwrite previous definitions.
-  def validate(*args, &block); end
+  sig { params(names: T.any(String, Symbol), on: T.nilable(T.any(String, Symbol, T::Array[T.any(String, Symbol)])), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), prepend: T::Boolean).void }
+  def validate(*names, on: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), prepend: T.unsafe(nil)); end
 
   # This method is a shortcut to all default validators and any custom
   # validator classes ending in 'Validator'. Note that Rails default
@@ -3724,7 +3730,8 @@ module ActiveModel::Validations::ClassMethods
   # and +:message+ can be given to one specific validator, as a hash:
   #
   # validates :password, presence: { if: :password_required?, message: 'is forgotten.' }, confirmation: true
-  def validates(*attributes); end
+  sig { params(attr_names: T.any(String, Symbol), acceptance: T.nilable(T.any(T::Boolean, {accept: T.nilable(T.untyped), message: T.nilable(String), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), comparison: T.nilable({equal_to: T.nilable(T.untyped), other_than: T.nilable(T.untyped), greater_than: T.nilable(T.untyped), greater_than_or_equal_to: T.nilable(T.untyped), less_than: T.nilable(T.untyped), less_than_or_equal_to: T.nilable(T.untyped), message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))}), confirmation: T.nilable(T.any(T::Boolean, {case_sensitive: T.nilable(T::Boolean), message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), exclusion: T.nilable(T.any({in: T::Enumerable[T.untyped], message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))}, {within: T::Enumerable[T.untyped], message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), format: T.nilable(T.any({with: Regexp, message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))}, {without: Regexp, message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), inclusion: T.nilable(T.any({in: T::Enumerable[T.untyped], message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))}, {within: T::Enumerable[T.untyped], message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), length: T.nilable({minimum: T.nilable(T.untyped), maximum: T.nilable(T.untyped), is: T.nilable(T.untyped), in: T.nilable(T::Range[T.untyped]), message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))}), numericality: T.nilable(T.any(T::Boolean, {only_integer: T.nilable(T::Boolean), in: T.nilable(T::Range[T.untyped]), odd: T.nilable(T::Boolean), even: T.nilable(T::Boolean), equal_to: T.nilable(T.untyped), other_than: T.nilable(T.untyped), greater_than: T.nilable(T.untyped), greater_than_or_equal_to: T.nilable(T.untyped), less_than: T.nilable(T.untyped), less_than_or_equal_to: T.nilable(T.untyped), message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), presence: T.nilable(T.any(T::Boolean, {message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), absence: T.nilable(T.any(T::Boolean, {message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), uniqueness: T.nilable(T.any(T::Boolean, {scope: T.nilable(T.any(Symbol, T::Array[Symbol])), case_sensitive: T.nilable(T::Boolean), message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), on: T.nilable(T.any(String, Symbol, T::Array[T.any(String, Symbol)])), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))).void }
+  def validates(*attr_names, acceptance: T.unsafe(nil), comparison: T.unsafe(nil), confirmation: T.unsafe(nil), exclusion: T.unsafe(nil), format: T.unsafe(nil), inclusion: T.unsafe(nil), length: T.unsafe(nil), numericality: T.unsafe(nil), presence: T.unsafe(nil), absence: T.unsafe(nil), uniqueness: T.unsafe(nil), on: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), allow_blank: T.unsafe(nil), allow_nil: T.unsafe(nil), strict: T.unsafe(nil)); end
 
   # This method is used to define validations that cannot be corrected by end
   # users and are considered exceptional. So each validator defined with bang
@@ -3744,7 +3751,8 @@ module ActiveModel::Validations::ClassMethods
   # person.name = ''
   # person.valid?
   # # => ActiveModel::StrictValidationFailed: Name can't be blank
-  def validates!(*attributes); end
+  sig { params(attr_names: T.any(String, Symbol), acceptance: T.nilable(T.any(T::Boolean, {accept: T.nilable(T.untyped), message: T.nilable(String), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), comparison: T.nilable({equal_to: T.nilable(T.untyped), other_than: T.nilable(T.untyped), greater_than: T.nilable(T.untyped), greater_than_or_equal_to: T.nilable(T.untyped), less_than: T.nilable(T.untyped), less_than_or_equal_to: T.nilable(T.untyped), message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))}), confirmation: T.nilable(T.any(T::Boolean, {case_sensitive: T.nilable(T::Boolean), message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), exclusion: T.nilable(T.any({in: T::Enumerable[T.untyped], message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))}, {within: T::Enumerable[T.untyped], message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), format: T.nilable(T.any({with: Regexp, message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))}, {without: Regexp, message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), inclusion: T.nilable(T.any({in: T::Enumerable[T.untyped], message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))}, {within: T::Enumerable[T.untyped], message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), length: T.nilable({minimum: T.nilable(T.untyped), maximum: T.nilable(T.untyped), is: T.nilable(T.untyped), in: T.nilable(T::Range[T.untyped]), message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))}), numericality: T.nilable(T.any(T::Boolean, {only_integer: T.nilable(T::Boolean), in: T.nilable(T::Range[T.untyped]), odd: T.nilable(T::Boolean), even: T.nilable(T::Boolean), equal_to: T.nilable(T.untyped), other_than: T.nilable(T.untyped), greater_than: T.nilable(T.untyped), greater_than_or_equal_to: T.nilable(T.untyped), less_than: T.nilable(T.untyped), less_than_or_equal_to: T.nilable(T.untyped), message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), presence: T.nilable(T.any(T::Boolean, {message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), absence: T.nilable(T.any(T::Boolean, {message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), uniqueness: T.nilable(T.any(T::Boolean, {scope: T.nilable(T.any(Symbol, T::Array[Symbol])), case_sensitive: T.nilable(T::Boolean), message: T.nilable(T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String))), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean), strict: T.nilable(T.any(T.class_of(Exception), T::Boolean))})), on: T.nilable(T.any(String, Symbol, T::Array[T.any(String, Symbol)])), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), allow_blank: T.nilable(T::Boolean), allow_nil: T.nilable(T::Boolean)).void }
+  def validates!(*attr_names, acceptance: T.unsafe(nil), comparison: T.unsafe(nil), confirmation: T.unsafe(nil), exclusion: T.unsafe(nil), format: T.unsafe(nil), inclusion: T.unsafe(nil), length: T.unsafe(nil), numericality: T.unsafe(nil), presence: T.unsafe(nil), absence: T.unsafe(nil), uniqueness: T.unsafe(nil), on: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), allow_blank: T.unsafe(nil), allow_nil: T.unsafe(nil)); end
 
   # Validates each attribute against a block.
   #
@@ -3775,6 +3783,7 @@ module ActiveModel::Validations::ClassMethods
   # or <tt>unless: Proc.new { |user| user.signup_step <= 2 }</tt>). The
   # method, proc or string should return or evaluate to a +true+ or +false+
   # value.
+  sig { params(attr_names: Symbol, block: T.nilable(T.proc.params(record: T.untyped, attr: Symbol, value: T.untyped).void)).void }
   def validates_each(*attr_names, &block); end
 
   # Passes the record off to the class or classes specified and allows them
@@ -3838,7 +3847,8 @@ module ActiveModel::Validations::ClassMethods
   # options[:my_custom_key] # => "my custom value"
   # end
   # end
-  def validates_with(*args, &block); end
+  sig { params(classes: Class, options: T.untyped).void }
+  def validates_with(*classes, **options); end
 
   # List all validators that are being used to validate the model using
   # +validates_with+ method.
@@ -4388,6 +4398,7 @@ end
 ActiveModel::Validations::LengthValidator::CHECKS = T.let(T.unsafe(nil), Hash)
 ActiveModel::Validations::LengthValidator::MESSAGES = T.let(T.unsafe(nil), Hash)
 ActiveModel::Validations::LengthValidator::RESERVED_OPTIONS = T.let(T.unsafe(nil), Array)
+ActiveModel::Validations::Message = T.type_alias { T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String)) }
 
 class ActiveModel::Validations::NumericalityValidator < ::ActiveModel::EachValidator
   include ::ActiveModel::Validations::Comparability
@@ -4419,6 +4430,8 @@ ActiveModel::Validations::NumericalityValidator::RESERVED_OPTIONS = T.let(T.unsa
 class ActiveModel::Validations::PresenceValidator < ::ActiveModel::EachValidator
   def validate_each(record, attr_name, value); end
 end
+
+ActiveModel::Validations::Strict = T.type_alias { T.nilable(T.any(T.class_of(Exception), T::Boolean)) }
 
 class ActiveModel::Validations::WithValidator < ::ActiveModel::EachValidator
   def validate_each(record, attr, val); end

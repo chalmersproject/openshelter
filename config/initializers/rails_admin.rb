@@ -1,7 +1,6 @@
+# rubocop:disable Layout/LineLength
 # typed: false
 # frozen_string_literal: true
-
-# rubocop:disable Layout/LineLength
 
 RailsAdmin.config do |config|
   config.asset_source = :sprockets

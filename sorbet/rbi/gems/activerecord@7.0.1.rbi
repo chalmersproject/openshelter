@@ -2024,7 +2024,7 @@ module ActiveRecord::Associations::ClassMethods
   # has_and_belongs_to_many :categories, join_table: "prods_cats"
   # has_and_belongs_to_many :categories, -> { readonly }
   # has_and_belongs_to_many :categories, strict_loading: true
-  sig { params(name: T.nilable(T.any(String, Symbol)), scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), after_add: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, Symbol, T.proc.void)])), after_remove: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, Symbol, T.proc.void)])), association_foreign_key: T.nilable(T.any(String, Symbol)), autosave: T.nilable(T::Boolean), before_add: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, Symbol, T.proc.void)])), before_remove: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, Symbol, T.proc.void)])), class_name: T.nilable(T.any(String, Symbol)), extend: T.nilable(T.any(Module, T::Array[Module])), foreign_key: T.nilable(T.any(String, Symbol)), inverse_of: T.nilable(T.any(FalseClass, String, Symbol)), join_table: T.nilable(T.any(String, Symbol)), validate: T.nilable(T::Boolean), block: T.nilable(T.proc.void)).void }
+  sig { params(name: T.nilable(T.any(String, Symbol)), scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), after_add: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), after_remove: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), association_foreign_key: T.nilable(T.any(String, Symbol)), autosave: T.nilable(T::Boolean), before_add: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), before_remove: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), class_name: T.nilable(T.any(String, Symbol)), extend: T.nilable(T.any(Module, T::Array[Module])), foreign_key: T.nilable(T.any(String, Symbol)), inverse_of: T.nilable(T.any(FalseClass, String, Symbol)), join_table: T.nilable(T.any(String, Symbol)), validate: T.nilable(T::Boolean), block: T.nilable(T.proc.void)).void }
   def has_and_belongs_to_many(name, scope = T.unsafe(nil), after_add: T.unsafe(nil), after_remove: T.unsafe(nil), association_foreign_key: T.unsafe(nil), autosave: T.unsafe(nil), before_add: T.unsafe(nil), before_remove: T.unsafe(nil), class_name: T.unsafe(nil), extend: T.unsafe(nil), foreign_key: T.unsafe(nil), inverse_of: T.unsafe(nil), join_table: T.unsafe(nil), validate: T.unsafe(nil), &block); end
 
   # Specifies a one-to-many association. The following methods for retrieval and query of
@@ -2262,7 +2262,7 @@ module ActiveRecord::Associations::ClassMethods
   # has_many :subscribers, through: :subscriptions, source: :user
   # has_many :subscribers, through: :subscriptions, disable_joins: true
   # has_many :comments, strict_loading: true
-  sig { params(name: Symbol, scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), after_add: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, Symbol, T.proc.void)])), after_remove: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, Symbol, T.proc.void)])), anonymous_class: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), autosave: T.nilable(T::Boolean), before_add: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, Symbol, T.proc.void)])), before_remove: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, Symbol, T.proc.void)])), class_name: T.nilable(T.any(String, Symbol)), counter_cache: T.nilable(T.any(String, Symbol)), dependent: T.nilable(T.any(String, Symbol)), extend: T.nilable(T.any(Module, T::Array[Module])), foreign_key: T.nilable(T.any(String, Symbol)), foreign_type: T.nilable(T.any(String, Symbol)), index_errors: T.nilable(T::Boolean), inverse_of: T.nilable(T.any(FalseClass, String, Symbol)), join_table: T.nilable(T.any(String, Symbol)), primary_key: T.nilable(T.any(String, Symbol)), source: T.nilable(T.any(String, Symbol)), source_type: T.nilable(T.any(String, Symbol)), table_name: T.nilable(T.any(String, Symbol)), through: T.nilable(T.any(String, Symbol)), validate: T.nilable(T::Boolean), block: T.nilable(T.proc.void)).void }
+  sig { params(name: Symbol, scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), after_add: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), after_remove: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), anonymous_class: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), autosave: T.nilable(T::Boolean), before_add: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), before_remove: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), class_name: T.nilable(T.any(String, Symbol)), counter_cache: T.nilable(T.any(String, Symbol)), dependent: T.nilable(T.any(String, Symbol)), extend: T.nilable(T.any(Module, T::Array[Module])), foreign_key: T.nilable(T.any(String, Symbol)), foreign_type: T.nilable(T.any(String, Symbol)), index_errors: T.nilable(T::Boolean), inverse_of: T.nilable(T.any(FalseClass, String, Symbol)), join_table: T.nilable(T.any(String, Symbol)), primary_key: T.nilable(T.any(String, Symbol)), source: T.nilable(T.any(String, Symbol)), source_type: T.nilable(T.any(String, Symbol)), table_name: T.nilable(T.any(String, Symbol)), through: T.nilable(T.any(String, Symbol)), validate: T.nilable(T::Boolean), block: T.nilable(T.proc.void)).void }
   def has_many(name, scope = T.unsafe(nil), after_add: T.unsafe(nil), after_remove: T.unsafe(nil), anonymous_class: T.unsafe(nil), as: T.unsafe(nil), autosave: T.unsafe(nil), before_add: T.unsafe(nil), before_remove: T.unsafe(nil), class_name: T.unsafe(nil), counter_cache: T.unsafe(nil), dependent: T.unsafe(nil), extend: T.unsafe(nil), foreign_key: T.unsafe(nil), foreign_type: T.unsafe(nil), index_errors: T.unsafe(nil), inverse_of: T.unsafe(nil), join_table: T.unsafe(nil), primary_key: T.unsafe(nil), source: T.unsafe(nil), source_type: T.unsafe(nil), table_name: T.unsafe(nil), through: T.unsafe(nil), validate: T.unsafe(nil), &block); end
 
   # Specifies a one-to-one association with another class. This method should only be used
@@ -6147,21 +6147,21 @@ class ActiveRecord::Base
     def _validators=(value); end
     def _validators?; end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), unless: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
     def after_create(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), unless: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
     def after_destroy(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
     def after_find(*args, **options, &block); end
     def after_initialize(*args, **options, &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), unless: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
     def after_save(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
     def after_touch(*args, **options, &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), unless: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), block: T.nilable(T.proc.void)).void }
+    sig { params(args: Symbol, if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
     def after_update(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
     def aggregate_reflections; end
@@ -6169,16 +6169,16 @@ class ActiveRecord::Base
     def aggregate_reflections?; end
     def application_record_class?; end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), unless: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
     def around_create(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), unless: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
     def around_destroy(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), unless: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), block: T.nilable(T.proc.void)).void }
+    sig { params(args: Symbol, if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
     def around_save(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), unless: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), block: T.nilable(T.proc.void)).void }
+    sig { params(args: Symbol, if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
     def around_update(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
     def asynchronous_queries_session; end
@@ -6196,16 +6196,16 @@ class ActiveRecord::Base
     def automatic_scope_inversing=(value); end
     def automatic_scope_inversing?; end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), unless: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
     def before_create(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), unless: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), prepend: T::Boolean, block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), prepend: T::Boolean, block: T.nilable(T.proc.void)).void }
     def before_destroy(*args, if: T.unsafe(nil), unless: T.unsafe(nil), prepend: T.unsafe(nil), &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), unless: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
     def before_save(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), unless: T.nilable(T.any(Proc, Symbol, T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)))), block: T.nilable(T.proc.void)).void }
+    sig { params(args: Symbol, if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
     def before_update(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
     def belongs_to_required_by_default; end
@@ -6786,6 +6786,8 @@ module ActiveRecord::Calculations
   def type_cast_pluck_values(result, columns); end
   def type_for(field, &block); end
 end
+
+ActiveRecord::Callback = T.type_alias { T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])) }
 
 # = Active Record \Callbacks
 #
@@ -16148,7 +16150,9 @@ class ActiveRecord::Migration::Compatibility::V5_2 < ::ActiveRecord::Migration::
   def add_timestamps(table_name, **options); end
   def change_table(table_name, **options); end
   def create_join_table(table_1, table_2, **options); end
-  def create_table(table_name, **options); end
+
+  sig { params(table_name: T.any(String, Symbol), comment: T.untyped, id: T.any(Symbol, T::Boolean), primary_key: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), options: T.untyped, temporary: T::Boolean, force: T.any(Symbol, T::Boolean), as: T.untyped, block: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)).void }
+  def create_table(table_name, comment: T.unsafe(nil), id: T.unsafe(nil), primary_key: T.unsafe(nil), options: T.unsafe(nil), temporary: T.unsafe(nil), force: T.unsafe(nil), as: T.unsafe(nil), &block); end
 
   private
 
@@ -17173,7 +17177,7 @@ module ActiveRecord::NestedAttributes::ClassMethods
   # accepts_nested_attributes_for :avatar, reject_if: :all_blank
   # # creates avatar_attributes= and posts_attributes=
   # accepts_nested_attributes_for :avatar, :posts, allow_destroy: true
-  sig { params(attr_names: T.any(String, Symbol), allow_destroy: T.nilable(T::Boolean), reject_if: T.nilable(T.any(Proc, Symbol, T.proc.params(attributes: T.any(ActionController::Parameters, T::Hash[T.any(String, Symbol), T.untyped])).returns(T::Boolean))), limit: T.nilable(T.any(Integer, Proc, Symbol, T.proc.returns(Integer))), update_only: T.nilable(T::Boolean)).void }
+  sig { params(attr_names: T.any(String, Symbol), allow_destroy: T.nilable(T::Boolean), reject_if: T.nilable(T.any(String, Symbol, T.proc.params(attributes: T.any(ActionController::Parameters, T::Hash[T.any(String, Symbol), T.untyped])).returns(T::Boolean))), limit: T.nilable(T.any(Integer, Symbol, T.proc.returns(Integer))), update_only: T.nilable(T::Boolean)).void }
   def accepts_nested_attributes_for(*attr_names, allow_destroy: T.unsafe(nil), reject_if: T.unsafe(nil), limit: T.unsafe(nil), update_only: T.unsafe(nil)); end
 
   private
@@ -18077,6 +18081,8 @@ module ActiveRecord::Persistence::ClassMethods
   # new instance of the class. Accepts only keys as strings.
   def instantiate_instance_of(klass, attributes, column_types = T.unsafe(nil), &block); end
 end
+
+ActiveRecord::Persistence::Returning = T.type_alias { T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])) }
 
 class ActiveRecord::PredicateBuilder
   def initialize(table); end

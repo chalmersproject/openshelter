@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Types
-  class MutationType < Types::BaseObject
+  class MutationType < BaseObject
     extend T::Sig
 
     # TODO: remove me

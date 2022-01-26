@@ -1,258 +1,258 @@
 # typed: strict
 # frozen_string_literal: true
 
-module AbstractController::Callbacks::ClassMethods
-  extend T::Sig
+# module AbstractController::Callbacks::ClassMethods
+#   extend T::Sig
 
-  sig do
-    params(
-      names: T.any(Symbol, Proc),
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped)),
-    ).void
-  end
-  def after_action(
-    *names,
-    except: nil,
-    only: nil,
-    if: nil,
-    unless: nil,
-    raise: true,
-    &block
-  ); end
+#   sig do
+#     params(
+#       names: Symbol,
+#       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       raise: T::Boolean,
+#       block: T.nilable(T.proc.returns(T.untyped)),
+#     ).void
+#   end
+#   def after_action(
+#     *names,
+#     except: nil,
+#     only: nil,
+#     if: nil,
+#     unless: nil,
+#     raise: true,
+#     &block
+#   ); end
 
-  # append_after_action is an alias of after_action
-  sig do
-    params(
-      names: T.any(Symbol, Proc),
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped)),
-    ).void
-  end
-  def append_after_action(
-    *names,
-    except: nil,
-    only: nil,
-    if: nil,
-    unless: nil,
-    raise: true,
-    &block
-  ); end
+#   # append_after_action is an alias of after_action
+#   sig do
+#     params(
+#       names: T.any(Symbol, Proc),
+#       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       raise: T::Boolean,
+#       block: T.nilable(T.proc.returns(T.untyped)),
+#     ).void
+#   end
+#   def append_after_action(
+#     *names,
+#     except: nil,
+#     only: nil,
+#     if: nil,
+#     unless: nil,
+#     raise: true,
+#     &block
+#   ); end
 
-  # append_around_action is an alias of around_action
-  sig do
-    params(
-      names: T.any(Symbol, Proc),
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped)),
-    ).void
-  end
-  def append_around_action(
-    *names,
-    except: nil,
-    only: nil,
-    if: nil,
-    unless: nil,
-    raise: true,
-    &block
-  ); end
+#   # append_around_action is an alias of around_action
+#   sig do
+#     params(
+#       names: T.any(Symbol, Proc),
+#       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       raise: T::Boolean,
+#       block: T.nilable(T.proc.returns(T.untyped)),
+#     ).void
+#   end
+#   def append_around_action(
+#     *names,
+#     except: nil,
+#     only: nil,
+#     if: nil,
+#     unless: nil,
+#     raise: true,
+#     &block
+#   ); end
 
-  # append_before_action is an alias of before_action
-  sig do
-    params(
-      names: T.any(Symbol, Proc),
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped)),
-    ).void
-  end
-  def append_before_action(
-    *names,
-    except: nil,
-    only: nil,
-    if: nil,
-    unless: nil,
-    raise: true,
-    &block
-  ); end
+#   # append_before_action is an alias of before_action
+#   sig do
+#     params(
+#       names: T.any(Symbol, Proc),
+#       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       raise: T::Boolean,
+#       block: T.nilable(T.proc.returns(T.untyped)),
+#     ).void
+#   end
+#   def append_before_action(
+#     *names,
+#     except: nil,
+#     only: nil,
+#     if: nil,
+#     unless: nil,
+#     raise: true,
+#     &block
+#   ); end
 
-  sig do
-    params(
-      names: T.any(Symbol, Proc),
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped)),
-    ).void
-  end
-  def around_action(
-    *names,
-    except: nil,
-    only: nil,
-    if: nil,
-    unless: nil,
-    raise: true,
-    &block
-  ); end
+#   sig do
+#     params(
+#       names: T.any(Symbol, Proc),
+#       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       raise: T::Boolean,
+#       block: T.nilable(T.proc.returns(T.untyped)),
+#     ).void
+#   end
+#   def around_action(
+#     *names,
+#     except: nil,
+#     only: nil,
+#     if: nil,
+#     unless: nil,
+#     raise: true,
+#     &block
+#   ); end
 
-  sig do
-    params(
-      names: T.any(Symbol, Proc),
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped)),
-    ).void
-  end
-  def before_action(
-    *names,
-    except: nil,
-    only: nil,
-    if: nil,
-    unless: nil,
-    raise: true,
-    &block
-  ); end
+#   sig do
+#     params(
+#       names: T.any(Symbol, Proc),
+#       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       raise: T::Boolean,
+#       block: T.nilable(T.proc.returns(T.untyped)),
+#     ).void
+#   end
+#   def before_action(
+#     *names,
+#     except: nil,
+#     only: nil,
+#     if: nil,
+#     unless: nil,
+#     raise: true,
+#     &block
+#   ); end
 
-  sig do
-    params(
-      names: T.any(Symbol, Proc),
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped)),
-    ).void
-  end
-  def prepend_after_action(
-    *names,
-    except: nil,
-    only: nil,
-    if: nil,
-    unless: nil,
-    raise: true,
-    &block
-  ); end
+#   sig do
+#     params(
+#       names: T.any(Symbol, Proc),
+#       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       raise: T::Boolean,
+#       block: T.nilable(T.proc.returns(T.untyped)),
+#     ).void
+#   end
+#   def prepend_after_action(
+#     *names,
+#     except: nil,
+#     only: nil,
+#     if: nil,
+#     unless: nil,
+#     raise: true,
+#     &block
+#   ); end
 
-  sig do
-    params(
-      names: T.any(Symbol, Proc),
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped)),
-    ).void
-  end
-  def prepend_around_action(
-    *names,
-    except: nil,
-    only: nil,
-    if: nil,
-    unless: nil,
-    raise: true,
-    &block
-  ); end
+#   sig do
+#     params(
+#       names: T.any(Symbol, Proc),
+#       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       raise: T::Boolean,
+#       block: T.nilable(T.proc.returns(T.untyped)),
+#     ).void
+#   end
+#   def prepend_around_action(
+#     *names,
+#     except: nil,
+#     only: nil,
+#     if: nil,
+#     unless: nil,
+#     raise: true,
+#     &block
+#   ); end
 
-  sig do
-    params(
-      names: T.any(Symbol, Proc),
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-      block: T.nilable(T.proc.returns(T.untyped)),
-    ).void
-  end
-  def prepend_before_action(
-    *names,
-    except: nil,
-    only: nil,
-    if: nil,
-    unless: nil,
-    raise: true,
-    &block
-  ); end
+#   sig do
+#     params(
+#       names: T.any(Symbol, Proc),
+#       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       raise: T::Boolean,
+#       block: T.nilable(T.proc.returns(T.untyped)),
+#     ).void
+#   end
+#   def prepend_before_action(
+#     *names,
+#     except: nil,
+#     only: nil,
+#     if: nil,
+#     unless: nil,
+#     raise: true,
+#     &block
+#   ); end
 
-  sig do
-    params(
-      names: T.any(Symbol, Proc),
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-    ).void
-  end
-  def skip_after_action(
-    *names,
-    except: nil,
-    only: nil,
-    if: nil,
-    unless: nil,
-    raise: true
-  ); end
+#   sig do
+#     params(
+#       names: T.any(Symbol, Proc),
+#       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       raise: T::Boolean,
+#     ).void
+#   end
+#   def skip_after_action(
+#     *names,
+#     except: nil,
+#     only: nil,
+#     if: nil,
+#     unless: nil,
+#     raise: true
+#   ); end
 
-  sig do
-    params(
-      names: T.any(Symbol, Proc),
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-    ).void
-  end
-  def skip_around_action(
-    *names,
-    except: nil,
-    only: nil,
-    if: nil,
-    unless: nil,
-    raise: true
-  ); end
+#   sig do
+#     params(
+#       names: T.any(Symbol, Proc),
+#       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       raise: T::Boolean,
+#     ).void
+#   end
+#   def skip_around_action(
+#     *names,
+#     except: nil,
+#     only: nil,
+#     if: nil,
+#     unless: nil,
+#     raise: true
+#   ); end
 
-  sig do
-    params(
-      names: T.any(Symbol, Proc),
-      except: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      only: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
-      raise: T::Boolean,
-    ).void
-  end
-  def skip_before_action(
-    *names,
-    except: nil,
-    only: nil,
-    if: nil,
-    unless: nil,
-    raise: true
-  ); end
-end
+#   sig do
+#     params(
+#       names: T.any(Symbol, Proc),
+#       except: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       only: T.nilable(T.any(Symbol, T::Array[Symbol])),
+#       if: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       unless: T.nilable(T.any(Symbol, T::Array[Symbol], Proc)),
+#       raise: T::Boolean,
+#     ).void
+#   end
+#   def skip_before_action(
+#     *names,
+#     except: nil,
+#     only: nil,
+#     if: nil,
+#     unless: nil,
+#     raise: true
+#   ); end
+# end
 
 class ActionController::Parameters
   extend T::Sig
@@ -348,6 +348,34 @@ module ActionController::RequestForgeryProtection::ClassMethods
   ); end
 end
 
+module ActionController::RequestForgeryProtection
+  extend T::Sig
+
+  sig { returns(Symbol) }
+  def request_forgery_protection_token
+    T.unsafe(nil)
+  end
+
+  sig { params(value: Symbol).void }
+  def request_forgery_protection_token=(value); end
+end
+
+class ActionDispatch::Routing::Mapper
+  Via = T.type_alias { T.nilable(T.any(Symbol, T::Array[Symbol])) }
+  To =
+    T.type_alias do
+      T.nilable(
+        T.any(
+          String,
+          Symbol,
+          Class,
+          Proc,
+          T.proc.params(env: T.untyped).returns(T.untyped),
+        ),
+      )
+    end
+end
+
 module ActionDispatch::Routing::Mapper::HttpHelpers
   extend T::Sig
 
@@ -359,8 +387,8 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
         param: T.nilable(Symbol),
         module: T.nilable(T.any(String, Symbol)),
         as: T.nilable(T.any(String, Symbol)),
-        via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-        to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
+        via: ActionDispatch::Routing::Mapper::Via,
+        to: ActionDispatch::Routing::Mapper::To,
         on: T.nilable(Symbol),
         constraints: T.nilable(T.untyped),
         defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
@@ -397,15 +425,8 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
         param: T.nilable(Symbol),
         module: T.nilable(T.any(String, Symbol)),
         as: T.nilable(T.any(String, Symbol)),
-        via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-        to:
-          T.nilable(
-            T.any(
-              String,
-              Symbol,
-              T.proc.params(arg0: T.untyped).returns(T.untyped),
-            ),
-          ),
+        via: ActionDispatch::Routing::Mapper::Via,
+        to: ActionDispatch::Routing::Mapper::To,
         on: T.nilable(Symbol),
         constraints: T.nilable(T.untyped),
         defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
@@ -442,15 +463,8 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
         param: T.nilable(Symbol),
         module: T.nilable(T.any(String, Symbol)),
         as: T.nilable(T.any(String, Symbol)),
-        via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-        to:
-          T.nilable(
-            T.any(
-              String,
-              Symbol,
-              T.proc.params(arg0: T.untyped).returns(T.untyped),
-            ),
-          ),
+        via: ActionDispatch::Routing::Mapper::Via,
+        to: ActionDispatch::Routing::Mapper::To,
         on: T.nilable(Symbol),
         constraints: T.nilable(T.untyped),
         defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
@@ -487,8 +501,8 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
         param: T.nilable(Symbol),
         module: T.nilable(T.any(String, Symbol)),
         as: T.nilable(T.any(String, Symbol)),
-        via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-        to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
+        via: ActionDispatch::Routing::Mapper::Via,
+        to: ActionDispatch::Routing::Mapper::To,
         on: T.nilable(Symbol),
         constraints: T.nilable(T.untyped),
         defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
@@ -525,8 +539,8 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
         param: T.nilable(Symbol),
         module: T.nilable(T.any(String, Symbol)),
         as: T.nilable(T.any(String, Symbol)),
-        via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-        to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
+        via: ActionDispatch::Routing::Mapper::Via,
+        to: ActionDispatch::Routing::Mapper::To,
         on: T.nilable(Symbol),
         constraints: T.nilable(T.untyped),
         defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
@@ -563,8 +577,8 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
         param: T.nilable(Symbol),
         module: T.nilable(T.any(String, Symbol)),
         as: T.nilable(T.any(String, Symbol)),
-        via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-        to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
+        via: ActionDispatch::Routing::Mapper::Via,
+        to: ActionDispatch::Routing::Mapper::To,
         on: T.nilable(Symbol),
         constraints: T.nilable(T.untyped),
         defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
@@ -605,8 +619,8 @@ module ActionDispatch::Routing::Mapper::Resources
         param: T.nilable(Symbol),
         module: T.nilable(T.any(String, Symbol)),
         as: T.nilable(T.any(String, Symbol)),
-        via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-        to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
+        via: ActionDispatch::Routing::Mapper::Via,
+        to: ActionDispatch::Routing::Mapper::To,
         on: T.nilable(Symbol),
         constraints: T.nilable(T.untyped),
         defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
@@ -748,8 +762,8 @@ module ActionDispatch::Routing::Mapper::Resources
         param: T.nilable(Symbol),
         module: T.nilable(T.any(String, Symbol)),
         as: T.nilable(T.any(String, Symbol)),
-        via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-        to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
+        via: ActionDispatch::Routing::Mapper::Via,
+        to: ActionDispatch::Routing::Mapper::To,
         on: T.nilable(Symbol),
         constraints: T.nilable(T.untyped),
         defaults: T.nilable(T::Hash[T.untyped, T.untyped]),

@@ -1,15 +1,16 @@
 # typed: strict
+
 # frozen_string_literal: true
 
-AssociationCallback =
+ActiveRecord::Callback =
   T.type_alias do
     T.nilable(
       T.any(
-        Symbol, # reference to a method
-        String, # reference to a method? not clear: no string examples in docs
-        T.proc.void, # a lambda that contains the callback
-        Proc, # a proc that contains the callback
-        T::Array[T.any(Symbol, Proc, T.proc.void)], # multiple callbacks
+        Symbol,
+        String,
+        Proc,
+        T.proc.void,
+        T::Array[T.any(Symbol, String, Proc, T.proc.void)],
       ),
     )
   end
@@ -22,13 +23,13 @@ module ActiveRecord::Associations::ClassMethods
       name: Symbol,
       scope:
         T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)),
-      after_add: AssociationCallback,
-      after_remove: AssociationCallback,
+      after_add: ActiveRecord::Callback,
+      after_remove: ActiveRecord::Callback,
       anonymous_class: T.nilable(T.any(Symbol, String)),
       as: T.nilable(T.any(Symbol, String)),
       autosave: T.nilable(T::Boolean),
-      before_add: AssociationCallback,
-      before_remove: AssociationCallback,
+      before_add: ActiveRecord::Callback,
+      before_remove: ActiveRecord::Callback,
       class_name: T.nilable(T.any(Symbol, String)),
       counter_cache: T.nilable(T.any(Symbol, String)),
       dependent: T.nilable(T.any(Symbol, String)),
@@ -164,12 +165,12 @@ module ActiveRecord::Associations::ClassMethods
       name: T.nilable(T.any(Symbol, String)),
       scope:
         T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)),
-      after_add: AssociationCallback,
-      after_remove: AssociationCallback,
+      after_add: ActiveRecord::Callback,
+      after_remove: ActiveRecord::Callback,
       association_foreign_key: T.nilable(T.any(Symbol, String)),
       autosave: T.nilable(T::Boolean),
-      before_add: AssociationCallback,
-      before_remove: AssociationCallback,
+      before_add: ActiveRecord::Callback,
+      before_remove: ActiveRecord::Callback,
       class_name: T.nilable(T.any(Symbol, String)),
       extend: T.nilable(T.any(Module, T::Array[Module])),
       foreign_key: T.nilable(T.any(Symbol, String)),
@@ -211,6 +212,41 @@ module ActiveRecord::AttributeMethods::Serialization::ClassMethods
   def serialize(attr_name, class_name_or_coder = Object, default: nil); end
 end
 
+class ActiveRecord::Migration::Compatibility::V5_2
+  extend T::Sig
+
+  sig do
+    params(
+      table_name: T.any(String, Symbol),
+      comment: T.untyped,
+      id: T.any(T::Boolean, Symbol),
+      primary_key: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      options: T.untyped,
+      temporary: T::Boolean,
+      force: T.any(T::Boolean, Symbol),
+      as: T.untyped,
+      block:
+        T.nilable(
+          T
+            .proc
+            .params(t: ActiveRecord::ConnectionAdapters::TableDefinition)
+            .void,
+        ),
+    ).void
+  end
+  def create_table(
+    table_name,
+    comment: nil,
+    id: :primary_key,
+    primary_key: :_,
+    options: nil,
+    temporary: false,
+    force: false,
+    as: nil,
+    &block
+  ); end
+end
+
 module ActiveRecord::NestedAttributes::ClassMethods
   extend T::Sig
 
@@ -222,7 +258,7 @@ module ActiveRecord::NestedAttributes::ClassMethods
         T.nilable(
           T.any(
             Symbol,
-            Proc,
+            String,
             T
               .proc
               .params(
@@ -235,7 +271,7 @@ module ActiveRecord::NestedAttributes::ClassMethods
               .returns(T::Boolean),
           ),
         ),
-      limit: T.nilable(T.any(Integer, Symbol, Proc, T.proc.returns(Integer))),
+      limit: T.nilable(T.any(Integer, Symbol, T.proc.returns(Integer))),
       update_only: T.nilable(T::Boolean),
     ).void
   end
@@ -254,23 +290,9 @@ class ActiveRecord::Base
 
     sig do
       params(
-        args: Symbol,
-        if:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
-        unless:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
+        args: T.any(Symbol, String),
+        if: ActiveRecord::Callback,
+        unless: ActiveRecord::Callback,
         block: T.nilable(T.proc.bind(T.untyped).void),
       ).void
     end
@@ -278,23 +300,9 @@ class ActiveRecord::Base
 
     sig do
       params(
-        args: Symbol,
-        if:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
-        unless:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
+        args: T.any(Symbol, String),
+        if: ActiveRecord::Callback,
+        unless: ActiveRecord::Callback,
         block: T.nilable(T.proc.bind(T.untyped).void),
       ).void
     end
@@ -302,23 +310,9 @@ class ActiveRecord::Base
 
     sig do
       params(
-        args: Symbol,
-        if:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
-        unless:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
+        args: T.any(Symbol, String),
+        if: ActiveRecord::Callback,
+        unless: ActiveRecord::Callback,
         block: T.nilable(T.proc.bind(T.untyped).void),
       ).void
     end
@@ -326,23 +320,9 @@ class ActiveRecord::Base
 
     sig do
       params(
-        args: Symbol,
-        if:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
-        unless:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
+        args: T.any(Symbol, String),
+        if: ActiveRecord::Callback,
+        unless: ActiveRecord::Callback,
         prepend: T::Boolean,
         block: T.nilable(T.proc.bind(T.untyped).void),
       ).void
@@ -351,23 +331,9 @@ class ActiveRecord::Base
 
     sig do
       params(
-        args: Symbol,
-        if:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
-        unless:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
+        args: T.any(Symbol, String),
+        if: ActiveRecord::Callback,
+        unless: ActiveRecord::Callback,
         block: T.nilable(T.proc.bind(T.untyped).void),
       ).void
     end
@@ -375,23 +341,9 @@ class ActiveRecord::Base
 
     sig do
       params(
-        args: Symbol,
-        if:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
-        unless:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
+        args: T.any(Symbol, String),
+        if: ActiveRecord::Callback,
+        unless: ActiveRecord::Callback,
         block: T.nilable(T.proc.bind(T.untyped).void),
       ).void
     end
@@ -399,23 +351,9 @@ class ActiveRecord::Base
 
     sig do
       params(
-        args: Symbol,
-        if:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
-        unless:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
+        args: T.any(Symbol, String),
+        if: ActiveRecord::Callback,
+        unless: ActiveRecord::Callback,
         block: T.nilable(T.proc.bind(T.untyped).void),
       ).void
     end
@@ -423,23 +361,9 @@ class ActiveRecord::Base
 
     sig do
       params(
-        args: Symbol,
-        if:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
-        unless:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
+        args: T.any(Symbol, String),
+        if: ActiveRecord::Callback,
+        unless: ActiveRecord::Callback,
         block: T.nilable(T.proc.bind(T.untyped).void),
       ).void
     end
@@ -448,22 +372,8 @@ class ActiveRecord::Base
     sig do
       params(
         args: Symbol,
-        if:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
-        unless:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
+        if: ActiveRecord::Callback,
+        unless: ActiveRecord::Callback,
         block: T.nilable(T.proc.bind(T.untyped).void),
       ).void
     end
@@ -472,22 +382,8 @@ class ActiveRecord::Base
     sig do
       params(
         args: Symbol,
-        if:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
-        unless:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
+        if: ActiveRecord::Callback,
+        unless: ActiveRecord::Callback,
         block: T.nilable(T.proc.bind(T.untyped).void),
       ).void
     end
@@ -496,22 +392,8 @@ class ActiveRecord::Base
     sig do
       params(
         args: Symbol,
-        if:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
-        unless:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
+        if: ActiveRecord::Callback,
+        unless: ActiveRecord::Callback,
         block: T.nilable(T.proc.bind(T.untyped).void),
       ).void
     end
@@ -520,28 +402,17 @@ class ActiveRecord::Base
     sig do
       params(
         args: Symbol,
-        if:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
-        unless:
-          T.nilable(
-            T.any(
-              Symbol,
-              Proc,
-              T.proc.params(arg0: T.untyped).returns(T.nilable(T::Boolean)),
-            ),
-          ),
+        if: ActiveRecord::Callback,
+        unless: ActiveRecord::Callback,
         block: T.nilable(T.proc.bind(T.untyped).void),
       ).void
     end
     def around_update(*args, if: nil, unless: nil, &block); end
   end
 end
+
+ActiveRecord::Persistence::Returning =
+  T.type_alias { T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])) }
 
 module ActiveRecord::Persistence
   extend T::Sig
@@ -573,8 +444,7 @@ module ActiveRecord::Persistence
   sig do
     params(
         attributes: T::Hash[T.any(Symbol, String), T.untyped],
-        returning:
-          T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
+        returning: ActiveRecord::Persistence::Returning,
         unique_by: T.nilable(T.untyped),
         record_timestamps: T.nilable(T::Boolean),
       )
@@ -587,25 +457,19 @@ module ActiveRecord::Persistence
   sig do
     params(
         attributes: T::Hash[T.any(Symbol, String), T.untyped],
-        returning:
-          T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
+        returning: ActiveRecord::Persistence::Returning,
         record_timestamps: T.nilable(T::Boolean),
       )
       .returns(ActiveRecord::Result)
   end
-  def insert!(
-    attributes,
-    returning: T.unsafe(nil),
-    record_timestamps: T.unsafe(nil)
-  )
+  def insert!(attributes, returning: nil, record_timestamps: nil)
     T.unsafe(nil)
   end
 
   sig do
     params(
         attributes: T::Array[T::Hash[T.any(Symbol, String), T.untyped]],
-        returning:
-          T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
+        returning: ActiveRecord::Persistence::Returning,
         unique_by: T.nilable(T.untyped),
         record_timestamps: T.nilable(T::Boolean),
       )
@@ -623,8 +487,7 @@ module ActiveRecord::Persistence
   sig do
     params(
         attributes: T::Array[T::Hash[T.any(Symbol, String), T.untyped]],
-        returning:
-          T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
+        returning: ActiveRecord::Persistence::Returning,
         record_timestamps: T.nilable(T::Boolean),
       )
       .returns(ActiveRecord::Result)
@@ -637,8 +500,7 @@ module ActiveRecord::Persistence
     params(
         attributes: T::Hash[T.any(Symbol, String), T.untyped],
         on_duplicate: T.nilable(T.untyped),
-        returning:
-          T.nilable(T.any(FalseClass, T::Array[T.any(Symbol, String)])),
+        returning: ActiveRecord::Persistence::Returning,
         unique_by: T.nilable(T.untyped),
         record_timestamps: T.nilable(T::Boolean),
       )

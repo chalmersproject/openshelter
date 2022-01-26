@@ -1,7 +1,9 @@
 # typed: strict
 # frozen_string_literal: true
 
+require "sorbet-runtime"
 require "zeitwerk"
+require "semantic_logger"
 
 module Remix
   extend T::Sig

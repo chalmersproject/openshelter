@@ -54,6 +54,12 @@ Style/Documentation:
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
 
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Proc:
+  Enabled: true
+
 # You guys think I have time for this shit?
 GraphQL/ObjectDescription:
   Enabled: false

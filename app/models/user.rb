@@ -1,0 +1,17 @@
+# typed: strict
+# frozen_string_literal: true
+
+class User < ApplicationRecord
+  extend T::Helpers
+  extend Devise::Models
+
+  # Include default devise modules. Others available are:
+  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+  devise :database_authenticatable,
+         :registerable,
+         :recoverable,
+         :rememberable,
+         :validatable,
+         :confirmable,
+         :trackable
+end

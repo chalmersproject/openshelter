@@ -2,16 +2,19 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Serve GraphQL API at /api/graphql
-  post "/api/graphql", to: "graphql#execute"
+  devise_for :users
+  root "remix#proxy"
 
-  # Serve GraphiQL at /api
-  mount GraphiQL::Rails::Engine, at: "/api", graphql_path: "/api/graphql"
+  # Serve GraphQL API at /api
+  scope "/api" do
+    # devise_for :users
+    post "/", to: "graphql#execute"
+    mount GraphiQL::Rails::Engine, at: "/", graphql_path: "/api"
+  end
 
   # Serve Rails Admin at /admin
-  mount RailsAdmin::Engine, at: "/admin" #, as: "rails_admin"
+  mount RailsAdmin::Engine, at: "/admin"
 
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-  # Defines the root path route ("/")
-  # root "articles#index"
+  # Proxy all other requests to Remix
+  match "/*path", to: "remix#proxy", via: :all
 end

@@ -462,41 +462,18 @@ module AbstractController::Callbacks::ClassMethods
   # * <tt>except</tt>  - The callback should be run for all actions except this action.
   def _normalize_callback_options(options); end
 
-  sig { params(names: T.any(Proc, Symbol), except: T.nilable(T.any(Symbol, T::Array[Symbol])), only: T.nilable(T.any(Symbol, T::Array[Symbol])), if: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), unless: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), raise: T::Boolean, block: T.nilable(T.proc.returns(T.untyped))).void }
-  def after_action(*names, except: T.unsafe(nil), only: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), raise: T.unsafe(nil), &block); end
-
-  sig { params(names: T.any(Proc, Symbol), except: T.nilable(T.any(Symbol, T::Array[Symbol])), only: T.nilable(T.any(Symbol, T::Array[Symbol])), if: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), unless: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), raise: T::Boolean, block: T.nilable(T.proc.returns(T.untyped))).void }
-  def append_after_action(*names, except: T.unsafe(nil), only: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), raise: T.unsafe(nil), &block); end
-
-  sig { params(names: T.any(Proc, Symbol), except: T.nilable(T.any(Symbol, T::Array[Symbol])), only: T.nilable(T.any(Symbol, T::Array[Symbol])), if: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), unless: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), raise: T::Boolean, block: T.nilable(T.proc.returns(T.untyped))).void }
-  def append_around_action(*names, except: T.unsafe(nil), only: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), raise: T.unsafe(nil), &block); end
-
-  sig { params(names: T.any(Proc, Symbol), except: T.nilable(T.any(Symbol, T::Array[Symbol])), only: T.nilable(T.any(Symbol, T::Array[Symbol])), if: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), unless: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), raise: T::Boolean, block: T.nilable(T.proc.returns(T.untyped))).void }
-  def append_before_action(*names, except: T.unsafe(nil), only: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), raise: T.unsafe(nil), &block); end
-
-  sig { params(names: T.any(Proc, Symbol), except: T.nilable(T.any(Symbol, T::Array[Symbol])), only: T.nilable(T.any(Symbol, T::Array[Symbol])), if: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), unless: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), raise: T::Boolean, block: T.nilable(T.proc.returns(T.untyped))).void }
-  def around_action(*names, except: T.unsafe(nil), only: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), raise: T.unsafe(nil), &block); end
-
-  sig { params(names: T.any(Proc, Symbol), except: T.nilable(T.any(Symbol, T::Array[Symbol])), only: T.nilable(T.any(Symbol, T::Array[Symbol])), if: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), unless: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), raise: T::Boolean, block: T.nilable(T.proc.returns(T.untyped))).void }
-  def before_action(*names, except: T.unsafe(nil), only: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), raise: T.unsafe(nil), &block); end
-
-  sig { params(names: T.any(Proc, Symbol), except: T.nilable(T.any(Symbol, T::Array[Symbol])), only: T.nilable(T.any(Symbol, T::Array[Symbol])), if: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), unless: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), raise: T::Boolean, block: T.nilable(T.proc.returns(T.untyped))).void }
-  def prepend_after_action(*names, except: T.unsafe(nil), only: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), raise: T.unsafe(nil), &block); end
-
-  sig { params(names: T.any(Proc, Symbol), except: T.nilable(T.any(Symbol, T::Array[Symbol])), only: T.nilable(T.any(Symbol, T::Array[Symbol])), if: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), unless: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), raise: T::Boolean, block: T.nilable(T.proc.returns(T.untyped))).void }
-  def prepend_around_action(*names, except: T.unsafe(nil), only: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), raise: T.unsafe(nil), &block); end
-
-  sig { params(names: T.any(Proc, Symbol), except: T.nilable(T.any(Symbol, T::Array[Symbol])), only: T.nilable(T.any(Symbol, T::Array[Symbol])), if: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), unless: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), raise: T::Boolean, block: T.nilable(T.proc.returns(T.untyped))).void }
-  def prepend_before_action(*names, except: T.unsafe(nil), only: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), raise: T.unsafe(nil), &block); end
-
-  sig { params(names: T.any(Proc, Symbol), except: T.nilable(T.any(Symbol, T::Array[Symbol])), only: T.nilable(T.any(Symbol, T::Array[Symbol])), if: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), unless: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), raise: T::Boolean).void }
-  def skip_after_action(*names, except: T.unsafe(nil), only: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), raise: T.unsafe(nil)); end
-
-  sig { params(names: T.any(Proc, Symbol), except: T.nilable(T.any(Symbol, T::Array[Symbol])), only: T.nilable(T.any(Symbol, T::Array[Symbol])), if: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), unless: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), raise: T::Boolean).void }
-  def skip_around_action(*names, except: T.unsafe(nil), only: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), raise: T.unsafe(nil)); end
-
-  sig { params(names: T.any(Proc, Symbol), except: T.nilable(T.any(Symbol, T::Array[Symbol])), only: T.nilable(T.any(Symbol, T::Array[Symbol])), if: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), unless: T.nilable(T.any(Proc, Symbol, T::Array[Symbol])), raise: T::Boolean).void }
-  def skip_before_action(*names, except: T.unsafe(nil), only: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), raise: T.unsafe(nil)); end
+  def after_action(*names, &blk); end
+  def append_after_action(*names, &blk); end
+  def append_around_action(*names, &blk); end
+  def append_before_action(*names, &blk); end
+  def around_action(*names, &blk); end
+  def before_action(*names, &blk); end
+  def prepend_after_action(*names, &blk); end
+  def prepend_around_action(*names, &blk); end
+  def prepend_before_action(*names, &blk); end
+  def skip_after_action(*names); end
+  def skip_around_action(*names); end
+  def skip_before_action(*names); end
 end
 
 module AbstractController::Collector
@@ -5058,6 +5035,12 @@ module ActionController::RequestForgeryProtection
   mixes_in_class_methods ::ActiveSupport::DescendantsTracker
   mixes_in_class_methods ::AbstractController::Callbacks::ClassMethods
   mixes_in_class_methods ::ActionController::RequestForgeryProtection::ClassMethods
+
+  sig { returns(Symbol) }
+  def request_forgery_protection_token; end
+
+  sig { params(value: Symbol).void }
+  def request_forgery_protection_token=(value); end
 
   private
 
@@ -10951,42 +10934,42 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
   # For supported arguments, see match[rdoc-ref:Base#match]
   #
   # delete 'broccoli', to: 'food#broccoli'
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(String, T.proc.returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
+  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
   def delete(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), &block); end
 
   # Define a route that only recognizes HTTP GET.
   # For supported arguments, see match[rdoc-ref:Base#match]
   #
   # get 'bacon', to: 'food#bacon'
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(String, Symbol, T.proc.params(arg0: T.untyped).returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
+  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
   def get(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), &block); end
 
   # Define a route that only recognizes HTTP OPTIONS.
   # For supported arguments, see match[rdoc-ref:Base#match]
   #
   # options 'carrots', to: 'food#carrots'
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(String, Symbol, T.proc.params(arg0: T.untyped).returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
+  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
   def options(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), &block); end
 
   # Define a route that only recognizes HTTP PATCH.
   # For supported arguments, see match[rdoc-ref:Base#match]
   #
   # patch 'bacon', to: 'food#bacon'
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(String, T.proc.returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
+  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
   def patch(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), &block); end
 
   # Define a route that only recognizes HTTP POST.
   # For supported arguments, see match[rdoc-ref:Base#match]
   #
   # post 'bacon', to: 'food#bacon'
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(String, T.proc.returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
+  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
   def post(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), &block); end
 
   # Define a route that only recognizes HTTP PUT.
   # For supported arguments, see match[rdoc-ref:Base#match]
   #
   # put 'bacon', to: 'food#bacon'
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(String, T.proc.returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
+  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
   def put(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), &block); end
 
   private
@@ -11123,7 +11106,7 @@ module ActionDispatch::Routing::Mapper::Resources
   # match 'path' => 'controller#action', via: :patch
   # match 'path', to: 'controller#action', via: :post
   # match 'path', 'otherpath', on: :member, via: :get
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(String, T.proc.returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
+  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), path: T.nilable(T.any(String, Symbol)), block: T.nilable(T.untyped)).returns(T.untyped) }
   def match(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), &block); end
 
   # To add a member route, add a member block into the resource block:
@@ -11335,7 +11318,7 @@ module ActionDispatch::Routing::Mapper::Resources
   # You should put the root route at the top of <tt>config/routes.rb</tt>,
   # because this means it will be matched first. As this is the most popular route
   # of most Rails applications, this is beneficial.
-  sig { params(path: T.nilable(String), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(String, T.proc.returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), block: T.nilable(T.untyped)).returns(T.untyped) }
+  sig { params(path: T.nilable(String), controller: T.nilable(T.any(String, Symbol)), action: T.nilable(T.any(String, Symbol)), param: T.nilable(Symbol), module: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), via: T.nilable(T.any(Symbol, T::Array[Symbol])), to: T.nilable(T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped))), on: T.nilable(Symbol), constraints: T.nilable(T.untyped), defaults: T.nilable(T::Hash[T.untyped, T.untyped]), anchor: T::Boolean, format: T.nilable(T.any(String, T::Boolean)), block: T.nilable(T.untyped)).returns(T.untyped) }
   def root(path = T.unsafe(nil), controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), &block); end
 
   def shallow; end
@@ -11683,7 +11666,9 @@ module ActionDispatch::Routing::Mapper::Scoping
 end
 
 ActionDispatch::Routing::Mapper::Scoping::POISON = T.let(T.unsafe(nil), Object)
+ActionDispatch::Routing::Mapper::To = T.type_alias { T.nilable(T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped))) }
 ActionDispatch::Routing::Mapper::URL_OPTIONS = T.let(T.unsafe(nil), Array)
+ActionDispatch::Routing::Mapper::Via = T.type_alias { T.nilable(T.any(Symbol, T::Array[Symbol])) }
 
 class ActionDispatch::Routing::OptionRedirect < ::ActionDispatch::Routing::Redirect
   def inspect; end

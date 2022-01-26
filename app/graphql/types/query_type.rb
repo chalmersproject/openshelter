@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Types
-  class QueryType < Types::BaseObject
+  class QueryType < BaseObject
     extend T::Sig
 
     # Add `node(id: ID!) and `nodes(ids: [ID!]!)`

@@ -6,6 +6,7 @@ require "rubocop"
 
 # Patches
 require_relative "./lib/actionpack.rb"
+require_relative "./lib/activemodel.rb"
 require_relative "./lib/activerecord.rb"
 require_relative "./lib/activesupport.rb"
 require_relative "./lib/graphql.rb"

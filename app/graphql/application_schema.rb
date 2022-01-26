@@ -1,14 +1,15 @@
 # typed: strict
 # frozen_string_literal: true
 
-class Schema < GraphQL::Schema
+class ApplicationSchema < GraphQL::Schema
   extend T::Sig
 
-  mutation Types::MutationType
-  query Types::QueryType
-
-  # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
+  use GraphQL::Subscriptions::ActionCableSubscriptions
+
+  query Types::QueryType
+  mutation Types::MutationType
+  subscription Types::SubscriptionType
 
   # GraphQL-Ruby calls this when something goes wrong while running a query:
   sig { params(err: T.untyped, context: T.untyped).returns(T.untyped) }

@@ -18,14 +18,17 @@
     "fmt:partial": "prettier --write",
     "lint": "run-p -l lint:ts lint:eslint lint:srb lint:rubocop",
     "lint:ts": "tsc --noEmit",
+    "lint:ts:partial": "tsc-files --noEmit",
     "lint:eslint": "yarn lint:eslint:partial .",
     "lint:eslint:partial": "eslint --cache --ext .js,.jsx,.ts,.tsx",
     "lint:srb": "bundle exec srb tc",
-    "lint:rubocop": "bundle exec rubocop --force-exclusion",
+    "lint:rubocop": "bundle exec rubocop",
+    "lint:rubocop:partial": "bundle exec rubocop --force-exclusion",
     "fix": "run-s -l fix:eslint fix:rubocop",
     "fix:eslint": "yarn lint:eslint --fix",
     "fix:eslint:partial": "yarn lint:eslint:partial --fix",
     "fix:rubocop": "yarn lint:rubocop --auto-correct-all",
+    "fix:rubocop:partial": "yarn lint:rubocop:partial --auto-correct",
     "build": "run-p -l build:remix build:rails",
     "build:remix": "remix build",
     "build:rails": "bundle exec rails assets:precompile",
@@ -37,6 +40,7 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@rails/ujs": "^7.0.1",
     "@remix-run/react": "^1.1.3",
     "@remix-run/serve": "^1.1.3",
     "@remix-run/server-runtime": "^1.1.3",
@@ -48,6 +52,7 @@
     "@prettier/plugin-ruby": "^2.0.0",
     "@remix-run/dev": "^1.1.3",
     "@remix-run/node": "^1.1.3",
+    "@types/rails__ujs": "^6.0.1",
     "@types/react": "^17.0.24",
     "@types/react-dom": "^17.0.9",
     "@typescript-eslint/eslint-plugin": "^5.10.0",
@@ -59,6 +64,7 @@
     "npm-run-all": "^4.1.5",
     "prettier": "^2.5.1",
     "release-it": "^14.12.4",
+    "tsc-files": "^1.1.3",
     "typescript": "^4.1.2"
   }
 }
