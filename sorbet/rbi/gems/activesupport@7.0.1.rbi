@@ -4681,9 +4681,8 @@ class ActiveSupport::Logger < ::Logger
     # logger = Logger.new(STDOUT)
     # ActiveSupport::Logger.logger_outputs_to?(logger, STDOUT)
     # # => true
-    def logger_outputs_to?(*args); end
+    def logger_outputs_to?(logger, *sources); end
 
-    def new(*args, **kwargs); end
     def silencer; end
     def silencer=(val); end
   end

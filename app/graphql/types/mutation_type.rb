@@ -5,15 +5,16 @@ module Types
   class MutationType < BaseObject
     extend T::Sig
 
-    # TODO: remove me
-    field :test_field,
+    field :greet,
           String,
           null: false,
-          description: "An example field added by the generator"
+          description: "An example field added by the generator" do
+      argument :value, String, required: true
+    end
 
-    sig { returns(String) }
-    def test_field
-      "Hello World"
+    sig { params(value: String).returns(String) }
+    def greet(value:)
+      "Hello #{value}"
     end
   end
 end

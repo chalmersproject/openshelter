@@ -2,6 +2,8 @@
 build/
 public/build/
 node_modules/
+db/schema.rb
+app/assets/build
 bin/
 log/
 tmp/

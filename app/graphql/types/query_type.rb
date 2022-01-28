@@ -5,20 +5,22 @@ module Types
   class QueryType < BaseObject
     extend T::Sig
 
-    # Add `node(id: ID!) and `nodes(ids: [ID!]!)`
+    # Add node and nodes field.
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    # Add root-level fields here.
-    # They will be entry points for queries on your schema.
+    field :version, String, description: "Application server version."
+
+    field :viewer,
+          UserType,
+          description: "The currently authenticated user.",
+          resolver_method: :current_user
 
     # TODO: remove me
-    field :test_field,
-          String,
-          null: false,
-          description: "An example field added by the generator"
-
+    field :test_field, String, null: false
     field :test_signal_type, SignalTypeType, null: false
+
+    delegate :version, to: :application
 
     sig { returns(String) }
     def test_field

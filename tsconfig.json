@@ -1,5 +1,20 @@
 {
   "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
+  "exclude": [
+    ".cache",
+    "build",
+    "public/build",
+    "app/assets/build",
+    "node_modules",
+    "db",
+    "bin",
+    "log",
+    "tmp",
+    "storage",
+    "vendor",
+    "sorbet"
+  ],
+
   "compilerOptions": {
     "lib": ["DOM", "DOM.Iterable", "ES2019"],
     "isolatedModules": true,

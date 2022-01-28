@@ -3,8 +3,12 @@
 
 module Types
   class BaseObject < GraphQL::Schema::Object
-    edge_type_class(Types::BaseEdge)
-    connection_type_class(Types::BaseConnection)
+    extend T::Sig
+
+    include ApplicationResolverHelpers
+
     field_class Types::BaseField
+    connection_type_class Types::BaseConnection
+    edge_type_class Types::BaseEdge
   end
 end

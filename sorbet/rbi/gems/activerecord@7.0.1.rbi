@@ -1854,7 +1854,7 @@ module ActiveRecord::Associations::ClassMethods
   # belongs_to :user, optional: true
   # belongs_to :account, default: -> { company.account }
   # belongs_to :account, strict_loading: true
-  sig { params(name: T.nilable(T.any(String, Symbol)), scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), autosave: T.nilable(T::Boolean), class_name: T.nilable(T.any(String, Symbol)), counter_cache: T.nilable(T.any(String, Symbol, T::Boolean)), dependent: T.nilable(T.any(String, Symbol)), foreign_key: T.nilable(T.any(String, Symbol)), foreign_type: T.nilable(T.any(String, Symbol)), inverse_of: T.nilable(T.any(FalseClass, String, Symbol)), optional: T.nilable(T::Boolean), polymorphic: T.nilable(T::Boolean), primary_key: T.nilable(T.any(String, Symbol)), required: T.nilable(T::Boolean), touch: T.nilable(T.any(Symbol, T::Boolean)), validate: T.nilable(T::Boolean), default: T.nilable(T.proc.returns(T.untyped))).void }
+  sig { params(name: T.any(String, Symbol), scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), autosave: T::Boolean, class_name: T.any(String, Symbol), counter_cache: T.any(String, Symbol, T::Boolean), dependent: T.any(String, Symbol), foreign_key: T.any(String, Symbol), foreign_type: T.any(String, Symbol), inverse_of: T.any(FalseClass, String, Symbol), optional: T::Boolean, polymorphic: T::Boolean, primary_key: T.any(String, Symbol), required: T::Boolean, touch: T.any(Symbol, T::Boolean), validate: T::Boolean, default: T.proc.returns(T.untyped)).void }
   def belongs_to(name, scope = T.unsafe(nil), autosave: T.unsafe(nil), class_name: T.unsafe(nil), counter_cache: T.unsafe(nil), dependent: T.unsafe(nil), foreign_key: T.unsafe(nil), foreign_type: T.unsafe(nil), inverse_of: T.unsafe(nil), optional: T.unsafe(nil), polymorphic: T.unsafe(nil), primary_key: T.unsafe(nil), required: T.unsafe(nil), touch: T.unsafe(nil), validate: T.unsafe(nil), default: T.unsafe(nil)); end
 
   # Specifies a many-to-many relationship with another class. This associates two classes via an
@@ -2024,7 +2024,7 @@ module ActiveRecord::Associations::ClassMethods
   # has_and_belongs_to_many :categories, join_table: "prods_cats"
   # has_and_belongs_to_many :categories, -> { readonly }
   # has_and_belongs_to_many :categories, strict_loading: true
-  sig { params(name: T.nilable(T.any(String, Symbol)), scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), after_add: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), after_remove: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), association_foreign_key: T.nilable(T.any(String, Symbol)), autosave: T.nilable(T::Boolean), before_add: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), before_remove: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), class_name: T.nilable(T.any(String, Symbol)), extend: T.nilable(T.any(Module, T::Array[Module])), foreign_key: T.nilable(T.any(String, Symbol)), inverse_of: T.nilable(T.any(FalseClass, String, Symbol)), join_table: T.nilable(T.any(String, Symbol)), validate: T.nilable(T::Boolean), block: T.nilable(T.proc.void)).void }
+  sig { params(name: T.any(String, Symbol), scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), after_add: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), after_remove: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), association_foreign_key: T.any(String, Symbol), autosave: T::Boolean, before_add: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), before_remove: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), class_name: T.any(String, Symbol), extend: T.any(Module, T::Array[Module]), foreign_key: T.any(String, Symbol), inverse_of: T.any(FalseClass, String, Symbol), join_table: T.any(String, Symbol), validate: T::Boolean, block: T.proc.void).void }
   def has_and_belongs_to_many(name, scope = T.unsafe(nil), after_add: T.unsafe(nil), after_remove: T.unsafe(nil), association_foreign_key: T.unsafe(nil), autosave: T.unsafe(nil), before_add: T.unsafe(nil), before_remove: T.unsafe(nil), class_name: T.unsafe(nil), extend: T.unsafe(nil), foreign_key: T.unsafe(nil), inverse_of: T.unsafe(nil), join_table: T.unsafe(nil), validate: T.unsafe(nil), &block); end
 
   # Specifies a one-to-many association. The following methods for retrieval and query of
@@ -2262,7 +2262,7 @@ module ActiveRecord::Associations::ClassMethods
   # has_many :subscribers, through: :subscriptions, source: :user
   # has_many :subscribers, through: :subscriptions, disable_joins: true
   # has_many :comments, strict_loading: true
-  sig { params(name: Symbol, scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), after_add: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), after_remove: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), anonymous_class: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), autosave: T.nilable(T::Boolean), before_add: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), before_remove: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), class_name: T.nilable(T.any(String, Symbol)), counter_cache: T.nilable(T.any(String, Symbol)), dependent: T.nilable(T.any(String, Symbol)), extend: T.nilable(T.any(Module, T::Array[Module])), foreign_key: T.nilable(T.any(String, Symbol)), foreign_type: T.nilable(T.any(String, Symbol)), index_errors: T.nilable(T::Boolean), inverse_of: T.nilable(T.any(FalseClass, String, Symbol)), join_table: T.nilable(T.any(String, Symbol)), primary_key: T.nilable(T.any(String, Symbol)), source: T.nilable(T.any(String, Symbol)), source_type: T.nilable(T.any(String, Symbol)), table_name: T.nilable(T.any(String, Symbol)), through: T.nilable(T.any(String, Symbol)), validate: T.nilable(T::Boolean), block: T.nilable(T.proc.void)).void }
+  sig { params(name: Symbol, scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), after_add: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), after_remove: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), anonymous_class: T.any(String, Symbol), as: T.any(String, Symbol), autosave: T::Boolean, before_add: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), before_remove: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), class_name: T.any(String, Symbol), counter_cache: T.any(String, Symbol), dependent: T.any(String, Symbol), extend: T.any(Module, T::Array[Module]), foreign_key: T.any(String, Symbol), foreign_type: T.any(String, Symbol), index_errors: T::Boolean, inverse_of: T.any(FalseClass, String, Symbol), join_table: T.any(String, Symbol), primary_key: T.any(String, Symbol), source: T.any(String, Symbol), source_type: T.any(String, Symbol), table_name: T.any(String, Symbol), through: T.any(String, Symbol), validate: T::Boolean, block: T.proc.void).void }
   def has_many(name, scope = T.unsafe(nil), after_add: T.unsafe(nil), after_remove: T.unsafe(nil), anonymous_class: T.unsafe(nil), as: T.unsafe(nil), autosave: T.unsafe(nil), before_add: T.unsafe(nil), before_remove: T.unsafe(nil), class_name: T.unsafe(nil), counter_cache: T.unsafe(nil), dependent: T.unsafe(nil), extend: T.unsafe(nil), foreign_key: T.unsafe(nil), foreign_type: T.unsafe(nil), index_errors: T.unsafe(nil), inverse_of: T.unsafe(nil), join_table: T.unsafe(nil), primary_key: T.unsafe(nil), source: T.unsafe(nil), source_type: T.unsafe(nil), table_name: T.unsafe(nil), through: T.unsafe(nil), validate: T.unsafe(nil), &block); end
 
   # Specifies a one-to-one association with another class. This method should only be used
@@ -2424,7 +2424,7 @@ module ActiveRecord::Associations::ClassMethods
   # has_one :primary_address, -> { where(primary: true) }, through: :addressables, source: :addressable
   # has_one :credit_card, required: true
   # has_one :credit_card, strict_loading: true
-  sig { params(name: Symbol, scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), anonymous_class: T.nilable(T.any(String, Symbol)), as: T.nilable(T.any(String, Symbol)), autosave: T.nilable(T::Boolean), class_name: T.nilable(T.any(String, Symbol)), dependent: T.nilable(T.any(String, Symbol)), foreign_key: T.nilable(T.any(String, Symbol)), foreign_type: T.nilable(T.any(String, Symbol)), inverse_of: T.nilable(T.any(FalseClass, String, Symbol)), primary_key: T.nilable(T.any(String, Symbol)), required: T.nilable(T::Boolean), source: T.nilable(T.any(String, Symbol)), source_type: T.nilable(T.any(String, Symbol)), through: T.nilable(T.any(String, Symbol)), validate: T.nilable(T::Boolean), touch: T.nilable(T.any(Symbol, T::Boolean)), block: T.nilable(T.proc.void)).void }
+  sig { params(name: Symbol, scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), anonymous_class: T.any(String, Symbol), as: T.any(String, Symbol), autosave: T::Boolean, class_name: T.any(String, Symbol), dependent: T.any(String, Symbol), foreign_key: T.any(String, Symbol), foreign_type: T.any(String, Symbol), inverse_of: T.any(FalseClass, String, Symbol), primary_key: T.any(String, Symbol), required: T::Boolean, source: T.any(String, Symbol), source_type: T.any(String, Symbol), through: T.any(String, Symbol), validate: T::Boolean, touch: T.any(Symbol, T::Boolean), block: T.proc.void).void }
   def has_one(name, scope = T.unsafe(nil), anonymous_class: T.unsafe(nil), as: T.unsafe(nil), autosave: T.unsafe(nil), class_name: T.unsafe(nil), dependent: T.unsafe(nil), foreign_key: T.unsafe(nil), foreign_type: T.unsafe(nil), inverse_of: T.unsafe(nil), primary_key: T.unsafe(nil), required: T.unsafe(nil), source: T.unsafe(nil), source_type: T.unsafe(nil), through: T.unsafe(nil), validate: T.unsafe(nil), touch: T.unsafe(nil), &block); end
 end
 
@@ -6147,21 +6147,21 @@ class ActiveRecord::Base
     def _validators=(value); end
     def _validators?; end
 
-    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
     def after_create(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
-    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
     def after_destroy(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
     def after_find(*args, **options, &block); end
     def after_initialize(*args, **options, &block); end
 
-    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
     def after_save(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
     def after_touch(*args, **options, &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
+    sig { params(args: Symbol, if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
     def after_update(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
     def aggregate_reflections; end
@@ -6169,16 +6169,16 @@ class ActiveRecord::Base
     def aggregate_reflections?; end
     def application_record_class?; end
 
-    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
     def around_create(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
-    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
     def around_destroy(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
+    sig { params(args: Symbol, if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
     def around_save(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
+    sig { params(args: Symbol, if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
     def around_update(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
     def asynchronous_queries_session; end
@@ -6196,16 +6196,16 @@ class ActiveRecord::Base
     def automatic_scope_inversing=(value); end
     def automatic_scope_inversing?; end
 
-    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
     def before_create(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
-    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), prepend: T::Boolean, block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), prepend: T::Boolean, block: T.proc.void).void }
     def before_destroy(*args, if: T.unsafe(nil), unless: T.unsafe(nil), prepend: T.unsafe(nil), &block); end
 
-    sig { params(args: T.any(String, Symbol), if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
+    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
     def before_save(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
-    sig { params(args: Symbol, if: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), unless: T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])), block: T.nilable(T.proc.void)).void }
+    sig { params(args: Symbol, if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
     def before_update(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
 
     def belongs_to_required_by_default; end
@@ -6787,7 +6787,7 @@ module ActiveRecord::Calculations
   def type_for(field, &block); end
 end
 
-ActiveRecord::Callback = T.type_alias { T.nilable(T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)])) }
+ActiveRecord::Callback = T.type_alias { T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]) }
 
 # = Active Record \Callbacks
 #
@@ -8920,6 +8920,1184 @@ class ActiveRecord::ConnectionAdapters::PoolManager
   def shard_names; end
 end
 
+module ActiveRecord::ConnectionAdapters::PostgreSQL; end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::AlterTable < ::ActiveRecord::ConnectionAdapters::AlterTable
+  def initialize(td); end
+
+  # Returns the value of attribute constraint_validations.
+  def constraint_validations; end
+
+  def validate_constraint(name); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::Column < ::ActiveRecord::ConnectionAdapters::Column
+  def initialize(*_arg0, serial: T.unsafe(nil), generated: T.unsafe(nil), **_arg3); end
+
+  def ==(other); end
+  def array; end
+  def array?; end
+  def encode_with(coder); end
+  def enum?; end
+  def eql?(other); end
+  def fmod(*_arg0, &_arg1); end
+  def has_default?; end
+  def hash; end
+  def init_with(coder); end
+  def oid(*_arg0, &_arg1); end
+  def serial?; end
+  def sql_type; end
+  def virtual?; end
+end
+
+module ActiveRecord::ConnectionAdapters::PostgreSQL::ColumnMethods
+  extend ::ActiveSupport::Concern
+
+  # Defines the primary key field.
+  # Use of the native PostgreSQL UUID type is supported, and can be used
+  # by defining your tables as such:
+  #
+  # create_table :stuffs, id: :uuid do |t|
+  # t.string :content
+  # t.timestamps
+  # end
+  #
+  # By default, this will use the <tt>gen_random_uuid()</tt> function from the
+  # +pgcrypto+ extension. As that extension is only available in
+  # PostgreSQL 9.4+, for earlier versions an explicit default can be set
+  # to use <tt>uuid_generate_v4()</tt> from the +uuid-ossp+ extension instead:
+  #
+  # create_table :stuffs, id: false do |t|
+  # t.primary_key :id, :uuid, default: "uuid_generate_v4()"
+  # t.uuid :foo_id
+  # t.timestamps
+  # end
+  #
+  # To enable the appropriate extension, which is a requirement, use
+  # the +enable_extension+ method in your migrations.
+  #
+  # To use a UUID primary key without any of the extensions, set the
+  # +:default+ option to +nil+:
+  #
+  # create_table :stuffs, id: false do |t|
+  # t.primary_key :id, :uuid, default: nil
+  # t.uuid :foo_id
+  # t.timestamps
+  # end
+  #
+  # You may also pass a custom stored procedure that returns a UUID or use a
+  # different UUID generation function from another library.
+  #
+  # Note that setting the UUID primary key default value to +nil+ will
+  # require you to assure that you always provide a UUID value before saving
+  # a record (as primary keys cannot be +nil+). This might be done via the
+  # +SecureRandom.uuid+ method and a +before_save+ callback, for instance.
+  def primary_key(name, type = T.unsafe(nil), **options); end
+end
+
+module ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements
+  # Begins a transaction.
+  def begin_db_transaction; end
+
+  def begin_isolated_db_transaction(isolation); end
+
+  # Commits a transaction.
+  def commit_db_transaction; end
+
+  def exec_delete(sql, name = T.unsafe(nil), binds = T.unsafe(nil)); end
+  def exec_insert(sql, name = T.unsafe(nil), binds = T.unsafe(nil), pk = T.unsafe(nil), sequence_name = T.unsafe(nil)); end
+  def exec_query(sql, name = T.unsafe(nil), binds = T.unsafe(nil), prepare: T.unsafe(nil), async: T.unsafe(nil)); end
+
+  # Aborts a transaction.
+  def exec_rollback_db_transaction; end
+
+  def exec_update(sql, name = T.unsafe(nil), binds = T.unsafe(nil)); end
+
+  # Executes an SQL statement, returning a PG::Result object on success
+  # or raising a PG::Error exception otherwise.
+  # Note: the PG::Result object is manually memory managed; if you don't
+  # need it specifically, you may want consider the <tt>exec_query</tt> wrapper.
+  def execute(sql, name = T.unsafe(nil)); end
+
+  def explain(arel, binds = T.unsafe(nil)); end
+  def high_precision_current_timestamp; end
+
+  # Queries the database and returns the results in an Array-like object
+  def query(sql, name = T.unsafe(nil)); end
+
+  def write_query?(sql); end
+
+  private
+
+  def build_truncate_statements(table_names); end
+  def execute_batch(statements, name = T.unsafe(nil)); end
+
+  # Returns the current ID of a table's sequence.
+  def last_insert_id_result(sequence_name); end
+
+  def sql_for_insert(sql, pk, binds); end
+  def suppress_composite_primary_key(pk); end
+end
+
+# From https://www.postgresql.org/docs/current/functions-datetime.html#FUNCTIONS-DATETIME-CURRENT
+ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements::HIGH_PRECISION_CURRENT_TIMESTAMP = T.let(T.unsafe(nil), Arel::Nodes::SqlLiteral)
+
+ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements::READ_QUERY = T.let(T.unsafe(nil), Regexp)
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::ExplainPrettyPrinter
+  # Pretty prints the result of an EXPLAIN in a way that resembles the output of the
+  # PostgreSQL shell:
+  #
+  # QUERY PLAN
+  # ------------------------------------------------------------------------------
+  # Nested Loop Left Join  (cost=0.00..37.24 rows=8 width=0)
+  # Join Filter: (posts.user_id = users.id)
+  # ->  Index Scan using users_pkey on users  (cost=0.00..8.27 rows=1 width=4)
+  # Index Cond: (id = 1)
+  # ->  Seq Scan on posts  (cost=0.00..28.88 rows=8 width=4)
+  # Filter: (posts.user_id = 1)
+  # (6 rows)
+  def pp(result); end
+end
+
+# Value Object to hold a schema qualified name.
+# This is usually the name of a PostgreSQL relation but it can also represent
+# schema qualified type names. +schema+ and +identifier+ are unquoted to prevent
+# double quoting.
+class ActiveRecord::ConnectionAdapters::PostgreSQL::Name
+  def initialize(schema, identifier); end
+
+  def ==(o); end
+  def eql?(o); end
+  def hash; end
+
+  # Returns the value of attribute identifier.
+  def identifier; end
+
+  def quoted; end
+
+  # Returns the value of attribute schema.
+  def schema; end
+
+  def to_s; end
+
+  protected
+
+  def parts; end
+
+  private
+
+  def unquote(part); end
+end
+
+ActiveRecord::ConnectionAdapters::PostgreSQL::Name::SEPARATOR = T.let(T.unsafe(nil), String)
+module ActiveRecord::ConnectionAdapters::PostgreSQL::OID; end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Array < ::ActiveModel::Type::Value
+  include ::ActiveModel::Type::Helpers::Mutable
+
+  def initialize(subtype, delimiter = T.unsafe(nil)); end
+
+  def ==(other); end
+  def cast(value); end
+  def changed_in_place?(raw_old_value, new_value); end
+
+  # Returns the value of attribute delimiter.
+  def delimiter; end
+
+  def deserialize(value); end
+  def force_equality?(value); end
+  def limit(*_arg0, &_arg1); end
+  def map(value, &block); end
+  def precision(*_arg0, &_arg1); end
+  def scale(*_arg0, &_arg1); end
+  def serialize(value); end
+
+  # Returns the value of attribute subtype.
+  def subtype; end
+
+  def type(*_arg0, &_arg1); end
+  def type_cast_for_schema(value); end
+  def user_input_in_time_zone(*_arg0, &_arg1); end
+
+  private
+
+  def type_cast_array(value, method); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Array::Data < ::Struct
+  # Returns the value of attribute encoder
+  def encoder; end
+
+  # Sets the attribute encoder
+  def encoder=(_); end
+
+  # Returns the value of attribute values
+  def values; end
+
+  # Sets the attribute values
+  def values=(_); end
+
+  class << self
+    def [](*_arg0); end
+    def inspect; end
+    def members; end
+    def new(*_arg0); end
+  end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Bit < ::ActiveModel::Type::Value
+  def cast_value(value); end
+  def serialize(value); end
+  def type; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Bit::Data
+  def initialize(value); end
+
+  def binary?; end
+  def hex?; end
+  def to_s; end
+
+  private
+
+  # Returns the value of attribute value.
+  def value; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::BitVarying < ::ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Bit
+  def type; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Bytea < ::ActiveModel::Type::Binary
+  def deserialize(value); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Cidr < ::ActiveModel::Type::Value
+  def cast_value(value); end
+  def serialize(value); end
+  def type; end
+  def type_cast_for_schema(value); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Date < ::ActiveRecord::Type::Date
+  def cast_value(value); end
+  def type_cast_for_schema(value); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::DateTime < ::ActiveRecord::Type::DateTime
+  def cast_value(value); end
+  def type_cast_for_schema(value); end
+
+  protected
+
+  def real_type_unless_aliased(real_type); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Decimal < ::ActiveModel::Type::Decimal
+  def infinity(options = T.unsafe(nil)); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Enum < ::ActiveModel::Type::Value
+  def type; end
+
+  private
+
+  def cast_value(value); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Hstore < ::ActiveModel::Type::Value
+  include ::ActiveModel::Type::Helpers::Mutable
+
+  def accessor; end
+
+  # Will compare the Hash equivalents of +raw_old_value+ and +new_value+.
+  # By comparing hashes, this avoids an edge case where the order of
+  # the keys change between the two hashes, and they would not be marked
+  # as equal.
+  def changed_in_place?(raw_old_value, new_value); end
+
+  def deserialize(value); end
+  def serialize(value); end
+  def type; end
+
+  private
+
+  def escape_hstore(value); end
+end
+
+ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Hstore::ERROR = T.let(T.unsafe(nil), String)
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Inet < ::ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Cidr
+  def type; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Interval < ::ActiveModel::Type::Value
+  def cast_value(value); end
+  def serialize(value); end
+  def type; end
+  def type_cast_for_schema(value); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Jsonb < ::ActiveRecord::Type::Json
+  def type; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::LegacyPoint < ::ActiveModel::Type::Value
+  include ::ActiveModel::Type::Helpers::Mutable
+
+  def cast(value); end
+  def serialize(value); end
+  def type; end
+
+  private
+
+  def number_for_point(number); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Macaddr < ::ActiveModel::Type::String
+  def changed?(old_value, new_value, _new_value_before_type_cast); end
+  def changed_in_place?(raw_old_value, new_value); end
+  def type; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Money < ::ActiveModel::Type::Decimal
+  def cast_value(value); end
+  def scale; end
+  def type; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Oid < ::ActiveRecord::Type::UnsignedInteger
+  def type; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Point < ::ActiveModel::Type::Value
+  include ::ActiveModel::Type::Helpers::Mutable
+
+  def cast(value); end
+  def serialize(value); end
+  def type; end
+  def type_cast_for_schema(value); end
+
+  private
+
+  def build_point(x, y); end
+  def number_for_point(number); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Range < ::ActiveModel::Type::Value
+  def initialize(subtype, type = T.unsafe(nil)); end
+
+  def ==(other); end
+  def cast_value(value); end
+  def force_equality?(value); end
+  def map(value); end
+  def serialize(value); end
+
+  # Returns the value of attribute subtype.
+  def subtype; end
+
+  # Returns the value of attribute type.
+  def type; end
+
+  def type_cast_for_schema(value); end
+  def user_input_in_time_zone(*_arg0, &_arg1); end
+
+  private
+
+  def extract_bounds(value); end
+  def infinity(negative: T.unsafe(nil)); end
+  def infinity?(value); end
+  def type_cast_single(value); end
+  def type_cast_single_for_database(value); end
+
+  # When formatting the bound values of range types, PostgreSQL quotes
+  # the bound value using double-quotes in certain conditions. Within
+  # a double-quoted string, literal " and \ characters are themselves
+  # escaped. In input, PostgreSQL accepts multiple escape styles for "
+  # (either \" or "") but in output always uses "".
+  # See:
+  # * https://www.postgresql.org/docs/current/rangetypes.html#RANGETYPES-IO
+  # * https://www.postgresql.org/docs/current/rowtypes.html#ROWTYPES-IO-SYNTAX
+  def unquote(value); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::SpecializedString < ::ActiveModel::Type::String
+  def initialize(type, **options); end
+
+  # Returns the value of attribute type.
+  def type; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Timestamp < ::ActiveRecord::ConnectionAdapters::PostgreSQL::OID::DateTime
+  def type; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::TimestampWithTimeZone < ::ActiveRecord::ConnectionAdapters::PostgreSQL::OID::DateTime
+  def cast_value(value); end
+  def type; end
+end
+
+# This class uses the data from PostgreSQL pg_type table to build
+# the OID -> Type mapping.
+# - OID is an integer representing the type.
+# - Type is an OID::Type object.
+# This class has side effects on the +store+ passed during initialization.
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::TypeMapInitializer
+  def initialize(store); end
+
+  def query_conditions_for_array_types; end
+  def query_conditions_for_known_type_names; end
+  def query_conditions_for_known_type_types; end
+  def run(records); end
+
+  private
+
+  def alias_type(oid, target); end
+  def assert_valid_registration(oid, oid_type); end
+  def register(oid, oid_type = T.unsafe(nil), &block); end
+  def register_array_type(row); end
+  def register_composite_type(row); end
+  def register_domain_type(row); end
+  def register_enum_type(row); end
+  def register_mapped_type(row); end
+  def register_range_type(row); end
+  def register_with_subtype(oid, target_oid); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Uuid < ::ActiveModel::Type::Value
+  def changed?(old_value, new_value, _new_value_before_type_cast); end
+  def changed_in_place?(raw_old_value, new_value); end
+  def serialize(value); end
+  def type; end
+
+  private
+
+  def cast_value(value); end
+end
+
+ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Uuid::ACCEPTABLE_UUID = T.let(T.unsafe(nil), Regexp)
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Vector < ::ActiveModel::Type::Value
+  # +delim+ corresponds to the `typdelim` column in the pg_types
+  # table.  +subtype+ is derived from the `typelem` column in the
+  # pg_types table.
+  def initialize(delim, subtype); end
+
+  # FIXME: this should probably split on +delim+ and use +subtype+
+  # to cast the values.  Unfortunately, the current Rails behavior
+  # is to just return the string.
+  def cast(value); end
+
+  # Returns the value of attribute delim.
+  def delim; end
+
+  # Returns the value of attribute subtype.
+  def subtype; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Xml < ::ActiveModel::Type::String
+  def serialize(value); end
+  def type; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Xml::Data
+  def initialize(value); end
+
+  def to_s; end
+end
+
+module ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting
+  def column_name_matcher; end
+  def column_name_with_order_matcher; end
+
+  # Escapes binary strings for bytea input to the database.
+  def escape_bytea(value); end
+
+  def lookup_cast_type_from_column(column); end
+  def quote(value); end
+
+  # Quotes column names for use in SQL queries.
+  def quote_column_name(name); end
+
+  def quote_default_expression(value, column); end
+
+  # Quotes schema names for use in SQL queries.
+  def quote_schema_name(name); end
+
+  # Quotes strings for use in SQL input.
+  def quote_string(s); end
+
+  # Checks the following cases:
+  #
+  # - table_name
+  # - "table.name"
+  # - schema_name.table_name
+  # - schema_name."table.name"
+  # - "schema.name".table_name
+  # - "schema.name"."table.name"
+  def quote_table_name(name); end
+
+  def quote_table_name_for_assignment(table, attr); end
+  def quoted_binary(value); end
+
+  # Quote date/time values for use in SQL input.
+  def quoted_date(value); end
+
+  def type_cast(value); end
+
+  # Unescapes bytea output from a database to the binary string it represents.
+  # NOTE: This is NOT an inverse of escape_bytea! This is only to be used
+  # on escaped binary output from database drive.
+  def unescape_bytea(value); end
+
+  private
+
+  def determine_encoding_of_strings_in_array(value); end
+  def encode_array(array_data); end
+  def encode_range(range); end
+  def infinity?(value); end
+  def lookup_cast_type(sql_type); end
+  def type_cast_array(values); end
+  def type_cast_range_value(value); end
+end
+
+ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting::COLUMN_NAME = T.let(T.unsafe(nil), Regexp)
+ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting::COLUMN_NAME_WITH_ORDER = T.let(T.unsafe(nil), Regexp)
+
+module ActiveRecord::ConnectionAdapters::PostgreSQL::ReferentialIntegrity
+  def all_foreign_keys_valid?; end
+  def disable_referential_integrity; end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::SchemaCreation < ::ActiveRecord::ConnectionAdapters::SchemaCreation
+  private
+
+  def add_column_options!(sql, options); end
+
+  # Returns any SQL string to go between CREATE and TABLE. May be nil.
+  def table_modifier_in_create(o); end
+
+  def visit_AddForeignKey(o); end
+  def visit_AlterTable(o); end
+  def visit_ChangeColumnDefinition(o); end
+  def visit_CheckConstraintDefinition(o); end
+  def visit_ValidateConstraint(name); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::SchemaDumper < ::ActiveRecord::ConnectionAdapters::SchemaDumper
+  private
+
+  def default_primary_key?(column); end
+  def explicit_primary_key_default?(column); end
+  def extensions(stream); end
+  def extract_expression_for_virtual_column(column); end
+  def prepare_column_options(column); end
+  def schema_expression(column); end
+  def schema_type(column); end
+  def types(stream); end
+end
+
+module ActiveRecord::ConnectionAdapters::PostgreSQL::SchemaStatements
+  def add_column(table_name, column_name, type, **options); end
+  def add_index(table_name, column_name, **options); end
+  def change_column(table_name, column_name, type, **options); end
+
+  # Adds comment for given table column or drops it if +comment+ is a +nil+
+  def change_column_comment(table_name, column_name, comment_or_changes); end
+
+  # Changes the default value of a table column.
+  def change_column_default(table_name, column_name, default_or_changes); end
+
+  def change_column_null(table_name, column_name, null, default = T.unsafe(nil)); end
+
+  # Adds comment for given table or drops it if +comment+ is a +nil+
+  def change_table_comment(table_name, comment_or_changes); end
+
+  def check_constraints(table_name); end
+
+  # Returns the current client message level.
+  def client_min_messages; end
+
+  # Set the client message level.
+  def client_min_messages=(level); end
+
+  # Returns the current database collation.
+  def collation; end
+
+  # PostgreSQL requires the ORDER BY columns in the select list for distinct queries, and
+  # requires that the ORDER BY include the distinct column.
+  def columns_for_distinct(columns, orders); end
+
+  # Create a new PostgreSQL database. Options include <tt>:owner</tt>, <tt>:template</tt>,
+  # <tt>:encoding</tt> (defaults to utf8), <tt>:collation</tt>, <tt>:ctype</tt>,
+  # <tt>:tablespace</tt>, and <tt>:connection_limit</tt> (note that MySQL uses
+  # <tt>:charset</tt> while PostgreSQL uses <tt>:encoding</tt>).
+  #
+  # Example:
+  # create_database config[:database], config
+  def create_database(name, options = T.unsafe(nil)); end
+
+  # Creates a schema for the given schema name.
+  def create_schema(schema_name); end
+
+  def create_schema_dumper(options); end
+
+  # Returns the current database ctype.
+  def ctype; end
+
+  # Returns the current database name.
+  def current_database; end
+
+  # Returns the current schema name.
+  def current_schema; end
+
+  # Returns the sequence name for a table's primary key or some other specified key.
+  def default_sequence_name(table_name, pk = T.unsafe(nil)); end
+
+  # Drops a PostgreSQL database.
+  #
+  # Example:
+  # drop_database 'matt_development'
+  def drop_database(name); end
+
+  # Drops the schema for the given schema name.
+  def drop_schema(schema_name, **options); end
+
+  def drop_table(table_name, **options); end
+
+  # Returns the current database encoding format.
+  def encoding; end
+
+  def foreign_keys(table_name); end
+  def foreign_table_exists?(table_name); end
+  def foreign_tables; end
+
+  # Verifies existence of an index with a given name.
+  def index_name_exists?(table_name, index_name); end
+
+  # Returns an array of indexes for the given table.
+  def indexes(table_name); end
+
+  # Returns a table's primary key and belonging sequence.
+  def pk_and_sequence_for(table); end
+
+  def primary_keys(table_name); end
+
+  # Drops the database specified on the +name+ attribute
+  # and creates it again using the provided +options+.
+  def recreate_database(name, options = T.unsafe(nil)); end
+
+  def remove_index(table_name, column_name = T.unsafe(nil), **options); end
+
+  # Renames a column in a table.
+  def rename_column(table_name, column_name, new_column_name); end
+
+  # Renames an index of a table. Raises error if length of new
+  # index name is greater than allowed limit.
+  def rename_index(table_name, old_name, new_name); end
+
+  # Renames a table.
+  # Also renames a table's primary key sequence if the sequence name exists and
+  # matches the Active Record default.
+  #
+  # Example:
+  # rename_table('octopuses', 'octopi')
+  def rename_table(table_name, new_name); end
+
+  # Resets the sequence of a table's primary key to the maximum value.
+  def reset_pk_sequence!(table, pk = T.unsafe(nil), sequence = T.unsafe(nil)); end
+
+  # Returns true if schema exists.
+  def schema_exists?(name); end
+
+  # Returns an array of schema names.
+  def schema_names; end
+
+  # Returns the active schema search path.
+  def schema_search_path; end
+
+  # Sets the schema search path to a string of comma-separated schema names.
+  # Names beginning with $ have to be quoted (e.g. $user => '$user').
+  # See: https://www.postgresql.org/docs/current/static/ddl-schemas.html
+  #
+  # This should be not be called manually but set in database.yml.
+  def schema_search_path=(schema_csv); end
+
+  def serial_sequence(table, column); end
+
+  # Sets the sequence of a table's primary key to the specified value.
+  def set_pk_sequence!(table, value); end
+
+  # Returns a comment stored in database for given table
+  def table_comment(table_name); end
+
+  def table_options(table_name); end
+
+  # Maps logical Rails types to PostgreSQL-specific data types.
+  def type_to_sql(type, limit: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), array: T.unsafe(nil), enum_type: T.unsafe(nil), **_arg6); end
+
+  def update_table_definition(table_name, base); end
+
+  # Validates the given check constraint.
+  #
+  # validate_check_constraint :products, name: "price_check"
+  #
+  # The +options+ hash accepts the same keys as add_check_constraint[rdoc-ref:ConnectionAdapters::SchemaStatements#add_check_constraint].
+  def validate_check_constraint(table_name, **options); end
+
+  # Validates the given constraint.
+  #
+  # Validates the constraint named +constraint_name+ on +accounts+.
+  #
+  # validate_constraint :accounts, :constraint_name
+  def validate_constraint(table_name, constraint_name); end
+
+  # Validates the given foreign key.
+  #
+  # Validates the foreign key on +accounts.branch_id+.
+  #
+  # validate_foreign_key :accounts, :branches
+  #
+  # Validates the foreign key on +accounts.owner_id+.
+  #
+  # validate_foreign_key :accounts, column: :owner_id
+  #
+  # Validates the foreign key named +special_fk_name+ on the +accounts+ table.
+  #
+  # validate_foreign_key :accounts, name: :special_fk_name
+  #
+  # The +options+ hash accepts the same keys as SchemaStatements#add_foreign_key.
+  def validate_foreign_key(from_table, to_table = T.unsafe(nil), **options); end
+
+  private
+
+  def add_column_for_alter(table_name, column_name, type, **options); end
+  def add_index_opclass(quoted_columns, **options); end
+  def add_options_for_index_columns(quoted_columns, **options); end
+  def change_column_default_for_alter(table_name, column_name, default_or_changes); end
+  def change_column_for_alter(table_name, column_name, type, **options); end
+  def change_column_null_for_alter(table_name, column_name, null, default = T.unsafe(nil)); end
+  def create_alter_table(name); end
+  def create_table_definition(name, **options); end
+  def data_source_sql(name = T.unsafe(nil), type: T.unsafe(nil)); end
+  def extract_foreign_key_action(specifier); end
+  def extract_foreign_key_deferrable(deferrable, deferred); end
+  def extract_schema_qualified_name(string); end
+  def fetch_type_metadata(column_name, sql_type, oid, fmod); end
+  def new_column_from_field(table_name, field); end
+  def quoted_scope(name = T.unsafe(nil), type: T.unsafe(nil)); end
+  def schema_creation; end
+  def sequence_name_from_parts(table_name, column_name, suffix); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::Table < ::ActiveRecord::ConnectionAdapters::Table
+  include ::ActiveRecord::ConnectionAdapters::PostgreSQL::ColumnMethods
+
+  def bigserial(*names, **options); end
+  def bit(*names, **options); end
+  def bit_varying(*names, **options); end
+  def box(*names, **options); end
+  def cidr(*names, **options); end
+  def circle(*names, **options); end
+  def citext(*names, **options); end
+  def daterange(*names, **options); end
+  def enum(*names, **options); end
+  def hstore(*names, **options); end
+  def inet(*names, **options); end
+  def int4range(*names, **options); end
+  def int8range(*names, **options); end
+  def interval(*names, **options); end
+  def jsonb(*names, **options); end
+  def line(*names, **options); end
+  def lseg(*names, **options); end
+  def ltree(*names, **options); end
+  def macaddr(*names, **options); end
+  def money(*names, **options); end
+  def numrange(*names, **options); end
+  def oid(*names, **options); end
+  def path(*names, **options); end
+  def point(*names, **options); end
+  def polygon(*names, **options); end
+  def serial(*names, **options); end
+  def timestamptz(*names, **options); end
+  def tsrange(*names, **options); end
+  def tstzrange(*names, **options); end
+  def tsvector(*names, **options); end
+  def uuid(*names, **options); end
+  def xml(*names, **options); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::TableDefinition < ::ActiveRecord::ConnectionAdapters::TableDefinition
+  include ::ActiveRecord::ConnectionAdapters::PostgreSQL::ColumnMethods
+
+  def initialize(*_arg0, **_arg1); end
+
+  def bigserial(*names, **options); end
+  def bit(*names, **options); end
+  def bit_varying(*names, **options); end
+  def box(*names, **options); end
+  def cidr(*names, **options); end
+  def circle(*names, **options); end
+  def citext(*names, **options); end
+  def daterange(*names, **options); end
+  def enum(*names, **options); end
+  def hstore(*names, **options); end
+  def inet(*names, **options); end
+  def int4range(*names, **options); end
+  def int8range(*names, **options); end
+  def interval(*names, **options); end
+  def jsonb(*names, **options); end
+  def line(*names, **options); end
+  def lseg(*names, **options); end
+  def ltree(*names, **options); end
+  def macaddr(*names, **options); end
+  def money(*names, **options); end
+  def new_column_definition(name, type, **options); end
+  def numrange(*names, **options); end
+  def oid(*names, **options); end
+  def path(*names, **options); end
+  def point(*names, **options); end
+  def polygon(*names, **options); end
+  def serial(*names, **options); end
+  def timestamptz(*names, **options); end
+  def tsrange(*names, **options); end
+  def tstzrange(*names, **options); end
+  def tsvector(*names, **options); end
+
+  # Returns the value of attribute unlogged.
+  def unlogged; end
+
+  def uuid(*names, **options); end
+  def xml(*names, **options); end
+
+  private
+
+  def aliased_types(name, fallback); end
+  def integer_like_primary_key_type(type, options); end
+end
+
+class ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
+  include ::ActiveRecord::ConnectionAdapters::Deduplicable
+  extend ::ActiveRecord::ConnectionAdapters::Deduplicable::ClassMethods
+
+  def initialize(type_metadata, oid: T.unsafe(nil), fmod: T.unsafe(nil)); end
+
+  def ==(other); end
+  def eql?(other); end
+
+  # Returns the value of attribute fmod.
+  def fmod; end
+
+  def hash; end
+
+  # Returns the value of attribute oid.
+  def oid; end
+
+  private
+
+  def deduplicated; end
+end
+
+module ActiveRecord::ConnectionAdapters::PostgreSQL::Utils
+  extend ::ActiveRecord::ConnectionAdapters::PostgreSQL::Utils
+
+  # Returns an instance of <tt>ActiveRecord::ConnectionAdapters::PostgreSQL::Name</tt>
+  # extracted from +string+.
+  # +schema+ is +nil+ if not specified in +string+.
+  # +schema+ and +identifier+ exclude surrounding quotes (regardless of whether provided in +string+)
+  # +string+ supports the range of schema/table references understood by PostgreSQL, for example:
+  #
+  # * <tt>table_name</tt>
+  # * <tt>"table.name"</tt>
+  # * <tt>schema_name.table_name</tt>
+  # * <tt>schema_name."table.name"</tt>
+  # * <tt>"schema_name".table_name</tt>
+  # * <tt>"schema.name"."table name"</tt>
+  def extract_schema_qualified_name(string); end
+end
+
+# The PostgreSQL adapter works with the native C (https://github.com/ged/ruby-pg) driver.
+#
+# Options:
+#
+# * <tt>:host</tt> - Defaults to a Unix-domain socket in /tmp. On machines without Unix-domain sockets,
+# the default is to connect to localhost.
+# * <tt>:port</tt> - Defaults to 5432.
+# * <tt>:username</tt> - Defaults to be the same as the operating system name of the user running the application.
+# * <tt>:password</tt> - Password to be used if the server demands password authentication.
+# * <tt>:database</tt> - Defaults to be the same as the username.
+# * <tt>:schema_search_path</tt> - An optional schema search path for the connection given
+# as a string of comma-separated schema names. This is backward-compatible with the <tt>:schema_order</tt> option.
+# * <tt>:encoding</tt> - An optional client encoding that is used in a <tt>SET client_encoding TO
+# <encoding></tt> call on the connection.
+# * <tt>:min_messages</tt> - An optional client min messages that is used in a
+# <tt>SET client_min_messages TO <min_messages></tt> call on the connection.
+# * <tt>:variables</tt> - An optional hash of additional parameters that
+# will be used in <tt>SET SESSION key = val</tt> calls on the connection.
+# * <tt>:insert_returning</tt> - An optional boolean to control the use of <tt>RETURNING</tt> for <tt>INSERT</tt> statements
+# defaults to true.
+#
+# Any further options are used as connection parameters to libpq. See
+# https://www.postgresql.org/docs/current/static/libpq-connect.html for the
+# list of parameters.
+#
+# In addition, default connection parameters of libpq can be set per environment variables.
+# See https://www.postgresql.org/docs/current/static/libpq-envars.html .
+class ActiveRecord::ConnectionAdapters::PostgreSQLAdapter < ::ActiveRecord::ConnectionAdapters::AbstractAdapter
+  include ::ActiveRecord::ConnectionAdapters::PostgreSQL::Quoting
+  include ::ActiveRecord::ConnectionAdapters::PostgreSQL::ReferentialIntegrity
+  include ::ActiveRecord::ConnectionAdapters::PostgreSQL::SchemaStatements
+  include ::ActiveRecord::ConnectionAdapters::PostgreSQL::DatabaseStatements
+
+  # Initializes and connects a PostgreSQL adapter.
+  def initialize(connection, logger, connection_parameters, config); end
+
+  # Is this connection alive and ready for queries?
+  def active?; end
+
+  def build_insert_sql(insert); end
+  def check_version; end
+
+  # Given a name and an array of values, creates an enum type.
+  def create_enum(name, values); end
+
+  # :singleton-method:
+  # PostgreSQL allows the creation of "unlogged" tables, which do not record
+  # data in the PostgreSQL Write-Ahead Log. This can make the tables faster,
+  # but significantly increases the risk of data loss if the database
+  # crashes. As a result, this should not be used in production
+  # environments. If you would like all created tables to be unlogged in
+  # the test environment you can add the following line to your test.rb
+  # file:
+  #
+  # ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.create_unlogged_tables = true
+  def create_unlogged_tables; end
+
+  def create_unlogged_tables=(_arg0); end
+  def create_unlogged_tables?; end
+
+  # :singleton-method:
+  # PostgreSQL supports multiple types for DateTimes. By default if you use `datetime`
+  # in migrations, Rails will translate this to a PostgreSQL "timestamp without time zone".
+  # Change this in an initializer to use another NATIVE_DATABASE_TYPES. For example, to
+  # store DateTimes as "timestamp with time zone":
+  #
+  # ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.datetime_type = :timestamptz
+  #
+  # Or if you are adding a custom type:
+  #
+  # ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::NATIVE_DATABASE_TYPES[:my_custom_type] = { name: "my_custom_type_name" }
+  # ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.datetime_type = :my_custom_type
+  #
+  # If you're using :ruby as your config.active_record.schema_format and you change this
+  # setting, you should immediately run bin/rails db:migrate to update the types in your schema.rb.
+  def datetime_type; end
+
+  def datetime_type=(_arg0); end
+  def datetime_type?; end
+  def default_index_type?(index); end
+  def disable_extension(name); end
+  def discard!; end
+
+  # Disconnects from the database if already connected. Otherwise, this
+  # method does nothing.
+  def disconnect!; end
+
+  def enable_extension(name); end
+
+  # Returns a list of defined enum types, and their values.
+  def enum_types; end
+
+  def extension_available?(name); end
+  def extension_enabled?(name); end
+  def extensions; end
+  def get_advisory_lock(lock_id); end
+
+  # Returns the version of the connected PostgreSQL server.
+  def get_database_version; end
+
+  def index_algorithms; end
+
+  # Returns the configured supported identifier length supported by PostgreSQL
+  def max_identifier_length; end
+
+  def native_database_types; end
+  def postgresql_version; end
+
+  # Close then reopen the connection.
+  def reconnect!; end
+
+  def release_advisory_lock(lock_id); end
+  def reload_type_map; end
+  def reset!; end
+
+  # Set the authorized user for this session
+  def session_auth=(user); end
+
+  def set_standard_conforming_strings; end
+  def supports_advisory_locks?; end
+  def supports_bulk_alter?; end
+  def supports_check_constraints?; end
+  def supports_comments?; end
+  def supports_common_table_expressions?; end
+  def supports_datetime_with_precision?; end
+  def supports_ddl_transactions?; end
+  def supports_deferrable_constraints?; end
+  def supports_explain?; end
+  def supports_expression_index?; end
+  def supports_extensions?; end
+  def supports_foreign_keys?; end
+  def supports_foreign_tables?; end
+  def supports_index_sort_order?; end
+  def supports_insert_conflict_target?; end
+  def supports_insert_on_conflict?; end
+  def supports_insert_on_duplicate_skip?; end
+  def supports_insert_on_duplicate_update?; end
+  def supports_insert_returning?; end
+  def supports_json?; end
+  def supports_lazy_transactions?; end
+  def supports_materialized_views?; end
+  def supports_optimizer_hints?; end
+  def supports_partial_index?; end
+  def supports_partitioned_indexes?; end
+  def supports_pgcrypto_uuid?; end
+  def supports_savepoints?; end
+  def supports_transaction_isolation?; end
+  def supports_validate_constraints?; end
+  def supports_views?; end
+  def supports_virtual_columns?; end
+  def use_insert_returning?; end
+
+  private
+
+  def add_pg_decoders; end
+  def add_pg_encoders; end
+  def arel_visitor; end
+  def build_statement_pool; end
+  def can_perform_case_insensitive_comparison_for?(column); end
+
+  # Returns the list of a table's column names, data types, and default values.
+  #
+  # The underlying query is roughly:
+  # SELECT column.name, column.type, default.value, column.comment
+  # FROM column LEFT JOIN default
+  # ON column.table_id = default.table_id
+  # AND column.num = default.column_num
+  # WHERE column.table_id = get_table_id('table_name')
+  # AND column.num > 0
+  # AND NOT column.is_dropped
+  # ORDER BY column.num
+  #
+  # If the table name is not prefixed with a schema, the database will
+  # take the first match from the schema search path.
+  #
+  # Query implementation notes:
+  # - format_type includes the column size constraint, e.g. varchar(50)
+  # - ::regclass is a function that gives the id for a table name
+  def column_definitions(table_name); end
+
+  # Configures the encoding, verbosity, schema search path, and time zone of the connection.
+  # This is called by #connect and should not be called manually.
+  def configure_connection; end
+
+  # Connects to a PostgreSQL server and sets up the adapter depending on the
+  # connected server's characteristics.
+  def connect; end
+
+  def construct_coder(row, coder_class); end
+  def exec_cache(sql, name, binds, async: T.unsafe(nil)); end
+  def exec_no_cache(sql, name, binds, async: T.unsafe(nil)); end
+  def execute_and_clear(sql, name, binds, prepare: T.unsafe(nil), async: T.unsafe(nil)); end
+  def extract_default_function(default_value, default); end
+  def extract_table_ref_from_insert_sql(sql); end
+
+  # Extracts the value from a PostgreSQL column default definition.
+  def extract_value_from_default(default); end
+
+  def get_oid_type(oid, fmod, column_name, sql_type = T.unsafe(nil)); end
+  def has_default_function?(default_value, default); end
+  def in_transaction?; end
+  def initialize_type_map(m = T.unsafe(nil)); end
+
+  # Annoyingly, the code for prepared statements whose return value may
+  # have changed is FEATURE_NOT_SUPPORTED.
+  #
+  # This covers various different error types so we need to do additional
+  # work to classify the exception definitively as a
+  # ActiveRecord::PreparedStatementCacheExpired
+  #
+  # Check here for more details:
+  # https://git.postgresql.org/gitweb/?p=postgresql.git;a=blob;f=src/backend/utils/cache/plancache.c#l573
+  def is_cached_plan_failure?(e); end
+
+  def load_additional_types(oids = T.unsafe(nil)); end
+  def load_types_queries(initializer, oids); end
+
+  # Prepare the statement if it hasn't been prepared, return
+  # the statement key.
+  def prepare_statement(sql, binds); end
+
+  # Returns the statement identifier for the client side cache
+  # of statements
+  def sql_key(sql); end
+
+  def translate_exception(exception, message:, sql:, binds:); end
+  def type_map; end
+  def update_typemap_for_default_timezone; end
+
+  class << self
+    def create_unlogged_tables; end
+    def create_unlogged_tables=(value); end
+    def create_unlogged_tables?; end
+    def database_exists?(config); end
+    def datetime_type; end
+    def datetime_type=(value); end
+    def datetime_type?; end
+    def initialize_type_map(m); end
+    def native_database_types; end
+    def new_client(conn_params); end
+  end
+end
+
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::ADAPTER_NAME = T.let(T.unsafe(nil), String)
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::DEADLOCK_DETECTED = T.let(T.unsafe(nil), String)
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::DUPLICATE_DATABASE = T.let(T.unsafe(nil), String)
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::FEATURE_NOT_SUPPORTED = T.let(T.unsafe(nil), String)
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::FOREIGN_KEY_VIOLATION = T.let(T.unsafe(nil), String)
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::LOCK_NOT_AVAILABLE = T.let(T.unsafe(nil), String)
+
+class ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::MoneyDecoder < ::PG::SimpleDecoder
+  def decode(value, tuple = T.unsafe(nil), field = T.unsafe(nil)); end
+end
+
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::MoneyDecoder::TYPE = T.let(T.unsafe(nil), ActiveRecord::ConnectionAdapters::PostgreSQL::OID::Money)
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::NATIVE_DATABASE_TYPES = T.let(T.unsafe(nil), Hash)
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::NOT_NULL_VIOLATION = T.let(T.unsafe(nil), String)
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::NUMERIC_VALUE_OUT_OF_RANGE = T.let(T.unsafe(nil), String)
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::OID = ActiveRecord::ConnectionAdapters::PostgreSQL::OID
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::QUERY_CANCELED = T.let(T.unsafe(nil), String)
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::SERIALIZATION_FAILURE = T.let(T.unsafe(nil), String)
+
+class ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::StatementPool < ::ActiveRecord::ConnectionAdapters::StatementPool
+  def initialize(connection, max); end
+
+  def next_key; end
+
+  private
+
+  def connection_active?; end
+  def dealloc(key); end
+end
+
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::UNIQUE_VIOLATION = T.let(T.unsafe(nil), String)
+
+# See https://www.postgresql.org/docs/current/static/errcodes-appendix.html
+ActiveRecord::ConnectionAdapters::PostgreSQLAdapter::VALUE_LIMIT_VIOLATION = T.let(T.unsafe(nil), String)
+
+ActiveRecord::ConnectionAdapters::PostgreSQLColumn = ActiveRecord::ConnectionAdapters::PostgreSQL::Column
+ActiveRecord::ConnectionAdapters::PostgreSQLTypeMetadata = ActiveRecord::ConnectionAdapters::PostgreSQL::TypeMetadata
+
 class ActiveRecord::ConnectionAdapters::PrimaryKeyDefinition < ::Struct
   # Returns the value of attribute name
   def name; end
@@ -10385,6 +11563,27 @@ class ActiveRecord::ConnectionAdapters::SqlTypeMetadata
   def deduplicated; end
 end
 
+class ActiveRecord::ConnectionAdapters::StatementPool
+  include ::Enumerable
+
+  def initialize(statement_limit = T.unsafe(nil)); end
+
+  def [](key); end
+  def []=(sql, stmt); end
+  def clear; end
+  def delete(key); end
+  def each(&block); end
+  def key?(key); end
+  def length; end
+
+  private
+
+  def cache; end
+  def dealloc(stmt); end
+end
+
+ActiveRecord::ConnectionAdapters::StatementPool::DEFAULT_STATEMENT_LIMIT = T.let(T.unsafe(nil), Integer)
+
 # Represents an SQL table in an abstract way for updating a table.
 # Also see TableDefinition and {connection.create_table}[rdoc-ref:SchemaStatements#create_table]
 #
@@ -10453,7 +11652,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.change(:description, :text)
   #
   # See TableDefinition#column for details of the options you can use.
-  sig { params(column_name: T.any(String, Symbol), type: Symbol, index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), limit: T.nilable(Numeric), null: T.nilable(T::Boolean), precision: T.nilable(Numeric), scale: T.nilable(Numeric), collation: T.nilable(T.untyped), comment: T.nilable(String), if_not_exists: T.nilable(T::Boolean)).void }
+  sig { params(column_name: T.any(String, Symbol), type: Symbol, index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), limit: Numeric, null: T::Boolean, precision: Numeric, scale: Numeric, collation: T.untyped, comment: String, if_not_exists: T::Boolean).void }
   def change(column_name, type, index: T.unsafe(nil), limit: T.unsafe(nil), null: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), collation: T.unsafe(nil), comment: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
 
   # Sets a new default value for a column.
@@ -10485,7 +11684,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.column(:name, :string)
   #
   # See TableDefinition#column for details of the options you can use.
-  sig { params(column_name: T.any(String, Symbol), type: Symbol, index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), default: T.nilable(T.untyped), limit: T.nilable(Numeric), null: T::Boolean, precision: T.nilable(Numeric), scale: T.nilable(Numeric), collation: T.nilable(T.untyped), comment: T.nilable(String), if_not_exists: T::Boolean).void }
+  sig { params(column_name: T.any(String, Symbol), type: Symbol, index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), default: T.untyped, limit: Numeric, null: T::Boolean, precision: Numeric, scale: Numeric, collation: T.untyped, comment: String, if_not_exists: T::Boolean).void }
   def column(column_name, type, index: T.unsafe(nil), default: T.unsafe(nil), limit: T.unsafe(nil), null: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), collation: T.unsafe(nil), comment: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
 
   # Checks to see if a column exists.
@@ -10493,7 +11692,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.string(:name) unless t.column_exists?(:name, :string)
   #
   # See {connection.column_exists?}[rdoc-ref:SchemaStatements#column_exists?]
-  sig { params(column_name: T.any(String, Symbol), type: T.nilable(Symbol), index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), limit: T.nilable(Numeric), null: T.nilable(T::Boolean), precision: T.nilable(Numeric), scale: T.nilable(Numeric), collation: T.nilable(T.untyped), comment: T.nilable(String), if_not_exists: T.nilable(T::Boolean)).returns(T::Boolean) }
+  sig { params(column_name: T.any(String, Symbol), type: T.nilable(Symbol), index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), limit: Numeric, null: T::Boolean, precision: Numeric, scale: Numeric, collation: T.untyped, comment: String, if_not_exists: T::Boolean).returns(T::Boolean) }
   def column_exists?(column_name, type = T.unsafe(nil), index: T.unsafe(nil), limit: T.unsafe(nil), null: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), collation: T.unsafe(nil), comment: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
 
   def date(*names, **options); end
@@ -10507,7 +11706,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.foreign_key(:authors, column: :author_id, primary_key: "id")
   #
   # See {connection.add_foreign_key}[rdoc-ref:SchemaStatements#add_foreign_key]
-  sig { params(to_table: T.any(String, Symbol), column: T.any(String, Symbol), primary_key: T.any(String, Symbol), name: T.nilable(T.any(String, Symbol)), on_delete: T.nilable(Symbol), on_update: T.nilable(Symbol), if_not_exists: T.nilable(T::Boolean), validate: T::Boolean, deferrable: T.any(Symbol, T::Boolean)).void }
+  sig { params(to_table: T.any(String, Symbol), column: T.any(String, Symbol), primary_key: T.any(String, Symbol), name: T.any(String, Symbol), on_delete: Symbol, on_update: Symbol, if_not_exists: T::Boolean, validate: T::Boolean, deferrable: T.any(FalseClass, Symbol)).void }
   def foreign_key(to_table, column: T.unsafe(nil), primary_key: T.unsafe(nil), name: T.unsafe(nil), on_delete: T.unsafe(nil), on_update: T.unsafe(nil), if_not_exists: T.unsafe(nil), validate: T.unsafe(nil), deferrable: T.unsafe(nil)); end
 
   # Checks to see if a foreign key exists.
@@ -10515,7 +11714,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.foreign_key(:authors) unless t.foreign_key_exists?(:authors)
   #
   # See {connection.foreign_key_exists?}[rdoc-ref:SchemaStatements#foreign_key_exists?]
-  sig { params(to_table: T.nilable(T.any(String, Symbol)), column: T.nilable(T.any(String, Symbol)), primary_key: T.nilable(T.any(String, Symbol)), name: T.nilable(T.any(String, Symbol)), on_delete: T.nilable(Symbol), on_update: T.nilable(Symbol), if_not_exists: T.nilable(T::Boolean), validate: T::Boolean, deferrable: T.any(Symbol, T::Boolean)).void }
+  sig { params(to_table: T.nilable(T.any(String, Symbol)), column: T.any(String, Symbol), primary_key: T.any(String, Symbol), name: T.any(String, Symbol), on_delete: Symbol, on_update: Symbol, if_not_exists: T::Boolean, validate: T::Boolean, deferrable: T.any(FalseClass, Symbol)).void }
   def foreign_key_exists?(to_table = T.unsafe(nil), column: T.unsafe(nil), primary_key: T.unsafe(nil), name: T.unsafe(nil), on_delete: T.unsafe(nil), on_update: T.unsafe(nil), if_not_exists: T.unsafe(nil), validate: T.unsafe(nil), deferrable: T.unsafe(nil)); end
 
   # Adds a new index to the table. +column_name+ can be a single Symbol, or
@@ -10526,7 +11725,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.index([:branch_id, :party_id], unique: true, name: 'by_branch_party')
   #
   # See {connection.add_index}[rdoc-ref:SchemaStatements#add_index] for details of the options you can use.
-  sig { params(column_name: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), name: T.nilable(String), unique: T.nilable(T::Boolean), length: T.nilable(T.any(Numeric, T::Hash[T.any(String, Symbol), Numeric])), if_not_exists: T::Boolean).void }
+  sig { params(column_name: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), name: String, unique: T::Boolean, length: T.any(Numeric, T::Hash[T.any(String, Symbol), Numeric]), if_not_exists: T::Boolean).void }
   def index(column_name, name: T.unsafe(nil), unique: T.unsafe(nil), length: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
 
   # Checks to see if an index exists.
@@ -10584,7 +11783,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.remove_foreign_key(column: :author_id)
   #
   # See {connection.remove_foreign_key}[rdoc-ref:SchemaStatements#remove_foreign_key]
-  sig { params(to_table: T.any(String, Symbol), column: T.any(String, Symbol), primary_key: T.any(String, Symbol), name: T.nilable(T.any(String, Symbol)), on_delete: T.nilable(Symbol), on_update: T.nilable(Symbol), if_not_exists: T.nilable(T::Boolean), validate: T::Boolean, deferrable: T.any(Symbol, T::Boolean)).void }
+  sig { params(to_table: T.any(String, Symbol), column: T.any(String, Symbol), primary_key: T.any(String, Symbol), name: T.any(String, Symbol), on_delete: Symbol, on_update: Symbol, if_not_exists: T::Boolean, validate: T::Boolean, deferrable: T.any(FalseClass, Symbol)).void }
   def remove_foreign_key(to_table, column: T.unsafe(nil), primary_key: T.unsafe(nil), name: T.unsafe(nil), on_delete: T.unsafe(nil), on_update: T.unsafe(nil), if_not_exists: T.unsafe(nil), validate: T.unsafe(nil), deferrable: T.unsafe(nil)); end
 
   # Removes the given index from the table.
@@ -10595,7 +11794,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.remove_index(:branch_id, name: :by_branch_party)
   #
   # See {connection.remove_index}[rdoc-ref:SchemaStatements#remove_index]
-  sig { params(column_name: T.nilable(T.any(String, Symbol)), column: T.nilable(T.any(String, Symbol, T::Array[T.any(String, Symbol)])), name: T.nilable(T.any(String, Symbol)), if_exists: T::Boolean, algorithm: T.nilable(Symbol)).void }
+  sig { params(column_name: T.nilable(T.any(String, Symbol)), column: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), name: T.any(String, Symbol), if_exists: T::Boolean, algorithm: Symbol).void }
   def remove_index(column_name = T.unsafe(nil), column: T.unsafe(nil), name: T.unsafe(nil), if_exists: T.unsafe(nil), algorithm: T.unsafe(nil)); end
 
   # Removes a reference. Optionally removes a +type+ column.
@@ -10638,7 +11837,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.timestamps(null: false)
   #
   # See {connection.add_timestamps}[rdoc-ref:SchemaStatements#add_timestamps]
-  sig { params(index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), limit: T.nilable(Numeric), null: T::Boolean, precision: T.nilable(Numeric), scale: T.nilable(Numeric), collation: T.nilable(T.untyped), comment: T.nilable(String), if_not_exists: T::Boolean).void }
+  sig { params(index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), limit: Numeric, null: T::Boolean, precision: Numeric, scale: Numeric, collation: T.untyped, comment: String, if_not_exists: T::Boolean).void }
   def timestamps(index: T.unsafe(nil), limit: T.unsafe(nil), null: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), collation: T.unsafe(nil), comment: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
 
   def virtual(*names, **options); end
@@ -10758,7 +11957,7 @@ class ActiveRecord::ConnectionAdapters::TableDefinition
   # t.references :tagger, polymorphic: true
   # t.references :taggable, polymorphic: { default: 'Photo' }, index: false
   # end
-  sig { params(column_name: T.any(String, Symbol), type: Symbol, index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), default: T.nilable(T.untyped), limit: T.nilable(Numeric), null: T::Boolean, precision: T.nilable(Numeric), scale: T.nilable(Numeric), collation: T.nilable(T.untyped), comment: T.nilable(String), if_not_exists: T::Boolean).void }
+  sig { params(column_name: T.any(String, Symbol), type: Symbol, index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), default: T.untyped, limit: Numeric, null: T::Boolean, precision: Numeric, scale: Numeric, collation: T.untyped, comment: String, if_not_exists: T::Boolean).void }
   def column(column_name, type, index: T.unsafe(nil), default: T.unsafe(nil), limit: T.unsafe(nil), null: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), collation: T.unsafe(nil), comment: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
 
   # Returns an array of ColumnDefinition objects for the columns of the table.
@@ -11089,6 +12288,10 @@ module ActiveRecord::ConnectionHandling
 
   def flush_idle_connections!(*_arg0, &_arg1); end
   def lookup_connection_handler(handler_key); end
+
+  # Establishes a connection to the database that's used by all Active Record objects
+  def postgresql_connection(config); end
+
   def primary_class?; end
 
   # Prohibit swapping shards while inside of the passed block.
@@ -17177,8 +18380,7 @@ module ActiveRecord::NestedAttributes::ClassMethods
   # accepts_nested_attributes_for :avatar, reject_if: :all_blank
   # # creates avatar_attributes= and posts_attributes=
   # accepts_nested_attributes_for :avatar, :posts, allow_destroy: true
-  sig { params(attr_names: T.any(String, Symbol), allow_destroy: T.nilable(T::Boolean), reject_if: T.nilable(T.any(String, Symbol, T.proc.params(attributes: T.any(ActionController::Parameters, T::Hash[T.any(String, Symbol), T.untyped])).returns(T::Boolean))), limit: T.nilable(T.any(Integer, Symbol, T.proc.returns(Integer))), update_only: T.nilable(T::Boolean)).void }
-  def accepts_nested_attributes_for(*attr_names, allow_destroy: T.unsafe(nil), reject_if: T.unsafe(nil), limit: T.unsafe(nil), update_only: T.unsafe(nil)); end
+  def accepts_nested_attributes_for(*attr_names); end
 
   private
 
@@ -17402,18 +18604,6 @@ module ActiveRecord::Persistence
   # Returns +self+.
   def increment!(attribute, by = T.unsafe(nil), touch: T.unsafe(nil)); end
 
-  sig { params(attributes: T::Hash[T.any(String, Symbol), T.untyped], returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), unique_by: T.nilable(T.untyped), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
-  def insert(attributes, returning: T.unsafe(nil), unique_by: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
-
-  sig { params(attributes: T::Hash[T.any(String, Symbol), T.untyped], returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
-  def insert!(attributes, returning: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
-
-  sig { params(attributes: T::Array[T::Hash[T.any(String, Symbol), T.untyped]], returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), unique_by: T.nilable(T.untyped), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
-  def insert_all(attributes, returning: T.unsafe(nil), unique_by: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
-
-  sig { params(attributes: T::Array[T::Hash[T.any(String, Symbol), T.untyped]], returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
-  def insert_all!(attributes, returning: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
-
   # Returns true if this object hasn't been saved yet -- that is, a record
   # for the object doesn't exist in the database yet; otherwise, returns false.
   def new_record?; end
@@ -17503,7 +18693,7 @@ module ActiveRecord::Persistence
   #
   # Attributes marked as readonly are silently ignored if the record is
   # being updated.
-  sig { params(validate: T.nilable(T::Boolean), touch: T.nilable(T::Boolean), block: T.nilable(T.proc.void)).returns(T::Boolean) }
+  sig { params(validate: T::Boolean, touch: T::Boolean, block: T.proc.void).returns(T::Boolean) }
   def save(validate: T.unsafe(nil), touch: T.unsafe(nil), &block); end
 
   # :call-seq:
@@ -17532,7 +18722,7 @@ module ActiveRecord::Persistence
   # being updated.
   #
   # Unless an error is raised, returns true.
-  sig { params(validate: T.nilable(T::Boolean), touch: T.nilable(T::Boolean), block: T.nilable(T.proc.void)).returns(TrueClass) }
+  sig { params(validate: T::Boolean, touch: T::Boolean, block: T.proc.void).returns(TrueClass) }
   def save!(validate: T.unsafe(nil), touch: T.unsafe(nil), &block); end
 
   # Assigns to +attribute+ the boolean opposite of <tt>attribute?</tt>. So
@@ -17632,12 +18822,6 @@ module ActiveRecord::Persistence
   # This method raises an ActiveRecord::ActiveRecordError when called on new
   # objects, or when at least one of the attributes is marked as readonly.
   def update_columns(attributes); end
-
-  sig { params(attributes: T::Hash[T.any(String, Symbol), T.untyped], on_duplicate: T.nilable(T.untyped), returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), unique_by: T.nilable(T.untyped), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
-  def upsert(attributes, on_duplicate: T.unsafe(nil), returning: T.unsafe(nil), unique_by: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
-
-  sig { params(attributes: T::Hash[T.any(String, Symbol), T.untyped], on_duplicate: T.nilable(T.untyped), update_only: T.nilable(T.any(String, Symbol)), returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), unique_by: T.nilable(T.untyped), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
-  def upsert_all(attributes, on_duplicate: T.unsafe(nil), update_only: T.unsafe(nil), returning: T.unsafe(nil), unique_by: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   private
 
@@ -17759,6 +18943,7 @@ module ActiveRecord::Persistence::ClassMethods
   # go through Active Record's type casting and serialization.
   #
   # See <tt>ActiveRecord::Persistence#insert_all</tt> for documentation.
+  sig { params(attributes: T::Hash[T.any(String, Symbol), T.untyped], returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), unique_by: T.nilable(T.untyped), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
   def insert(attributes, returning: T.unsafe(nil), unique_by: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   # Inserts a single record into the database in a single SQL INSERT
@@ -17767,6 +18952,7 @@ module ActiveRecord::Persistence::ClassMethods
   # go through Active Record's type casting and serialization.
   #
   # See <tt>ActiveRecord::Persistence#insert_all!</tt> for more.
+  sig { params(attributes: T::Hash[T.any(String, Symbol), T.untyped], returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
   def insert!(attributes, returning: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   # Inserts multiple records into the database in a single SQL INSERT
@@ -17844,6 +19030,7 @@ module ActiveRecord::Persistence::ClassMethods
   # { id: 1, title: "Rework" },
   # { id: 2, title: "Eloquent Ruby" }
   # ])
+  sig { params(attributes: T::Array[T::Hash[T.any(String, Symbol), T.untyped]], returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), unique_by: T.nilable(T.untyped), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
   def insert_all(attributes, returning: T.unsafe(nil), unique_by: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   # Inserts multiple records into the database in a single SQL INSERT
@@ -17900,6 +19087,7 @@ module ActiveRecord::Persistence::ClassMethods
   # { id: 1, title: "Rework", author: "David" },
   # { id: 1, title: "Eloquent Ruby", author: "Russ" }
   # ])
+  sig { params(attributes: T::Array[T::Hash[T.any(String, Symbol), T.untyped]], returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
   def insert_all!(attributes, returning: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   # Given an attributes hash, +instantiate+ returns a new instance of
@@ -17953,6 +19141,7 @@ module ActiveRecord::Persistence::ClassMethods
   # go through Active Record's type casting and serialization.
   #
   # See <tt>ActiveRecord::Persistence#upsert_all</tt> for documentation.
+  sig { params(attributes: T::Hash[T.any(String, Symbol), T.untyped], on_duplicate: T.nilable(T.untyped), returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), unique_by: T.nilable(T.untyped), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
   def upsert(attributes, on_duplicate: T.unsafe(nil), returning: T.unsafe(nil), unique_by: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   # Updates or inserts (upserts) multiple records into the database in a
@@ -18061,6 +19250,7 @@ module ActiveRecord::Persistence::ClassMethods
   # ], unique_by: :isbn)
   #
   # Book.find_by(isbn: "1").title # => "Eloquent Ruby"
+  sig { params(attributes: T::Hash[T.any(String, Symbol), T.untyped], on_duplicate: T.nilable(T.untyped), update_only: T.nilable(T.any(String, Symbol)), returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), unique_by: T.nilable(T.untyped), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
   def upsert_all(attributes, on_duplicate: T.unsafe(nil), update_only: T.unsafe(nil), returning: T.unsafe(nil), unique_by: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   private
@@ -18083,6 +19273,27 @@ module ActiveRecord::Persistence::ClassMethods
 end
 
 ActiveRecord::Persistence::Returning = T.type_alias { T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])) }
+
+class ActiveRecord::Point < ::Struct
+  # Returns the value of attribute x
+  def x; end
+
+  # Sets the attribute x
+  def x=(_); end
+
+  # Returns the value of attribute y
+  def y; end
+
+  # Sets the attribute y
+  def y=(_); end
+
+  class << self
+    def [](*_arg0); end
+    def inspect; end
+    def members; end
+    def new(*_arg0); end
+  end
+end
 
 class ActiveRecord::PredicateBuilder
   def initialize(table); end
@@ -25398,3 +26609,6 @@ end
 module Arel::WindowPredications
   def over(expr = T.unsafe(nil)); end
 end
+
+class PG::SimpleCoder < ::PG::Coder; end
+class PG::SimpleDecoder < ::PG::SimpleCoder; end

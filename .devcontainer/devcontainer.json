@@ -83,6 +83,7 @@
     "oderwat.indent-rainbow",
     "visualstudioexptteam.vscodeintellicode",
     "editorconfig.editorconfig",
+    "benspaulding.procfile",
     "eamodio.gitlens",
     "christian-kohler.path-intellisense",
     "christian-kohler.npm-intellisense",

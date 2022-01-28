@@ -26,6 +26,7 @@ AllCops:
     - .cache/**/*
     - build/**/*
     - public/**/*
+    - db/schema.rb
     - bin/**/*
     - log/**/*
     - tmp/**/*
@@ -50,13 +51,12 @@ Layout/LineLength:
 
 Style/Documentation:
   Enabled: false
-
+Style/CommandLiteral:
+  EnforcedStyle: backticks
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
-
 Style/ClassAndModuleChildren:
   Enabled: false
-
 Style/Proc:
   Enabled: true
 
@@ -65,5 +65,9 @@ GraphQL/ObjectDescription:
   Enabled: false
 GraphQL/FieldDescription:
   Enabled: false
+GraphQL/ArgumentDescription:
+  Enabled: false
 GraphQL/ExtractType:
+  Enabled: false
+GraphQL/ExtractInputType:
   Enabled: false

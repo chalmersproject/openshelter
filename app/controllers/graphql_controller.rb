@@ -7,7 +7,7 @@ class GraphqlController < ApplicationController
   # If accessing from outside this domain, nullify the session
   # This allows for outside API access while preventing CSRF attacks,
   # but you'll have to authenticate your user separately
-  protect_from_forgery with: :null_session
+  # protect_from_forgery with: :null_session
 
   sig { returns(T.untyped) }
   def execute
@@ -22,10 +22,7 @@ class GraphqlController < ApplicationController
     end
 
     variables = prepare_variables(params[:variables])
-
-    context = {
-      # current_user: current_user
-    }
+    context = { current_user: current_user }
 
     result =
       ApplicationSchema.execute(

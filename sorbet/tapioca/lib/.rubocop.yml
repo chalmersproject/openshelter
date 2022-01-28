@@ -1,7 +1,0 @@
-inherit_from: ../../../.rubocop.yml
-
-Style/ClassAndModuleChildren:
-  EnforcedStyle: compact
-
-Naming/ClassAndModuleCamelCase:
-  Enabled: false

@@ -4,6 +4,7 @@
 class ApplicationSchema < GraphQL::Schema
   extend T::Sig
 
+  use GraphQL::Batch
   use GraphQL::Dataloader
   use GraphQL::Subscriptions::ActionCableSubscriptions
 

@@ -755,190 +755,191 @@ end
 module ActionDispatch::Routing::Mapper::HttpHelpers
   # get, put, patch, post, and delete all have the same arguments as
   # ActionDispatch::Routing::Mapper::Resources#match
-  sig do
-    params(
-      name: T.any(String, Symbol, T::Hash[String, String]),
-      controller: T.nilable(T.any(String, Symbol)),
-      action: T.nilable(T.any(String, Symbol)),
-      param: T.nilable(Symbol),
-      module: T.nilable(T.any(String, Symbol)),
-      as: T.nilable(T.any(String, Symbol)),
-      via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
-      on: T.nilable(Symbol),
-      constraints: T.untyped,
-      defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
-      anchor: T::Boolean,
-      format: T.nilable(T.any(String, T::Boolean)),
-      path: T.nilable(T.any(String, Symbol)),
-      block: T.untyped
-    ).returns(T.untyped)
-  end
-  def delete(
-    name,
-    controller: nil,
-    action: nil,
-    param: :id,
-    module: nil,
-    as: nil,
-    via: nil,
-    to: nil,
-    on: nil,
-    constraints: nil,
-    defaults: nil,
-    anchor: true,
-    format: nil,
-    path: nil,
-    &block
-  ); end
 
-  sig do
-    params(
-      name: T.any(String, Symbol, T::Hash[String, String]),
-      controller: T.nilable(T.any(String, Symbol)),
-      action: T.nilable(T.any(String, Symbol)),
-      param: T.nilable(Symbol),
-      module: T.nilable(T.any(String, Symbol)),
-      as: T.nilable(T.any(String, Symbol)),
-      via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      to: T.nilable(T.any(String, Symbol, T.proc.params(arg0: T.untyped).returns(T.untyped))),
-      on: T.nilable(Symbol),
-      constraints: T.untyped,
-      defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
-      anchor: T::Boolean,
-      format: T.nilable(T.any(String, T::Boolean)),
-      path: T.nilable(T.any(String, Symbol)),
-      block: T.untyped
-    ).returns(T.untyped)
-  end
-  def get(
-    name,
-    controller: nil,
-    action: nil,
-    param: :id,
-    module: nil,
-    as: nil,
-    via: nil,
-    to: nil,
-    on: nil,
-    constraints: nil,
-    defaults: nil,
-    anchor: true,
-    format: nil,
-    path: nil,
-    &block
-  ); end
+  # sig do
+  #   params(
+  #     name: T.any(String, Symbol, T::Hash[String, String]),
+  #     controller: T.nilable(T.any(String, Symbol)),
+  #     action: T.nilable(T.any(String, Symbol)),
+  #     param: T.nilable(Symbol),
+  #     module: T.nilable(T.any(String, Symbol)),
+  #     as: T.nilable(T.any(String, Symbol)),
+  #     via: T.nilable(T.any(Symbol, T::Array[Symbol])),
+  #     to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
+  #     on: T.nilable(Symbol),
+  #     constraints: T.untyped,
+  #     defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
+  #     anchor: T::Boolean,
+  #     format: T.nilable(T.any(String, T::Boolean)),
+  #     path: T.nilable(T.any(String, Symbol)),
+  #     block: T.untyped
+  #   ).returns(T.untyped)
+  # end
+  # def delete(
+  #   name,
+  #   controller: nil,
+  #   action: nil,
+  #   param: :id,
+  #   module: nil,
+  #   as: nil,
+  #   via: nil,
+  #   to: nil,
+  #   on: nil,
+  #   constraints: nil,
+  #   defaults: nil,
+  #   anchor: true,
+  #   format: nil,
+  #   path: nil,
+  #   &block
+  # ); end
 
-  sig do
-    params(
-      name: T.any(String, Symbol, T::Hash[String, String]),
-      controller: T.nilable(T.any(String, Symbol)),
-      action: T.nilable(T.any(String, Symbol)),
-      param: T.nilable(Symbol),
-      module: T.nilable(T.any(String, Symbol)),
-      as: T.nilable(T.any(String, Symbol)),
-      via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
-      on: T.nilable(Symbol),
-      constraints: T.untyped,
-      defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
-      anchor: T::Boolean,
-      format: T.nilable(T.any(String, T::Boolean)),
-      path: T.nilable(T.any(String, Symbol)),
-      block: T.untyped
-    ).returns(T.untyped)
-  end
-  def patch(
-    name,
-    controller: nil,
-    action: nil,
-    param: :id,
-    module: nil,
-    as: nil,
-    via: nil,
-    to: nil,
-    on: nil,
-    constraints: nil,
-    defaults: nil,
-    anchor: true,
-    format: nil,
-    path: nil,
-    &block
-  ); end
+  # sig do
+  #   params(
+  #     name: T.any(String, Symbol, T::Hash[String, String]),
+  #     controller: T.nilable(T.any(String, Symbol)),
+  #     action: T.nilable(T.any(String, Symbol)),
+  #     param: T.nilable(Symbol),
+  #     module: T.nilable(T.any(String, Symbol)),
+  #     as: T.nilable(T.any(String, Symbol)),
+  #     via: T.nilable(T.any(Symbol, T::Array[Symbol])),
+  #     to: T.nilable(T.any(String, Symbol, T.proc.params(arg0: T.untyped).returns(T.untyped))),
+  #     on: T.nilable(Symbol),
+  #     constraints: T.untyped,
+  #     defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
+  #     anchor: T::Boolean,
+  #     format: T.nilable(T.any(String, T::Boolean)),
+  #     path: T.nilable(T.any(String, Symbol)),
+  #     block: T.untyped
+  #   ).returns(T.untyped)
+  # end
+  # def get(
+  #   name,
+  #   controller: nil,
+  #   action: nil,
+  #   param: :id,
+  #   module: nil,
+  #   as: nil,
+  #   via: nil,
+  #   to: nil,
+  #   on: nil,
+  #   constraints: nil,
+  #   defaults: nil,
+  #   anchor: true,
+  #   format: nil,
+  #   path: nil,
+  #   &block
+  # ); end
 
-  sig do
-    params(
-      name: T.any(String, Symbol, T::Hash[String, String]),
-      controller: T.nilable(T.any(String, Symbol)),
-      action: T.nilable(T.any(String, Symbol)),
-      param: T.nilable(Symbol),
-      module: T.nilable(T.any(String, Symbol)),
-      as: T.nilable(T.any(String, Symbol)),
-      via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
-      on: T.nilable(Symbol),
-      constraints: T.untyped,
-      defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
-      anchor: T::Boolean,
-      format: T.nilable(T.any(String, T::Boolean)),
-      path: T.nilable(T.any(String, Symbol)),
-      block: T.untyped
-    ).returns(T.untyped)
-  end
-  def post(
-    name,
-    controller: nil,
-    action: nil,
-    param: :id,
-    module: nil,
-    as: nil,
-    via: nil,
-    to: nil,
-    on: nil,
-    constraints: nil,
-    defaults: nil,
-    anchor: true,
-    format: nil,
-    path: nil,
-    &block
-  ); end
+  # sig do
+  #   params(
+  #     name: T.any(String, Symbol, T::Hash[String, String]),
+  #     controller: T.nilable(T.any(String, Symbol)),
+  #     action: T.nilable(T.any(String, Symbol)),
+  #     param: T.nilable(Symbol),
+  #     module: T.nilable(T.any(String, Symbol)),
+  #     as: T.nilable(T.any(String, Symbol)),
+  #     via: T.nilable(T.any(Symbol, T::Array[Symbol])),
+  #     to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
+  #     on: T.nilable(Symbol),
+  #     constraints: T.untyped,
+  #     defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
+  #     anchor: T::Boolean,
+  #     format: T.nilable(T.any(String, T::Boolean)),
+  #     path: T.nilable(T.any(String, Symbol)),
+  #     block: T.untyped
+  #   ).returns(T.untyped)
+  # end
+  # def patch(
+  #   name,
+  #   controller: nil,
+  #   action: nil,
+  #   param: :id,
+  #   module: nil,
+  #   as: nil,
+  #   via: nil,
+  #   to: nil,
+  #   on: nil,
+  #   constraints: nil,
+  #   defaults: nil,
+  #   anchor: true,
+  #   format: nil,
+  #   path: nil,
+  #   &block
+  # ); end
 
-  sig do
-    params(
-      name: T.any(String, Symbol, T::Hash[String, String]),
-      controller: T.nilable(T.any(String, Symbol)),
-      action: T.nilable(T.any(String, Symbol)),
-      param: T.nilable(Symbol),
-      module: T.nilable(T.any(String, Symbol)),
-      as: T.nilable(T.any(String, Symbol)),
-      via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
-      on: T.nilable(Symbol),
-      constraints: T.untyped,
-      defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
-      anchor: T::Boolean,
-      format: T.nilable(T.any(String, T::Boolean)),
-      path: T.nilable(T.any(String, Symbol)),
-      block: T.untyped
-    ).returns(T.untyped)
-  end
-  def put(
-    name,
-    controller: nil,
-    action: nil,
-    param: :id,
-    module: nil,
-    as: nil,
-    via: nil,
-    to: nil,
-    on: nil,
-    constraints: nil,
-    defaults: nil,
-    anchor: true,
-    format: nil,
-    path: nil,
-    &block
-  ); end
+  # sig do
+  #   params(
+  #     name: T.any(String, Symbol, T::Hash[String, String]),
+  #     controller: T.nilable(T.any(String, Symbol)),
+  #     action: T.nilable(T.any(String, Symbol)),
+  #     param: T.nilable(Symbol),
+  #     module: T.nilable(T.any(String, Symbol)),
+  #     as: T.nilable(T.any(String, Symbol)),
+  #     via: T.nilable(T.any(Symbol, T::Array[Symbol])),
+  #     to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
+  #     on: T.nilable(Symbol),
+  #     constraints: T.untyped,
+  #     defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
+  #     anchor: T::Boolean,
+  #     format: T.nilable(T.any(String, T::Boolean)),
+  #     path: T.nilable(T.any(String, Symbol)),
+  #     block: T.untyped
+  #   ).returns(T.untyped)
+  # end
+  # def post(
+  #   name,
+  #   controller: nil,
+  #   action: nil,
+  #   param: :id,
+  #   module: nil,
+  #   as: nil,
+  #   via: nil,
+  #   to: nil,
+  #   on: nil,
+  #   constraints: nil,
+  #   defaults: nil,
+  #   anchor: true,
+  #   format: nil,
+  #   path: nil,
+  #   &block
+  # ); end
+
+  # sig do
+  #   params(
+  #     name: T.any(String, Symbol, T::Hash[String, String]),
+  #     controller: T.nilable(T.any(String, Symbol)),
+  #     action: T.nilable(T.any(String, Symbol)),
+  #     param: T.nilable(Symbol),
+  #     module: T.nilable(T.any(String, Symbol)),
+  #     as: T.nilable(T.any(String, Symbol)),
+  #     via: T.nilable(T.any(Symbol, T::Array[Symbol])),
+  #     to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
+  #     on: T.nilable(Symbol),
+  #     constraints: T.untyped,
+  #     defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
+  #     anchor: T::Boolean,
+  #     format: T.nilable(T.any(String, T::Boolean)),
+  #     path: T.nilable(T.any(String, Symbol)),
+  #     block: T.untyped
+  #   ).returns(T.untyped)
+  # end
+  # def put(
+  #   name,
+  #   controller: nil,
+  #   action: nil,
+  #   param: :id,
+  #   module: nil,
+  #   as: nil,
+  #   via: nil,
+  #   to: nil,
+  #   on: nil,
+  #   constraints: nil,
+  #   defaults: nil,
+  #   anchor: true,
+  #   format: nil,
+  #   path: nil,
+  #   &block
+  # ); end
 end
 
 module ActionDispatch::Routing::Mapper::Resources
@@ -948,42 +949,42 @@ module ActionDispatch::Routing::Mapper::Resources
   sig { params(block: T.untyped).returns(T.untyped) }
   def collection(&block); end
 
-  sig do
-    params(
-      name: T.any(String, Symbol, T::Hash[String, String]),
-      controller: T.nilable(T.any(String, Symbol)),
-      action: T.nilable(T.any(String, Symbol)),
-      param: T.nilable(Symbol),
-      module: T.nilable(T.any(String, Symbol)),
-      as: T.nilable(T.any(String, Symbol)),
-      via: T.nilable(T.any(Symbol, T::Array[Symbol])),
-      to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
-      on: T.nilable(Symbol),
-      constraints: T.untyped,
-      defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
-      anchor: T::Boolean,
-      format: T.nilable(T.any(String, T::Boolean)),
-      path: T.nilable(T.any(String, Symbol)),
-      block: T.untyped
-    ).returns(T.untyped)
-  end
-  def match(
-    name,
-    controller: nil,
-    action: nil,
-    param: :id,
-    module: nil,
-    as: nil,
-    via: nil,
-    to: nil,
-    on: nil,
-    constraints: nil,
-    defaults: nil,
-    anchor: true,
-    format: nil,
-    path: nil,
-    &block
-  ); end
+  # sig do
+  #   params(
+  #     name: T.any(String, Symbol, T::Hash[String, String]),
+  #     controller: T.nilable(T.any(String, Symbol)),
+  #     action: T.nilable(T.any(String, Symbol)),
+  #     param: T.nilable(Symbol),
+  #     module: T.nilable(T.any(String, Symbol)),
+  #     as: T.nilable(T.any(String, Symbol)),
+  #     via: T.nilable(T.any(Symbol, T::Array[Symbol])),
+  #     to: T.nilable(T.any(String, T.proc.returns(T.untyped))),
+  #     on: T.nilable(Symbol),
+  #     constraints: T.untyped,
+  #     defaults: T.nilable(T::Hash[T.untyped, T.untyped]),
+  #     anchor: T::Boolean,
+  #     format: T.nilable(T.any(String, T::Boolean)),
+  #     path: T.nilable(T.any(String, Symbol)),
+  #     block: T.untyped
+  #   ).returns(T.untyped)
+  # end
+  # def match(
+  #   name,
+  #   controller: nil,
+  #   action: nil,
+  #   param: :id,
+  #   module: nil,
+  #   as: nil,
+  #   via: nil,
+  #   to: nil,
+  #   on: nil,
+  #   constraints: nil,
+  #   defaults: nil,
+  #   anchor: true,
+  #   format: nil,
+  #   path: nil,
+  #   &block
+  # ); end
 
   sig { params(block: T.untyped).returns(T.untyped) }
   def member(&block); end

@@ -1,0 +1,11 @@
+rails: yarn dev:rails
+# css: yarn dev:css
+
+# Sometimes, the Remix dev process isn't killed correctly by Foreman.
+#
+# To check for still-running processes, do:
+#     lsof -i :3000
+#     kill (port from previous command)
+#
+# See: https://github.com/ddollar/foreman/pull/780
+remix: yarn dev:remix

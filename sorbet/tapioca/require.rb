@@ -3,14 +3,15 @@
 
 require "safe_type"
 require "rubocop"
+require "active_record/connection_adapters/postgresql_adapter"
 
 # Patches
-require_relative "./lib/actionpack.rb"
-require_relative "./lib/activemodel.rb"
-require_relative "./lib/activerecord.rb"
-require_relative "./lib/activesupport.rb"
-require_relative "./lib/graphql.rb"
-require_relative "./lib/graphiql-rails.rb"
+require_relative "./shims/actionpack.rb"
+require_relative "./shims/activemodel.rb"
+require_relative "./shims/activerecord.rb"
+require_relative "./shims/devise.rb"
+require_relative "./shims/graphql.rb"
+require_relative "./shims/rails_admin.rb"
 
 # require 'active_support/core_ext/integer/time'
 # require 'fileutils'

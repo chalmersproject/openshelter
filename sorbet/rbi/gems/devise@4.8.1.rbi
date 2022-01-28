@@ -328,7 +328,9 @@ class ActionDispatch::Routing::Mapper
   end
 end
 
+ActionDispatch::Routing::Mapper::To = T.type_alias { T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped)) }
 ActionDispatch::Routing::Mapper::URL_OPTIONS = T.let(T.unsafe(nil), Array)
+ActionDispatch::Routing::Mapper::Via = T.type_alias { T.any(Symbol, T::Array[Symbol]) }
 
 class ActionDispatch::Routing::RouteSet
   include ::Devise::RouteSet
@@ -415,6 +417,13 @@ ActionDispatch::Routing::RouteSet::PATH = T.let(T.unsafe(nil), Proc)
 ActionDispatch::Routing::RouteSet::RESERVED_OPTIONS = T.let(T.unsafe(nil), Array)
 ActionDispatch::Routing::RouteSet::UNKNOWN = T.let(T.unsafe(nil), Proc)
 ActionDispatch::Routing::SEPARATORS = T.let(T.unsafe(nil), Array)
+
+module ApplicationController::HelperMethods
+  def alert(*args, &block); end
+  def form_authenticity_token(*args, &block); end
+  def notice(*args, &block); end
+  def protect_against_forgery?(*args, &block); end
+end
 
 module Devise
   def allow_unconfirmed_access_for; end
@@ -738,6 +747,7 @@ class Devise::ConfirmationsController < ::DeviseController
   def translation_scope; end
 
   class << self
+    def __callbacks; end
     def middleware_stack; end
   end
 end
@@ -791,6 +801,11 @@ module Devise::Controllers::Helpers
   # Tell warden that params authentication is allowed for that specific page.
   def allow_params_authentication!; end
 
+  def authenticate_user!(opts = T.unsafe(nil)); end
+
+  sig { returns(T.nilable(User)) }
+  def current_user; end
+
   # Return true if it's a devise_controller. false to all controllers unless
   # the controllers defined inside devise. Useful if you want to apply a before
   # filter to all controllers, except the ones in devise:
@@ -826,6 +841,11 @@ module Devise::Controllers::Helpers
   # The scope root url to be used when they're signed in. By default, it first
   # tries to find a resource_root_path, otherwise it uses the root_path.
   def signed_in_root_path(resource_or_scope); end
+
+  def user_session; end
+
+  sig { returns(T::Boolean) }
+  def user_signed_in?; end
 
   # The main accessor for the warden proxy instance
   def warden; end
@@ -1689,10 +1709,14 @@ module Devise::Models::Confirmable
   # calculate if the confirm time has not expired for this user.
   def active_for_authentication?; end
 
+  sig { void }
+  def ass; end
+
   # Confirm a user by setting it's confirmed_at to actual time. If the user
   # is already confirmed, add an error to email field. If the user is invalid
   # add errors
-  def confirm(args = T.unsafe(nil)); end
+  sig { returns(T::Boolean) }
+  def confirm; end
 
   # Verifies whether a user is confirmed or not
   def confirmed?; end
@@ -3006,9 +3030,23 @@ class DeviseController < ::ApplicationController
 
   class << self
     def __callbacks; end
+    def _helper_methods; end
     def middleware_stack; end
     def mimes_for_respond_to; end
   end
+end
+
+module DeviseController::HelperMethods
+  include ::ApplicationController::HelperMethods
+  include ::DeviseHelper
+
+  def devise_mapping(*args, &block); end
+  def resource(*args, &block); end
+  def resource_class(*args, &block); end
+  def resource_name(*args, &block); end
+  def resource_params(*args, &block); end
+  def scope_name(*args, &block); end
+  def signed_in_resource(*args, &block); end
 end
 
 module DeviseHelper

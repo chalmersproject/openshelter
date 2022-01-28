@@ -1,0 +1,13 @@
+inherit_from: ../../../.rubocop.yml
+
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+Naming/ClassAndModuleCamelCase:
+  Enabled: false
+
+Naming/FileName:
+  Enabled: false
+
+Naming/AccessorMethodName:
+  Enabled: false
