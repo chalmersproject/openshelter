@@ -2,39 +2,37 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  # Render index with Remix.
-  root "remix#proxy"
-
-  # Account and authentication routes.
-  resource :account, only: %i[show update destroy]
-
-  # scope :account, controller: :accounts do
-  #   get :register, as: :new_user_registration
-  #   get :login, as: :new_user_session
+  # scope :api do
+  #   mount API, at: "/"
+  #   mount GrapeSwaggerRails::Engine, at: :docs, as: :api_docs
   # end
 
-  # Account authentication with Devise.
-  devise_for :users,
-             path: :account,
-             path_names: {
-               sign_up: :register,
-               sign_in: :login,
-               sign_out: :logout,
-             },
-             controllers: {
-               sessions: "accounts/sessions",
-             }
+  scope :api, controller: :api, defaults: { format: :json } do
+    root action: :show
 
-  scope :api do
-    get :/, to: "api#show"
-    # post :graphql, to: "graphql#execute"
+    # Account and authentication routes.
+    resource :account, only: %i[show edit update] do
+      get :login, action: :login_data
+      post :login
+
+      get :logout, action: :logout_data
+      post :logout
+    end
+
+    # resource :account, only: %i[show update destroy] do
+    #   get :login, action: :login_data, prefix: :login
+    #   post :login
+    #   get :
+    #   post :logout, prefix: ""
+    # end
+
+    resources :users, only: %i[index show]
   end
 
-  # Administrate with Rails Admin.
-  match :admin, to: RailsAdmin::Engine, via: :all
+  # resource :api, only: :show, controller: :api
 
-  # Fallback to Remix.
-  match "*path", to: "remix#proxy", via: :all
+  # Administrate with Rails Admin.
+  mount RailsAdmin::Engine, at: :admin, as: :admin
 end
 
 # rubocop:disable Layout/LineLength
@@ -42,35 +40,16 @@ end
 # == Route Map
 #
 #                                   Prefix Verb   URI Pattern                                                                                       Controller#Action
-#                                     root GET    /                                                                                                 remix#proxy
-#                                  account GET    /account(.:format)                                                                                accounts#show
-#                                          PATCH  /account(.:format)                                                                                accounts#update
-#                                          PUT    /account(.:format)                                                                                accounts#update
-#                                          DELETE /account(.:format)                                                                                accounts#destroy
-#                                 register GET    /account/register(.:format)                                                                       account#register
-#                                    login GET    /account/login(.:format)                                                                          account#login
-#                         new_user_session GET    /account/login(.:format)                                                                          devise/sessions#new
-#                             user_session POST   /account/login(.:format)                                                                          devise/sessions#create
-#                     destroy_user_session DELETE /account/logout(.:format)                                                                         devise/sessions#destroy
-#                        new_user_password GET    /account/password/new(.:format)                                                                   devise/passwords#new
-#                       edit_user_password GET    /account/password/edit(.:format)                                                                  devise/passwords#edit
-#                            user_password PATCH  /account/password(.:format)                                                                       devise/passwords#update
-#                                          PUT    /account/password(.:format)                                                                       devise/passwords#update
-#                                          POST   /account/password(.:format)                                                                       devise/passwords#create
-#                 cancel_user_registration GET    /account/cancel(.:format)                                                                         devise/registrations#cancel
-#                    new_user_registration GET    /account/register(.:format)                                                                       devise/registrations#new
-#                   edit_user_registration GET    /account/edit(.:format)                                                                           devise/registrations#edit
-#                        user_registration PATCH  /account(.:format)                                                                                devise/registrations#update
-#                                          PUT    /account(.:format)                                                                                devise/registrations#update
-#                                          DELETE /account(.:format)                                                                                devise/registrations#destroy
-#                                          POST   /account(.:format)                                                                                devise/registrations#create
-#                    new_user_confirmation GET    /account/confirmation/new(.:format)                                                               devise/confirmations#new
-#                        user_confirmation GET    /account/confirmation(.:format)                                                                   devise/confirmations#show
-#                                          POST   /account/confirmation(.:format)                                                                   devise/confirmations#create
-#                                          GET    /api(.:format)                                                                                    api#show
-#                                  graphql POST   /api/graphql(.:format)                                                                            graphql#execute
-#                                    admin        /admin(.:format)                                                                                  RailsAdmin::Engine
-#                                                 /*path(.:format)                                                                                  remix#proxy
+#                                     root GET    /api(.:format)                                                                                    api#root
+#                            login_account POST   /api/account/login(.:format)                                                                      accounts#create {:prefix=>nil}
+#                           logout_account POST   /api/account/logout(.:format)                                                                     accounts#destroy {:prefix=>nil}
+#                                  account GET    /api/account(.:format)                                                                            accounts#show
+#                                          PATCH  /api/account(.:format)                                                                            accounts#update
+#                                          PUT    /api/account(.:format)                                                                            accounts#update
+#                                          DELETE /api/account(.:format)                                                                            accounts#destroy
+#                                    users GET    /api/users(.:format)                                                                              users#index
+#                                     user GET    /api/users/:id(.:format)                                                                          users#show
+#                                    admin        /admin                                                                                            RailsAdmin::Engine
 #            rails_postmark_inbound_emails POST   /rails/action_mailbox/postmark/inbound_emails(.:format)                                           action_mailbox/ingresses/postmark/inbound_emails#create
 #               rails_relay_inbound_emails POST   /rails/action_mailbox/relay/inbound_emails(.:format)                                              action_mailbox/ingresses/relay/inbound_emails#create
 #            rails_sendgrid_inbound_emails POST   /rails/action_mailbox/sendgrid/inbound_emails(.:format)                                           action_mailbox/ingresses/sendgrid/inbound_emails#create
@@ -108,4 +87,3 @@ end
 #        edit GET|PUT     /:model_name/:id/edit(.:format)        rails_admin/main#edit
 #      delete GET|DELETE  /:model_name/:id/delete(.:format)      rails_admin/main#delete
 # show_in_app GET         /:model_name/:id/show_in_app(.:format) rails_admin/main#show_in_app
-#

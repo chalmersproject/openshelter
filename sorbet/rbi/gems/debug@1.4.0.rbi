@@ -833,7 +833,12 @@ module IRB::Color
     def clear(colorable: T.unsafe(nil)); end
     def colorable?; end
     def colorize(text, seq, colorable: T.unsafe(nil)); end
+
+    # If `complete` is false (code is incomplete), this does not warn compile_error.
+    # This option is needed to avoid warning a user when the compile_error is happening
+    # because the input is not wrong but just incomplete.
     def colorize_code(code, complete: T.unsafe(nil), ignore_error: T.unsafe(nil), colorable: T.unsafe(nil)); end
+
     def inspect_colorable?(obj, seen: T.unsafe(nil)); end
 
     private
@@ -863,11 +868,17 @@ module Kernel
   def debugger(pre: T.unsafe(nil), do: T.unsafe(nil), up_level: T.unsafe(nil)); end
 end
 
-# Also, modules included into Object need to be scanned and have their
-# instance methods removed from blank slate.  In theory, modules
-# included into Kernel would have to be removed as well, but a
-# "feature" of Ruby prevents late includes into modules from being
-# exposed in the first place.
+# == Attribute Accessors per Thread
+#
+# Extends the module object with class/module and instance accessors for
+# class/module attributes, just like the native attr* accessors for instance
+# attributes, but does so on a per-thread basis.
+#
+# So the values are scoped within the Thread.current space under the class name
+# of the module.
+#
+# Note that it can also be scoped per-fiber if Rails.application.config.active_support.isolation_level
+# is set to `:fiber`
 class Module
   include ::Module::Concerning
 

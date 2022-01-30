@@ -1,5 +1,4 @@
-rails: yarn dev:rails
-# css: yarn dev:css
+rails: yarn -s dev:rails
 
 # Sometimes, the Remix dev process isn't killed correctly by Foreman.
 #
@@ -8,4 +7,4 @@ rails: yarn dev:rails
 #     kill (port from previous command)
 #
 # See: https://github.com/ddollar/foreman/pull/780
-remix: yarn dev:remix
+remix: yarn -s dev:remix

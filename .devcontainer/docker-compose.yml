@@ -2,7 +2,6 @@ version: "3"
 
 services:
   app_devcontainer:
-    image: ghcr.io/chalmersproject/chalmersproject_com-devcontainer
     build:
       context: ..
       dockerfile: .devcontainer/Dockerfile
@@ -18,9 +17,9 @@ services:
     depends_on: ["postgres"]
     command: sleep infinity
     ports:
-      - 8080:8080
-      - 8000:8000
       - 3000:3000
+      - 3100:3100
+      - 8000:8000
 
   postgres:
     image: postgres:14

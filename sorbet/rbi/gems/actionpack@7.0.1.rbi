@@ -917,7 +917,7 @@ class ActionController::API < ::ActionController::Metal
   include ::ActionController::Rescue
   include ::ActionController::Instrumentation
   include ::ActionController::ParamsWrapper
-  include ::ActionController::RespondWith
+  include ::Authlogic::ControllerAdapters::RailsAdapter::RailsImplementation
   extend ::ActionView::ViewPaths::ClassMethods
   extend ::AbstractController::UrlFor::ClassMethods
   extend ::ActionController::Rendering::ClassMethods
@@ -930,7 +930,6 @@ class ActionController::API < ::ActionController::Metal
   extend ::ActiveSupport::Rescuable::ClassMethods
   extend ::ActionController::Instrumentation::ClassMethods
   extend ::ActionController::ParamsWrapper::ClassMethods
-  extend ::ActionController::RespondWith::ClassMethods
 
   def __callbacks; end
   def __callbacks?; end
@@ -950,17 +949,11 @@ class ActionController::API < ::ActionController::Metal
   def etaggers?; end
   def logger; end
   def logger=(value); end
-  def mimes_for_respond_to; end
-  def mimes_for_respond_to=(_arg0); end
-  def mimes_for_respond_to?; end
   def raise_on_open_redirects; end
   def raise_on_open_redirects=(val); end
   def rescue_handlers; end
   def rescue_handlers=(_arg0); end
   def rescue_handlers?; end
-  def responder; end
-  def responder=(_arg0); end
-  def responder?; end
 
   class << self
     def __callbacks; end
@@ -983,17 +976,11 @@ class ActionController::API < ::ActionController::Metal
     def logger; end
     def logger=(value); end
     def middleware_stack; end
-    def mimes_for_respond_to; end
-    def mimes_for_respond_to=(value); end
-    def mimes_for_respond_to?; end
     def raise_on_open_redirects; end
     def raise_on_open_redirects=(val); end
     def rescue_handlers; end
     def rescue_handlers=(value); end
     def rescue_handlers?; end
-    def responder; end
-    def responder=(value); end
-    def responder?; end
 
     # Shortcut helper that returns all the ActionController::API modules except
     # the ones passed as arguments:
@@ -1235,7 +1222,7 @@ class ActionController::Base < ::ActionController::Metal
   include ::ActionController::Rescue
   include ::ActionController::Instrumentation
   include ::ActionController::ParamsWrapper
-  include ::ActionController::RespondWith
+  include ::Authlogic::ControllerAdapters::RailsAdapter::RailsImplementation
   extend ::ActionView::ViewPaths::ClassMethods
   extend ::AbstractController::Helpers::ClassMethods
   extend ::ActionController::Helpers::ClassMethods
@@ -1262,8 +1249,6 @@ class ActionController::Base < ::ActionController::Metal
   extend ::ActiveSupport::Rescuable::ClassMethods
   extend ::ActionController::Instrumentation::ClassMethods
   extend ::ActionController::ParamsWrapper::ClassMethods
-  extend ::Responders::ControllerMethod
-  extend ::ActionController::RespondWith::ClassMethods
 
   def __callbacks; end
   def __callbacks?; end
@@ -1325,9 +1310,6 @@ class ActionController::Base < ::ActionController::Metal
   def log_warning_on_csrf_failure=(value); end
   def logger; end
   def logger=(value); end
-  def mimes_for_respond_to; end
-  def mimes_for_respond_to=(_arg0); end
-  def mimes_for_respond_to?; end
   def notice; end
   def per_form_csrf_tokens; end
   def per_form_csrf_tokens=(value); end
@@ -1342,9 +1324,6 @@ class ActionController::Base < ::ActionController::Metal
   def rescue_handlers; end
   def rescue_handlers=(_arg0); end
   def rescue_handlers?; end
-  def responder; end
-  def responder=(_arg0); end
-  def responder?; end
   def stylesheets_dir; end
   def stylesheets_dir=(value); end
   def urlsafe_csrf_tokens; end
@@ -1428,9 +1407,6 @@ class ActionController::Base < ::ActionController::Metal
     def logger; end
     def logger=(value); end
     def middleware_stack; end
-    def mimes_for_respond_to; end
-    def mimes_for_respond_to=(value); end
-    def mimes_for_respond_to?; end
     def per_form_csrf_tokens; end
     def per_form_csrf_tokens=(value); end
     def perform_caching; end
@@ -1444,9 +1420,6 @@ class ActionController::Base < ::ActionController::Metal
     def rescue_handlers; end
     def rescue_handlers=(value); end
     def rescue_handlers?; end
-    def responder; end
-    def responder=(value); end
-    def responder?; end
     def stylesheets_dir; end
     def stylesheets_dir=(value); end
     def urlsafe_csrf_tokens; end
@@ -1474,12 +1447,9 @@ module ActionController::Base::HelperMethods
   def content_security_policy?(*args, &block); end
   def content_security_policy_nonce(*args, &block); end
   def cookies(*args, &block); end
-  def current_user(*args, &block); end
   def form_authenticity_token(*args, &block); end
   def notice(*args, &block); end
   def protect_against_forgery?(*args, &block); end
-  def user_session(*args, &block); end
-  def user_signed_in?(*args, &block); end
   def view_cache_dependencies(*args, &block); end
 end
 
@@ -10471,27 +10441,6 @@ class ActionDispatch::Routing::Mapper
 
   def initialize(set); end
 
-  def as(scope); end
-  def authenticate(scope = T.unsafe(nil), block = T.unsafe(nil)); end
-  def authenticated(scope = T.unsafe(nil), block = T.unsafe(nil)); end
-  def devise_for(*resources); end
-  def devise_scope(scope); end
-  def unauthenticated(scope = T.unsafe(nil)); end
-
-  protected
-
-  def constraints_for(method_to_apply, scope = T.unsafe(nil), block = T.unsafe(nil)); end
-  def devise_confirmation(mapping, controllers); end
-  def devise_omniauth_callback(mapping, controllers); end
-  def devise_password(mapping, controllers); end
-  def devise_registration(mapping, controllers); end
-  def devise_session(mapping, controllers); end
-  def devise_unlock(mapping, controllers); end
-  def raise_no_devise_method_error!(klass); end
-  def raise_no_secret_key; end
-  def set_omniauth_path_prefix!(path_prefix); end
-  def with_devise_exclusive_scope(new_path, new_as, options); end
-
   class << self
     def normalize_name(name); end
 
@@ -11912,8 +11861,6 @@ end
 
 # :stopdoc:
 class ActionDispatch::Routing::RouteSet
-  include ::Devise::RouteSet
-
   def initialize(config = T.unsafe(nil)); end
 
   def add_polymorphic_mapping(klass, options, &block); end
@@ -11962,6 +11909,7 @@ class ActionDispatch::Routing::RouteSet
   # the keys that were not used to generate it.
   def extra_keys(options, recall = T.unsafe(nil)); end
 
+  def finalize!; end
   def find_relative_url_root(options); end
   def find_script_name(options); end
 

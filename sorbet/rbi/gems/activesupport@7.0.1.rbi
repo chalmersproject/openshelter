@@ -6993,15 +6993,6 @@ end
 # vehicle.car?   # => true
 # vehicle.bike?  # => false
 class ActiveSupport::StringInquirer < ::String
-  sig { returns(T::Boolean) }
-  def development?; end
-
-  sig { returns(T::Boolean) }
-  def production?; end
-
-  sig { returns(T::Boolean) }
-  def test?; end
-
   private
 
   def method_missing(method_name, *arguments); end

@@ -15,26 +15,36 @@ ActiveRecord::Schema.define(version: 2022_01_26_184556) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "ar_internal_metadata", primary_key: "key", id: :string, force: :cascade do |t|
+    t.string "value"
+    t.timestamp "created_at", precision: 6, null: false
+    t.timestamp "updated_at", precision: 6, null: false
+  end
+
+  create_table "schema_migrations", primary_key: "version", id: :string, force: :cascade do |t|
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
-    t.string "encrypted_password", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at", precision: 6
-    t.datetime "remember_created_at", precision: 6
-    t.integer "sign_in_count", default: 0, null: false
-    t.datetime "current_sign_in_at", precision: 6
-    t.datetime "last_sign_in_at", precision: 6
-    t.string "current_sign_in_ip"
-    t.string "last_sign_in_ip"
-    t.string "confirmation_token"
-    t.datetime "confirmed_at", precision: 6
-    t.datetime "confirmation_sent_at", precision: 6
-    t.string "unconfirmed_email"
+    t.string "password_hash", null: false
+    t.string "password_salt", null: false
+    t.string "persistence_token", null: false
+    t.string "single_access_token", null: false
+    t.string "perishable_token", null: false
+    t.integer "login_count", default: 0, null: false
+    t.integer "failed_login_count", default: 0, null: false
+    t.datetime "last_request_at", precision: 6
+    t.datetime "current_login_at", precision: 6
+    t.datetime "last_login_at", precision: 6
+    t.string "current_login_ip"
+    t.string "last_login_ip"
+    t.boolean "active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["perishable_token"], name: "index_users_on_perishable_token", unique: true
+    t.index ["persistence_token"], name: "index_users_on_persistence_token", unique: true
+    t.index ["single_access_token"], name: "index_users_on_single_access_token", unique: true
   end
 
 end

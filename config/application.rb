@@ -57,6 +57,9 @@ class Application < Rails::Application
   # Skip views, helpers and assets when generating a new resource.
   config.api_only = true
 
+  # Don't show full stack traces in responses.
+  config.consider_all_requests_local = false
+
   # Configure cookie sessions.
   config.session_store(:cookie_store, key: "session")
   config.middleware.use(ActionDispatch::Cookies)
@@ -78,7 +81,4 @@ class Application < Rails::Application
 
   # Configure assets.
   config.assets.prefix = "/build/rails"
-
-  # Configure logging.
-  config.colorize_logging = true
 end

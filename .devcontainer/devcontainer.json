@@ -72,7 +72,6 @@
 
     // Sorbet (for Ruby)
     "sorbet.enabled": true,
-    "sorbet.selectedLspConfigId": "beta",
 
     // ESLint (for JS)
     "eslint.packageManager": "yarn"
@@ -90,7 +89,6 @@
     "dbaeumer.vscode-eslint",
     "esbenp.prettier-vscode",
     "ms-azuretools.vscode-docker",
-    "apollographql.vscode-apollo",
     "redhat.vscode-yaml",
     "mikestead.dotenv",
     "mtxr.sqltools",

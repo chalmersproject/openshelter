@@ -317,141 +317,6 @@ class User
 
   module GeneratedAttributeMethods
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmation_sent_at; end
-
-    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmation_sent_at=(value); end
-
-    sig { returns(T::Boolean) }
-    def confirmation_sent_at?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmation_sent_at_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def confirmation_sent_at_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def confirmation_sent_at_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def confirmation_sent_at_change; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def confirmation_sent_at_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def confirmation_sent_at_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmation_sent_at_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def confirmation_sent_at_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def confirmation_sent_at_previously_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmation_sent_at_previously_was; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmation_sent_at_was; end
-
-    sig { void }
-    def confirmation_sent_at_will_change!; end
-
-    sig { returns(T.nilable(::String)) }
-    def confirmation_token; end
-
-    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
-    def confirmation_token=(value); end
-
-    sig { returns(T::Boolean) }
-    def confirmation_token?; end
-
-    sig { returns(T.nilable(::String)) }
-    def confirmation_token_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def confirmation_token_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def confirmation_token_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def confirmation_token_change; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def confirmation_token_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def confirmation_token_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def confirmation_token_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def confirmation_token_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def confirmation_token_previously_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def confirmation_token_previously_was; end
-
-    sig { returns(T.nilable(::String)) }
-    def confirmation_token_was; end
-
-    sig { void }
-    def confirmation_token_will_change!; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmed_at; end
-
-    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmed_at=(value); end
-
-    sig { returns(T::Boolean) }
-    def confirmed_at?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmed_at_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def confirmed_at_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def confirmed_at_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def confirmed_at_change; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def confirmed_at_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def confirmed_at_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmed_at_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def confirmed_at_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def confirmed_at_previously_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmed_at_previously_was; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def confirmed_at_was; end
-
-    sig { void }
-    def confirmed_at_will_change!; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def created_at; end
 
     sig { params(value: ::ActiveSupport::TimeWithZone).returns(::ActiveSupport::TimeWithZone) }
@@ -495,96 +360,6 @@ class User
 
     sig { void }
     def created_at_will_change!; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def current_sign_in_at; end
-
-    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def current_sign_in_at=(value); end
-
-    sig { returns(T::Boolean) }
-    def current_sign_in_at?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def current_sign_in_at_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def current_sign_in_at_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def current_sign_in_at_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def current_sign_in_at_change; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def current_sign_in_at_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def current_sign_in_at_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def current_sign_in_at_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def current_sign_in_at_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def current_sign_in_at_previously_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def current_sign_in_at_previously_was; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def current_sign_in_at_was; end
-
-    sig { void }
-    def current_sign_in_at_will_change!; end
-
-    sig { returns(T.nilable(::String)) }
-    def current_sign_in_ip; end
-
-    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
-    def current_sign_in_ip=(value); end
-
-    sig { returns(T::Boolean) }
-    def current_sign_in_ip?; end
-
-    sig { returns(T.nilable(::String)) }
-    def current_sign_in_ip_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def current_sign_in_ip_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def current_sign_in_ip_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def current_sign_in_ip_change; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def current_sign_in_ip_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def current_sign_in_ip_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def current_sign_in_ip_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def current_sign_in_ip_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def current_sign_in_ip_previously_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def current_sign_in_ip_previously_was; end
-
-    sig { returns(T.nilable(::String)) }
-    def current_sign_in_ip_was; end
-
-    sig { void }
-    def current_sign_in_ip_will_change!; end
 
     sig { returns(::String) }
     def email; end
@@ -631,51 +406,6 @@ class User
     sig { void }
     def email_will_change!; end
 
-    sig { returns(::String) }
-    def encrypted_password; end
-
-    sig { params(value: ::String).returns(::String) }
-    def encrypted_password=(value); end
-
-    sig { returns(T::Boolean) }
-    def encrypted_password?; end
-
-    sig { returns(T.nilable(::String)) }
-    def encrypted_password_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def encrypted_password_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def encrypted_password_came_from_user?; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def encrypted_password_change; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def encrypted_password_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def encrypted_password_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def encrypted_password_in_database; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def encrypted_password_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def encrypted_password_previously_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def encrypted_password_previously_was; end
-
-    sig { returns(T.nilable(::String)) }
-    def encrypted_password_was; end
-
-    sig { void }
-    def encrypted_password_will_change!; end
-
     sig { returns(T.nilable(::Integer)) }
     def id; end
 
@@ -721,299 +451,65 @@ class User
     sig { void }
     def id_will_change!; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def last_sign_in_at; end
+    sig { returns(::String) }
+    def password_digest; end
 
-    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def last_sign_in_at=(value); end
+    sig { params(value: ::String).returns(::String) }
+    def password_digest=(value); end
 
     sig { returns(T::Boolean) }
-    def last_sign_in_at?; end
+    def password_digest?; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def last_sign_in_at_before_last_save; end
+    sig { returns(T.nilable(::String)) }
+    def password_digest_before_last_save; end
 
     sig { returns(T.untyped) }
-    def last_sign_in_at_before_type_cast; end
+    def password_digest_before_type_cast; end
 
     sig { returns(T::Boolean) }
-    def last_sign_in_at_came_from_user?; end
+    def password_digest_came_from_user?; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def last_sign_in_at_change; end
+    sig { returns(T.nilable([::String, ::String])) }
+    def password_digest_change; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def last_sign_in_at_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def last_sign_in_at_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def last_sign_in_at_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def last_sign_in_at_previous_change; end
+    sig { returns(T.nilable([::String, ::String])) }
+    def password_digest_change_to_be_saved; end
 
     sig { returns(T::Boolean) }
-    def last_sign_in_at_previously_changed?; end
+    def password_digest_changed?; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def last_sign_in_at_previously_was; end
+    sig { returns(T.nilable(::String)) }
+    def password_digest_in_database; end
 
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def last_sign_in_at_was; end
+    sig { returns(T.nilable([::String, ::String])) }
+    def password_digest_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def password_digest_previously_changed?; end
+
+    sig { returns(T.nilable(::String)) }
+    def password_digest_previously_was; end
+
+    sig { returns(T.nilable(::String)) }
+    def password_digest_was; end
 
     sig { void }
-    def last_sign_in_at_will_change!; end
-
-    sig { returns(T.nilable(::String)) }
-    def last_sign_in_ip; end
-
-    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
-    def last_sign_in_ip=(value); end
-
-    sig { returns(T::Boolean) }
-    def last_sign_in_ip?; end
-
-    sig { returns(T.nilable(::String)) }
-    def last_sign_in_ip_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def last_sign_in_ip_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def last_sign_in_ip_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def last_sign_in_ip_change; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def last_sign_in_ip_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def last_sign_in_ip_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def last_sign_in_ip_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def last_sign_in_ip_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def last_sign_in_ip_previously_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def last_sign_in_ip_previously_was; end
-
-    sig { returns(T.nilable(::String)) }
-    def last_sign_in_ip_was; end
-
-    sig { void }
-    def last_sign_in_ip_will_change!; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def remember_created_at; end
-
-    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def remember_created_at=(value); end
-
-    sig { returns(T::Boolean) }
-    def remember_created_at?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def remember_created_at_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def remember_created_at_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def remember_created_at_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def remember_created_at_change; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def remember_created_at_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def remember_created_at_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def remember_created_at_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def remember_created_at_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def remember_created_at_previously_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def remember_created_at_previously_was; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def remember_created_at_was; end
-
-    sig { void }
-    def remember_created_at_will_change!; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def reset_password_sent_at; end
-
-    sig { params(value: T.nilable(::ActiveSupport::TimeWithZone)).returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def reset_password_sent_at=(value); end
-
-    sig { returns(T::Boolean) }
-    def reset_password_sent_at?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def reset_password_sent_at_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def reset_password_sent_at_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def reset_password_sent_at_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def reset_password_sent_at_change; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def reset_password_sent_at_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def reset_password_sent_at_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def reset_password_sent_at_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def reset_password_sent_at_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def reset_password_sent_at_previously_changed?; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def reset_password_sent_at_previously_was; end
-
-    sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
-    def reset_password_sent_at_was; end
-
-    sig { void }
-    def reset_password_sent_at_will_change!; end
-
-    sig { returns(T.nilable(::String)) }
-    def reset_password_token; end
-
-    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
-    def reset_password_token=(value); end
-
-    sig { returns(T::Boolean) }
-    def reset_password_token?; end
-
-    sig { returns(T.nilable(::String)) }
-    def reset_password_token_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def reset_password_token_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def reset_password_token_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def reset_password_token_change; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def reset_password_token_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def reset_password_token_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def reset_password_token_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def reset_password_token_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def reset_password_token_previously_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def reset_password_token_previously_was; end
-
-    sig { returns(T.nilable(::String)) }
-    def reset_password_token_was; end
-
-    sig { void }
-    def reset_password_token_will_change!; end
-
-    sig { void }
-    def restore_confirmation_sent_at!; end
-
-    sig { void }
-    def restore_confirmation_token!; end
-
-    sig { void }
-    def restore_confirmed_at!; end
+    def password_digest_will_change!; end
 
     sig { void }
     def restore_created_at!; end
 
     sig { void }
-    def restore_current_sign_in_at!; end
-
-    sig { void }
-    def restore_current_sign_in_ip!; end
-
-    sig { void }
     def restore_email!; end
-
-    sig { void }
-    def restore_encrypted_password!; end
 
     sig { void }
     def restore_id!; end
 
     sig { void }
-    def restore_last_sign_in_at!; end
-
-    sig { void }
-    def restore_last_sign_in_ip!; end
-
-    sig { void }
-    def restore_remember_created_at!; end
-
-    sig { void }
-    def restore_reset_password_sent_at!; end
-
-    sig { void }
-    def restore_reset_password_token!; end
-
-    sig { void }
-    def restore_sign_in_count!; end
-
-    sig { void }
-    def restore_unconfirmed_email!; end
+    def restore_password_digest!; end
 
     sig { void }
     def restore_updated_at!; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def saved_change_to_confirmation_sent_at; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_confirmation_sent_at?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def saved_change_to_confirmation_token; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_confirmation_token?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def saved_change_to_confirmed_at; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_confirmed_at?; end
 
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def saved_change_to_created_at; end
@@ -1021,29 +517,11 @@ class User
     sig { returns(T::Boolean) }
     def saved_change_to_created_at?; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def saved_change_to_current_sign_in_at; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_current_sign_in_at?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def saved_change_to_current_sign_in_ip; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_current_sign_in_ip?; end
-
     sig { returns(T.nilable([::String, ::String])) }
     def saved_change_to_email; end
 
     sig { returns(T::Boolean) }
     def saved_change_to_email?; end
-
-    sig { returns(T.nilable([::String, ::String])) }
-    def saved_change_to_encrypted_password; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_encrypted_password?; end
 
     sig { returns(T.nilable([T.nilable(::Integer), T.nilable(::Integer)])) }
     def saved_change_to_id; end
@@ -1051,143 +529,17 @@ class User
     sig { returns(T::Boolean) }
     def saved_change_to_id?; end
 
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def saved_change_to_last_sign_in_at; end
+    sig { returns(T.nilable([::String, ::String])) }
+    def saved_change_to_password_digest; end
 
     sig { returns(T::Boolean) }
-    def saved_change_to_last_sign_in_at?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def saved_change_to_last_sign_in_ip; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_last_sign_in_ip?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def saved_change_to_remember_created_at; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_remember_created_at?; end
-
-    sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
-    def saved_change_to_reset_password_sent_at; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_reset_password_sent_at?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def saved_change_to_reset_password_token; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_reset_password_token?; end
-
-    sig { returns(T.nilable([::Integer, ::Integer])) }
-    def saved_change_to_sign_in_count; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_sign_in_count?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def saved_change_to_unconfirmed_email; end
-
-    sig { returns(T::Boolean) }
-    def saved_change_to_unconfirmed_email?; end
+    def saved_change_to_password_digest?; end
 
     sig { returns(T.nilable([T.nilable(::ActiveSupport::TimeWithZone), T.nilable(::ActiveSupport::TimeWithZone)])) }
     def saved_change_to_updated_at; end
 
     sig { returns(T::Boolean) }
     def saved_change_to_updated_at?; end
-
-    sig { returns(::Integer) }
-    def sign_in_count; end
-
-    sig { params(value: ::Integer).returns(::Integer) }
-    def sign_in_count=(value); end
-
-    sig { returns(T::Boolean) }
-    def sign_in_count?; end
-
-    sig { returns(T.nilable(::Integer)) }
-    def sign_in_count_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def sign_in_count_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def sign_in_count_came_from_user?; end
-
-    sig { returns(T.nilable([::Integer, ::Integer])) }
-    def sign_in_count_change; end
-
-    sig { returns(T.nilable([::Integer, ::Integer])) }
-    def sign_in_count_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def sign_in_count_changed?; end
-
-    sig { returns(T.nilable(::Integer)) }
-    def sign_in_count_in_database; end
-
-    sig { returns(T.nilable([::Integer, ::Integer])) }
-    def sign_in_count_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def sign_in_count_previously_changed?; end
-
-    sig { returns(T.nilable(::Integer)) }
-    def sign_in_count_previously_was; end
-
-    sig { returns(T.nilable(::Integer)) }
-    def sign_in_count_was; end
-
-    sig { void }
-    def sign_in_count_will_change!; end
-
-    sig { returns(T.nilable(::String)) }
-    def unconfirmed_email; end
-
-    sig { params(value: T.nilable(::String)).returns(T.nilable(::String)) }
-    def unconfirmed_email=(value); end
-
-    sig { returns(T::Boolean) }
-    def unconfirmed_email?; end
-
-    sig { returns(T.nilable(::String)) }
-    def unconfirmed_email_before_last_save; end
-
-    sig { returns(T.untyped) }
-    def unconfirmed_email_before_type_cast; end
-
-    sig { returns(T::Boolean) }
-    def unconfirmed_email_came_from_user?; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def unconfirmed_email_change; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def unconfirmed_email_change_to_be_saved; end
-
-    sig { returns(T::Boolean) }
-    def unconfirmed_email_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def unconfirmed_email_in_database; end
-
-    sig { returns(T.nilable([T.nilable(::String), T.nilable(::String)])) }
-    def unconfirmed_email_previous_change; end
-
-    sig { returns(T::Boolean) }
-    def unconfirmed_email_previously_changed?; end
-
-    sig { returns(T.nilable(::String)) }
-    def unconfirmed_email_previously_was; end
-
-    sig { returns(T.nilable(::String)) }
-    def unconfirmed_email_was; end
-
-    sig { void }
-    def unconfirmed_email_will_change!; end
 
     sig { returns(T.nilable(::ActiveSupport::TimeWithZone)) }
     def updated_at; end
@@ -1235,52 +587,16 @@ class User
     def updated_at_will_change!; end
 
     sig { returns(T::Boolean) }
-    def will_save_change_to_confirmation_sent_at?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_confirmation_token?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_confirmed_at?; end
-
-    sig { returns(T::Boolean) }
     def will_save_change_to_created_at?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_current_sign_in_at?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_current_sign_in_ip?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_email?; end
 
     sig { returns(T::Boolean) }
-    def will_save_change_to_encrypted_password?; end
-
-    sig { returns(T::Boolean) }
     def will_save_change_to_id?; end
 
     sig { returns(T::Boolean) }
-    def will_save_change_to_last_sign_in_at?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_last_sign_in_ip?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_remember_created_at?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_reset_password_sent_at?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_reset_password_token?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_sign_in_count?; end
-
-    sig { returns(T::Boolean) }
-    def will_save_change_to_unconfirmed_email?; end
+    def will_save_change_to_password_digest?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_updated_at?; end

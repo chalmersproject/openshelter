@@ -1,63 +1,54 @@
-# typed: true
+# typed: strict
 # frozen_string_literal: true
 
-class AccountsController < Devise::SessionsController
+class AccountsController < ApplicationController
   extend T::Sig
 
-  include ApplicationController::Remix
+  sig { void }
+  def initialize
+    super
+    @user = T.let(nil, T.nilable(User))
+  end
 
-  # before_action :set_account, only: %i[show update destroy]
+  before_action :set_user, only: %i[show edit update destroy]
 
-  # GET /account
-  def show
-    respond_to do |format|
-      format.json do
-        payload = { user: current_user }
-        render(json: payload)
-      end
-      format.html { proxy }
+  sig { returns(ActionController::Parameters) }
+  def login_params
+    params.permit(:email, :password, :redirect_url) do |params|
+      params.require(%i[email password])
     end
   end
 
-  # # PATCH/PUT /account
-  # def update
-  #   if @account.update(account_params)
-  #     render json: @account
-  #   else
-  #     render json: @account.errors, status: :unprocessable_entity
-  #   end
-  # end
-
-  # # DELETE /account
-  # def destroy
-  #   @account.destroy
-  # end
-
-  # GET /account/register
-  def register
-    proxy
-  end
-
-  # Get /account/login
+  # POST /account/login
+  sig { void }
   def login
-    respond_to do |format|
-      format.json do
-        payload = { user: current_user }
-        render(json: payload)
-      end
-      format.html { proxy }
+    email, password = login_params.require(%i[email password])
+    session = UserSession.new(email: email, password: password)
+    unless session.save
+      return render(json: { errors: session.errors }, status: :bad_request)
     end
+
+    # Redirect to root.
+    redirect_url = login_params.fetch(:redirect_url, "/")
+    redirect_to(redirect_url)
   end
 
-  # private
+  # POST /account/logout
+  sig { void }
+  def logout
+    # Destroy session.
+    session = current_user_session
+    session.destroy if session.present?
 
-  # # Use callbacks to share common setup or constraints between actions.
-  # def set_account
-  #   @account = Account.find(params[:id])
-  # end
+    # Redirect to root.
+    redirect_url = params.fetch(:redirect_url, "/")
+    redirect_to(redirect_url)
+  end
 
-  # # Only allow a list of trusted parameters through.
-  # def account_params
-  #   params.fetch(:account, {})
-  # end
+  private
+
+  sig { void }
+  def set_user
+    @user = current_user
+  end
 end

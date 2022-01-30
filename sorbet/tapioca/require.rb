@@ -9,9 +9,8 @@ require "active_record/connection_adapters/postgresql_adapter"
 require_relative "./shims/actionpack.rb"
 require_relative "./shims/activemodel.rb"
 require_relative "./shims/activerecord.rb"
-require_relative "./shims/devise.rb"
-require_relative "./shims/graphql.rb"
 require_relative "./shims/rails_admin.rb"
+# require_relative "./shims/grape.rb"
 
 # require 'active_support/core_ext/integer/time'
 # require 'fileutils'

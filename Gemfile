@@ -6,18 +6,23 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 # Declare Ruby version.
 ruby "3.0.3"
 
-# Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
+# Bundle Rails!
 gem "rails", "~> 7.0.1"
-
-# Proxy requests to Remix with rails-reverse-proxy.
-gem "rails-reverse-proxy", "~> 0.10.1"
-
-# Run multiple processes defined in a Procfile.
-gem "foreman", "~> 0.87.2"
 
 # Deliver assets with Sprockets (for rails_admin).
 gem "sprockets", "~> 4.0.2"
 gem "sprockets-rails", "~> 3.4.2"
+# gem "sassc-rails", "~> 2.1"
+# gem "sassc", "~> 2.4"
+
+# # Define RESTful API with Grape.
+# gem "grape", "~> 1.6"
+# gem "grape-swagger", "~> 1.4"
+# gem "grape-swagger-rails", "~> 0.3.1"
+
+# Install additional ActiveModel validators.
+gem "email_validator", "~> 2.2"
+gem "validate_url", "~> 1.0"
 
 # Administrate app with Rails Admin.
 gem "rails_admin", [">= 3.0.0.beta2", "< 4"]
@@ -29,26 +34,20 @@ gem "puma", "~> 5.0"
 gem "pg", "~> 1.2.3"
 gem "pg_search", "~> 2.3.6"
 
-# Expose a GraphQL API.
-gem "graphql", "~> 1.13.6"
-gem "graphql-batch", "~> 0.5.0"
-gem "graphql-rails_logger", "~> 1.2"
-
-# Authenticate users with Devise.
-gem "devise", "~> 4.8.1"
+# Authenticate users with Authlogic.
+gem "authlogic", "~> 6.4.1"
+gem "scrypt", "~> 2.0.2"
+gem "scanf", "~> 1.0.0"
 
 # Authorize actions with Pundit.
 gem "pundit", "~> 2.1.1"
-
-# Annotate models and routes.
-gem "annotate", "~> 2.6", group: :development
 
 # Audit model changes with PaperTrail.
 gem "paper_trail", "~> 12.2.0"
 # gem "paper_trail-association_tracking", "~> 2.1.3"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder].
-# gem "jbuilder"
+gem "jbuilder", "~> 2.11"
 
 # Use Redis adapter to run Action Cable in production.
 # gem "redis", "~> 4.0"
@@ -56,10 +55,6 @@ gem "paper_trail", "~> 12.2.0"
 # Use Kredis to get higher-level data types in Redis
 # [https://github.com/rails/kredis].
 # gem "kredis"
-
-# Use Active Model has_secure_password
-# [https://guides.rubyonrails.org/active_model_basics.html#securepassword].
-gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem.
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
@@ -74,11 +69,6 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making
 # cross-origin AJAX possible.
 # gem "rack-cors"
-
-# # Use Semantic Logger for logging.
-# gem "semantic_logger", "~> 4.9.0"
-# gem "rails_semantic_logger", "~> 4.9.0"
-# gem "amazing_print", "~> 1.4.0"
 
 # Check types with Sorbet.
 gem "sorbet", "~> 0.5.9542", group: :development
@@ -97,11 +87,13 @@ gem "rubocop", group: :development, require: false
 gem "rubocop-shopify", group: :development, require: false
 gem "rubocop-sorbet", group: :development, require: false
 gem "rubocop-rails", group: :development, require: false
-gem "rubocop-graphql", group: :development, require: false
 gem "unparser", group: :development, require: false
 
-# # Enable autoloading with zeitwerk.
-# gem "zeitwerk", group: :development
+# Annotate models and routes.
+gem "annotate",
+    github: "dabit/annotate_models",
+    branch: "rails-7",
+    group: :development
 
 # Enable runtime debugging.
 gem "debug", group: %i[development test], platforms: %i[mri mingw x64_mingw]

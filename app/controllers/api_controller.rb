@@ -6,7 +6,11 @@ class ApiController < ApplicationController
 
   sig { void }
   def show
-    payload = { version: application.version }
-    render(json: JSON.pretty_generate(payload))
+    payload = {
+      version: app.version,
+      csrf_param: request_forgery_protection_token.to_s,
+      csrf_token: form_authenticity_token,
+    }
+    render(json: payload)
   end
 end

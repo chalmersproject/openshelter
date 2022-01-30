@@ -274,6 +274,8 @@ class ActionView::Base
   include ::ActionView::Helpers::NumberHelper
   include ::ActionView::Helpers::RenderingHelper
   include ::ActionView::Helpers
+  include ::Kaminari::Helpers::UrlHelper
+  include ::Kaminari::Helpers::HelperMethods
   extend ::ActionView::Helpers::UrlHelper::ClassMethods
   extend ::ActionView::Helpers::SanitizeHelper::ClassMethods
 
@@ -9473,12 +9475,13 @@ end
 #
 # Provides functionality so that Rails can output logs from Action View.
 class ActionView::LogSubscriber < ::ActiveSupport::LogSubscriber
+  include ::Kaminari::ActionViewExtension::LogSubscriberSilencer
+
   def initialize; end
 
   def logger; end
   def render_collection(event); end
   def render_layout(event); end
-  def render_partial(event); end
   def render_template(event); end
   def start(name, id, payload); end
 

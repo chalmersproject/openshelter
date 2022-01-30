@@ -5948,6 +5948,16 @@ class ActiveRecord::Base
   include ::ActiveRecord::Suppressor
   include ::ActiveRecord::Encryption::EncryptableRecord
   include ::Kaminari::ActiveRecordExtension
+  include ::Authlogic::ActsAsAuthentic::Base
+  include ::Authlogic::ActsAsAuthentic::Email
+  include ::Authlogic::ActsAsAuthentic::LoggedInStatus
+  include ::Authlogic::ActsAsAuthentic::Login
+  include ::Authlogic::ActsAsAuthentic::MagicColumns
+  include ::Authlogic::ActsAsAuthentic::Password
+  include ::Authlogic::ActsAsAuthentic::PerishableToken
+  include ::Authlogic::ActsAsAuthentic::PersistenceToken
+  include ::Authlogic::ActsAsAuthentic::SessionMaintenance
+  include ::Authlogic::ActsAsAuthentic::SingleAccessToken
   extend ::ActiveModel::Naming
   extend ::ActiveSupport::Benchmarkable
   extend ::ActiveSupport::DescendantsTracker
@@ -6005,7 +6015,15 @@ class ActiveRecord::Base
   extend ::ActiveRecord::Suppressor::ClassMethods
   extend ::ActiveRecord::Encryption::EncryptableRecord::ClassMethods
   extend ::Kaminari::ActiveRecordExtension::ClassMethods
-  extend ::OrmAdapter::ToAdapter
+  extend ::Authlogic::Config
+  extend ::Authlogic::ActsAsAuthentic::Base::Config
+  extend ::Authlogic::ActsAsAuthentic::Email::Config
+  extend ::Authlogic::ActsAsAuthentic::LoggedInStatus::Config
+  extend ::Authlogic::ActsAsAuthentic::Login::Config
+  extend ::Authlogic::ActsAsAuthentic::Password::Config
+  extend ::Authlogic::ActsAsAuthentic::PerishableToken::Config
+  extend ::Authlogic::ActsAsAuthentic::SessionMaintenance::Config
+  extend ::Authlogic::ActsAsAuthentic::SingleAccessToken::Config
 
   def __callbacks; end
   def __callbacks?; end
@@ -6037,6 +6055,12 @@ class ActiveRecord::Base
   def _validation_callbacks; end
   def _validators; end
   def _validators?; end
+  def acts_as_authentic_config; end
+  def acts_as_authentic_config=(_arg0); end
+  def acts_as_authentic_config?; end
+  def acts_as_authentic_modules; end
+  def acts_as_authentic_modules=(_arg0); end
+  def acts_as_authentic_modules?; end
   def aggregate_reflections; end
   def aggregate_reflections?; end
   def attribute_aliases; end
@@ -6146,6 +6170,12 @@ class ActiveRecord::Base
     def _validators; end
     def _validators=(value); end
     def _validators?; end
+    def acts_as_authentic_config; end
+    def acts_as_authentic_config=(value); end
+    def acts_as_authentic_config?; end
+    def acts_as_authentic_modules; end
+    def acts_as_authentic_modules=(value); end
+    def acts_as_authentic_modules?; end
 
     sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
     def after_create(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
@@ -6345,7 +6375,6 @@ end
 
 module ActiveRecord::Base::GeneratedAssociationMethods; end
 module ActiveRecord::Base::GeneratedAttributeMethods; end
-ActiveRecord::Base::OrmAdapter = OrmAdapter::ActiveRecord
 
 module ActiveRecord::Batches
   # Looping through a collection of records from the database

@@ -1,20 +1,24 @@
-import { useLoaderData } from "remix";
+import { Form } from "remix";
+
+import { useActionData } from "remix";
+import { createAction } from "~/utils/rails/remix";
 
 import { Button, Group, Text } from "@mantine/core";
 import { TextInput, PasswordInput } from "@mantine/core";
 
-import { Form, CSRFHeaders } from "~/utils/rails";
-export { loader } from "~/utils/rails";
+import { FormAuthenticityField } from "~/utils/rails/csrf";
 
-export type AccountLoginData = {
-  user: null;
-  csrfHeaders: CSRFHeaders;
+export const action = createAction("/api/account/login");
+
+export type AccountLoginActionData = {
+  error?: string;
 };
 
 export default function AccountLogin() {
-  const { user, csrfHeaders } = useLoaderData<AccountLoginData>();
+  const actionData = useActionData<AccountLoginActionData>();
   return (
-    <Form {...{ csrfHeaders }} reloadDocument>
+    <Form method="post">
+      <FormAuthenticityField />
       <Group direction="column" align="stretch">
         <TextInput
           name="email"
@@ -30,7 +34,7 @@ export default function AccountLogin() {
         />
         <Button type="submit">Sign In</Button>
       </Group>
-      <Text>{JSON.stringify({ user })}</Text>
+      <Text component="pre">{JSON.stringify({ actionData })}</Text>
     </Form>
   );
 }

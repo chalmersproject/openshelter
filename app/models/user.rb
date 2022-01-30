@@ -1,45 +1,76 @@
 # typed: strict
 # frozen_string_literal: true
 
+# TODO: Create a custom email type.
 class User < ApplicationRecord
-  extend T::Helpers
+  acts_as_authentic do |config|
+    # Configure Authlogic.
+    #
+    # See:
+    # https://github.com/binarylogic/authlogic
+    # https://www.rubydoc.info/github/binarylogic/authlogic
 
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable,
-         :registerable,
-         :recoverable,
-         :rememberable,
-         :validatable,
-         :confirmable,
-         :trackable
+    config.crypto_provider = Authlogic::CryptoProviders::SCrypt
+  end
+
+  validates :email,
+            presence: true,
+            length: {
+              maximum: 100,
+            },
+            email: {
+              mode: :strict,
+              require_fqdn: true,
+            },
+            uniqueness: {
+              case_sensitive: false,
+              if: :will_save_change_to_email?,
+            }
+
+  validates :password,
+            presence: true,
+            length: {
+              minimum: 8,
+              if: :require_password?,
+            },
+            confirmation: {
+              if: :require_password?,
+            }
+
+  validates :password_confirmation,
+            presence: true,
+            length: {
+              minimum: 8,
+              if: :require_password?,
+            }
 end
 
 # == Schema Information
 #
 # Table name: users
 #
-#  id                     :integer          not null, primary key
-#  email                  :string           not null
-#  encrypted_password     :string           not null
-#  reset_password_token   :string
-#  reset_password_sent_at :datetime
-#  remember_created_at    :datetime
-#  sign_in_count          :integer          default("0"), not null
-#  current_sign_in_at     :datetime
-#  last_sign_in_at        :datetime
-#  current_sign_in_ip     :string
-#  last_sign_in_ip        :string
-#  confirmation_token     :string
-#  confirmed_at           :datetime
-#  confirmation_sent_at   :datetime
-#  unconfirmed_email      :string
-#  created_at             :datetime         not null
-#  updated_at             :datetime         not null
+#  id                  :bigint           not null, primary key
+#  active              :boolean          default(TRUE)
+#  current_login_at    :datetime
+#  current_login_ip    :string
+#  email               :string           not null
+#  failed_login_count  :integer          default(0), not null
+#  last_login_at       :datetime
+#  last_login_ip       :string
+#  last_request_at     :datetime
+#  login_count         :integer          default(0), not null
+#  password_hash       :string           not null
+#  password_salt       :string           not null
+#  perishable_token    :string           not null
+#  persistence_token   :string           not null
+#  single_access_token :string           not null
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
 #
 # Indexes
 #
-#  index_users_on_confirmation_token    (confirmation_token) UNIQUE
-#  index_users_on_email                 (email) UNIQUE
-#  index_users_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_users_on_email                (email) UNIQUE
+#  index_users_on_perishable_token     (perishable_token) UNIQUE
+#  index_users_on_persistence_token    (persistence_token) UNIQUE
+#  index_users_on_single_access_token  (single_access_token) UNIQUE
 #

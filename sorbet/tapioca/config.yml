@@ -3,6 +3,7 @@
 gem:
   doc: true
   exclude:
+    - annotate
     - pry
     - pry-rails
     - rake
@@ -12,3 +13,6 @@ gem:
     - thor
     - yard
     - yard-sorbet
+    - tapioca
+    - spoom
+    - prettier

@@ -6,5 +6,5 @@
 # Be sure to restart your server when you modify this file.
 Rails.application.configure do
   config.filter_parameters +=
-    %i[passw secret token _key crypt salt certificate otp ssn]
+    %i[pass passw password secret token _key crypt salt certificate otp ssn]
 end
