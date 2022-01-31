@@ -10,8 +10,15 @@ class ApplicationController < ActionController::API
   # Declare helper methods.
   helper_method :current_user_session, :current_user
 
+  # Define error handlers.
+  rescue_from StandardError, with: :show_error
+  rescue_from ActionController::ParameterMissing,
+              with: :show_parameter_missing_error
+
   # Enable CSRF protection.
   protect_from_forgery with: :exception
+
+  protected
 
   sig { returns(Application) }
   def app
@@ -34,5 +41,26 @@ class ApplicationController < ActionController::API
       @current_user = session.user if session.present?
     end
     @current_user
+  end
+
+  sig { params(exception: Exception).void }
+  def show_error(exception)
+    detail = T.let(exception.message.humanize, String)
+    render(
+      json: {
+        errors: [{ detail: detail.end_with?(".") ? detail : detail + "." }],
+      },
+    )
+  end
+
+  sig { params(error: ActionController::ParameterMissing).void }
+  def show_parameter_missing_error(error)
+    render(
+      json: {
+        errors: [
+          { title: "Missing Parameters", detail: "#{error.message.humanize}." },
+        ],
+      },
+    )
   end
 end

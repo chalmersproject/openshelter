@@ -1,7 +1,6 @@
 import { Form } from "remix";
-
-import { useActionData } from "remix";
-import { createAction } from "~/utils/rails/remix";
+import { createAction, useActionData } from "~/utils/remix";
+import * as struct from "superstruct";
 
 import { Button, Group, Text } from "@mantine/core";
 import { TextInput, PasswordInput } from "@mantine/core";
@@ -14,8 +13,12 @@ export type AccountLoginActionData = {
   error?: string;
 };
 
+const AccountLoginActionData = struct.object({
+  user: struct.optional(struct.object()),
+});
+
 export default function AccountLogin() {
-  const actionData = useActionData<AccountLoginActionData>();
+  const actionData = useActionData(AccountLoginActionData);
   return (
     <Form method="post">
       <FormAuthenticityField />

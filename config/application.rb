@@ -5,6 +5,8 @@ require_relative "boot"
 require "rails/all"
 require "sprockets/railtie"
 
+require_relative "../lib/log_formatter"
+
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
@@ -81,4 +83,12 @@ class Application < Rails::Application
 
   # Configure assets.
   config.assets.prefix = "/build/rails"
+
+  # Configure logging.
+  config.log_formatter = LogFormatter.new
+  if ENV["RAILS_LOG_TO_STDOUT"].present?
+    logger = ActiveSupport::Logger.new($stdout)
+    logger.formatter = config.log_formatter
+    config.logger = ActiveSupport::TaggedLogging.new(logger)
+  end
 end

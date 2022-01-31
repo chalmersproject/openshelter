@@ -22,14 +22,21 @@ class AccountsController < ApplicationController
   # POST /account/login
   sig { void }
   def login
-    email, password = login_params.require(%i[email password])
+    # params = login_params
+    email, password = params.require(%i[email password])
     session = UserSession.new(email: email, password: password)
     unless session.save
-      return render(json: { errors: session.errors }, status: :bad_request)
+      render(
+        partial: "errors/validation",
+        message: "Bad credentials",
+        params: params,
+        errors: session.errors,
+        status: :unauthorized,
+      ) and return
     end
 
     # Redirect to root.
-    redirect_url = login_params.fetch(:redirect_url, "/")
+    redirect_url = params.fetch(:redirect_url, "/")
     redirect_to(redirect_url)
   end
 

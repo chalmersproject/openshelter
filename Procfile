@@ -1,2 +1,3 @@
-rails: yarn start:rails
-remix: yarn start:remix
+nginx: yarn -s start:nginx
+rails: yarn -s start:rails
+remix: yarn -s start:remix

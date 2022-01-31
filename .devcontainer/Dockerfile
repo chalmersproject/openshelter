@@ -7,8 +7,8 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg ma
     apt-get update && \
     apt-get -y install postgresql-client-14
 
-# Install Watchman and Tmux.
-RUN apt-get -y install watchman tmux
+# Install Ngnix and Tmux.
+RUN apt-get -y install nginx tmux
 
 # Install Overmind.
 RUN curl -Lo /usr/local/bin/overmind.gz https://github.com/DarthSim/overmind/releases/download/v2.2.2/overmind-v2.2.2-linux-amd64.gz && \
@@ -18,12 +18,14 @@ RUN curl -Lo /usr/local/bin/overmind.gz https://github.com/DarthSim/overmind/rel
 # Install Node 16.
 RUN zsh -c "source /usr/local/share/nvm/nvm.sh && nvm install 16 2>&1"
 
-# Disable RVM and NVM.
+# Disable RVM and NVM (to improve shell performance).
 RUN /usr/local/rvm/bin/rvm-shell -c "rvm implode --force" && \
     rm /usr/local/share/nvm/nvm.sh /usr/local/share/nvm/bash_completion
 
 # Install Yarn completions for zsh.
-RUN git clone https://github.com/buonomo/yarn-completion /root/.oh-my-zsh/custom/plugins/yarn-completion
+# TODO: This doesn't seem to work!
+#
+# RUN git clone https://github.com/buonomo/yarn-completion /root/.oh-my-zsh/custom/plugins/yarn-completion
 
 # Default value to allow debug server to serve content over GitHub Codespace's
 # port forwarding service.

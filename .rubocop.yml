@@ -48,12 +48,14 @@ AllCops:
 Layout/LineLength:
   Max: 80
 
-Style/Documentation:
-  Enabled: false
+Style/AndOr:
+  EnforcedStyle: conditionals
 Style/CommandLiteral:
   EnforcedStyle: backticks
 Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
+Style/Documentation:
+  Enabled: false
 Style/ClassAndModuleChildren:
   Enabled: false
 Style/Proc:

@@ -1,19 +1,17 @@
+import type { FC } from "react";
 import { Meta, MetaFunction } from "remix";
 import { Links, LinksFunction } from "remix";
 import { LiveReload, Outlet, Scripts, ScrollRestoration } from "remix";
-
+import { createLoader, useLoaderDataRequired } from "~/utils/remix";
 import * as struct from "superstruct";
-
-import { createLoader } from "~/utils/rails/remix";
-import { useLoaderData } from "~/utils/superstruct/remix";
 
 import { MantineProvider } from "@mantine/core";
 import { AppShell, Header } from "@mantine/core";
 import { Box, Group } from "@mantine/core";
 import { Text, Badge } from "@mantine/core";
+import { NotificationsProvider } from "@mantine/notifications";
 
 import { FormAuthenticityProvider } from "~/utils/rails/csrf";
-
 import { isDevelopment } from "~/utils/application";
 import { themeOverride, sx } from "~/utils/mantine";
 
@@ -45,11 +43,8 @@ export const AppLoaderData = struct.object({
 });
 
 export default function App() {
-  const {
-    version,
-    csrf_param: csrfParam,
-    csrf_token: csrfToken,
-  } = useLoaderData(AppLoaderData);
+  const data = useLoaderDataRequired(AppLoaderData);
+  const { version, csrf_param: csrfParam, csrf_token: csrfToken } = data!;
   return (
     <html lang="en">
       <head>
@@ -60,58 +55,11 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <FormAuthenticityProvider {...{ csrfParam, csrfToken }}>
-          <MantineProvider
-            theme={themeOverride}
-            withNormalizeCSS
-            withGlobalStyles
-          >
-            <AppShell
-              header={
-                <Header
-                  height={44}
-                  sx={({ colors }) => ({
-                    background: colors.gray[1],
-                  })}
-                >
-                  <Group
-                    align="center"
-                    sx={({ spacing }) => ({
-                      height: "100%",
-                      paddingLeft: spacing.sm,
-                      paddingRight: spacing.sm,
-                    })}
-                  >
-                    <Group position="left" sx={{ flex: 1 }} />
-                    <Box>
-                      <Text
-                        color="gray"
-                        size="md"
-                        weight="bold"
-                        sx={sx(({ letterSpacing }) => ({
-                          letterSpacing: letterSpacing.widest,
-                        }))}
-                      >
-                        CHALMERS PROJECT
-                      </Text>
-                    </Box>
-                    <Group position="right" sx={{ flex: 1 }}>
-                      <Badge
-                        size="sm"
-                        variant="outline"
-                        sx={{ textTransform: "unset" }}
-                      >
-                        v{version}
-                      </Badge>
-                    </Group>
-                  </Group>
-                </Header>
-              }
-            >
-              <Outlet />
-            </AppShell>
-          </MantineProvider>
-        </FormAuthenticityProvider>
+        <AppProviders {...{ csrfParam, csrfToken }}>
+          <AppLayout version={version}>
+            <Outlet />
+          </AppLayout>
+        </AppProviders>
         <ScrollRestoration />
         <Scripts />
         {isDevelopment && <LiveReload port={3100} />}
@@ -119,3 +67,70 @@ export default function App() {
     </html>
   );
 }
+
+type AppProvidersProps = { csrfParam: string; csrfToken: string };
+
+const AppProviders: FC<AppProvidersProps> = ({
+  children,
+  csrfParam,
+  csrfToken,
+}) => {
+  return (
+    <FormAuthenticityProvider {...{ csrfParam, csrfToken }}>
+      <MantineProvider theme={themeOverride} withNormalizeCSS withGlobalStyles>
+        <NotificationsProvider>{children}</NotificationsProvider>
+      </MantineProvider>
+    </FormAuthenticityProvider>
+  );
+};
+
+type AppLayoutProps = { version: string };
+
+const AppLayout: FC<AppLayoutProps> = ({ children, version }) => {
+  return (
+    <AppShell
+      header={
+        <Header
+          height={44}
+          sx={({ colors }) => ({
+            background: colors.gray[1],
+          })}
+        >
+          <Group
+            align="center"
+            sx={({ spacing }) => ({
+              height: "100%",
+              paddingLeft: spacing.sm,
+              paddingRight: spacing.sm,
+            })}
+          >
+            <Group position="left" sx={{ flex: 1 }} />
+            <Box>
+              <Text
+                color="gray"
+                size="md"
+                weight="bold"
+                sx={sx(({ letterSpacing }) => ({
+                  letterSpacing: letterSpacing.widest,
+                }))}
+              >
+                CHALMERS PROJECT
+              </Text>
+            </Box>
+            <Group position="right" sx={{ flex: 1 }}>
+              <Badge
+                size="sm"
+                variant="outline"
+                sx={{ textTransform: "unset" }}
+              >
+                v{version}
+              </Badge>
+            </Group>
+          </Group>
+        </Header>
+      }
+    >
+      {children}
+    </AppShell>
+  );
+};

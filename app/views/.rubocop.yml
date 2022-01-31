@@ -2,3 +2,5 @@ inherit_from: ../../.rubocop.yml
 
 Style/LambdaCall:
   Enabled: false
+Style/MethodCallWithArgsParentheses:
+  Enabled: false

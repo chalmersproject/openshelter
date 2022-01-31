@@ -2,7 +2,7 @@ import { Button, Group, Text } from "@mantine/core";
 import { Form } from "remix";
 
 import { useLoaderData, useActionData } from "remix";
-import { createLoader, createAction } from "~/utils/rails/remix";
+import { createLoader, createAction } from "~/utils/remix";
 
 export const action = createAction("/api/account");
 export const loader = createLoader("/api/account");
