@@ -23,14 +23,18 @@ class GraphQLController < ApplicationController
 
     variables = prepare_variables(params[:variables])
     extensions = prepare_extensions(params[:extensions])
-    context = { current_user: current_user, extensions: extensions }
+    context = {
+      extensions: extensions,
+      current_user: current_user,
+      controller: self,
+    }
 
     result =
       Schema.execute(
         query,
         variables: variables,
-        context: context,
         operation_name: operation_name,
+        context: context,
       )
     render(json: result)
   rescue StandardError => e
@@ -43,7 +47,7 @@ class GraphQLController < ApplicationController
   # Handle variables in form data, JSON body, or a blank value.
   sig { params(variables_param: T.untyped).returns(T::Hash[String, T.untyped]) }
   def prepare_variables(variables_param)
-    coerce_hash(variables_param) do
+    ensure_hash(variables_param) do
       raise ArgumentError, "Unexpected variables parameter: #{variables_param}"
     end
   end
@@ -53,7 +57,7 @@ class GraphQLController < ApplicationController
     params(extensions_param: T.untyped).returns(T::Hash[String, T.untyped])
   end
   def prepare_extensions(extensions_param)
-    coerce_hash(extensions_param) do
+    ensure_hash(extensions_param) do
       raise ArgumentError,
             "Unexpected extensions parameter: #{extensions_param}"
     end
@@ -63,7 +67,7 @@ class GraphQLController < ApplicationController
     params(param: T.untyped, block: T.proc.void)
       .returns(T::Hash[String, T.untyped])
   end
-  def coerce_hash(param, &block)
+  def ensure_hash(param, &block)
     case param
     when String
       param.present? ? JSON.parse(param) || {} : {}
@@ -95,6 +99,15 @@ class GraphQLController < ApplicationController
 
   sig { returns(T::Boolean) }
   def protect_from_forgery?
-    !request.local? || request.origin.present?
+    local =
+      case request.hostname
+      when "localhost"
+        true
+      when "127.0.0.1"
+        true
+      else
+        false
+      end
+    !local || request.origin.present?
   end
 end

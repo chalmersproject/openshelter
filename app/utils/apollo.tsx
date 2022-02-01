@@ -1,7 +1,9 @@
 import { FC, useCallback, useEffect, useMemo } from "react";
-import { useLoaderData } from "remix";
 import { apiBaseURL, isBrowser } from "~/utils/config";
 import { pick } from "lodash";
+
+import { useLoaderData } from "remix";
+import { useCSRFContext, CSRFContext } from "~/utils/csrf";
 
 import type { ApolloError, ServerError } from "@apollo/client";
 import type { ApolloQueryResult, QueryResult } from "@apollo/client";
@@ -18,14 +20,15 @@ import { ApolloLink } from "@apollo/client";
 import { HttpLink } from "@apollo/client";
 // import { RetryLink } from "@apollo/client/link/retry";
 // import { SentryLink } from "apollo-link-sentry";
-// import { WebSocketLink as WsLink } from "@apollo/client/link/ws";
-// import { split as splitLinks } from "@apollo/client";
+// import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries";
+import { split as splitLinks } from "@apollo/client";
 import { setContext as setLinkContext } from "@apollo/client/link/context";
 import { from as mergeLinks } from "@apollo/client";
+import CableLink from "graphql-ruby-client/subscriptions/ActionCableLink";
+import cable from "~/utils/cable.client";
 
-// import { getMainDefinition } from "@apollo/client/utilities";
+import { getMainDefinition } from "@apollo/client/utilities";
 import { useApolloClient, useQuery } from "@apollo/client";
-import { useCSRFContext, CSRFContext } from "~/utils/csrf";
 
 import type { TypedTypePolicies as TypePolicies } from "~/graphql/apollo.generated";
 
@@ -33,11 +36,6 @@ import { HiOutlineExclamation } from "react-icons/hi";
 import { useNotifications } from "@mantine/notifications";
 
 const typePolicies: TypePolicies = {};
-
-// const createFetchOptions = (request: Request): RequestInit => {
-//   const { headers, referrer } = request;
-//   return { headers, referrer };
-// };
 
 const createTerminatingLink = (request?: Request): ApolloLink => {
   const httpLink = new HttpLink({
@@ -56,39 +54,23 @@ const createTerminatingLink = (request?: Request): ApolloLink => {
       return fetch(input, init);
     },
   });
-  if (typeof window === "undefined") {
+  if (!isBrowser) {
     return httpLink;
   }
-  return httpLink;
 
-  // const wsLink = new WsLink({
-  //   uri: (() => {
-  //     const { protocol, host } = window.location;
-  //     switch (protocol) {
-  //       case "http:":
-  //         return `ws://${host}/api`;
-  //       case "https:":
-  //         return `wss://${host}/api`;
-  //       default:
-  //         throw new Error("Unknown protocol.");
-  //     }
-  //   })(),
-  //   options: {
-  //     reconnect: true,
-  //   },
-  // });
-
-  // return splitLinks(
-  //   ({ query }) => {
-  //     const definition = getMainDefinition(query);
-  //     return (
-  //       definition.kind === "OperationDefinition" &&
-  //       definition.operation === "subscription"
-  //     );
-  //   },
-  //   wsLink,
-  //   httpLink,
-  // );
+  // Browser only!
+  const cableLink = new CableLink({ cable, channelName: "GraphQLChannel" });
+  return splitLinks(
+    ({ query }) => {
+      const definition = getMainDefinition(query);
+      return (
+        definition.kind === "OperationDefinition" &&
+        definition.operation === "subscription"
+      );
+    },
+    cableLink,
+    httpLink,
+  );
 };
 
 const createCSRFLink = ({ token }: CSRFContext): ApolloLink => {
@@ -113,9 +95,9 @@ const createApolloClient = (
     throw new Error("Missing CSRF context");
   }
   const link = mergeLinks([
-    // ...(isBrowser ? [new RetryLink()] : []),
-    ...(csrf ? [createCSRFLink(csrf)] : []),
     // new SentryLink(),
+    // ...(isBrowser ? [new RetryLink()] : []),
+    ...(isBrowser ? [createCSRFLink(csrf!)] : []),
     createTerminatingLink(request),
   ]);
   return new Client({

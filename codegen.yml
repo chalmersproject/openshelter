@@ -11,8 +11,8 @@ generates:
       - typescript
       - typescript-operations
       - typed-document-node
-      # - typescript-react-apollo
     config:
+      dedupeOperationSuffix: true
       dedupeFragments: true
   app/graphql/apollo.generated.ts:
     plugins:

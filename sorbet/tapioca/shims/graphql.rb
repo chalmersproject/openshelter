@@ -30,7 +30,7 @@ class GraphQL::Schema
           root_value: ::Object,
           kwargs: T.untyped,
         )
-        .returns(T::Hash[String, T.untyped])
+        .returns(GraphQL::Query::Result)
     end
     def execute(
       query_string = nil,
@@ -42,7 +42,7 @@ class GraphQL::Schema
       root_value: nil,
       **kwargs
     )
-      {}
+      T.unsafe(nil)
     end
   end
 end

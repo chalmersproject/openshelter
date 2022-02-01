@@ -22,7 +22,7 @@ export const action: ActionFunction = async ({ request }) => {
   });
   if (response.ok) {
     const { headers } = response;
-    return redirect(request.referrer || "/", { headers });
+    return redirect(request.referrer || "/account", { headers });
   }
   return response;
 };

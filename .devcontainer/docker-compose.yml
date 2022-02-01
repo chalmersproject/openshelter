@@ -20,6 +20,7 @@ services:
       - 3000:3000
       - 3100:3100
       - 8000:8000
+      - 8080:8080
 
   postgres:
     image: postgres:14

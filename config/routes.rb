@@ -27,10 +27,10 @@ end
 #
 #                                   Prefix Verb   URI Pattern                                                                            Controller#Action
 #                                  graphql POST   /graphql(.:format)                                                                     graphql#execute
+#                                     meta GET    /api/meta                                                                              meta#show {:format=>:json}
 #                                          POST   /api/graphql                                                                           graphql#execute {:format=>:json}
-#                                     meta POST   /api/meta                                                                              meta#show {:format=>:json}
-#                                    login POST   /api/auth/login                                                                        auth#login {:format=>:json, :prefix=>:login}
-#                                   logout POST   /api/auth/logout                                                                       auth#logout {:format=>:json, :prefix=>:logout}
+#                                    login POST   /api/auth/login                                                                        auth#login {:format=>:json}
+#                                   logout POST   /api/auth/logout                                                                       auth#logout {:format=>:json}
 #                                 graphiql        /api                                                                                   GraphiQL::Rails::Engine {:format=>:json, :graphql_path=>"/api/graphql"}
 #                                    admin        /admin                                                                                 RailsAdmin::Engine
 #                       rails_service_blob GET    /api/files/blobs/redirect/:signed_id/*filename(.:format)                               active_storage/blobs/redirect#show

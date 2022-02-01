@@ -70,5 +70,11 @@ export type AccountIndexRouteQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type AccountIndexRouteQuery = { __typename?: 'Query', viewer?: { __typename?: 'User', id: string } | null };
 
+export type AccountIndexRouteSubscriptionVariables = Exact<{ [key: string]: never; }>;
 
-export const AccountIndexRouteDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AccountIndexRoute"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AccountIndexRouteQuery, AccountIndexRouteQueryVariables>;
+
+export type AccountIndexRouteSubscription = { __typename?: 'Subscription', testField: { __typename?: 'TestFieldPayload', value?: number | null } };
+
+
+export const AccountIndexRouteQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AccountIndexRouteQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]}}]} as unknown as DocumentNode<AccountIndexRouteQuery, AccountIndexRouteQueryVariables>;
+export const AccountIndexRouteSubscriptionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"AccountIndexRouteSubscription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"testField"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<AccountIndexRouteSubscription, AccountIndexRouteSubscriptionVariables>;

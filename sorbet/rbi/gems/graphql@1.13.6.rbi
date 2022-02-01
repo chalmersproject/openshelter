@@ -5816,7 +5816,7 @@ class GraphQL::Schema
     def error_handler; end
 
     # Execute a query on itself.
-    sig { params(query_string: T.nilable(String), query: T.nilable(String), document: T.untyped, context: T.nilable(T::Hash[T.untyped, T.untyped]), variables: T.nilable(T::Hash[String, T.untyped]), operation_name: T.nilable(String), root_value: Object, kwargs: T.untyped).returns(T::Hash[String, T.untyped]) }
+    sig { params(query_string: T.nilable(String), query: T.nilable(String), document: T.untyped, context: T.nilable(T::Hash[T.untyped, T.untyped]), variables: T.nilable(T::Hash[String, T.untyped]), operation_name: T.nilable(String), root_value: Object, kwargs: T.untyped).returns(GraphQL::Query::Result) }
     def execute(query_string = T.unsafe(nil), query: T.unsafe(nil), document: T.unsafe(nil), context: T.unsafe(nil), variables: T.unsafe(nil), operation_name: T.unsafe(nil), root_value: T.unsafe(nil), **kwargs); end
 
     def execution_strategy_for_operation(*args, &block); end

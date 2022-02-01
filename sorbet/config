@@ -1,8 +1,13 @@
 --dir
 .
---ignore=/vendor/bundle
---ignore=/node_modules
---ignore=/bin
+--ignore=/.devcontainer
 --ignore=/.cache
+--ignore=/.husky
+--ignore=/build
+--ignore=/bin
+--ignore=/log
+--ignore=/tmp
 --ignore=/public
 --ignore=/storage
+--ignore=/vendor/bundle
+--ignore=/node_modules
