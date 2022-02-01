@@ -1,0 +1,22 @@
+overwrite: true
+schema: http://localhost:8080/api/graphql
+documents:
+  - app/components/**/*.ts
+  - app/components/**/*.tsx
+  - app/routes/**/*.ts
+  - app/routes/**/*.tsx
+generates:
+  app/graphql/schema.generated.ts:
+    plugins:
+      - typescript
+      - typescript-operations
+      - typed-document-node
+      # - typescript-react-apollo
+    config:
+      dedupeFragments: true
+  app/graphql/apollo.generated.ts:
+    plugins:
+      - typescript-apollo-client-helpers
+  # app/graphql/schema.generated.json:
+  #   plugins:
+  #     - introspection

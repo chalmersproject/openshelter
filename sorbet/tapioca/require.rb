@@ -6,17 +6,9 @@ require "rubocop"
 require "active_record/connection_adapters/postgresql_adapter"
 
 # Patches
-require_relative "./shims/actionpack.rb"
-require_relative "./shims/activemodel.rb"
-require_relative "./shims/activerecord.rb"
-require_relative "./shims/rails_admin.rb"
-# require_relative "./shims/grape.rb"
-
-# require 'active_support/core_ext/integer/time'
-# require 'fileutils'
-# require 'json'
-# require 'open3'
-# require 'rails/all'
-# require 'rails/test_help'
-# require 'ripper'
-# require 'socket'
+require_relative "./shims/graphql"
+require_relative "./shims/graphiql-rails"
+require_relative "./shims/actionpack"
+require_relative "./shims/activemodel"
+require_relative "./shims/activerecord"
+require_relative "./shims/rails_admin"

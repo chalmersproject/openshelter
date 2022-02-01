@@ -14,3 +14,4 @@ sorbet/rbi/gems/
 sorbet/rbi/dsl/
 package-lock.json
 yarn.lock
+*.generated.ts

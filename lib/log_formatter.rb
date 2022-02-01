@@ -5,7 +5,7 @@ class LogFormatter < ActiveSupport::Logger::SimpleFormatter
   def call(severity, time, progname, msg)
     severity = format("%-5s", severity.to_s)
     time = time.strftime("%Y-%m-%d %H:%M:%S")
-    if progname.present?
+    if progname.blank?
       "[#{severity} #{time}] #{msg}\n"
     else
       "[#{severity} #{time}] (#{progname}) #{msg}\n"

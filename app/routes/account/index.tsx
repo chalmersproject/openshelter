@@ -1,32 +1,44 @@
-import { Button, Group, Text } from "@mantine/core";
-import { Form } from "remix";
+import { Group, Text } from "@mantine/core";
 
-import { useLoaderData, useActionData } from "remix";
-import { createLoader, createAction } from "~/utils/remix";
+import type { LoaderFunction } from "remix";
+import { gql } from "@apollo/client";
+import { useLoaderQuery, runLoaderQuery } from "~/utils/apollo";
 
-export const action = createAction("/api/account");
-export const loader = createLoader("/api/account");
+import {
+  AccountIndexRouteDocument,
+  AccountIndexRouteQuery,
+  AccountIndexRouteQueryVariables,
+} from "~/graphql/schema.generated";
 
-export type AccountLoginLoaderData = {
-  user: null;
+gql`
+  query AccountIndexRoute {
+    viewer {
+      id
+    }
+  }
+`;
+
+export const loader: LoaderFunction = async ({ request }) => {
+  const result = await runLoaderQuery<
+    AccountIndexRouteQuery,
+    AccountIndexRouteQueryVariables
+  >({
+    request,
+    query: AccountIndexRouteDocument,
+  });
+  console.log({ result });
+  return result;
 };
 
-export type AccountLoginActionData = any;
+export default function AccountIndexRoute() {
+  const { data } = useLoaderQuery<
+    AccountIndexRouteQuery,
+    AccountIndexRouteQueryVariables
+  >(AccountIndexRouteDocument);
 
-export default function Account() {
-  const actionData = useActionData();
-  const { csrfParams, ...loaderData } = useLoaderData();
   return (
     <Group direction="column" align="stretch" spacing="md">
-      <Form {...{ csrfParams }} method="put">
-        <Button type="submit">Do Stuff</Button>
-      </Form>
-      <Text component="pre">
-        {JSON.stringify({ loaderData, csrfParams }, undefined, 2)}
-      </Text>
-      <Text component="pre">
-        {JSON.stringify({ actionData }, undefined, 2)}
-      </Text>
+      <Text component="pre">{JSON.stringify(data, undefined, 2)}</Text>
     </Group>
   );
 }

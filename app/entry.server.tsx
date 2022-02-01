@@ -3,17 +3,19 @@ import { RemixServer } from "remix";
 import type { EntryContext } from "remix";
 import { injectStylesIntoStaticMarkup } from "@mantine/ssr";
 
-export default function handleRequest(
+export default async function handleRequest(
   request: Request,
   responseStatusCode: number,
   responseHeaders: Headers,
   remixContext: EntryContext,
 ) {
   // Create markup.
-  const markupWithoutStyles = renderToString(
+  const markupPlain = renderToString(
     <RemixServer context={remixContext} url={request.url} />,
   );
-  const markup = injectStylesIntoStaticMarkup(markupWithoutStyles);
+
+  // Style markup (with Mantine).
+  const markup = injectStylesIntoStaticMarkup(markupPlain);
 
   // Create response.
   responseHeaders.set("Content-Type", "text/html");

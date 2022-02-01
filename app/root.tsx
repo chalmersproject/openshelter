@@ -2,8 +2,7 @@ import type { FC } from "react";
 import { Meta, MetaFunction } from "remix";
 import { Links, LinksFunction } from "remix";
 import { LiveReload, Outlet, Scripts, ScrollRestoration } from "remix";
-import { createLoader, useLoaderDataRequired } from "~/utils/remix";
-import * as struct from "superstruct";
+import { useLoaderData, LoaderFunction } from "remix";
 
 import { MantineProvider } from "@mantine/core";
 import { AppShell, Header } from "@mantine/core";
@@ -11,8 +10,10 @@ import { Box, Group } from "@mantine/core";
 import { Text, Badge } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
 
-import { FormAuthenticityProvider } from "~/utils/rails/csrf";
-import { isDevelopment } from "~/utils/application";
+import { CSRFProvider, CSRFMeta } from "~/utils/csrf";
+import { ApolloProvider } from "~/utils/apollo";
+
+import { apiBaseURL, isDevelopment } from "~/utils/config";
 import { themeOverride, sx } from "~/utils/mantine";
 
 export const meta: MetaFunction = () => {
@@ -34,53 +35,55 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const loader = createLoader("/api");
+export const loader: LoaderFunction = async () => {
+  const response = await fetch(apiBaseURL + "/meta");
+  if (!response.ok) {
+    throw new Error("Failed to load application metadata.");
+  }
+  return response;
+};
 
-export const AppLoaderData = struct.object({
-  version: struct.string(),
-  csrf_param: struct.string(),
-  csrf_token: struct.string(),
-});
+type AppData = {
+  readonly version: string;
+  readonly csrf: Record<string, string>;
+};
 
 export default function App() {
-  const data = useLoaderDataRequired(AppLoaderData);
-  const { version, csrf_param: csrfParam, csrf_token: csrfToken } = data!;
+  const { version, csrf } = useLoaderData<AppData>();
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        {/* <CSRFMeta {...{ csrfParam, csrfToken }} /> */}
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <AppProviders {...{ csrfParam, csrfToken }}>
+    <AppProviders csrf={csrf}>
+      <html lang="en">
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <CSRFMeta />
+          <Meta />
+          <Links />
+        </head>
+        <body>
           <AppLayout version={version}>
             <Outlet />
           </AppLayout>
-        </AppProviders>
-        <ScrollRestoration />
-        <Scripts />
-        {isDevelopment && <LiveReload port={3100} />}
-      </body>
-    </html>
+          <ScrollRestoration />
+          <Scripts />
+          {isDevelopment && <LiveReload port={3100} />}
+        </body>
+      </html>
+    </AppProviders>
   );
 }
 
-type AppProvidersProps = { csrfParam: string; csrfToken: string };
+type AppProvidersProps = { readonly csrf: Record<string, string> };
 
-const AppProviders: FC<AppProvidersProps> = ({
-  children,
-  csrfParam,
-  csrfToken,
-}) => {
+const AppProviders: FC<AppProvidersProps> = ({ csrf, children }) => {
   return (
-    <FormAuthenticityProvider {...{ csrfParam, csrfToken }}>
+    <CSRFProvider csrf={csrf}>
       <MantineProvider theme={themeOverride} withNormalizeCSS withGlobalStyles>
-        <NotificationsProvider>{children}</NotificationsProvider>
+        <NotificationsProvider>
+          <ApolloProvider>{children}</ApolloProvider>
+        </NotificationsProvider>
       </MantineProvider>
-    </FormAuthenticityProvider>
+    </CSRFProvider>
   );
 };
 

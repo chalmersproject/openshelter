@@ -6,6 +6,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
     create_table(:users) do |t|
       t.string(:email, null: false)
       t.index(:email, unique: true)
+      t.boolean(:email_verified, default: false, null: false)
 
       t.string(:password_hash, null: false)
       t.string(:password_salt, null: false)
@@ -21,7 +22,6 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       # Authlogic magic columns:
       t.integer(:login_count, default: 0, null: false)
       t.integer(:failed_login_count, default: 0, null: false)
-      t.datetime(:last_request_at)
       t.datetime(:current_login_at)
       t.datetime(:last_login_at)
       t.string(:current_login_ip)

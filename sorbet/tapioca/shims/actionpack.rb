@@ -800,3 +800,12 @@ module ActionDispatch::Routing::Mapper::Resources
     &block
   ); end
 end
+
+class ActionController::Parameters
+  extend T::Sig
+
+  sig { returns(T::Hash[String, T.untyped]) }
+  def to_unsafe_hash
+    {}
+  end
+end

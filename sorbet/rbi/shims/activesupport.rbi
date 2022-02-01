@@ -12408,8 +12408,6 @@ class Object < ::BasicObject
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   include ::ActiveSupport::Dependencies::RequireDependency
   include ::Kernel
-  include ::DEBUGGER__::ForkInterceptor
-  include ::DEBUGGER__::TrapInterceptor
   include ::ActiveSupport::ForkTracker::CoreExt
   include ::ActiveSupport::ForkTracker::CoreExtPrivate
   include ::JSON::Ext::Generator::GeneratorMethods::Object

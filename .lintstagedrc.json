@@ -1,6 +1,6 @@
 {
   "*.{rb,js,jsx,ts,tsx,css,md,html,json,yaml,yml}": "yarn fmt:partial",
-  "*.rb": "yarn fix:rubocop:partial",
+  "*.rb": "yarn fix:cops:partial",
   "*.{js,jsx,ts,tsx}": "yarn fix:eslint:partial",
-  "*.{ts,tsx}": "yarn lint:ts:partial"
+  "*.{ts,tsx}": "yarn lint:tsc:partial"
 }

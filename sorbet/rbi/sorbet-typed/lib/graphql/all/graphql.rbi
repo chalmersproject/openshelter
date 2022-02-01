@@ -1,4 +1,4 @@
-# typed: ignore
+# typed: strict
 
 module GraphQL
   class << self

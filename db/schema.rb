@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 2022_01_26_184556) do
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
+    t.boolean "email_verified", default: false, null: false
     t.string "password_hash", null: false
     t.string "password_salt", null: false
     t.string "persistence_token", null: false
@@ -33,7 +34,6 @@ ActiveRecord::Schema.define(version: 2022_01_26_184556) do
     t.string "perishable_token", null: false
     t.integer "login_count", default: 0, null: false
     t.integer "failed_login_count", default: 0, null: false
-    t.datetime "last_request_at", precision: 6
     t.datetime "current_login_at", precision: 6
     t.datetime "last_login_at", precision: 6
     t.string "current_login_ip"

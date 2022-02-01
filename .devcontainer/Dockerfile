@@ -7,8 +7,8 @@ RUN echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg ma
     apt-get update && \
     apt-get -y install postgresql-client-14
 
-# Install Ngnix and Tmux.
-RUN apt-get -y install nginx tmux
+# Install Ngnix, Tmux, and Watchman (required for Sorbet developer extension).
+RUN apt-get -y install nginx tmux watchman
 
 # Install Overmind.
 RUN curl -Lo /usr/local/bin/overmind.gz https://github.com/DarthSim/overmind/releases/download/v2.2.2/overmind-v2.2.2-linux-amd64.gz && \

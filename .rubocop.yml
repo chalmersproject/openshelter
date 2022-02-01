@@ -12,6 +12,7 @@
 require:
   - rubocop-sorbet
   - rubocop-rails
+  - rubocop-graphql
 
 inherit_gem:
   rubocop-shopify: rubocop.yml
@@ -45,6 +46,9 @@ AllCops:
     - "**/Gemfile"
     - "**/Rakefile"
 
+Naming/InclusiveLanguage:
+  Enabled: false
+
 Layout/LineLength:
   Max: 80
 
@@ -61,10 +65,20 @@ Style/ClassAndModuleChildren:
 Style/Proc:
   Enabled: true
 
-Rails/LexicallyScopedActionFilter:
-  Enabled: false
-
 Sorbet/FalseSigil:
   Enabled: false
 Sorbet/ValidSigil:
   MinimumStrictness: "ignore"
+
+Rails/LexicallyScopedActionFilter:
+  Enabled: false
+
+# You guys think I have time for this shit?
+GraphQL/ObjectDescription:
+  Enabled: false
+GraphQL/ArgumentDescription:
+  Enabled: false
+GraphQL/FieldDescription:
+  Enabled: false
+GraphQL/ExtractType:
+  Enabled: false

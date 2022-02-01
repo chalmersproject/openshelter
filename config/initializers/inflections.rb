@@ -18,4 +18,6 @@
 #   inflect.acronym "RESTful"
 # end
 
-# ActiveSupport::Inflector.inflections(:en) { |inflect| inflect.acronym "API" }
+ActiveSupport::Inflector.inflections(:en) do |inflect|
+  inflect.acronym("GraphQL")
+end

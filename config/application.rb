@@ -78,8 +78,9 @@ class Application < Rails::Application
   # Configure Active Support.
   config.active_support.remove_deprecated_time_with_zone_name = true
 
-  # Configure Action Cable.
+  # Configure Action Cable, Active Support routes.
   config.action_cable.mount_path = "/api/cable"
+  config.active_storage.routes_prefix = "/api/files"
 
   # Configure assets.
   config.assets.prefix = "/build/rails"

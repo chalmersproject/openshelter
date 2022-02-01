@@ -10,13 +10,13 @@ class ApplicationController < ActionController::API
   # Declare helper methods.
   helper_method :current_user_session, :current_user
 
-  # Define error handlers.
+  # Declare error handlers.
   rescue_from StandardError, with: :show_error
   rescue_from ActionController::ParameterMissing,
               with: :show_parameter_missing_error
 
   # Enable CSRF protection.
-  protect_from_forgery with: :exception
+  protect_from_forgery with: :exception, if: :protect_from_forgery?
 
   protected
 
@@ -43,24 +43,39 @@ class ApplicationController < ActionController::API
     @current_user
   end
 
-  sig { params(exception: Exception).void }
-  def show_error(exception)
-    detail = T.let(exception.message.humanize, String)
-    render(
-      json: {
-        errors: [{ detail: detail.end_with?(".") ? detail : detail + "." }],
-      },
-    )
+  private
+
+  sig { params(error: StandardError).void }
+  def show_error(error)
+    message = T.let(error.message, String)
+    message += "." unless message.end_with?(".")
+    status =
+      case error
+      when ActionController::InvalidAuthenticityToken
+        :unprocessable_entity
+      else
+        :internal_server_error
+      end
+    render(json: { errors: [{ message: message }] }, status: status)
+    raise(error)
   end
 
   sig { params(error: ActionController::ParameterMissing).void }
   def show_parameter_missing_error(error)
+    logger.error(error)
+    message = T.let(error.message, String)
+    message += "." unless message.end_with?(".")
     render(
       json: {
-        errors: [
-          { title: "Missing Parameters", detail: "#{error.message.humanize}." },
-        ],
+        errors: [{ message: message }],
       },
+      status: :unprocessable_entity,
     )
+    raise(error)
+  end
+
+  sig { returns(T::Boolean) }
+  def protect_from_forgery?
+    true
   end
 end

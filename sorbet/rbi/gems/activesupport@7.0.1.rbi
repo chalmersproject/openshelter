@@ -12422,8 +12422,6 @@ class Object < ::BasicObject
   include ::ActiveSupport::ToJsonWithActiveSupportEncoder
   include ::ActiveSupport::Dependencies::RequireDependency
   include ::Kernel
-  include ::DEBUGGER__::ForkInterceptor
-  include ::DEBUGGER__::TrapInterceptor
   include ::ActiveSupport::ForkTracker::CoreExt
   include ::ActiveSupport::ForkTracker::CoreExtPrivate
   include ::JSON::Ext::Generator::GeneratorMethods::Object
@@ -13406,11 +13404,8 @@ class Struct
   def as_json(options = T.unsafe(nil)); end
 end
 
-Struct::CompletionJourneyData = Struct
 Struct::Group = Etc::Group
 Struct::HTMLElementDescription = Struct
-Struct::Key = Struct
-Struct::MenuInfo = Struct
 Struct::Passwd = Etc::Passwd
 
 class Symbol

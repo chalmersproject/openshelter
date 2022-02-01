@@ -1,24 +1,50 @@
-import { Form } from "remix";
-import { createAction, useActionData } from "~/utils/remix";
-import * as struct from "superstruct";
+import { useEffect } from "react";
+import { Form, redirect } from "remix";
+import { useActionData, ActionFunction } from "remix";
+import { apiBaseURL } from "~/utils/config";
 
-import { Button, Group, Text } from "@mantine/core";
+import { HiOutlineExclamation } from "react-icons/hi";
+
+import { Button, Group } from "@mantine/core";
 import { TextInput, PasswordInput } from "@mantine/core";
+import { useNotifications } from "@mantine/notifications";
 
-import { FormAuthenticityField } from "~/utils/rails/csrf";
+import type { GraphQLErrors } from "@apollo/client/errors";
 
-export const action = createAction("/api/account/login");
+import { FormAuthenticityField } from "~/utils/csrf";
 
-export type AccountLoginActionData = {
-  error?: string;
+export const action: ActionFunction = async ({ request }) => {
+  const { body, headers } = request;
+  const response = await fetch(apiBaseURL + "/auth/login", {
+    method: "POST",
+    headers,
+    body,
+  });
+  if (response.ok) {
+    const { headers } = response;
+    return redirect(request.referrer || "/", { headers });
+  }
+  return response;
 };
 
-const AccountLoginActionData = struct.object({
-  user: struct.optional(struct.object()),
-});
+type LoginData = {
+  errors: GraphQLErrors;
+};
 
 export default function AccountLogin() {
-  const actionData = useActionData(AccountLoginActionData);
+  const { showNotification } = useNotifications();
+  const data = useActionData<LoginData>();
+  useEffect(() => {
+    const [firstError] = data?.errors || [];
+    if (firstError) {
+      showNotification({
+        title: "Login failed",
+        message: firstError.message,
+        color: "red",
+        icon: <HiOutlineExclamation />,
+      });
+    }
+  }, [data]);
   return (
     <Form method="post">
       <FormAuthenticityField />
@@ -37,7 +63,6 @@ export default function AccountLogin() {
         />
         <Button type="submit">Sign In</Button>
       </Group>
-      <Text component="pre">{JSON.stringify({ actionData })}</Text>
     </Form>
   );
 }

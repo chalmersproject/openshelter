@@ -9,16 +9,22 @@ module GeneratedUrlHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
-  def account_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def admin_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def login_account_url(*args); end
+  def graphiql_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def logout_account_url(*args); end
+  def graphql_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def login_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def logout_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def meta_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_url(*args); end
@@ -99,14 +105,5 @@ module GeneratedUrlHelpersModule
   def rails_storage_redirect_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def root_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
   def update_rails_disk_service_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def user_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def users_url(*args); end
 end
