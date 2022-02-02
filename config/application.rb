@@ -86,7 +86,7 @@ class Application < Rails::Application
   config.assets.prefix = "/build/rails"
 
   # Configure logging.
-  config.log_formatter = LogFormatter.new
+  # config.log_formatter = LogFormatter.new
   if ENV["RAILS_LOG_TO_STDOUT"].present?
     logger = ActiveSupport::Logger.new($stdout)
     logger.formatter = config.log_formatter

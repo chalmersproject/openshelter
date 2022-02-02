@@ -16,7 +16,9 @@ module ApplicationCable
 
     sig { returns(T.nilable(User)) }
     def find_verified_user
-      credentials = T.let(cookies.encrypted[:credentials], String)
+      credentials = T.let(cookies.encrypted[:credentials], T.nilable(String))
+      return nil if credentials.nil?
+
       token = T.must(credentials.split("::").first)
       User.find_by(persistence_token: token)
     end

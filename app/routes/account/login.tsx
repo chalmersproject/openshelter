@@ -34,17 +34,25 @@ type LoginData = {
 export default function AccountLogin() {
   const { showNotification } = useNotifications();
   const data = useActionData<LoginData>();
+
   useEffect(() => {
     const [firstError] = data?.errors || [];
     if (firstError) {
+      const { message } = firstError;
+      const messageCapitalized =
+        message.charAt(0).toUpperCase() + message.slice(1);
+      const messageFormatted =
+        messageCapitalized + (message.endsWith(".") ? "" : ".");
+      console.log({ messageCapitalized, messageFormatted });
       showNotification({
         title: "Login failed",
-        message: firstError.message,
+        message: messageFormatted,
         color: "red",
         icon: <HiOutlineExclamation />,
       });
     }
   }, [data]);
+
   return (
     <Form method="post">
       <FormAuthenticityField />

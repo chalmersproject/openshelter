@@ -25,18 +25,18 @@ class ApplicationController < ActionController::API
     T.cast(Rails.application, Application)
   end
 
-  sig { returns(T.nilable(UserSession)) }
-  def current_user_session
-    unless defined?(@current_users_session)
-      @current_user_session = T.let(UserSession.find, T.nilable(UserSession))
+  sig { returns(T.nilable(Session)) }
+  def current_session
+    unless defined?(@current_session)
+      @current_session = T.let(Session.find, T.nilable(Session))
     end
-    @current_user_session
+    @current_session
   end
 
   sig { returns(T.nilable(User)) }
   def current_user
     unless defined?(@current_user)
-      session = current_user_session
+      session = current_session
       @current_user = T.let(nil, T.nilable(User))
       @current_user = session.user if session.present?
     end
@@ -47,8 +47,6 @@ class ApplicationController < ActionController::API
 
   sig { params(error: StandardError).void }
   def show_error(error)
-    message = T.let(error.message, String)
-    message += "." unless message.end_with?(".")
     status =
       case error
       when ActionController::InvalidAuthenticityToken
@@ -56,22 +54,17 @@ class ApplicationController < ActionController::API
       else
         :internal_server_error
       end
-    render(json: { errors: [{ message: message }] }, status: status)
-    raise(error)
+    render(json: { errors: [{ message: error.message }] }, status: status)
   end
 
   sig { params(error: ActionController::ParameterMissing).void }
   def show_parameter_missing_error(error)
-    logger.error(error)
-    message = T.let(error.message, String)
-    message += "." unless message.end_with?(".")
     render(
       json: {
-        errors: [{ message: message }],
+        errors: [{ message: error.message }],
       },
       status: :unprocessable_entity,
     )
-    raise(error)
   end
 
   sig { returns(T::Boolean) }

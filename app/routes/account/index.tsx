@@ -56,6 +56,11 @@ export default function AccountIndexRoute() {
     AccountIndexRouteSubscriptionVariables
   >(AccountIndexRouteSubscriptionDocument, {
     skip: !isBrowser,
+    onSubscriptionData: ({ subscriptionData: { error } }) => {
+      if (error) {
+        console.error("Error from subscription:", error);
+      }
+    },
   });
 
   return (

@@ -1,15 +1,14 @@
 # typed: strict
 # frozen_string_literal: true
 
+# TODO: Read up on other N+1 solutions:
+# https://evilmartians.com/chronicles/how-to-graphql-with-ruby-rails-active-record-and-no-n-plus-one
 class Schema < GraphQL::Schema
   extend T::Sig
 
-  use GraphQL::PersistedQueries, compiled_queries: true
-
-  # TODO: Read up on other N+1 solutions:
-  # https://evilmartians.com/chronicles/how-to-graphql-with-ruby-rails-active-record-and-no-n-plus-one
-  use GraphQL::Dataloader
   use GraphQL::Subscriptions::ActionCableSubscriptions
+  use GraphQL::PersistedQueries, compiled_queries: true
+  use GraphQL::Dataloader
 
   query Types::QueryType
   mutation Types::MutationType

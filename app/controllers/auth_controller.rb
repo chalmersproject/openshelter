@@ -22,12 +22,12 @@ class AuthController < ApplicationController
   def login
     params = login_params
     email, password = params.require(%i[email password])
-    session = UserSession.new(email: email, password: password)
+    session = Session.new(email: email, password: password)
     unless session.save
       logger.error("Login failed: #{session.errors.to_json}")
       render(
         json: {
-          errors: [{ message: "Bad credentials" }],
+          errors: [{ message: "bad credentials" }],
         },
         status: :unauthorized,
       ) and return
@@ -38,7 +38,7 @@ class AuthController < ApplicationController
   # POST /api/auth/logout
   sig { void }
   def logout
-    session = current_user_session
+    session = current_session
     session.destroy if session.present?
     head(:no_content)
   end

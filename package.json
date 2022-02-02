@@ -17,6 +17,7 @@
     "quit": "overmind quit",
     "kill": "overmind kill",
     "db": "bundle exec rails db --include-password",
+    "fixtures": "bundle exec rails db:fixtures:load",
     "routes": "bundle exec rails routes",
     "migrate": "bundle exec rails db:migrate",
     "migrate:status": "bundle exec rails db:migrate:status",

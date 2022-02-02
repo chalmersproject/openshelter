@@ -1,6 +1,6 @@
 # typed: strict
 
-class UserSession
+class Session
   sig { returns(User) }
   def user; end
 end

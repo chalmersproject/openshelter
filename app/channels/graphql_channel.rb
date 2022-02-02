@@ -9,26 +9,31 @@ class GraphQLChannel < ApplicationCable::Channel
     params(
       connection: ApplicationCable::Connection,
       identifier: T.untyped,
-      params: T::Hash[T.untyped, T.untyped],
+      params: T.untyped,
     ).void
   end
-  def initialize(connection, identifier, params = {})
+  def initialize(connection, identifier, params)
     super(connection, identifier, params)
+    @identifier = T.let(@identifier, T.untyped)
     @subscription_ids = T.let([], T::Array[String])
   end
 
-  sig { void }
-  def subscribed
-    @subscription_ids = []
+  # Type signature must not have a runtime in order not to interfere with
+  # ActionCable::Channel::Base's arity checks.
+  T::Sig::WithoutRuntime.sig do
+    params(data: T::Hash[String, T.untyped]).returns(T.untyped)
   end
+  def execute(data)
+    params =
+      T.let(
+        data.with_indifferent_access,
+        T::Hash[T.any(Symbol, String), T.untyped],
+      )
 
-  sig { params(params: T::Hash[String, T.untyped]).returns(T.untyped) }
-  def execute(params)
     operation_name = params["operationName"]
     unless operation_name.nil?
       raise "operationName must be a String" unless operation_name.is_a?(String)
     end
-
     query = params["query"]
     unless query.nil?
       raise "query must be a String" unless query.is_a?(String)
@@ -60,6 +65,13 @@ class GraphQLChannel < ApplicationCable::Channel
     transmit(payload)
   end
 
+  private
+
+  sig { void }
+  def subscribed
+    @subscription_ids = []
+  end
+
   sig { void }
   def unsubscribed
     @subscription_ids.each do |sid|
@@ -67,7 +79,62 @@ class GraphQLChannel < ApplicationCable::Channel
     end
   end
 
-  private
+  # Log a pretty GraphQL call signature.
+  sig { params(action: Symbol, data: T.untyped).returns(String) }
+  def action_signature(action, data)
+    (+"#{self.class.name}##{action}").tap do |signature|
+      config = GraphQL::RailsLogger.configuration
+      params =
+        T.let(
+          data.with_indifferent_access,
+          T::Hash[T.any(Symbol, String), T.untyped],
+        )
+
+      formatter = Rouge::Formatters::Terminal256.new(config.theme)
+      lexer_gql = Rouge::Lexers::GraphQL.new
+      lexer_rb = Rouge::Lexers::Ruby.new
+
+      # Cleanup and indent params for logging.
+      query = indent(params.fetch("query", ""))
+      variables = indent(pretty(params.fetch("variables", "")))
+      extensions = indent(pretty(params.fetch("extensions", "")))
+
+      # Skip introspection query, if applicable.
+      if config.skip_introspection_query &&
+           query.index(/query IntrospectionQuery/)
+        query = "    query IntrospectionQuery { ... }"
+      end
+
+      if query.present?
+        signature << "\n  Query:"
+        signature << "\n#{formatter.format(lexer_rb.lex(query))}"
+      end
+      if variables.present?
+        signature << "\n  Variables:"
+        signature << "\n#{formatter.format(lexer_gql.lex(variables))}"
+      end
+      if extensions.present?
+        signature << "\n  Extensions:"
+        signature << "\n#{formatter.format(lexer_rb.lex(extensions))}"
+      end
+    end
+  end
+
+  # Transmit a hash of data to the subscriber. The hash will automatically be
+  # wrapped in a JSON envelope with the proper channel identifier marked as the
+  # recipient.
+  sig { params(data: T.untyped, via: T.untyped).returns(T.untyped) }
+  def transmit(data, via: nil) # :doc:
+    status = "#{self.class.name} transmitting #{data.inspect.truncate(300)}"
+    status << " (via #{via})" if via
+    status << "\n\n" if defined?(Rails.env) && Rails.env.development?
+    logger.debug(status)
+
+    payload = { channel_class: self.class.name, data: data, via: via }
+    ActiveSupport::Notifications.instrument("transmit.action_cable", payload) do
+      connection.transmit(identifier: @identifier, message: data)
+    end
+  end
 
   # Handle variables in form data, JSON body, or a blank value.
   sig { params(variables_param: T.untyped).returns(T::Hash[String, T.untyped]) }
@@ -106,5 +173,17 @@ class GraphQLChannel < ApplicationCable::Channel
     else
       yield
     end
+  end
+
+  sig { params(data: T.untyped).returns(T.untyped) }
+  def indent(data)
+    data.lines.map { |line| "    #{line}" }.join.chomp
+  end
+
+  sig { params(data: T.untyped).returns(T.untyped) }
+  def pretty(data)
+    return "" if data.blank?
+    data = JSON.parse(data) if data.is_a?(String)
+    PP.pp(data, "")
   end
 end

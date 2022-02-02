@@ -3,9 +3,18 @@
 # This model initially had no columns defined. If you add columns to the
 # model remove the "{}" from the fixture names and add the columns immediately
 # below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-# column: value
+
+chalmers:
+  email: misterchalmers@chalmers.cards
+  email_verified: false
+  active: true
+
+  password_hash: 400$8$4c$27c64fbce1c5b05a$e6d416e1c05db043fd8b63657034d8359dc1f9c46cbe697f71743b4d017c4b88
+  password_salt: o6WjcHVIf_UNnidtznXl
+
+  persistence_token: 4010b07d6987a6747c1a27ada297ea7c6f0952d45fa94326dc761b4e5991bedabb73c7b79acf0de0762c8a6b24c0319945e8a80da61448d50ac8ef28eb81eb61
+  single_access_token: nbu-pupkO_ND4P8HhBfH
+  perishable_token: 3vDV-fzNO64pVPYSHa4o
+
+  login_count: 0
+  failed_login_count: 0

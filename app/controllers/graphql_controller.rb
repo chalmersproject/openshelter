@@ -11,11 +11,10 @@ class GraphQLController < ApplicationController
 
   sig { returns(T.untyped) }
   def execute
-    operation_name = params[:operationName]
+    operation_name = params["operationName"]
     unless operation_name.nil?
       raise "operationName must be a String" unless operation_name.is_a?(String)
     end
-
     query = params[:query]
     unless query.nil?
       raise "query must be a String" unless query.is_a?(String)
