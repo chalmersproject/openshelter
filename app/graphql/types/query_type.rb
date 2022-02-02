@@ -12,7 +12,7 @@ module Types
     field :version, String, description: "Application server version."
 
     field :viewer,
-          UserType,
+          Types::UserType,
           description: "The currently authenticated user.",
           resolver_method: :current_user
 

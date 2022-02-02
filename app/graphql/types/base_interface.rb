@@ -3,11 +3,24 @@
 
 module Types
   module BaseInterface
+    extend T::Sig
+
     include GraphQL::Schema::Interface
 
-    edge_type_class BaseEdge
-    connection_type_class BaseConnection
+    field_class Types::BaseField
+    connection_type_class Types::BaseConnection
+    edge_type_class Types::BaseEdge
 
-    field_class BaseField
+    sig do
+      params(
+          args: T.untyped,
+          kwargs: T.untyped,
+          block: T.nilable(T.proc.bind(Types::BaseField).void),
+        )
+        .returns(T.untyped)
+    end
+    def self.field(*args, **kwargs, &block)
+      super
+    end
   end
 end

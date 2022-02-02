@@ -87,16 +87,3 @@ module GraphQL::Schema::Interface
 
   mixes_in_class_methods ::GraphQL::Schema::Member::RelayShortcuts
 end
-
-module GraphQL::Schema::Member::HasFields
-  extend T::Sig
-
-  sig do
-    params(
-      args: T.untyped,
-      kwargs: T.untyped,
-      block: T.nilable(T.proc.void.bind(T.class_of(GraphQL::Schema::Resolver))),
-    ).void
-  end
-  def field(*args, **kwargs, &block); end
-end

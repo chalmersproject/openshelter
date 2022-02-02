@@ -14,6 +14,10 @@ class Schema < GraphQL::Schema
   mutation Types::MutationType
   subscription Types::SubscriptionType
 
+  # By default, connections from this schema limit the maximum number of
+  # returned items to 50.
+  default_max_page_size 50
+
   # GraphQL-Ruby calls this when something goes wrong while running a query:
   sig { params(err: T.untyped, context: T.untyped).returns(T.untyped) }
   def self.type_error(err, context)

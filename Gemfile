@@ -25,6 +25,7 @@ gem "graphiql-rails", "~> 1.8.0"
 gem "active_storage_validations", "~> 0.9.6"
 gem "email_validator", "~> 2.2"
 gem "validate_url", "~> 1.0"
+gem "phonelib", "~> 0.6.55"
 
 # Administrate app with Rails Admin.
 gem "rails_admin", [">= 3.0.0.beta2", "< 4"]
@@ -99,3 +100,4 @@ gem "annotate",
 # gem "debug", group: %i[development test], platforms: %i[mri mingw x64_mingw]
 gem "pry", group: %i[development test]
 gem "pry-rails", group: :development
+

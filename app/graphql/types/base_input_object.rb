@@ -3,6 +3,6 @@
 
 module Types
   class BaseInputObject < GraphQL::Schema::InputObject
-    argument_class BaseArgument
+    argument_class Types::BaseArgument
   end
 end

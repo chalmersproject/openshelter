@@ -57,7 +57,7 @@
     "fix:cops:partial": "yarn -s lint:cops:partial --auto-correct",
     "gem": "bundle",
     "install:remix": "remix setup node",
-    "install:gems": "bundle install",
+    "install:gems": "yarn -s gem install",
     "install:husky": "husky install",
     "prepare": "run-p -l install:gems install:husky",
     "postinstall": "yarn -s install:remix"

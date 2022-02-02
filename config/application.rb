@@ -5,7 +5,7 @@ require_relative "boot"
 require "rails/all"
 require "sprockets/railtie"
 
-require_relative "../lib/log_formatter"
+# require "./lib/log_formatter"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.

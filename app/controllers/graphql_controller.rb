@@ -98,15 +98,7 @@ class GraphQLController < ApplicationController
 
   sig { returns(T::Boolean) }
   def protect_from_forgery?
-    local =
-      case request.hostname
-      when "localhost"
-        true
-      when "127.0.0.1"
-        true
-      else
-        false
-      end
+    local = request.hostname.in?(%w[localhost 127.0.0.1])
     !local || request.origin.present?
   end
 end
