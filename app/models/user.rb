@@ -78,28 +78,6 @@ class User < ApplicationRecord
             },
             if: :require_password?
 
-  rails_admin do
-    base do
-      exclude_fields :password_hash, :password_salt
-      exclude_fields :persistence_token, :perishable_token, :single_access_token
-
-      # field :id do
-      #   label "ID"
-      # end
-      field :current_login_ip do
-        label "Current login IP"
-      end
-      field :last_login_ip do
-        label "Current login IP"
-      end
-    end
-    edit do
-      exclude_fields :login_count, :failed_login_count
-      exclude_fields :current_login_at, :current_login_ip
-      exclude_fields :last_login_at, :last_login_ip
-    end
-  end
-
   sig { returns(T::Boolean) }
   def admin?
     ADMIN_DOMAINS.any? { |domain| email.end_with?("@#{domain}") }

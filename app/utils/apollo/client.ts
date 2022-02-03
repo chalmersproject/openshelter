@@ -1,64 +1,22 @@
-import { apiBaseURL, isBrowser } from "~/config";
-import { CSRFContext } from "~/csrf";
+import { isBrowser } from "~/application";
+import { CSRFContext } from "~/utils/csrf";
 
 import { ApolloClient as Client } from "@apollo/client";
 import { InMemoryCache, NormalizedCacheObject } from "@apollo/client";
 
-import { ApolloLink } from "@apollo/client";
-import { HttpLink } from "@apollo/client";
+import type { ApolloLink } from "@apollo/client";
 // import { RetryLink } from "@apollo/client/link/retry";
 // import { SentryLink } from "apollo-link-sentry";
 // import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries";
 import { from as fromLinks } from "@apollo/client";
 
 // Split GraphQL requests between protocols.
-import { split as splitLinks } from "@apollo/client";
-import { getMainDefinition } from "@apollo/client/utilities";
 import { setContext as setLinkContext } from "@apollo/client/link/context";
-
-// Use Action Cable to implement GraphQL Subscriptions.
-import CableLink from "graphql-ruby-client/subscriptions/ActionCableLink";
-import cable from "~/cable.client";
+import { createTerminatingLink } from "~/utils/apollo/link";
 
 import type { TypedTypePolicies as TypePolicies } from "~/graphql/apollo.generated";
 
 const typePolicies: TypePolicies = {};
-
-const createTerminatingLink = (request?: Request): ApolloLink => {
-  const httpLink = new HttpLink({
-    uri: isBrowser ? "/api/graphql" : apiBaseURL + "/graphql",
-    fetch: async (input, init = {}) => {
-      if (request) {
-        const headers = new Headers(init.headers);
-        request.headers.forEach((value, key) => {
-          if (!headers.has(key)) {
-            headers.set(key, value);
-          }
-        });
-        init.headers = headers;
-        init.referrer = request.referrer;
-      }
-      return fetch(input, init);
-    },
-  });
-  if (!isBrowser) {
-    return httpLink;
-  }
-
-  // Browser only!
-  const cableLink = new CableLink({ cable, channelName: "GraphQLChannel" });
-  return splitLinks(
-    ({ query }) => {
-      const definition = getMainDefinition(query);
-      return (
-        definition.kind === "OperationDefinition" &&
-        definition.operation === "subscription"
-      );
-    },
-    cableLink,
-    httpLink,
-  );
-};
 
 const createCSRFLink = ({ token }: CSRFContext): ApolloLink => {
   return setLinkContext(async (operation, { headers }) => ({

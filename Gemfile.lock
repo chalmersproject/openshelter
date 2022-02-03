@@ -71,10 +71,6 @@ GEM
       globalid (>= 0.3.6)
     activemodel (7.0.1)
       activesupport (= 7.0.1)
-    activemodel-serializers-xml (1.0.2)
-      activemodel (> 5.x)
-      activesupport (> 5.x)
-      builder (~> 3.1)
     activerecord (7.0.1)
       activemodel (= 7.0.1)
       activesupport (= 7.0.1)
@@ -163,7 +159,6 @@ GEM
     mini_mime (1.1.2)
     minitest (5.15.0)
     msgpack (1.4.4)
-    nested_form (0.3.2)
     net-imap (0.2.3)
       digest
       net-protocol
@@ -202,9 +197,6 @@ GEM
     raabro (1.4.0)
     racc (1.6.0)
     rack (2.2.3)
-    rack-pjax (1.1.0)
-      nokogiri (~> 1.5)
-      rack (>= 1.1)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (7.0.1)
@@ -226,12 +218,6 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.4.2)
       loofah (~> 2.3)
-    rails_admin (3.0.0.beta2)
-      activemodel-serializers-xml (>= 1.0)
-      kaminari (>= 0.14, < 2.0)
-      nested_form (~> 0.3)
-      rack-pjax (>= 0.7)
-      rails (>= 6.0, < 8)
     railties (7.0.1)
       actionpack (= 7.0.1)
       activesupport (= 7.0.1)
@@ -315,6 +301,14 @@ GEM
     thor (1.2.1)
     tilt (2.0.10)
     timeout (0.2.0)
+    trestle (0.9.5)
+      activemodel (>= 4.2.0)
+      kaminari (>= 1.1.0)
+      railties (>= 4.2.0)
+      sprockets-rails (>= 2.0.0)
+    turbolinks (5.2.1)
+      turbolinks-source (~> 5.2)
+    turbolinks-source (5.2.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
     unicode-display_width (2.1.0)
@@ -359,7 +353,6 @@ DEPENDENCIES
   pry-rails
   puma (~> 5.0)
   rails (~> 7.0.1)
-  rails_admin (>= 3.0.0.beta2, < 4)
   rubocop
   rubocop-graphql
   rubocop-rails
@@ -376,6 +369,8 @@ DEPENDENCIES
   sprockets (~> 4.0.2)
   sprockets-rails (~> 3.4.2)
   tapioca
+  trestle (~> 0.9.5)
+  turbolinks (~> 5.2)
   tzinfo-data
   unparser
   validate_url (~> 1.0)

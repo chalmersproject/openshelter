@@ -27,8 +27,9 @@ gem "email_validator", "~> 2.2"
 gem "validate_url", "~> 1.0"
 gem "phonelib", "~> 0.6.55"
 
-# Expose an admin interface with Rails Admin.
-gem "rails_admin", [">= 3.0.0.beta2", "< 4"]
+# Expose an admin interface with Trestle.
+gem "trestle", "~> 0.9.5"
+gem "turbolinks", "~> 5.2"
 
 # Use the Puma web server [https://github.com/puma/puma].
 gem "puma", "~> 5.0"
@@ -103,4 +104,6 @@ gem "annotate",
 # gem "debug", group: %i[development test], platforms: %i[mri mingw x64_mingw]
 gem "pry", group: %i[development test]
 gem "pry-rails", group: :development
+
+
 

@@ -3,14 +3,14 @@ import { Meta, MetaFunction } from "remix";
 import { Links, LinksFunction } from "remix";
 import { LiveReload, Outlet, Scripts, ScrollRestoration } from "remix";
 import { useLoaderData, LoaderFunction } from "remix";
-import { apiBaseURL, isDevelopment } from "~/config";
+import { apiBaseURL, isDevelopment } from "~/application";
 
 import { MantineProvider } from "@mantine/core";
 import { AppShell, Header } from "@mantine/core";
 import { Box, Group } from "@mantine/core";
 import { Text, Badge } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
-import { themeOverride, sx } from "~/mantine";
+import { themeOverride, sx } from "~/utils/mantine";
 
 import { CSRFProvider, CSRFMeta } from "~/components/csrf";
 import { ApolloProvider } from "~/components/apollo";

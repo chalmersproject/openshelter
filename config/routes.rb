@@ -3,6 +3,17 @@
 
 require "route_constraints"
 
+Trestle::Engine.routes.draw do
+  resources :users,
+            only: %i[new edit],
+            module: "users_admin",
+            controller: "admin"
+  resources :shelters,
+            only: %i[new edit],
+            module: "shelters_admin",
+            controller: "admin"
+end
+
 Rails.application.routes.draw do
   scope :api do
     scope format: false, defaults: { format: :json } do
@@ -13,12 +24,16 @@ Rails.application.routes.draw do
         post :logout
       end
     end
-    mount GraphiQL::Rails::Engine, at: :/, graphql_path: "/api/graphql"
+    mount GraphiQL::Rails::Engine, at: "/", graphql_path: "/api/graphql"
   end
 
-  scope :admin, constraints: authenticated(admin_only: true) do
-    mount GoodJob::Engine, at: :good_job
-    mount RailsAdmin::Engine, at: :/
+  scope :admin do
+    constraints authenticated(admin_only: true) do
+      mount GoodJob::Engine, at: "/good_job/embed"
+      mount Trestle::Engine, at: "/"
+    end
+    match "/", to: "auth#show", via: :all
+    match "/*splat", to: "auth#show", via: :all unless Rails.env.development?
   end
 end
 
@@ -32,8 +47,10 @@ end
 #                                    login POST   /api/auth/login                                                                        auth#login {:format=>:json}
 #                                   logout POST   /api/auth/logout                                                                       auth#logout {:format=>:json}
 #                           graphiql_rails        /api                                                                                   GraphiQL::Rails::Engine {:graphql_path=>"/api/graphql"}
-#                                 good_job        /admin/good_job                                                                        GoodJob::Engine
-#                              rails_admin        /admin                                                                                 RailsAdmin::Engine
+#                                 good_job        /admin/good_job/embed                                                                  GoodJob::Engine
+#                                  trestle        /admin                                                                                 Trestle::Engine
+#                                                 /admin(.:format)                                                                       auth#show
+#                                                 /admin/*splat(.:format)                                                                auth#show {:unless=>true}
 #                       rails_service_blob GET    /api/files/blobs/redirect/:signed_id/*filename(.:format)                               active_storage/blobs/redirect#show
 #                 rails_service_blob_proxy GET    /api/files/blobs/proxy/:signed_id/*filename(.:format)                                  active_storage/blobs/proxy#show
 #                                          GET    /api/files/blobs/:signed_id/*filename(.:format)                                        active_storage/blobs/redirect#show
@@ -66,14 +83,20 @@ end
 #            chartjs GET    /chartjs(.:format)                  good_job/assets#chartjs_js {:format=>:js}
 #            scripts GET    /scripts(.:format)                  good_job/assets#scripts_js {:format=>:js}
 #
-# Routes for RailsAdmin::Engine:
-#   dashboard GET         /                                      rails_admin/main#dashboard
-#       index GET|POST    /:model_name(.:format)                 rails_admin/main#index
-#         new GET|POST    /:model_name/new(.:format)             rails_admin/main#new
-#      export GET|POST    /:model_name/export(.:format)          rails_admin/main#export
-# bulk_delete POST|DELETE /:model_name/bulk_delete(.:format)     rails_admin/main#bulk_delete
-# bulk_action POST        /:model_name/bulk_action(.:format)     rails_admin/main#bulk_action
-#        show GET         /:model_name/:id(.:format)             rails_admin/main#show
-#        edit GET|PUT     /:model_name/:id/edit(.:format)        rails_admin/main#edit
-#      delete GET|DELETE  /:model_name/:id/delete(.:format)      rails_admin/main#delete
-# show_in_app GET         /:model_name/:id/show_in_app(.:format) rails_admin/main#show_in_app
+# Routes for Trestle::Engine:
+#             new_user GET    /users/new(.:format)      users_admin/admin#new
+#            edit_user GET    /users/:id/edit(.:format) users_admin/admin#edit
+#      dashboard_admin GET    /dashboard(.:format)      dashboard_admin/admin#index
+# shelters_admin_index GET    /shelters(.:format)       shelters_admin/admin#index
+#                      POST   /shelters(.:format)       shelters_admin/admin#create
+#       shelters_admin GET    /shelters/:id(.:format)   shelters_admin/admin#show
+#                      PATCH  /shelters/:id(.:format)   shelters_admin/admin#update
+#                      PUT    /shelters/:id(.:format)   shelters_admin/admin#update
+#                      DELETE /shelters/:id(.:format)   shelters_admin/admin#destroy
+#    users_admin_index GET    /users(.:format)          users_admin/admin#index
+#                      POST   /users(.:format)          users_admin/admin#create
+#          users_admin GET    /users/:id(.:format)      users_admin/admin#show
+#                      PATCH  /users/:id(.:format)      users_admin/admin#update
+#                      PUT    /users/:id(.:format)      users_admin/admin#update
+#                      DELETE /users/:id(.:format)      users_admin/admin#destroy
+#                 root GET    /                         trestle/dashboard#index

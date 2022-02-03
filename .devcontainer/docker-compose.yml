@@ -12,6 +12,7 @@ services:
       - app-node-cache:/workspace/node_modules
       - app-cache:/workspace/.cache
       - app-build:/workspace/build
+      - app-assets:/workspace/public/assets
       - /var/run/docker.sock:/var/run/docker.sock
       - ..:/workspace:cached
     depends_on: ["postgres"]
@@ -39,4 +40,5 @@ volumes:
   app-node-cache: null
   app-build: null
   app-cache: null
+  app-assets: null
   postgres: null

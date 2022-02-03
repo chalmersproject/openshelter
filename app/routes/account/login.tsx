@@ -1,7 +1,6 @@
-import { useEffect } from "react";
-import { Form, redirect } from "remix";
+import { useEffect, useMemo } from "react";
 import { useActionData, ActionFunction } from "remix";
-import { apiBaseURL } from "~/config";
+import { apiBaseURL } from "~/application";
 
 import { HiOutlineExclamation } from "react-icons/hi";
 
@@ -14,17 +13,13 @@ import { FormAuthenticityField } from "~/components/csrf";
 import type { GraphQLErrors } from "@apollo/client/errors";
 
 export const action: ActionFunction = async ({ request }) => {
-  const { body, headers } = request;
-  const response = await fetch(apiBaseURL + "/auth/login", {
+  const { headers, body } = request;
+  return fetch(apiBaseURL + "/auth/login", {
     method: "POST",
     headers,
     body,
+    redirect: "manual",
   });
-  if (response.ok) {
-    const { headers } = response;
-    return redirect(request.referrer || "/account", { headers });
-  }
-  return response;
 };
 
 type LoginData = {
@@ -53,17 +48,29 @@ export default function AccountLogin() {
     }
   }, [data]);
 
+  const redirectURL = useMemo(() => {
+    if (typeof window === "undefined") {
+      return undefined;
+    }
+    const url = new URL(window.location.href);
+    return url.searchParams.get("redirect_url");
+  }, []);
   return (
-    <Form method="post">
+    <form method="post">
       <FormAuthenticityField />
+      {!!redirectURL && (
+        <input type="hidden" name="redirect_url" value={redirectURL} />
+      )}
       <Group direction="column" align="stretch">
         <TextInput
+          type="text"
           name="email"
           label="Email"
           placeholder="email@example.com"
           required
         />
         <PasswordInput
+          type="password"
           name="password"
           label="Password"
           placeholder="password"
@@ -71,6 +78,6 @@ export default function AccountLogin() {
         />
         <Button type="submit">Sign In</Button>
       </Group>
-    </Form>
+    </form>
   );
 }

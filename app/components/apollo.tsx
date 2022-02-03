@@ -1,12 +1,12 @@
 import { FC, useCallback, useMemo } from "react";
-import { useCSRFContext } from "~/csrf";
+import { useCSRFContext } from "~/utils/csrf";
 
 import { HiOutlineExclamation } from "react-icons/hi";
 import { useNotifications } from "@mantine/notifications";
 
 import type { ApolloError, ServerError } from "@apollo/client";
 import { ApolloProvider as Provider } from "@apollo/client";
-import { createApolloClient } from "~/apollo/client";
+import { createApolloClient } from "~/utils/apollo/client";
 
 export const ApolloProvider: FC = ({ children }) => {
   const csrf = useCSRFContext();

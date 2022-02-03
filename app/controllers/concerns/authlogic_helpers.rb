@@ -1,8 +1,6 @@
 # typed: strict
 # frozen_string_literal: true
 
-require "session"
-
 module AuthlogicHelpers
   extend T::Sig
   extend ActiveSupport::Concern

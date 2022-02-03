@@ -68,7 +68,7 @@ class Application < Rails::Application
   config.middleware.use(ActionDispatch::Cookies)
   config.middleware.use(config.session_store, config.session_options)
 
-  # Configure middleware for Rails Admin.
+  # Configure middleware for Trestle Admin.
   config.middleware.use(ActionDispatch::Flash)
   config.middleware.use(Rack::MethodOverride)
 

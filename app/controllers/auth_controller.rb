@@ -4,11 +4,11 @@
 class AuthController < ApplicationController
   extend T::Sig
 
-  # sig { void }
-  # def csrf
-  #   csrf = { request_forgery_protection_token => form_authenticity_token }
-  #   render(json: csrf)
-  # end
+  sig { void }
+  def show
+    params = { redirect_url: request.url }
+    redirect_to("/account/login?#{params.to_query}")
+  end
 
   sig { returns(ActionController::Parameters) }
   def login_params
@@ -23,16 +23,18 @@ class AuthController < ApplicationController
     params = login_params
     email, password = params.require(%i[email password])
     session = Session.new(email: email, password: password)
-    unless session.save
+    if session.save
+      redirect_url = params.fetch(:redirect_url, "/account")
+      redirect_to(redirect_url)
+    else
       logger.error("Login failed: #{session.errors.to_json}")
       render(
         json: {
           errors: [{ message: "bad credentials" }],
         },
         status: :unauthorized,
-      ) and return
+      )
     end
-    head(:no_content) # 204
   end
 
   # POST /api/auth/logout

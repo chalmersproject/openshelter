@@ -7,9 +7,12 @@ class Session < Authlogic::Session::Base
   extend T::Sig
   authenticate_with User
 
-  sig { params(request: ActionDispatch::Request).returns(T.nilable(Session)) }
-  def self.for(request)
+  sig do
+    params(request: ActionDispatch::Request, id: T.untyped)
+      .returns(T.nilable(Session))
+  end
+  def self.for(request, id = nil)
     self.controller = AuthlogicRequestAdapter.new(request) if controller.nil?
-    find
+    find(id)
   end
 end
