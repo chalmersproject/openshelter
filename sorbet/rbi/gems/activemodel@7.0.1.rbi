@@ -905,8 +905,6 @@ class ActiveModel::BlockValidator < ::ActiveModel::EachValidator
   def validate_each(record, attribute, value); end
 end
 
-ActiveModel::Callback = T.type_alias { T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]) }
-
 # == Active \Model \Callbacks
 #
 # Provides an interface for any class to have Active Record like callbacks.
@@ -1578,8 +1576,7 @@ class ActiveModel::Errors
   # # => {:base=>["either name or email must be present"]}
   # person.errors.details
   # # => {:base=>[{error: :name_or_email_blank}]}
-  sig { params(attribute: T.any(String, Symbol), type: T.any(String, Symbol), message: String).returns(T.untyped) }
-  def add(attribute, type = T.unsafe(nil), message: T.unsafe(nil)); end
+  def add(attribute, type = T.unsafe(nil), **options); end
 
   # Returns +true+ if an error matches provided +attribute+ and +type+,
   # or +false+ otherwise. +type+ is treated the same as for +add+.
@@ -3629,8 +3626,7 @@ module ActiveModel::Validations::ClassMethods
   # value.
   #
   # NOTE: Calling +validate+ multiple times on the same method will overwrite previous definitions.
-  sig { params(names: T.any(String, Symbol), on: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), prepend: T::Boolean).void }
-  def validate(*names, on: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), prepend: T.unsafe(nil)); end
+  def validate(*args, &block); end
 
   # This method is a shortcut to all default validators and any custom
   # validator classes ending in 'Validator'. Note that Rails default
@@ -3730,8 +3726,7 @@ module ActiveModel::Validations::ClassMethods
   # and +:message+ can be given to one specific validator, as a hash:
   #
   # validates :password, presence: { if: :password_required?, message: 'is forgotten.' }, confirmation: true
-  sig { params(attr_names: T.any(String, Symbol), acceptance: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), comparison: T::Hash[Symbol, T.untyped], confirmation: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), exclusion: T::Hash[Symbol, T.untyped], format: T::Hash[Symbol, T.untyped], inclusion: T::Hash[Symbol, T.untyped], length: T::Hash[Symbol, T.untyped], numericality: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), presence: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), absence: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), uniqueness: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), on: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), allow_blank: T::Boolean, allow_nil: T::Boolean, strict: T.any(T.class_of(Exception), T::Boolean), options: T.untyped).void }
-  def validates(*attr_names, acceptance: T.unsafe(nil), comparison: T.unsafe(nil), confirmation: T.unsafe(nil), exclusion: T.unsafe(nil), format: T.unsafe(nil), inclusion: T.unsafe(nil), length: T.unsafe(nil), numericality: T.unsafe(nil), presence: T.unsafe(nil), absence: T.unsafe(nil), uniqueness: T.unsafe(nil), on: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), allow_blank: T.unsafe(nil), allow_nil: T.unsafe(nil), strict: T.unsafe(nil), **options); end
+  def validates(*attributes); end
 
   # This method is used to define validations that cannot be corrected by end
   # users and are considered exceptional. So each validator defined with bang
@@ -3751,8 +3746,7 @@ module ActiveModel::Validations::ClassMethods
   # person.name = ''
   # person.valid?
   # # => ActiveModel::StrictValidationFailed: Name can't be blank
-  sig { params(attr_names: T.any(String, Symbol), acceptance: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), comparison: T::Hash[Symbol, T.untyped], confirmation: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), exclusion: T::Hash[Symbol, T.untyped], format: T::Hash[Symbol, T.untyped], inclusion: T::Hash[Symbol, T.untyped], length: T::Hash[Symbol, T.untyped], numericality: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), presence: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), absence: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), uniqueness: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), on: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), allow_blank: T::Boolean, allow_nil: T::Boolean, options: T.untyped).void }
-  def validates!(*attr_names, acceptance: T.unsafe(nil), comparison: T.unsafe(nil), confirmation: T.unsafe(nil), exclusion: T.unsafe(nil), format: T.unsafe(nil), inclusion: T.unsafe(nil), length: T.unsafe(nil), numericality: T.unsafe(nil), presence: T.unsafe(nil), absence: T.unsafe(nil), uniqueness: T.unsafe(nil), on: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), allow_blank: T.unsafe(nil), allow_nil: T.unsafe(nil), **options); end
+  def validates!(*attributes); end
 
   # Validates each attribute against a block.
   #
@@ -3783,7 +3777,6 @@ module ActiveModel::Validations::ClassMethods
   # or <tt>unless: Proc.new { |user| user.signup_step <= 2 }</tt>). The
   # method, proc or string should return or evaluate to a +true+ or +false+
   # value.
-  sig { params(attr_names: Symbol, block: T.proc.params(record: T.untyped, attr: Symbol, value: T.untyped).void).void }
   def validates_each(*attr_names, &block); end
 
   def validates_url(*attr_names); end
@@ -3849,8 +3842,7 @@ module ActiveModel::Validations::ClassMethods
   # options[:my_custom_key] # => "my custom value"
   # end
   # end
-  sig { params(classes: Class, options: T.untyped).void }
-  def validates_with(*classes, **options); end
+  def validates_with(*args, &block); end
 
   # List all validators that are being used to validate the model using
   # +validates_with+ method.
@@ -4400,7 +4392,6 @@ end
 ActiveModel::Validations::LengthValidator::CHECKS = T.let(T.unsafe(nil), Hash)
 ActiveModel::Validations::LengthValidator::MESSAGES = T.let(T.unsafe(nil), Hash)
 ActiveModel::Validations::LengthValidator::RESERVED_OPTIONS = T.let(T.unsafe(nil), Array)
-ActiveModel::Validations::Message = T.type_alias { T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String)) }
 
 class ActiveModel::Validations::NumericalityValidator < ::ActiveModel::EachValidator
   include ::ActiveModel::Validations::Comparability
@@ -4432,8 +4423,6 @@ ActiveModel::Validations::NumericalityValidator::RESERVED_OPTIONS = T.let(T.unsa
 class ActiveModel::Validations::PresenceValidator < ::ActiveModel::EachValidator
   def validate_each(record, attr_name, value); end
 end
-
-ActiveModel::Validations::Strict = T.type_alias { T.any(T.class_of(Exception), T::Boolean) }
 
 class ActiveModel::Validations::WithValidator < ::ActiveModel::EachValidator
   def validate_each(record, attr, val); end

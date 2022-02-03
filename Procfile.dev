@@ -1,4 +1,4 @@
-nginx: yarn -s start:nginx
+nginx: yarn -s dev:nginx
 rails: yarn -s dev:rails
 
 # Sometimes, the Remix dev process isn't killed correctly by Foreman.

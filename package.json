@@ -7,8 +7,9 @@
   "scripts": {
     "devcontainer": "docker exec -itw /workspace chalmersprojectcom_devcontainer_app_devcontainer_1 zsh",
     "dev": "overmind start -N -f Procfile.dev",
-    "dev:rails": "bundle exec rails server",
+    "dev:rails": "yarn -s start:rails",
     "dev:remix": "remix dev",
+    "dev:nginx": "nginx -c nginx.dev.conf -p \"$PWD\"",
     "build": "run-p -l build:remix build:rails",
     "build:remix": "remix build",
     "build:rails": "bundle exec rails assets:precompile",
@@ -16,6 +17,7 @@
     "start:nginx": "nginx -c nginx.conf -p \"$PWD\"",
     "start:rails": "bundle exec rails server",
     "start:remix": "remix-serve build",
+    "start:worker": "bundle exec good_job start",
     "routes": "bundle exec rails routes",
     "console": "bundle exec rails console",
     "restart": "overmind restart",

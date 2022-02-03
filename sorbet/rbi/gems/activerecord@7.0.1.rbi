@@ -1854,8 +1854,7 @@ module ActiveRecord::Associations::ClassMethods
   # belongs_to :user, optional: true
   # belongs_to :account, default: -> { company.account }
   # belongs_to :account, strict_loading: true
-  sig { params(name: T.any(String, Symbol), scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), autosave: T::Boolean, class_name: T.any(String, Symbol), counter_cache: T.any(String, Symbol, T::Boolean), dependent: T.any(String, Symbol), foreign_key: T.any(String, Symbol), foreign_type: T.any(String, Symbol), inverse_of: T.any(FalseClass, String, Symbol), optional: T::Boolean, polymorphic: T::Boolean, primary_key: T.any(String, Symbol), required: T::Boolean, touch: T.any(Symbol, T::Boolean), validate: T::Boolean, default: T.proc.returns(T.untyped)).void }
-  def belongs_to(name, scope = T.unsafe(nil), autosave: T.unsafe(nil), class_name: T.unsafe(nil), counter_cache: T.unsafe(nil), dependent: T.unsafe(nil), foreign_key: T.unsafe(nil), foreign_type: T.unsafe(nil), inverse_of: T.unsafe(nil), optional: T.unsafe(nil), polymorphic: T.unsafe(nil), primary_key: T.unsafe(nil), required: T.unsafe(nil), touch: T.unsafe(nil), validate: T.unsafe(nil), default: T.unsafe(nil)); end
+  def belongs_to(name, scope = T.unsafe(nil), **options); end
 
   # Specifies a many-to-many relationship with another class. This associates two classes via an
   # intermediate join table. Unless the join table is explicitly specified as an option, it is
@@ -2024,8 +2023,7 @@ module ActiveRecord::Associations::ClassMethods
   # has_and_belongs_to_many :categories, join_table: "prods_cats"
   # has_and_belongs_to_many :categories, -> { readonly }
   # has_and_belongs_to_many :categories, strict_loading: true
-  sig { params(name: T.any(String, Symbol), scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), after_add: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), after_remove: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), association_foreign_key: T.any(String, Symbol), autosave: T::Boolean, before_add: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), before_remove: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), class_name: T.any(String, Symbol), extend: T.any(Module, T::Array[Module]), foreign_key: T.any(String, Symbol), inverse_of: T.any(FalseClass, String, Symbol), join_table: T.any(String, Symbol), validate: T::Boolean, block: T.proc.void).void }
-  def has_and_belongs_to_many(name, scope = T.unsafe(nil), after_add: T.unsafe(nil), after_remove: T.unsafe(nil), association_foreign_key: T.unsafe(nil), autosave: T.unsafe(nil), before_add: T.unsafe(nil), before_remove: T.unsafe(nil), class_name: T.unsafe(nil), extend: T.unsafe(nil), foreign_key: T.unsafe(nil), inverse_of: T.unsafe(nil), join_table: T.unsafe(nil), validate: T.unsafe(nil), &block); end
+  def has_and_belongs_to_many(name, scope = T.unsafe(nil), **options, &extension); end
 
   # Specifies a one-to-many association. The following methods for retrieval and query of
   # collections of associated objects will be added:
@@ -2262,8 +2260,7 @@ module ActiveRecord::Associations::ClassMethods
   # has_many :subscribers, through: :subscriptions, source: :user
   # has_many :subscribers, through: :subscriptions, disable_joins: true
   # has_many :comments, strict_loading: true
-  sig { params(name: Symbol, scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), after_add: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), after_remove: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), anonymous_class: T.any(String, Symbol), as: T.any(String, Symbol), autosave: T::Boolean, before_add: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), before_remove: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), class_name: T.any(String, Symbol), counter_cache: T.any(String, Symbol), dependent: T.any(String, Symbol), extend: T.any(Module, T::Array[Module]), foreign_key: T.any(String, Symbol), foreign_type: T.any(String, Symbol), index_errors: T::Boolean, inverse_of: T.any(FalseClass, String, Symbol), join_table: T.any(String, Symbol), primary_key: T.any(String, Symbol), source: T.any(String, Symbol), source_type: T.any(String, Symbol), table_name: T.any(String, Symbol), through: T.any(String, Symbol), validate: T::Boolean, block: T.proc.void).void }
-  def has_many(name, scope = T.unsafe(nil), after_add: T.unsafe(nil), after_remove: T.unsafe(nil), anonymous_class: T.unsafe(nil), as: T.unsafe(nil), autosave: T.unsafe(nil), before_add: T.unsafe(nil), before_remove: T.unsafe(nil), class_name: T.unsafe(nil), counter_cache: T.unsafe(nil), dependent: T.unsafe(nil), extend: T.unsafe(nil), foreign_key: T.unsafe(nil), foreign_type: T.unsafe(nil), index_errors: T.unsafe(nil), inverse_of: T.unsafe(nil), join_table: T.unsafe(nil), primary_key: T.unsafe(nil), source: T.unsafe(nil), source_type: T.unsafe(nil), table_name: T.unsafe(nil), through: T.unsafe(nil), validate: T.unsafe(nil), &block); end
+  def has_many(name, scope = T.unsafe(nil), **options, &extension); end
 
   # Specifies a one-to-one association with another class. This method should only be used
   # if the other class contains the foreign key. If the current class contains the foreign key,
@@ -2424,8 +2421,7 @@ module ActiveRecord::Associations::ClassMethods
   # has_one :primary_address, -> { where(primary: true) }, through: :addressables, source: :addressable
   # has_one :credit_card, required: true
   # has_one :credit_card, strict_loading: true
-  sig { params(name: Symbol, scope: T.nilable(T.any(T.proc.void, T.proc.params(record: T.untyped).void)), anonymous_class: T.any(String, Symbol), as: T.any(String, Symbol), autosave: T::Boolean, class_name: T.any(String, Symbol), dependent: T.any(String, Symbol), foreign_key: T.any(String, Symbol), foreign_type: T.any(String, Symbol), inverse_of: T.any(FalseClass, String, Symbol), primary_key: T.any(String, Symbol), required: T::Boolean, source: T.any(String, Symbol), source_type: T.any(String, Symbol), through: T.any(String, Symbol), validate: T::Boolean, touch: T.any(Symbol, T::Boolean), block: T.proc.void).void }
-  def has_one(name, scope = T.unsafe(nil), anonymous_class: T.unsafe(nil), as: T.unsafe(nil), autosave: T.unsafe(nil), class_name: T.unsafe(nil), dependent: T.unsafe(nil), foreign_key: T.unsafe(nil), foreign_type: T.unsafe(nil), inverse_of: T.unsafe(nil), primary_key: T.unsafe(nil), required: T.unsafe(nil), source: T.unsafe(nil), source_type: T.unsafe(nil), through: T.unsafe(nil), validate: T.unsafe(nil), touch: T.unsafe(nil), &block); end
+  def has_one(name, scope = T.unsafe(nil), **options); end
 end
 
 # = Active Record Association Collection
@@ -5032,8 +5028,7 @@ module ActiveRecord::AttributeMethods::Serialization::ClassMethods
   # class User < ActiveRecord::Base
   # serialize :preferences, Rot13JSON
   # end
-  sig { params(attr_name: Symbol, class_name_or_coder: T.untyped, default: T.untyped).void }
-  def serialize(attr_name, class_name_or_coder = T.unsafe(nil), default: T.unsafe(nil)); end
+  def serialize(attr_name, class_name_or_coder = T.unsafe(nil), **options); end
 
   private
 
@@ -5947,6 +5942,7 @@ class ActiveRecord::Base
   include ::ActiveRecord::SignedId
   include ::ActiveRecord::Suppressor
   include ::ActiveRecord::Encryption::EncryptableRecord
+  include ::ActiveStorageValidations
   include ::Kaminari::ActiveRecordExtension
   include ::Authlogic::ActsAsAuthentic::Base
   include ::Authlogic::ActsAsAuthentic::Email
@@ -6176,41 +6172,21 @@ class ActiveRecord::Base
     def acts_as_authentic_modules; end
     def acts_as_authentic_modules=(value); end
     def acts_as_authentic_modules?; end
-
-    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
-    def after_create(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
-
-    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
-    def after_destroy(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
-
+    def after_create(*args, **options, &block); end
+    def after_destroy(*args, **options, &block); end
     def after_find(*args, **options, &block); end
     def after_initialize(*args, **options, &block); end
-
-    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
-    def after_save(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
-
+    def after_save(*args, **options, &block); end
     def after_touch(*args, **options, &block); end
-
-    sig { params(args: Symbol, if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
-    def after_update(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
-
+    def after_update(*args, **options, &block); end
     def aggregate_reflections; end
     def aggregate_reflections=(value); end
     def aggregate_reflections?; end
     def application_record_class?; end
-
-    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
-    def around_create(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
-
-    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
-    def around_destroy(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
-
-    sig { params(args: Symbol, if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
-    def around_save(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
-
-    sig { params(args: Symbol, if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
-    def around_update(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
-
+    def around_create(*args, **options, &block); end
+    def around_destroy(*args, **options, &block); end
+    def around_save(*args, **options, &block); end
+    def around_update(*args, **options, &block); end
     def asynchronous_queries_session; end
     def asynchronous_queries_tracker; end
     def attribute_aliases; end
@@ -6225,19 +6201,10 @@ class ActiveRecord::Base
     def automatic_scope_inversing; end
     def automatic_scope_inversing=(value); end
     def automatic_scope_inversing?; end
-
-    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
-    def before_create(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
-
-    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), prepend: T::Boolean, block: T.proc.void).void }
-    def before_destroy(*args, if: T.unsafe(nil), unless: T.unsafe(nil), prepend: T.unsafe(nil), &block); end
-
-    sig { params(args: T.any(String, Symbol), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
-    def before_save(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
-
-    sig { params(args: Symbol, if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), block: T.proc.void).void }
-    def before_update(*args, if: T.unsafe(nil), unless: T.unsafe(nil), &block); end
-
+    def before_create(*args, **options, &block); end
+    def before_destroy(*args, **options, &block); end
+    def before_save(*args, **options, &block); end
+    def before_update(*args, **options, &block); end
     def belongs_to_required_by_default; end
     def belongs_to_required_by_default=(value); end
     def belongs_to_required_by_default?; end
@@ -6815,8 +6782,6 @@ module ActiveRecord::Calculations
   def type_cast_pluck_values(result, columns); end
   def type_for(field, &block); end
 end
-
-ActiveRecord::Callback = T.type_alias { T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]) }
 
 # = Active Record \Callbacks
 #
@@ -11681,8 +11646,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.change(:description, :text)
   #
   # See TableDefinition#column for details of the options you can use.
-  sig { params(column_name: T.any(String, Symbol), type: Symbol, index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), limit: Numeric, null: T::Boolean, precision: Numeric, scale: Numeric, collation: T.untyped, comment: String, if_not_exists: T::Boolean).void }
-  def change(column_name, type, index: T.unsafe(nil), limit: T.unsafe(nil), null: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), collation: T.unsafe(nil), comment: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
+  def change(column_name, type, **options); end
 
   # Sets a new default value for a column.
   #
@@ -11713,16 +11677,14 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.column(:name, :string)
   #
   # See TableDefinition#column for details of the options you can use.
-  sig { params(column_name: T.any(String, Symbol), type: Symbol, index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), default: T.untyped, limit: Numeric, null: T::Boolean, precision: Numeric, scale: Numeric, collation: T.untyped, comment: String, if_not_exists: T::Boolean).void }
-  def column(column_name, type, index: T.unsafe(nil), default: T.unsafe(nil), limit: T.unsafe(nil), null: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), collation: T.unsafe(nil), comment: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
+  def column(column_name, type, index: T.unsafe(nil), **options); end
 
   # Checks to see if a column exists.
   #
   # t.string(:name) unless t.column_exists?(:name, :string)
   #
   # See {connection.column_exists?}[rdoc-ref:SchemaStatements#column_exists?]
-  sig { params(column_name: T.any(String, Symbol), type: T.nilable(Symbol), index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), limit: Numeric, null: T::Boolean, precision: Numeric, scale: Numeric, collation: T.untyped, comment: String, if_not_exists: T::Boolean).returns(T::Boolean) }
-  def column_exists?(column_name, type = T.unsafe(nil), index: T.unsafe(nil), limit: T.unsafe(nil), null: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), collation: T.unsafe(nil), comment: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
+  def column_exists?(column_name, type = T.unsafe(nil), **options); end
 
   def date(*names, **options); end
   def datetime(*names, **options); end
@@ -11735,16 +11697,14 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.foreign_key(:authors, column: :author_id, primary_key: "id")
   #
   # See {connection.add_foreign_key}[rdoc-ref:SchemaStatements#add_foreign_key]
-  sig { params(to_table: T.any(String, Symbol), column: T.any(String, Symbol), primary_key: T.any(String, Symbol), name: T.any(String, Symbol), on_delete: Symbol, on_update: Symbol, if_not_exists: T::Boolean, validate: T::Boolean, deferrable: T.any(FalseClass, Symbol)).void }
-  def foreign_key(to_table, column: T.unsafe(nil), primary_key: T.unsafe(nil), name: T.unsafe(nil), on_delete: T.unsafe(nil), on_update: T.unsafe(nil), if_not_exists: T.unsafe(nil), validate: T.unsafe(nil), deferrable: T.unsafe(nil)); end
+  def foreign_key(*args, **options); end
 
   # Checks to see if a foreign key exists.
   #
   # t.foreign_key(:authors) unless t.foreign_key_exists?(:authors)
   #
   # See {connection.foreign_key_exists?}[rdoc-ref:SchemaStatements#foreign_key_exists?]
-  sig { params(to_table: T.nilable(T.any(String, Symbol)), column: T.any(String, Symbol), primary_key: T.any(String, Symbol), name: T.any(String, Symbol), on_delete: Symbol, on_update: Symbol, if_not_exists: T::Boolean, validate: T::Boolean, deferrable: T.any(FalseClass, Symbol)).void }
-  def foreign_key_exists?(to_table = T.unsafe(nil), column: T.unsafe(nil), primary_key: T.unsafe(nil), name: T.unsafe(nil), on_delete: T.unsafe(nil), on_update: T.unsafe(nil), if_not_exists: T.unsafe(nil), validate: T.unsafe(nil), deferrable: T.unsafe(nil)); end
+  def foreign_key_exists?(*args, **options); end
 
   # Adds a new index to the table. +column_name+ can be a single Symbol, or
   # an Array of Symbols.
@@ -11754,8 +11714,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.index([:branch_id, :party_id], unique: true, name: 'by_branch_party')
   #
   # See {connection.add_index}[rdoc-ref:SchemaStatements#add_index] for details of the options you can use.
-  sig { params(column_name: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), name: String, unique: T::Boolean, length: T.any(Numeric, T::Hash[T.any(String, Symbol), Numeric]), if_not_exists: T::Boolean).void }
-  def index(column_name, name: T.unsafe(nil), unique: T.unsafe(nil), length: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
+  def index(column_name, **options); end
 
   # Checks to see if an index exists.
   #
@@ -11788,8 +11747,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.remove(:qualification, :experience)
   #
   # See {connection.remove_columns}[rdoc-ref:SchemaStatements#remove_columns]
-  sig { params(column_names: T.any(String, Symbol), type: T.nilable(Symbol), index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), limit: T.nilable(Numeric), null: T::Boolean, precision: T.nilable(Numeric), scale: T.nilable(Numeric), collation: T.nilable(T.untyped), comment: T.nilable(String), if_not_exists: T::Boolean).void }
-  def remove(*column_names, type: T.unsafe(nil), index: T.unsafe(nil), limit: T.unsafe(nil), null: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), collation: T.unsafe(nil), comment: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
+  def remove(*column_names, **options); end
 
   # Removes a reference. Optionally removes a +type+ column.
   #
@@ -11812,8 +11770,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.remove_foreign_key(column: :author_id)
   #
   # See {connection.remove_foreign_key}[rdoc-ref:SchemaStatements#remove_foreign_key]
-  sig { params(to_table: T.any(String, Symbol), column: T.any(String, Symbol), primary_key: T.any(String, Symbol), name: T.any(String, Symbol), on_delete: Symbol, on_update: Symbol, if_not_exists: T::Boolean, validate: T::Boolean, deferrable: T.any(FalseClass, Symbol)).void }
-  def remove_foreign_key(to_table, column: T.unsafe(nil), primary_key: T.unsafe(nil), name: T.unsafe(nil), on_delete: T.unsafe(nil), on_update: T.unsafe(nil), if_not_exists: T.unsafe(nil), validate: T.unsafe(nil), deferrable: T.unsafe(nil)); end
+  def remove_foreign_key(*args, **options); end
 
   # Removes the given index from the table.
   #
@@ -11823,8 +11780,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.remove_index(:branch_id, name: :by_branch_party)
   #
   # See {connection.remove_index}[rdoc-ref:SchemaStatements#remove_index]
-  sig { params(column_name: T.nilable(T.any(String, Symbol)), column: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), name: T.any(String, Symbol), if_exists: T::Boolean, algorithm: Symbol).void }
-  def remove_index(column_name = T.unsafe(nil), column: T.unsafe(nil), name: T.unsafe(nil), if_exists: T.unsafe(nil), algorithm: T.unsafe(nil)); end
+  def remove_index(column_name = T.unsafe(nil), **options); end
 
   # Removes a reference. Optionally removes a +type+ column.
   #
@@ -11839,8 +11795,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.remove_timestamps
   #
   # See {connection.remove_timestamps}[rdoc-ref:SchemaStatements#remove_timestamps]
-  sig { void }
-  def remove_timestamps; end
+  def remove_timestamps(**options); end
 
   # Renames a column.
   #
@@ -11866,8 +11821,7 @@ class ActiveRecord::ConnectionAdapters::Table
   # t.timestamps(null: false)
   #
   # See {connection.add_timestamps}[rdoc-ref:SchemaStatements#add_timestamps]
-  sig { params(index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), limit: Numeric, null: T::Boolean, precision: Numeric, scale: Numeric, collation: T.untyped, comment: String, if_not_exists: T::Boolean).void }
-  def timestamps(index: T.unsafe(nil), limit: T.unsafe(nil), null: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), collation: T.unsafe(nil), comment: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
+  def timestamps(**options); end
 
   def virtual(*names, **options); end
 end
@@ -11986,8 +11940,7 @@ class ActiveRecord::ConnectionAdapters::TableDefinition
   # t.references :tagger, polymorphic: true
   # t.references :taggable, polymorphic: { default: 'Photo' }, index: false
   # end
-  sig { params(column_name: T.any(String, Symbol), type: Symbol, index: T.nilable(T.any(T::Boolean, T::Hash[T.any(String, Symbol), String])), default: T.untyped, limit: Numeric, null: T::Boolean, precision: Numeric, scale: Numeric, collation: T.untyped, comment: String, if_not_exists: T::Boolean).void }
-  def column(column_name, type, index: T.unsafe(nil), default: T.unsafe(nil), limit: T.unsafe(nil), null: T.unsafe(nil), precision: T.unsafe(nil), scale: T.unsafe(nil), collation: T.unsafe(nil), comment: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
+  def column(name, type, index: T.unsafe(nil), **options); end
 
   # Returns an array of ColumnDefinition objects for the columns of the table.
   def columns; end
@@ -12011,8 +11964,7 @@ class ActiveRecord::ConnectionAdapters::TableDefinition
   # This is primarily used to track indexes that need to be created after the table
   #
   # index(:account_id, name: 'index_projects_on_account_id')
-  sig { params(column_name: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), name: T.nilable(String), unique: T.nilable(T::Boolean), length: T.nilable(T.any(Numeric, T::Hash[T.any(String, Symbol), Numeric])), if_not_exists: T::Boolean).void }
-  def index(column_name, name: T.unsafe(nil), unique: T.unsafe(nil), length: T.unsafe(nil), if_not_exists: T.unsafe(nil)); end
+  def index(column_name, **options); end
 
   # Returns the value of attribute indexes.
   def indexes; end
@@ -16418,7 +16370,6 @@ module ActiveRecord::Locking::Pessimistic
   # lock. Pass an SQL locking clause to append the end of the SELECT statement
   # or pass true for "FOR UPDATE" (the default, an exclusive row lock). Returns
   # the locked record.
-  sig { params(lock: T.any(String, TrueClass)).returns(T.self_type) }
   def lock!(lock = T.unsafe(nil)); end
 
   # Wraps the passed block in a transaction, locking the object
@@ -16428,8 +16379,7 @@ module ActiveRecord::Locking::Pessimistic
   # You can also pass options like <tt>requires_new:</tt>, <tt>isolation:</tt>,
   # and <tt>joinable:</tt> to the wrapping transaction (see
   # <tt>ActiveRecord::ConnectionAdapters::DatabaseStatements#transaction</tt>).
-  sig { type_parameters(:U).params(lock: T.any(String, TrueClass), requires_new: T.nilable(T::Boolean), isolation: T.nilable(Symbol), joinable: T::Boolean, block: T.proc.returns(T.type_parameter(:U))).returns(T.nilable(T.type_parameter(:U))) }
-  def with_lock(lock = T.unsafe(nil), requires_new: T.unsafe(nil), isolation: T.unsafe(nil), joinable: T.unsafe(nil), &block); end
+  def with_lock(*args); end
 end
 
 class ActiveRecord::LogSubscriber < ::ActiveSupport::LogSubscriber
@@ -17382,9 +17332,7 @@ class ActiveRecord::Migration::Compatibility::V5_2 < ::ActiveRecord::Migration::
   def add_timestamps(table_name, **options); end
   def change_table(table_name, **options); end
   def create_join_table(table_1, table_2, **options); end
-
-  sig { params(table_name: T.any(String, Symbol), comment: T.untyped, id: T.any(Symbol, T::Boolean), primary_key: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), options: T.untyped, temporary: T::Boolean, force: T.any(Symbol, T::Boolean), as: T.untyped, block: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)).void }
-  def create_table(table_name, comment: T.unsafe(nil), id: T.unsafe(nil), primary_key: T.unsafe(nil), options: T.unsafe(nil), temporary: T.unsafe(nil), force: T.unsafe(nil), as: T.unsafe(nil), &block); end
+  def create_table(table_name, **options); end
 
   private
 
@@ -18722,8 +18670,7 @@ module ActiveRecord::Persistence
   #
   # Attributes marked as readonly are silently ignored if the record is
   # being updated.
-  sig { params(validate: T::Boolean, touch: T::Boolean, block: T.proc.void).returns(T::Boolean) }
-  def save(validate: T.unsafe(nil), touch: T.unsafe(nil), &block); end
+  def save(**options, &block); end
 
   # :call-seq:
   # save!(**options)
@@ -18751,8 +18698,7 @@ module ActiveRecord::Persistence
   # being updated.
   #
   # Unless an error is raised, returns true.
-  sig { params(validate: T::Boolean, touch: T::Boolean, block: T.proc.void).returns(TrueClass) }
-  def save!(validate: T.unsafe(nil), touch: T.unsafe(nil), &block); end
+  def save!(**options, &block); end
 
   # Assigns to +attribute+ the boolean opposite of <tt>attribute?</tt>. So
   # if the predicate returns +true+ the attribute will become +false+. This
@@ -18972,7 +18918,6 @@ module ActiveRecord::Persistence::ClassMethods
   # go through Active Record's type casting and serialization.
   #
   # See <tt>ActiveRecord::Persistence#insert_all</tt> for documentation.
-  sig { params(attributes: T::Hash[T.any(String, Symbol), T.untyped], returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), unique_by: T.nilable(T.untyped), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
   def insert(attributes, returning: T.unsafe(nil), unique_by: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   # Inserts a single record into the database in a single SQL INSERT
@@ -18981,7 +18926,6 @@ module ActiveRecord::Persistence::ClassMethods
   # go through Active Record's type casting and serialization.
   #
   # See <tt>ActiveRecord::Persistence#insert_all!</tt> for more.
-  sig { params(attributes: T::Hash[T.any(String, Symbol), T.untyped], returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
   def insert!(attributes, returning: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   # Inserts multiple records into the database in a single SQL INSERT
@@ -19059,7 +19003,6 @@ module ActiveRecord::Persistence::ClassMethods
   # { id: 1, title: "Rework" },
   # { id: 2, title: "Eloquent Ruby" }
   # ])
-  sig { params(attributes: T::Array[T::Hash[T.any(String, Symbol), T.untyped]], returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), unique_by: T.nilable(T.untyped), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
   def insert_all(attributes, returning: T.unsafe(nil), unique_by: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   # Inserts multiple records into the database in a single SQL INSERT
@@ -19116,7 +19059,6 @@ module ActiveRecord::Persistence::ClassMethods
   # { id: 1, title: "Rework", author: "David" },
   # { id: 1, title: "Eloquent Ruby", author: "Russ" }
   # ])
-  sig { params(attributes: T::Array[T::Hash[T.any(String, Symbol), T.untyped]], returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
   def insert_all!(attributes, returning: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   # Given an attributes hash, +instantiate+ returns a new instance of
@@ -19170,7 +19112,6 @@ module ActiveRecord::Persistence::ClassMethods
   # go through Active Record's type casting and serialization.
   #
   # See <tt>ActiveRecord::Persistence#upsert_all</tt> for documentation.
-  sig { params(attributes: T::Hash[T.any(String, Symbol), T.untyped], on_duplicate: T.nilable(T.untyped), returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), unique_by: T.nilable(T.untyped), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
   def upsert(attributes, on_duplicate: T.unsafe(nil), returning: T.unsafe(nil), unique_by: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   # Updates or inserts (upserts) multiple records into the database in a
@@ -19279,7 +19220,6 @@ module ActiveRecord::Persistence::ClassMethods
   # ], unique_by: :isbn)
   #
   # Book.find_by(isbn: "1").title # => "Eloquent Ruby"
-  sig { params(attributes: T::Hash[T.any(String, Symbol), T.untyped], on_duplicate: T.nilable(T.untyped), update_only: T.nilable(T.any(String, Symbol)), returning: T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])), unique_by: T.nilable(T.untyped), record_timestamps: T.nilable(T::Boolean)).returns(ActiveRecord::Result) }
   def upsert_all(attributes, on_duplicate: T.unsafe(nil), update_only: T.unsafe(nil), returning: T.unsafe(nil), unique_by: T.unsafe(nil), record_timestamps: T.unsafe(nil)); end
 
   private
@@ -19300,8 +19240,6 @@ module ActiveRecord::Persistence::ClassMethods
   # new instance of the class. Accepts only keys as strings.
   def instantiate_instance_of(klass, attributes, column_types = T.unsafe(nil), &block); end
 end
-
-ActiveRecord::Persistence::Returning = T.type_alias { T.nilable(T.any(FalseClass, T::Array[T.any(String, Symbol)])) }
 
 class ActiveRecord::Point < ::Struct
   # Returns the value of attribute x

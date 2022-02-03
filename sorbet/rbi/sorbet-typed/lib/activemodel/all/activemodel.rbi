@@ -5,7 +5,7 @@
 #
 #   https://github.com/sorbet/sorbet-typed/edit/master/lib/activemodel/all/activemodel.rbi
 #
-# typed: strict
+# typed: strong
 
 module ActiveModel::AttributeMethods
   mixes_in_class_methods(::ActiveModel::AttributeMethods::ClassMethods)
@@ -28,8 +28,8 @@ module ActiveModel::Conversion::ClassMethods; end
 module ActiveModel::Dirty
   include(::ActiveModel::AttributeMethods)
 
-  # sig { params(attr: Symbol, from: T.untyped, to: T.untyped).returns(T::Boolean) }
-  # def attribute_changed?(attr, from: nil, to: nil); end
+  sig { params(attr: Symbol, from: T.untyped, to: T.untyped).returns(T::Boolean) }
+  def attribute_changed?(attr, from: nil, to: nil); end
 
   sig { params(attr_name: Symbol).returns(T::Boolean) }
   def attribute_changed_in_place?(attr_name); end
@@ -90,83 +90,83 @@ module ActiveModel::Validations
   def valid?(context = T.unsafe(nil)); end
 end
 
-# module ActiveModel::Validations::ClassMethods
-#   # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations.rb#L136-L154
-#   sig do
-#     params(
-#       names: T.any(Symbol, String),
-#       if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
-#       on: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
-#       prepend: T::Boolean,
-#       unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
-#     ).void
-#   end
-#   def validate(
-#     *names,
-#     if: nil,
-#     on: nil,
-#     prepend: false,
-#     unless: nil
-#   ); end
+module ActiveModel::Validations::ClassMethods
+  # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations.rb#L136-L154
+  sig do
+    params(
+      names: T.any(Symbol, String),
+      if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+      on: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
+      prepend: T::Boolean,
+      unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+    ).void
+  end
+  def validate(
+    *names,
+    if: nil,
+    on: nil,
+    prepend: false,
+    unless: nil
+  ); end
 
-#   # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations/validates.rb#L75-L105
-#   sig do
-#     params(
-#       names: T.any(Symbol, String), # a splat of at least one attribute name
-#       absence: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-#       acceptance: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-#       allow_blank: T::Boolean,
-#       allow_nil: T::Boolean,
-#       confirmation: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-#       # `exclusion` and `inclusion` are tricky to type without better support
-#       # for overloading and shapes. Value can be anything that responds to
-#       # `include?` (e.g. (1..3)), or a hash having an `in` or `within` key,
-#       # like { in: [1, 2, 3], ... }
-#       exclusion: T::Enumerable[T.untyped],
-#       # `format` hash must additionally contain either :with or :without keys.
-#       # Alternatively, it can be a Regexp.
-#       format: T.any(T::Hash[T.untyped, T.untyped], Regexp),
-#       if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
-#       # `exclusion` and `inclusion` are tricky to type without better support
-#       # for overloading and shapes. Value can be anything that responds to
-#       # `include?` (e.g. (1..3)), or a hash having an `in` or `within` key,
-#       # like { in: [1, 2, 3], ... }
-#       inclusion: T::Enumerable[T.untyped],
-#       # if Hash, must contain :in, :within, :maximum, :minimum, or :is keys
-#       length: T.any(T::Range[T.untyped], T::Hash[T.untyped, T.untyped]),
-#       numericality: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-#       on: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
-#       presence: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-#       size: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-#       strict: T::Boolean,
-#       uniqueness: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
-#       unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
-#       kwargs: T.untyped
-#     ).void
-#   end
-#   def validates(
-#     *names,
-#     absence: false,
-#     acceptance: {},
-#     allow_blank: false,
-#     allow_nil: false,
-#     confirmation: false,
-#     exclusion: [],
-#     format: {},
-#     if: nil,
-#     inclusion: [],
-#     length: {},
-#     numericality: false,
-#     on: :_,
-#     presence: false,
-#     size: false,
-#     strict: false,
-#     uniqueness: false,
-#     unless: :_,
-#     **kwargs
-#   )
-#   end
-# end
+  # https://github.com/rails/rails/blob/v5.2.3/activemodel/lib/active_model/validations/validates.rb#L75-L105
+  sig do
+    params(
+      names: T.any(Symbol, String), # a splat of at least one attribute name
+      absence: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      acceptance: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      allow_blank: T::Boolean,
+      allow_nil: T::Boolean,
+      confirmation: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      # `exclusion` and `inclusion` are tricky to type without better support
+      # for overloading and shapes. Value can be anything that responds to
+      # `include?` (e.g. (1..3)), or a hash having an `in` or `within` key,
+      # like { in: [1, 2, 3], ... }
+      exclusion: T::Enumerable[T.untyped],
+      # `format` hash must additionally contain either :with or :without keys.
+      # Alternatively, it can be a Regexp.
+      format: T.any(T::Hash[T.untyped, T.untyped], Regexp),
+      if: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+      # `exclusion` and `inclusion` are tricky to type without better support
+      # for overloading and shapes. Value can be anything that responds to
+      # `include?` (e.g. (1..3)), or a hash having an `in` or `within` key,
+      # like { in: [1, 2, 3], ... }
+      inclusion: T::Enumerable[T.untyped],
+      # if Hash, must contain :in, :within, :maximum, :minimum, or :is keys
+      length: T.any(T::Range[T.untyped], T::Hash[T.untyped, T.untyped]),
+      numericality: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      on: T.any(Symbol, String, T::Array[T.any(Symbol, String)]),
+      presence: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      size: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      strict: T::Boolean,
+      uniqueness: T.any(T::Boolean, T::Hash[T.untyped, T.untyped]),
+      unless: T.any(Symbol, String, T.proc.params(arg0: T.untyped).returns(T::Boolean)),
+      kwargs: T.untyped
+    ).void
+  end
+  def validates(
+    *names,
+    absence: false,
+    acceptance: {},
+    allow_blank: false,
+    allow_nil: false,
+    confirmation: false,
+    exclusion: [],
+    format: {},
+    if: nil,
+    inclusion: [],
+    length: {},
+    numericality: false,
+    on: :_,
+    presence: false,
+    size: false,
+    strict: false,
+    uniqueness: false,
+    unless: :_,
+    **kwargs
+  )
+  end
+end
 
 ActiveModel::Validations::ClassMethods::VALID_OPTIONS_FOR_VALIDATE = T.let(T.unsafe(nil), T::Array[T.untyped])
 
@@ -573,67 +573,67 @@ class ActiveModel::Errors
   sig { params(key: T.any(String, Symbol)).returns(T::Array[String]) }
   def [](key); end
 
-  # def each(&blk); end
+  def each(&blk); end
 
-  # # Adds `message` to the error messages and used validator type to `details` on `attribute`.
-  # # More than one error can be added to the same `attribute`.
-  # # If no `message` is supplied, `:invalid` is assumed.
-  # #
-  # # ```ruby
-  # # person.errors.add(:name)
-  # # # => ["is invalid"]
-  # # person.errors.add(:name, :not_implemented, message: "must be implemented")
-  # # # => ["is invalid", "must be implemented"]
-  # # ```
-  # #
-  # # ```ruby
-  # # person.errors.messages
-  # # # => {:name=>["is invalid", "must be implemented"]}
-  # # ```
-  # #
-  # # ```ruby
-  # # person.errors.details
-  # # # => {:name=>[{error: :not_implemented}, {error: :invalid}]}
-  # # ```
-  # #
-  # # If `message` is a symbol, it will be translated using the appropriate
-  # # scope (see `generate_message`).
-  # #
-  # # If `message` is a proc, it will be called, allowing for things like
-  # # `Time.now` to be used within an error.
-  # #
-  # # If the `:strict` option is set to `true`, it will raise
-  # # ActiveModel::StrictValidationFailed instead of adding the error.
-  # # `:strict` option can also be set to any other exception.
-  # #
-  # # ```ruby
-  # # person.errors.add(:name, :invalid, strict: true)
-  # # # => ActiveModel::StrictValidationFailed: Name is invalid
-  # # person.errors.add(:name, :invalid, strict: NameIsInvalid)
-  # # # => NameIsInvalid: Name is invalid
-  # #
-  # # person.errors.messages # => {}
-  # # ```
-  # #
-  # # `attribute` should be set to `:base` if the error is not
-  # # directly associated with a single attribute.
-  # #
-  # # ```ruby
-  # # person.errors.add(:base, :name_or_email_blank,
-  # #   message: "either name or email must be present")
-  # # person.errors.messages
-  # # # => {:base=>["either name or email must be present"]}
-  # # person.errors.details
-  # # # => {:base=>[{error: :name_or_email_blank}]}
-  # # ```
-  # sig do
-  #   params(
-  #     attribute: T.any(Symbol, String),
-  #     message: T.any(String, Symbol),
-  #     options: T::Hash[T.untyped, T.untyped]
-  #   ).returns(T.untyped)
-  # end
-  # def add(attribute, message = :invalid, options = {}); end
+  # Adds `message` to the error messages and used validator type to `details` on `attribute`.
+  # More than one error can be added to the same `attribute`.
+  # If no `message` is supplied, `:invalid` is assumed.
+  #
+  # ```ruby
+  # person.errors.add(:name)
+  # # => ["is invalid"]
+  # person.errors.add(:name, :not_implemented, message: "must be implemented")
+  # # => ["is invalid", "must be implemented"]
+  # ```
+  #
+  # ```ruby
+  # person.errors.messages
+  # # => {:name=>["is invalid", "must be implemented"]}
+  # ```
+  #
+  # ```ruby
+  # person.errors.details
+  # # => {:name=>[{error: :not_implemented}, {error: :invalid}]}
+  # ```
+  #
+  # If `message` is a symbol, it will be translated using the appropriate
+  # scope (see `generate_message`).
+  #
+  # If `message` is a proc, it will be called, allowing for things like
+  # `Time.now` to be used within an error.
+  #
+  # If the `:strict` option is set to `true`, it will raise
+  # ActiveModel::StrictValidationFailed instead of adding the error.
+  # `:strict` option can also be set to any other exception.
+  #
+  # ```ruby
+  # person.errors.add(:name, :invalid, strict: true)
+  # # => ActiveModel::StrictValidationFailed: Name is invalid
+  # person.errors.add(:name, :invalid, strict: NameIsInvalid)
+  # # => NameIsInvalid: Name is invalid
+  #
+  # person.errors.messages # => {}
+  # ```
+  #
+  # `attribute` should be set to `:base` if the error is not
+  # directly associated with a single attribute.
+  #
+  # ```ruby
+  # person.errors.add(:base, :name_or_email_blank,
+  #   message: "either name or email must be present")
+  # person.errors.messages
+  # # => {:base=>["either name or email must be present"]}
+  # person.errors.details
+  # # => {:base=>[{error: :name_or_email_blank}]}
+  # ```
+  sig do
+    params(
+      attribute: T.any(Symbol, String),
+      message: T.any(String, Symbol),
+      options: T::Hash[T.untyped, T.untyped]
+    ).returns(T.untyped)
+  end
+  def add(attribute, message = :invalid, options = {}); end
 
   # Returns `true` if an error on the attribute with the given message is
   # present, or `false` otherwise. `message` is treated the same as for `add`.

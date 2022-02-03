@@ -3,9 +3,10 @@
 
 require_relative "boot"
 require "rails/all"
-require "sprockets/railtie"
 
-# require "./lib/log_formatter"
+# Initialize Railties, etc.
+require "sprockets/railtie"
+require "good_job/engine"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -75,10 +76,13 @@ class Application < Rails::Application
   config.active_record.schema_migrations_table_name = "_migrations"
   config.active_record.internal_metadata_table_name = "_metadata"
 
+  # Configure Active Job.
+  config.active_job.queue_adapter = :good_job
+
   # Configure Active Support.
   config.active_support.remove_deprecated_time_with_zone_name = true
 
-  # Configure Action Cable, Active Support routes.
+  # Configure Action Cable, Active Storage routes.
   config.action_cable.mount_path = "/api/cable"
   config.active_storage.routes_prefix = "/api/files"
 

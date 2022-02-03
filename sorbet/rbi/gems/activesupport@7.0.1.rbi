@@ -7132,10 +7132,13 @@ class ActiveSupport::TestCase < ::Minitest::Test
   include ::ActiveSupport::Testing::Deprecation
   include ::ActiveSupport::Testing::TimeHelpers
   include ::ActiveSupport::Testing::FileFixtures
+  include ::ActiveRecord::TestDatabases
+  include ::ActiveRecord::TestFixtures
   extend ::ActiveSupport::Callbacks::ClassMethods
   extend ::ActiveSupport::DescendantsTracker
   extend ::ActiveSupport::Testing::SetupAndTeardown::ClassMethods
   extend ::ActiveSupport::Testing::Declarative
+  extend ::ActiveRecord::TestFixtures::ClassMethods
 
   def __callbacks; end
   def __callbacks?; end
@@ -7162,7 +7165,27 @@ class ActiveSupport::TestCase < ::Minitest::Test
 
   def file_fixture_path; end
   def file_fixture_path?; end
+  def fixture_class_names; end
+  def fixture_class_names=(_arg0); end
+  def fixture_class_names?; end
+  def fixture_path; end
+  def fixture_path?; end
+  def fixture_table_names; end
+  def fixture_table_names=(_arg0); end
+  def fixture_table_names?; end
+  def lock_threads; end
+  def lock_threads=(_arg0); end
+  def lock_threads?; end
   def method_name; end
+  def pre_loaded_fixtures; end
+  def pre_loaded_fixtures=(_arg0); end
+  def pre_loaded_fixtures?; end
+  def use_instantiated_fixtures; end
+  def use_instantiated_fixtures=(_arg0); end
+  def use_instantiated_fixtures?; end
+  def use_transactional_tests; end
+  def use_transactional_tests=(_arg0); end
+  def use_transactional_tests?; end
 
   class << self
     def __callbacks; end
@@ -7175,6 +7198,18 @@ class ActiveSupport::TestCase < ::Minitest::Test
     def file_fixture_path; end
     def file_fixture_path=(value); end
     def file_fixture_path?; end
+    def fixture_class_names; end
+    def fixture_class_names=(value); end
+    def fixture_class_names?; end
+    def fixture_path; end
+    def fixture_path=(value); end
+    def fixture_path?; end
+    def fixture_table_names; end
+    def fixture_table_names=(value); end
+    def fixture_table_names?; end
+    def lock_threads; end
+    def lock_threads=(value); end
+    def lock_threads?; end
 
     # Parallelizes the test suite.
     #
@@ -7241,6 +7276,10 @@ class ActiveSupport::TestCase < ::Minitest::Test
     # end
     def parallelize_teardown(&block); end
 
+    def pre_loaded_fixtures; end
+    def pre_loaded_fixtures=(value); end
+    def pre_loaded_fixtures?; end
+
     # Returns the order in which test cases are run.
     #
     # ActiveSupport::TestCase.test_order # => :random
@@ -7259,6 +7298,13 @@ class ActiveSupport::TestCase < ::Minitest::Test
     # * +:sorted+   (to run tests alphabetically by method name)
     # * +:alpha+    (equivalent to +:sorted+)
     def test_order=(new_order); end
+
+    def use_instantiated_fixtures; end
+    def use_instantiated_fixtures=(value); end
+    def use_instantiated_fixtures?; end
+    def use_transactional_tests; end
+    def use_transactional_tests=(value); end
+    def use_transactional_tests?; end
   end
 end
 
@@ -7748,6 +7794,14 @@ class ActiveSupport::Testing::SimpleStubs::Stub < ::Struct
     def members; end
     def new(*_arg0); end
   end
+end
+
+module ActiveSupport::Testing::Stream
+  private
+
+  def capture(stream); end
+  def quietly(&block); end
+  def silence_stream(stream); end
 end
 
 # Logs a "PostsControllerTest: test name" heading before each test to
@@ -10960,6 +11014,8 @@ module I18n
     def interpolate_hash(string, values); end
     def new_double_nested_cache; end
     def perform_caching?; end
+    def reserve_key(key); end
+    def reserved_keys_pattern; end
   end
 end
 
@@ -10968,7 +11024,6 @@ I18n::EMPTY_HASH = T.let(T.unsafe(nil), Hash)
 I18n::INTERPOLATION_PATTERN = T.let(T.unsafe(nil), Regexp)
 I18n::JSON = ActiveSupport::JSON
 I18n::RESERVED_KEYS = T.let(T.unsafe(nil), Array)
-I18n::RESERVED_KEYS_PATTERN = T.let(T.unsafe(nil), Regexp)
 
 class I18n::Railtie < ::Rails::Railtie
   class << self

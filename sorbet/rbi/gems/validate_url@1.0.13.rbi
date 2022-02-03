@@ -14,8 +14,6 @@ module ActiveModel
   end
 end
 
-ActiveModel::Callback = T.type_alias { T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]) }
-
 module ActiveModel::Validations
   extend ::ActiveSupport::Concern
   include GeneratedInstanceMethods
@@ -65,17 +63,9 @@ module ActiveModel::Validations::ClassMethods
   def attribute_method?(attribute); end
   def clear_validators!; end
   def inherited(base); end
-
-  sig { params(names: T.any(String, Symbol), on: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), prepend: T::Boolean).void }
-  def validate(*names, on: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), prepend: T.unsafe(nil)); end
-
-  sig { params(attr_names: T.any(String, Symbol), acceptance: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), comparison: T::Hash[Symbol, T.untyped], confirmation: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), exclusion: T::Hash[Symbol, T.untyped], format: T::Hash[Symbol, T.untyped], inclusion: T::Hash[Symbol, T.untyped], length: T::Hash[Symbol, T.untyped], numericality: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), presence: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), absence: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), uniqueness: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), on: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), allow_blank: T::Boolean, allow_nil: T::Boolean, strict: T.any(T.class_of(Exception), T::Boolean), options: T.untyped).void }
-  def validates(*attr_names, acceptance: T.unsafe(nil), comparison: T.unsafe(nil), confirmation: T.unsafe(nil), exclusion: T.unsafe(nil), format: T.unsafe(nil), inclusion: T.unsafe(nil), length: T.unsafe(nil), numericality: T.unsafe(nil), presence: T.unsafe(nil), absence: T.unsafe(nil), uniqueness: T.unsafe(nil), on: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), allow_blank: T.unsafe(nil), allow_nil: T.unsafe(nil), strict: T.unsafe(nil), **options); end
-
-  sig { params(attr_names: T.any(String, Symbol), acceptance: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), comparison: T::Hash[Symbol, T.untyped], confirmation: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), exclusion: T::Hash[Symbol, T.untyped], format: T::Hash[Symbol, T.untyped], inclusion: T::Hash[Symbol, T.untyped], length: T::Hash[Symbol, T.untyped], numericality: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), presence: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), absence: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), uniqueness: T.any(T::Boolean, T::Hash[Symbol, T.untyped]), on: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), if: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), unless: T.any(Proc, String, Symbol, T.proc.void, T::Array[T.any(Proc, String, Symbol, T.proc.void)]), allow_blank: T::Boolean, allow_nil: T::Boolean, options: T.untyped).void }
-  def validates!(*attr_names, acceptance: T.unsafe(nil), comparison: T.unsafe(nil), confirmation: T.unsafe(nil), exclusion: T.unsafe(nil), format: T.unsafe(nil), inclusion: T.unsafe(nil), length: T.unsafe(nil), numericality: T.unsafe(nil), presence: T.unsafe(nil), absence: T.unsafe(nil), uniqueness: T.unsafe(nil), on: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), allow_blank: T.unsafe(nil), allow_nil: T.unsafe(nil), **options); end
-
-  sig { params(attr_names: Symbol, block: T.proc.params(record: T.untyped, attr: Symbol, value: T.untyped).void).void }
+  def validate(*args, &block); end
+  def validates(*attributes); end
+  def validates!(*attributes); end
   def validates_each(*attr_names, &block); end
 
   # Validates whether the value of the specified attribute is valid url.
@@ -93,9 +83,7 @@ module ActiveModel::Validations::ClassMethods
   # * <tt>:schemes</tt> - Array of URI schemes to validate against. (default is +['http', 'https']+)
   def validates_url(*attr_names); end
 
-  sig { params(classes: Class, options: T.untyped).void }
-  def validates_with(*classes, **options); end
-
+  def validates_with(*args, &block); end
   def validators; end
   def validators_on(*attributes); end
 
@@ -106,8 +94,6 @@ module ActiveModel::Validations::ClassMethods
 end
 
 ActiveModel::Validations::ClassMethods::VALID_OPTIONS_FOR_VALIDATE = T.let(T.unsafe(nil), Array)
-ActiveModel::Validations::Message = T.type_alias { T.any(String, T.proc.params(object: T.untyped, data: {model: String, attribute: String, value: T.untyped}).returns(String)) }
-ActiveModel::Validations::Strict = T.type_alias { T.any(T.class_of(Exception), T::Boolean) }
 
 class ActiveModel::Validations::UrlValidator < ::ActiveModel::EachValidator
   def initialize(options); end

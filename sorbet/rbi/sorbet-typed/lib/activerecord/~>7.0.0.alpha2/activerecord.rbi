@@ -10,35 +10,35 @@
 class ActiveRecord::Migration::Compatibility::V5_0 < ActiveRecord::Migration::Compatibility::V5_1; end
 class ActiveRecord::Migration::Compatibility::V5_1 < ActiveRecord::Migration::Compatibility::V5_2; end
 
-# # 5.2 has a different definition for create_table because 6.0 adds a new option.
-# # This is the only difference between 5.2 and 6.0.
-# class ActiveRecord::Migration::Compatibility::V5_2 < ActiveRecord::Migration::Compatibility::V6_0
-#   # https://github.com/rails/rails/blob/v5.2.3/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L151-L290
-#   sig do
-#     params(
-#       table_name: T.any(String, Symbol),
-#       comment: T.untyped,
-#       id: T.any(T::Boolean, Symbol),
-#       primary_key: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
-#       options: T.untyped,
-#       temporary: T::Boolean,
-#       force: T.any(T::Boolean, Symbol),
-#       as: T.untyped,
-#       blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)
-#     ).void
-#   end
-#   def create_table(
-#     table_name,
-#     comment: nil,
-#     id: :primary_key,
-#     primary_key: :_,
-#     options: nil,
-#     temporary: false,
-#     force: false,
-#     as: nil,
-#     &blk
-#   ); end
-# end
+# 5.2 has a different definition for create_table because 6.0 adds a new option.
+# This is the only difference between 5.2 and 6.0.
+class ActiveRecord::Migration::Compatibility::V5_2 < ActiveRecord::Migration::Compatibility::V6_0
+  # https://github.com/rails/rails/blob/v5.2.3/activerecord/lib/active_record/connection_adapters/abstract/schema_statements.rb#L151-L290
+  sig do
+    params(
+      table_name: T.any(String, Symbol),
+      comment: T.untyped,
+      id: T.any(T::Boolean, Symbol),
+      primary_key: T.any(String, Symbol, T::Array[T.any(String, Symbol)]),
+      options: T.untyped,
+      temporary: T::Boolean,
+      force: T.any(T::Boolean, Symbol),
+      as: T.untyped,
+      blk: T.nilable(T.proc.params(t: ActiveRecord::ConnectionAdapters::TableDefinition).void)
+    ).void
+  end
+  def create_table(
+    table_name,
+    comment: nil,
+    id: :primary_key,
+    primary_key: :_,
+    options: nil,
+    temporary: false,
+    force: false,
+    as: nil,
+    &blk
+  ); end
+end
 
 class ActiveRecord::Migration::Compatibility::V6_0 < ActiveRecord::Migration::Compatibility::V6_1; end
 class ActiveRecord::Migration::Compatibility::V6_1 < ActiveRecord::Migration::Compatibility::V7_0; end
@@ -488,12 +488,12 @@ module ActiveRecord::Core
   def present?; end
 end
 
-# module ActiveRecord::ConnectionHandling
-#   def connected_to(database: T.unsafe(nil), role: T.unsafe(nil), prevent_writes: T.unsafe(nil), &blk); end
-#   def connected_to?(role:); end
-#   def connects_to(database: T.unsafe(nil)); end
-#   def current_role; end
-# end
+module ActiveRecord::ConnectionHandling
+  def connected_to(database: T.unsafe(nil), role: T.unsafe(nil), prevent_writes: T.unsafe(nil), &blk); end
+  def connected_to?(role:); end
+  def connects_to(database: T.unsafe(nil)); end
+  def current_role; end
+end
 
 # In ActiveRecord >= 6.1, the parent classes of these errors have changed.
 # https://github.com/rails/rails/commit/730d810b0dd24e80c1e88d56a5e6960363a25dbb

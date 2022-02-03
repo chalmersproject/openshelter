@@ -640,4 +640,5 @@ class Sprockets::Railtie::OrderedOptions < ::ActiveSupport::OrderedOptions
   def configure(&block); end
 end
 
+Sprockets::SassFunctions = Sprockets::SassProcessor::Functions
 Sprockets::VERSION = T.let(T.unsafe(nil), String)

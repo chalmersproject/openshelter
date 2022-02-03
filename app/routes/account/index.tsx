@@ -4,7 +4,7 @@ import { isBrowser } from "~/utils/config";
 import type { LoaderFunction } from "remix";
 import { gql } from "@apollo/client";
 import { useSubscription } from "@apollo/client";
-import { useLoaderQuery, runLoaderQuery } from "~/utils/apollo";
+import { useLoaderQuery, runLoaderQuery } from "~/utils/apollo_remix";
 
 import {
   AccountIndexRouteQueryDocument,

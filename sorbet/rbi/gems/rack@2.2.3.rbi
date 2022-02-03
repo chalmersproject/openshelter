@@ -3334,6 +3334,5 @@ class WEBrick::HTTPResponse
   # Sets the attribute rack
   def rack=(_arg0); end
 
-  # Sets up the headers for sending
   def setup_header; end
 end

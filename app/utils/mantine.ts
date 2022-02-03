@@ -70,14 +70,3 @@ export function sx(
 ): (theme: MantineTheme) => CSSObject {
   return theme => fn(customTheme(theme));
 }
-
-// export type MantineThemeOtherCustom = Pick<
-//   TailwindTheme,
-//   "letterSpacing" | "aspectRatio"
-// >;
-
-// declare module "@mantine/styles/lib/theme/types/MantineTheme" {
-//   export interface MantineTheme {
-//     other: MantineThemeOtherCustom;
-//   }
-// }

@@ -8,16 +8,9 @@ module GraphQL
   class << self
     def const_missing(const_name); end
     def default_parser; end
-
-    # Sets the attribute default_parser
     def default_parser=(_arg0); end
-
-    # Turn a query string or schema definition into an AST
     def parse(graphql_string, tracer: T.unsafe(nil)); end
-
-    # Read the contents of `filename` and parse them as GraphQL
     def parse_file(filename); end
-
     def parse_with_racc(string, filename: T.unsafe(nil), tracer: T.unsafe(nil)); end
     def scan(graphql_string); end
     def scan_with_ragel(graphql_string); end
@@ -27,12 +20,7 @@ end
 GraphQL::DEPRECATED_BOOLEAN_TYPE = T.let(T.unsafe(nil), GraphQL::ScalarType)
 GraphQL::DEPRECATED_FLOAT_TYPE = T.let(T.unsafe(nil), GraphQL::ScalarType)
 GraphQL::DEPRECATED_ID_TYPE = T.let(T.unsafe(nil), GraphQL::ScalarType)
-
-# Ruby has `deprecate_constant`,
-# but I don't see a way to give a nice error message in that case,
-# so I'm doing this instead.
 GraphQL::DEPRECATED_INT_TYPE = T.let(T.unsafe(nil), GraphQL::ScalarType)
-
 GraphQL::DEPRECATED_STRING_TYPE = T.let(T.unsafe(nil), GraphQL::ScalarType)
 
 # Plugin definition

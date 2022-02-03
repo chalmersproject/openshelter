@@ -176,10 +176,10 @@ class ActiveStorage::VariantRecord
   end
 
   module GeneratedAssociationMethods
-    sig { returns(T.nilable(T.untyped)) }
+    sig { returns(T.untyped) }
     def blob; end
 
-    sig { params(value: T.nilable(T.untyped)).void }
+    sig { params(value: T.untyped).void }
     def blob=(value); end
 
     sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
@@ -209,25 +209,25 @@ class ActiveStorage::VariantRecord
     sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
     def create_image_blob!(*args, &blk); end
 
-    sig { returns(T.nilable(T.untyped)) }
+    sig { returns(T.untyped) }
     def image_attachment; end
 
-    sig { params(value: T.nilable(T.untyped)).void }
+    sig { params(value: T.untyped).void }
     def image_attachment=(value); end
 
-    sig { returns(T.nilable(T.untyped)) }
+    sig { returns(T.untyped) }
     def image_blob; end
 
-    sig { params(value: T.nilable(T.untyped)).void }
+    sig { params(value: T.untyped).void }
     def image_blob=(value); end
 
-    sig { returns(T.nilable(T.untyped)) }
+    sig { returns(T.untyped) }
     def reload_blob; end
 
-    sig { returns(T.nilable(T.untyped)) }
+    sig { returns(T.untyped) }
     def reload_image_attachment; end
 
-    sig { returns(T.nilable(T.untyped)) }
+    sig { returns(T.untyped) }
     def reload_image_blob; end
   end
 

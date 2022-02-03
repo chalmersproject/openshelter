@@ -907,10 +907,14 @@ end
 class ActiveStorage::Record < ::ActiveRecord::Base
   include ::ActiveStorage::Record::GeneratedAttributeMethods
   include ::ActiveStorage::Record::GeneratedAssociationMethods
+  include ::Kaminari::ActiveRecordModelExtension
+  include ::Kaminari::ConfigurationMethods
+  extend ::Kaminari::ConfigurationMethods::ClassMethods
 
   class << self
     def _validators; end
     def defined_enums; end
+    def page(num = T.unsafe(nil)); end
   end
 end
 

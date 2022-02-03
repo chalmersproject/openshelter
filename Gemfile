@@ -42,9 +42,12 @@ gem "authlogic", "~> 6.4.1"
 gem "scrypt", "~> 2.0.2"
 gem "scanf", "~> 1.0.0"
 
-# Authorize actions with Action Policy
+# Authorize actions with Action Policy.
 gem "action_policy", "~> 0.6.0"
 gem "action_policy-graphql", "~> 0.5.3"
+
+# Run background jobs with Good Job.
+gem "good_job", "~> 2.9"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder].
 # gem "jbuilder", "~> 2.11"

@@ -232,22 +232,22 @@ class ActionMailbox::InboundEmail
     sig { params(args: T.untyped, blk: T.untyped).returns(T.untyped) }
     def create_raw_email_blob!(*args, &blk); end
 
-    sig { returns(T.nilable(T.untyped)) }
+    sig { returns(T.untyped) }
     def raw_email_attachment; end
 
-    sig { params(value: T.nilable(T.untyped)).void }
+    sig { params(value: T.untyped).void }
     def raw_email_attachment=(value); end
 
-    sig { returns(T.nilable(T.untyped)) }
+    sig { returns(T.untyped) }
     def raw_email_blob; end
 
-    sig { params(value: T.nilable(T.untyped)).void }
+    sig { params(value: T.untyped).void }
     def raw_email_blob=(value); end
 
-    sig { returns(T.nilable(T.untyped)) }
+    sig { returns(T.untyped) }
     def reload_raw_email_attachment; end
 
-    sig { returns(T.nilable(T.untyped)) }
+    sig { returns(T.untyped) }
     def reload_raw_email_blob; end
   end
 

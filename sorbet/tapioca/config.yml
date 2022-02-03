@@ -4,18 +4,14 @@ gem:
   doc: true
   exclude:
     - prettier
-    - pry
-    - pry-rails
-    - rake
+    - rbi
     - rubocop-graphql
     - rubocop-rails
     - rubocop-shopify
     - rubocop-sorbet
-    - sassc
     - sassc-rails
     - spoom
     - tapioca
-    - thor
     - tilt
     - yard
     - yard-sorbet

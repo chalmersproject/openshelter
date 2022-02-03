@@ -209,6 +209,20 @@ class ActiveRecord::MigrationProxy < ::Struct
   end
 end
 
+class ActiveRecord::Point < ::Struct
+  def x; end
+  def x=(_); end
+  def y; end
+  def y=(_); end
+
+  class << self
+    def [](*_arg0); end
+    def inspect; end
+    def members; end
+    def new(*_arg0); end
+  end
+end
+
 module ActiveRecord::Serialization
   extend ::ActiveSupport::Concern
   include GeneratedInstanceMethods

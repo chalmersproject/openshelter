@@ -1,14 +1,20 @@
-# typed: strong
+# typed: true
 # frozen_string_literal: true
 
-require "safe_type"
-require "rubocop"
 require "active_record/connection_adapters/postgresql_adapter"
-
-# Patches
-require_relative "./shims/graphql"
-require_relative "./shims/graphiql-rails"
-require_relative "./shims/actionpack"
-require_relative "./shims/activemodel"
-require_relative "./shims/activerecord"
-require_relative "./shims/rails_admin"
+require "active_support/core_ext/integer/time"
+require "bootsnap/setup"
+require "bundler/setup"
+require "fileutils"
+require "graphql_ext"
+require "good_job/engine"
+require "json"
+require "open3"
+require "rails/all"
+require "rails/test_help"
+require "ripper"
+require "route_constraints"
+require "rubocop"
+require "safe_type"
+require "socket"
+require "sprockets/railtie"

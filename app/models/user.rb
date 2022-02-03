@@ -31,8 +31,14 @@
 #  index_users_on_single_access_token  (single_access_token) UNIQUE
 #
 
-# TODO: Create a custom email type.
+# TODO: Create a custom email type?
 class User < ApplicationRecord
+  extend T::Sig
+
+  # Users with these domains are considered admins.
+  ADMIN_DOMAINS =
+    T.let(%w[chalmers.cards chalmersproject.com], T::Array[String])
+
   acts_as_authentic do |config|
     # Configure Authlogic.
     #
@@ -73,4 +79,9 @@ class User < ApplicationRecord
               minimum: 8,
               if: :require_password?,
             }
+
+  sig { returns(T::Boolean) }
+  def admin?
+    ADMIN_DOMAINS.any? { |domain| email.end_with?("@#{domain}") }
+  end
 end

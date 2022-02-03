@@ -40,26 +40,81 @@ module Rails
   extend ::ActiveSupport::Benchmarkable
 
   class << self
+    # Returns the value of attribute app_class.
     def app_class; end
+
+    # Sets the attribute app_class
     def app_class=(_arg0); end
+
     def application; end
+
+    # Sets the attribute application
     def application=(_arg0); end
+
     def autoloaders; end
     def backtrace_cleaner; end
+
+    # Returns the value of attribute cache.
     def cache; end
+
+    # Sets the attribute cache
     def cache=(_arg0); end
+
+    # The Configuration instance used to configure the Rails environment
     def configuration; end
+
+    # Returns the current Rails environment.
+    #
+    # Rails.env # => "development"
+    # Rails.env.development? # => true
+    # Rails.env.production? # => false
     def env; end
+
+    # Sets the Rails environment.
+    #
+    # Rails.env = "staging" # => "staging"
     def env=(environment); end
+
     def error; end
+
+    # Returns the version of the currently loaded Rails as a <tt>Gem::Version</tt>
     def gem_version; end
+
+    # Returns all Rails groups for loading based on:
+    #
+    # * The Rails environment;
+    # * The environment variable RAILS_GROUPS;
+    # * The optional envs given as argument and the hash with group dependencies;
+    #
+    # Rails.groups assets: [:development, :test]
+    # # => [:default, "development", :assets] for Rails.env == "development"
+    # # => [:default, "production"]           for Rails.env == "production"
     def groups(*groups); end
+
     def initialize!(*_arg0, &_arg1); end
     def initialized?(*_arg0, &_arg1); end
+
+    # Returns the value of attribute logger.
     def logger; end
+
+    # Sets the attribute logger
     def logger=(_arg0); end
+
+    # Returns a Pathname object of the public folder of the current
+    # Rails project, otherwise it returns +nil+ if there is no project:
+    #
+    # Rails.public_path
+    # # => #<Pathname:/Users/someuser/some/path/project/public>
     def public_path; end
+
+    # Returns a Pathname object of the current Rails project,
+    # otherwise it returns +nil+ if there is no project:
+    #
+    # Rails.root
+    # # => #<Pathname:/Users/someuser/some/path/project>
     def root; end
+
+    # Returns the version of the currently loaded Rails as a string.
     def version; end
   end
 end

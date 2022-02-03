@@ -3653,8 +3653,7 @@ class ActionController::Parameters
   # the same way as <tt>Hash#each_value</tt>.
   def each_value(&block); end
 
-  sig { returns(T::Boolean) }
-  def empty?; end
+  def empty?(*_arg0, &_arg1); end
 
   # Returns true if another +Parameters+ object contains the same content and
   # permitted flag.
@@ -3690,25 +3689,17 @@ class ActionController::Parameters
   # params.fetch(:none) { "Francesco" } # => "Francesco"
   def fetch(key, *args); end
 
-  sig { params(key: T.any(String, Symbol)).returns(T::Boolean) }
-  def has_key?(key); end
-
-  sig { params(value: T.untyped).returns(T::Boolean) }
-  def has_value?(value); end
-
+  def has_key?(*_arg0, &_arg1); end
+  def has_value?(*_arg0, &_arg1); end
   def hash; end
-
-  sig { params(key: T.any(String, Symbol)).returns(T::Boolean) }
-  def include?(key); end
-
+  def include?(*_arg0, &_arg1); end
   def init_with(coder); end
   def inspect; end
 
   # Equivalent to Hash#keep_if, but returns +nil+ if no changes were made.
   def keep_if(&block); end
 
-  sig { params(key: T.any(String, Symbol)).returns(T::Boolean) }
-  def key?(key); end
+  def key?(*_arg0, &_arg1); end
 
   # :method: values
   #
@@ -3716,8 +3707,7 @@ class ActionController::Parameters
   # values()
   #
   # Returns a new array of the values of the parameters.
-  sig { returns(T::Array[T.untyped]) }
-  def keys; end
+  def keys(*_arg0, &_arg1); end
 
   def member?(*_arg0, &_arg1); end
 
@@ -4099,8 +4089,7 @@ class ActionController::Parameters
   # This method is also aliased as +to_param+.
   def to_query(*args); end
 
-  sig { returns(String) }
-  def to_s; end
+  def to_s(*_arg0, &_arg1); end
 
   # Returns an unsafe, unfiltered
   # <tt>ActiveSupport::HashWithIndifferentAccess</tt> representation of the
@@ -4146,11 +4135,8 @@ class ActionController::Parameters
   # <tt>ActionController::Parameters</tt> instance.
   def transform_values!; end
 
-  sig { params(value: T.untyped).returns(T::Boolean) }
-  def value?(value); end
-
-  sig { returns(T::Array[T.untyped]) }
-  def values; end
+  def value?(*_arg0, &_arg1); end
+  def values(*_arg0, &_arg1); end
 
   # Returns values that were assigned to the given +keys+. Note that all the
   # +Hash+ objects will be converted to <tt>ActionController::Parameters</tt>.
@@ -5009,12 +4995,6 @@ module ActionController::RequestForgeryProtection
   mixes_in_class_methods ::AbstractController::Callbacks::ClassMethods
   mixes_in_class_methods ::ActionController::RequestForgeryProtection::ClassMethods
 
-  sig { returns(Symbol) }
-  def request_forgery_protection_token; end
-
-  sig { params(value: Symbol).void }
-  def request_forgery_protection_token=(value); end
-
   private
 
   # Checks if any of the authenticity tokens from the request are valid.
@@ -5171,8 +5151,7 @@ module ActionController::RequestForgeryProtection::ClassMethods
   # class ApplicationController < ActionController:x:Base
   # protect_from_forgery with: CustomStrategy
   # end
-  sig { params(only: T.any(Symbol, T::Array[Symbol]), except: T.any(Symbol, T::Array[Symbol]), if: T.untyped, unless: T.untyped, prepend: T::Boolean, with: Symbol, exception: T.untyped, reset_session: T.untyped, null_session: T.untyped).void }
-  def protect_from_forgery(only: T.unsafe(nil), except: T.unsafe(nil), if: T.unsafe(nil), unless: T.unsafe(nil), prepend: T.unsafe(nil), with: T.unsafe(nil), exception: T.unsafe(nil), reset_session: T.unsafe(nil), null_session: T.unsafe(nil)); end
+  def protect_from_forgery(options = T.unsafe(nil)); end
 
   # Turn off request forgery protection. This is a wrapper for:
   #
@@ -5701,6 +5680,7 @@ class ActionController::TestCase < ::ActiveSupport::TestCase
   def _controller_class; end
   def _controller_class=(_arg0); end
   def _controller_class?; end
+  def before_setup; end
 
   class << self
     def __callbacks; end
@@ -8164,6 +8144,12 @@ class ActionDispatch::IntegrationTest < ::ActiveSupport::TestCase
   include ::ActionDispatch::Routing::UrlFor
   include ::ActionDispatch::IntegrationTest::UrlOptions
   extend ::ActionDispatch::IntegrationTest::Behavior::ClassMethods
+
+  def before_setup; end
+
+  class << self
+    def fixture_path; end
+  end
 end
 
 module ActionDispatch::IntegrationTest::Behavior
@@ -10886,43 +10872,37 @@ module ActionDispatch::Routing::Mapper::HttpHelpers
   # For supported arguments, see match[rdoc-ref:Base#match]
   #
   # delete 'broccoli', to: 'food#broccoli'
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.any(String, Symbol), action: T.any(String, Symbol), param: Symbol, module: T.any(String, Symbol), as: T.any(String, Symbol), via: T.any(Symbol, T::Array[Symbol]), to: T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped)), on: Symbol, constraints: T.untyped, defaults: T::Hash[T.untyped, T.untyped], anchor: T::Boolean, format: T.any(String, T::Boolean), path: T.any(String, Symbol), options: T.untyped, block: T.untyped).returns(T.untyped) }
-  def delete(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), **options, &block); end
+  def delete(*args, &block); end
 
   # Define a route that only recognizes HTTP GET.
   # For supported arguments, see match[rdoc-ref:Base#match]
   #
   # get 'bacon', to: 'food#bacon'
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.any(String, Symbol), action: T.any(String, Symbol), param: Symbol, module: T.any(String, Symbol), as: T.any(String, Symbol), via: T.any(Symbol, T::Array[Symbol]), to: T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped)), on: Symbol, constraints: T.untyped, defaults: T::Hash[T.untyped, T.untyped], anchor: T::Boolean, format: T.any(String, T::Boolean), path: T.any(String, Symbol), options: T.untyped, block: T.untyped).returns(T.untyped) }
-  def get(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), **options, &block); end
+  def get(*args, &block); end
 
   # Define a route that only recognizes HTTP OPTIONS.
   # For supported arguments, see match[rdoc-ref:Base#match]
   #
   # options 'carrots', to: 'food#carrots'
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.any(String, Symbol), action: T.any(String, Symbol), param: Symbol, module: T.any(String, Symbol), as: T.any(String, Symbol), via: T.any(Symbol, T::Array[Symbol]), to: T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped)), on: Symbol, constraints: T.untyped, defaults: T::Hash[T.untyped, T.untyped], anchor: T::Boolean, format: T.any(String, T::Boolean), path: T.any(String, Symbol), options: T.untyped, block: T.untyped).returns(T.untyped) }
-  def options(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), **options, &block); end
+  def options(*args, &block); end
 
   # Define a route that only recognizes HTTP PATCH.
   # For supported arguments, see match[rdoc-ref:Base#match]
   #
   # patch 'bacon', to: 'food#bacon'
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.any(String, Symbol), action: T.any(String, Symbol), param: Symbol, module: T.any(String, Symbol), as: T.any(String, Symbol), via: T.any(Symbol, T::Array[Symbol]), to: T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped)), on: Symbol, constraints: T.untyped, defaults: T::Hash[T.untyped, T.untyped], anchor: T::Boolean, format: T.any(String, T::Boolean), path: T.any(String, Symbol), options: T.untyped, block: T.untyped).returns(T.untyped) }
-  def patch(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), **options, &block); end
+  def patch(*args, &block); end
 
   # Define a route that only recognizes HTTP POST.
   # For supported arguments, see match[rdoc-ref:Base#match]
   #
   # post 'bacon', to: 'food#bacon'
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.any(String, Symbol), action: T.any(String, Symbol), param: Symbol, module: T.any(String, Symbol), as: T.any(String, Symbol), via: T.any(Symbol, T::Array[Symbol]), to: T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped)), on: Symbol, constraints: T.untyped, defaults: T::Hash[T.untyped, T.untyped], anchor: T::Boolean, format: T.any(String, T::Boolean), path: T.any(String, Symbol), options: T.untyped, block: T.untyped).returns(T.untyped) }
-  def post(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), **options, &block); end
+  def post(*args, &block); end
 
   # Define a route that only recognizes HTTP PUT.
   # For supported arguments, see match[rdoc-ref:Base#match]
   #
   # put 'bacon', to: 'food#bacon'
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.any(String, Symbol), action: T.any(String, Symbol), param: Symbol, module: T.any(String, Symbol), as: T.any(String, Symbol), via: T.any(Symbol, T::Array[Symbol]), to: T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped)), on: Symbol, constraints: T.untyped, defaults: T::Hash[T.untyped, T.untyped], anchor: T::Boolean, format: T.any(String, T::Boolean), path: T.any(String, Symbol), options: T.untyped, block: T.untyped).returns(T.untyped) }
-  def put(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), **options, &block); end
+  def put(*args, &block); end
 
   private
 
@@ -11058,8 +11038,7 @@ module ActionDispatch::Routing::Mapper::Resources
   # match 'path' => 'controller#action', via: :patch
   # match 'path', to: 'controller#action', via: :post
   # match 'path', 'otherpath', on: :member, via: :get
-  sig { params(name: T.any(String, Symbol, T::Hash[String, String]), controller: T.any(String, Symbol), action: T.any(String, Symbol), param: Symbol, module: T.any(String, Symbol), as: T.any(String, Symbol), via: T.any(Symbol, T::Array[Symbol]), to: T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped)), on: Symbol, constraints: T.untyped, defaults: T::Hash[T.untyped, T.untyped], anchor: T::Boolean, format: T.any(String, T::Boolean), path: T.any(String, Symbol), options: T.untyped, block: T.untyped).returns(T.untyped) }
-  def match(name, controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), path: T.unsafe(nil), **options, &block); end
+  def match(path, *rest, &block); end
 
   # To add a member route, add a member block into the resource block:
   #
@@ -11075,8 +11054,7 @@ module ActionDispatch::Routing::Mapper::Resources
   def member(&block); end
 
   # See ActionDispatch::Routing::Mapper::Scoping#namespace.
-  sig { params(name: T.any(String, Symbol), path: T.any(String, Symbol), as: T.any(String, Symbol), module: T.any(String, Symbol), shallow_path: T.any(String, Symbol), shallow_prefix: T.any(String, Symbol), block: T.proc.void).returns(T.untyped) }
-  def namespace(name, path: T.unsafe(nil), as: T.unsafe(nil), module: T.unsafe(nil), shallow_path: T.unsafe(nil), shallow_prefix: T.unsafe(nil), &block); end
+  def namespace(path, options = T.unsafe(nil)); end
 
   def nested(&block); end
   def new(&block); end
@@ -11112,8 +11090,7 @@ module ActionDispatch::Routing::Mapper::Resources
   #
   # === Options
   # Takes same options as resources[rdoc-ref:#resources]
-  sig { params(resources: T.any(String, Symbol), as: T.any(String, Symbol), controller: T.any(String, Symbol), concerns: T.any(Symbol, T::Array[Symbol]), param: Symbol, path_names: T.untyped, path: T.untyped, only: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), except: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), shallow: T::Boolean, shallow_path: String, shallow_prefix: String, format: T.untyped, block: T.untyped).returns(T.untyped) }
-  def resource(*resources, as: T.unsafe(nil), controller: T.unsafe(nil), concerns: T.unsafe(nil), param: T.unsafe(nil), path_names: T.unsafe(nil), path: T.unsafe(nil), only: T.unsafe(nil), except: T.unsafe(nil), shallow: T.unsafe(nil), shallow_path: T.unsafe(nil), shallow_prefix: T.unsafe(nil), format: T.unsafe(nil), &block); end
+  def resource(*resources, &block); end
 
   # In Rails, a resourceful route provides a mapping between HTTP verbs
   # and URLs and controller actions. By convention, each action also maps
@@ -11252,8 +11229,7 @@ module ActionDispatch::Routing::Mapper::Resources
   #
   # # resource actions are at /admin/posts.
   # resources :posts, path: "admin/posts"
-  sig { params(resources: T.any(String, Symbol), as: T.any(String, Symbol), constraints: T.untyped, controller: T.any(String, Symbol), concerns: T.any(Symbol, T::Array[Symbol]), defaults: T.untyped, param: Symbol, path_names: T.untyped, path: T.untyped, only: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), except: T.any(String, Symbol, T::Array[T.any(String, Symbol)]), shallow: T::Boolean, shallow_path: String, shallow_prefix: String, format: T.untyped, block: T.untyped).returns(T.untyped) }
-  def resources(*resources, as: T.unsafe(nil), constraints: T.unsafe(nil), controller: T.unsafe(nil), concerns: T.unsafe(nil), defaults: T.unsafe(nil), param: T.unsafe(nil), path_names: T.unsafe(nil), path: T.unsafe(nil), only: T.unsafe(nil), except: T.unsafe(nil), shallow: T.unsafe(nil), shallow_path: T.unsafe(nil), shallow_prefix: T.unsafe(nil), format: T.unsafe(nil), &block); end
+  def resources(*resources, &block); end
 
   def resources_path_names(options); end
 
@@ -11270,8 +11246,7 @@ module ActionDispatch::Routing::Mapper::Resources
   # You should put the root route at the top of <tt>config/routes.rb</tt>,
   # because this means it will be matched first. As this is the most popular route
   # of most Rails applications, this is beneficial.
-  sig { params(path: T.nilable(String), controller: T.any(String, Symbol), action: T.any(String, Symbol), param: Symbol, module: T.any(String, Symbol), as: T.any(String, Symbol), via: T.any(Symbol, T::Array[Symbol]), to: T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped)), on: Symbol, constraints: T.untyped, defaults: T::Hash[T.untyped, T.untyped], anchor: T::Boolean, format: T.any(String, T::Boolean), block: T.untyped).returns(T.untyped) }
-  def root(path = T.unsafe(nil), controller: T.unsafe(nil), action: T.unsafe(nil), param: T.unsafe(nil), module: T.unsafe(nil), as: T.unsafe(nil), via: T.unsafe(nil), to: T.unsafe(nil), on: T.unsafe(nil), constraints: T.unsafe(nil), defaults: T.unsafe(nil), anchor: T.unsafe(nil), format: T.unsafe(nil), &block); end
+  def root(path, options = T.unsafe(nil)); end
 
   def shallow; end
   def shallow?; end
@@ -11618,9 +11593,7 @@ module ActionDispatch::Routing::Mapper::Scoping
 end
 
 ActionDispatch::Routing::Mapper::Scoping::POISON = T.let(T.unsafe(nil), Object)
-ActionDispatch::Routing::Mapper::To = T.type_alias { T.any(Class, Proc, String, Symbol, T.proc.params(env: T.untyped).returns(T.untyped)) }
 ActionDispatch::Routing::Mapper::URL_OPTIONS = T.let(T.unsafe(nil), Array)
-ActionDispatch::Routing::Mapper::Via = T.type_alias { T.any(Symbol, T::Array[Symbol]) }
 
 class ActionDispatch::Routing::OptionRedirect < ::ActionDispatch::Routing::Redirect
   def inspect; end

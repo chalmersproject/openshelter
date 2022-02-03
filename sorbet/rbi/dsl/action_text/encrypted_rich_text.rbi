@@ -200,13 +200,13 @@ class ActionText::EncryptedRichText
     sig { params(value: T::Enumerable[T.untyped]).void }
     def embeds_blobs=(value); end
 
-    sig { returns(T.nilable(T.untyped)) }
+    sig { returns(T.untyped) }
     def record; end
 
-    sig { params(value: T.nilable(T.untyped)).void }
+    sig { params(value: T.untyped).void }
     def record=(value); end
 
-    sig { returns(T.nilable(T.untyped)) }
+    sig { returns(T.untyped) }
     def reload_record; end
   end
 

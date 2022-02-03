@@ -10,8 +10,8 @@ import { Box, Group } from "@mantine/core";
 import { Text, Badge } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
 
-import { CSRFProvider, CSRFMeta } from "~/utils/csrf";
-import { ApolloProvider } from "~/utils/apollo";
+import { CSRFProvider, CSRFMeta } from "~/components/csrf";
+import { ApolloProvider } from "~/components/apollo";
 
 import { apiBaseURL, isDevelopment } from "~/utils/config";
 import { themeOverride, sx } from "~/utils/mantine";

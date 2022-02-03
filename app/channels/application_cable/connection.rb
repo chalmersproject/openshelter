@@ -1,6 +1,8 @@
 # typed: strict
 # frozen_string_literal: true
 
+require "authlogic_finder"
+
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
     extend T::Sig
@@ -9,18 +11,8 @@ module ApplicationCable
 
     sig { void }
     def connect
-      self.current_user = find_verified_user
-    end
-
-    private
-
-    sig { returns(T.nilable(User)) }
-    def find_verified_user
-      credentials = T.let(cookies.encrypted[:credentials], T.nilable(String))
-      return nil if credentials.nil?
-
-      token = T.must(credentials.split("::").first)
-      User.find_by(persistence_token: token)
+      finder = AuthlogicFinder.new(request)
+      self.current_user = finder.find_authenticated_user
     end
   end
 end

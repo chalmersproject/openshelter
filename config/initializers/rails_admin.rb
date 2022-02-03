@@ -3,6 +3,7 @@
 # frozen_string_literal: true
 
 RailsAdmin.config do |config|
+  config.main_app_name = "Chalmers Project"
   config.asset_source = :sprockets
 
   ### Popular gems integration
@@ -25,8 +26,7 @@ RailsAdmin.config do |config|
   ### More at https://github.com/railsadminteam/rails_admin/wiki/Base-configuration
 
   ## == Gravatar integration ==
-  ## To disable Gravatar integration in Navigation Bar set to false
-  # config.show_gravatar = true
+  config.show_gravatar = true
 
   config.actions do
     dashboard # mandatory

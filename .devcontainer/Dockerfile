@@ -1,5 +1,5 @@
-# Use Ruby 3 on Bullseye.
-FROM mcr.microsoft.com/vscode/devcontainers/ruby:0-3-bullseye
+# Use Ruby 3.0 on Bullseye.
+FROM mcr.microsoft.com/vscode/devcontainers/ruby:3.0-bullseye
 
 # Install Postgres.
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list && \

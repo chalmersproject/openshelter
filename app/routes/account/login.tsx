@@ -9,9 +9,9 @@ import { Button, Group } from "@mantine/core";
 import { TextInput, PasswordInput } from "@mantine/core";
 import { useNotifications } from "@mantine/notifications";
 
-import type { GraphQLErrors } from "@apollo/client/errors";
+import { FormAuthenticityField } from "~/components/csrf";
 
-import { FormAuthenticityField } from "~/utils/csrf";
+import type { GraphQLErrors } from "@apollo/client/errors";
 
 export const action: ActionFunction = async ({ request }) => {
   const { body, headers } = request;

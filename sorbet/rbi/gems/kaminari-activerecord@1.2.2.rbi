@@ -8,6 +8,13 @@ module Kaminari
   class << self
     def config; end
     def configure; end
+
+    # Wrap an Array object to make it paginatable
+    # ==== Options
+    # * <tt>:limit</tt> - limit
+    # * <tt>:offset</tt> - offset
+    # * <tt>:total_count</tt> - total_count
+    # * <tt>:padding</tt> - padding
     def paginate_array(array, limit: T.unsafe(nil), offset: T.unsafe(nil), total_count: T.unsafe(nil), padding: T.unsafe(nil)); end
   end
 end

@@ -118,7 +118,10 @@ PgSearch::Configuration::VALID_VALUES = T.let(T.unsafe(nil), Hash)
 class PgSearch::Document < ::ActiveRecord::Base
   include ::PgSearch::Document::GeneratedAttributeMethods
   include ::PgSearch::Document::GeneratedAssociationMethods
+  include ::Kaminari::ActiveRecordModelExtension
+  include ::Kaminari::ConfigurationMethods
   include ::PgSearch::Model
+  extend ::Kaminari::ConfigurationMethods::ClassMethods
   extend ::PgSearch::Model::ClassMethods
 
   def autosave_associated_records_for_searchable(*args); end
@@ -133,6 +136,7 @@ class PgSearch::Document < ::ActiveRecord::Base
     # https://github.com/Casecommons/pg_search/issues/26
     def logger; end
 
+    def page(num = T.unsafe(nil)); end
     def search(*args); end
   end
 end

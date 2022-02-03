@@ -374,6 +374,7 @@ module RuboCop::AST::CollectionNode
   def entries(*args, &block); end
   def exclude?(*args, &block); end
   def excluding(*args, &block); end
+  def extract!(*args, &block); end
   def extract_options!(*args, &block); end
   def fetch(*args, &block); end
   def fifth(*args, &block); end
@@ -394,6 +395,8 @@ module RuboCop::AST::CollectionNode
   def grep(*args, &block); end
   def grep_v(*args, &block); end
   def group_by(*args, &block); end
+  def in_groups(*args, &block); end
+  def in_groups_of(*args, &block); end
   def in_order_of(*args, &block); end
   def include?(*args, &block); end
   def including(*args, &block); end
@@ -401,6 +404,7 @@ module RuboCop::AST::CollectionNode
   def index_by(*args, &block); end
   def index_with(*args, &block); end
   def inject(*args, &block); end
+  def inquiry(*args, &block); end
   def insert(*args, &block); end
   def intersection(*args, &block); end
   def join(*args, &block); end
@@ -465,6 +469,7 @@ module RuboCop::AST::CollectionNode
   def sort!(*args, &block); end
   def sort_by(*args, &block); end
   def sort_by!(*args, &block); end
+  def split(*args, &block); end
   def sum(*args, &block); end
   def take(*args, &block); end
   def take_while(*args, &block); end
@@ -473,6 +478,7 @@ module RuboCop::AST::CollectionNode
   def third_to_last(*args, &block); end
   def to(*args, &block); end
   def to_ary(*args, &block); end
+  def to_csv(*args, &block); end
   def to_default_s(*args, &block); end
   def to_formatted_s(*args, &block); end
   def to_fs(*args, &block); end
