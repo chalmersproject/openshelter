@@ -1,9 +1,7 @@
 module.exports = {
   service: {
     name: "api",
-    endpoint: {
-      url: "http://localhost:8080/api/graphql",
-    },
+    localSchemaFile: `${__dirname}/lib/graphql/schema.generated.json`,
   },
   client: {
     includes: [

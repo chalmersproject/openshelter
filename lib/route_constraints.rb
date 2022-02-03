@@ -27,3 +27,7 @@ module RouteConstraints
     Authenticated.new(admin_only: admin_only)
   end
 end
+
+class ActionDispatch::Routing::Mapper
+  include RouteConstraints
+end

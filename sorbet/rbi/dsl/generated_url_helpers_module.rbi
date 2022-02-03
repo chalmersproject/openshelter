@@ -9,13 +9,10 @@ module GeneratedUrlHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
-  def admin_jobs_url(*args); end
+  def good_job_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def admin_url(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def graphiql_url(*args); end
+  def graphiql_rails_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def graphql_url(*args); end
@@ -31,6 +28,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def rails_admin_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def rails_blob_representation_proxy_url(*args); end

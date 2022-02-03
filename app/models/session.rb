@@ -1,6 +1,8 @@
 # typed: strict
 # frozen_string_literal: true
 
+require "authlogic_request_adapter"
+
 class Session < Authlogic::Session::Base
   extend T::Sig
   authenticate_with User

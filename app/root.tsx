@@ -3,18 +3,17 @@ import { Meta, MetaFunction } from "remix";
 import { Links, LinksFunction } from "remix";
 import { LiveReload, Outlet, Scripts, ScrollRestoration } from "remix";
 import { useLoaderData, LoaderFunction } from "remix";
+import { apiBaseURL, isDevelopment } from "~/config";
 
 import { MantineProvider } from "@mantine/core";
 import { AppShell, Header } from "@mantine/core";
 import { Box, Group } from "@mantine/core";
 import { Text, Badge } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
+import { themeOverride, sx } from "~/mantine";
 
 import { CSRFProvider, CSRFMeta } from "~/components/csrf";
 import { ApolloProvider } from "~/components/apollo";
-
-import { apiBaseURL, isDevelopment } from "~/utils/config";
-import { themeOverride, sx } from "~/utils/mantine";
 
 export const meta: MetaFunction = () => {
   return { title: "App" };

@@ -1,5 +1,5 @@
-import { apiBaseURL, isBrowser } from "~/utils/config";
-import { CSRFContext } from "~/utils/csrf";
+import { apiBaseURL, isBrowser } from "~/config";
+import { CSRFContext } from "~/csrf";
 
 import { ApolloClient as Client } from "@apollo/client";
 import { InMemoryCache, NormalizedCacheObject } from "@apollo/client";
@@ -9,13 +9,16 @@ import { HttpLink } from "@apollo/client";
 // import { RetryLink } from "@apollo/client/link/retry";
 // import { SentryLink } from "apollo-link-sentry";
 // import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries";
-import { split as splitLinks } from "@apollo/client";
-import { setContext as setLinkContext } from "@apollo/client/link/context";
-import { from as mergeLinks } from "@apollo/client";
-import CableLink from "graphql-ruby-client/subscriptions/ActionCableLink";
-import cable from "~/utils/cable.client";
+import { from as fromLinks } from "@apollo/client";
 
+// Split GraphQL requests between protocols.
+import { split as splitLinks } from "@apollo/client";
 import { getMainDefinition } from "@apollo/client/utilities";
+import { setContext as setLinkContext } from "@apollo/client/link/context";
+
+// Use Action Cable to implement GraphQL Subscriptions.
+import CableLink from "graphql-ruby-client/subscriptions/ActionCableLink";
+import cable from "~/cable.client";
 
 import type { TypedTypePolicies as TypePolicies } from "~/graphql/apollo.generated";
 
@@ -78,7 +81,7 @@ export const createApolloClient = (
   if (isBrowser && !csrf) {
     throw new Error("Missing CSRF context");
   }
-  const link = mergeLinks([
+  const link = fromLinks([
     // new SentryLink(),
     // ...(isBrowser ? [new RetryLink()] : []),
     ...(isBrowser ? [createCSRFLink(csrf!)] : []),

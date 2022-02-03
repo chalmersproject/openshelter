@@ -9,7 +9,7 @@ import type { OperationVariables } from "@apollo/client";
 import { NetworkStatus } from "@apollo/client";
 import { useApolloClient, useQuery } from "@apollo/client";
 
-import { createApolloClient } from "~/utils/apollo_client";
+import { createApolloClient } from "~/apollo/client";
 
 type LoaderQueryResult<TData, TVariables> = Pick<
   ApolloQueryResult<TData>,

@@ -9,13 +9,10 @@ module GeneratedPathHelpersModule
   include ::ActionDispatch::Routing::PolymorphicRoutes
 
   sig { params(args: T.untyped).returns(String) }
-  def admin_jobs_path(*args); end
+  def good_job_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
-  def admin_path(*args); end
-
-  sig { params(args: T.untyped).returns(String) }
-  def graphiql_path(*args); end
+  def graphiql_rails_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def graphql_path(*args); end
@@ -31,6 +28,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def rails_admin_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def rails_blob_path(*args); end

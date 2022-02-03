@@ -4,7 +4,7 @@ import { Group, Text } from "@mantine/core";
 import type { LoaderFunction } from "remix";
 import { gql } from "@apollo/client";
 import { useSubscription } from "@apollo/client";
-import { useLoaderQuery, runLoaderQuery } from "~/utils/apollo_remix";
+import { useLoaderQuery, runLoaderQuery } from "~/apollo/remix";
 
 import {
   AccountIndexRouteQueryDocument,

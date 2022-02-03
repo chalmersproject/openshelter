@@ -21,21 +21,23 @@ inherit_gem:
 AllCops:
   NewCops: enable
   Exclude:
-    - Rakefile
-    - config.ru
     - .cache/**/*
+    - .devcontainer/**/*
+    - .husky/**/*
     - build/**/*
-    - public/**/*
     - db/schema.rb
     - bin/**/*
     - log/**/*
-    - tmp/**/*
-    - storage/**/*
-    - sorbet/rbi/sorbet-typed/**/*
-    - sorbet/rbi/gems/**/*
-    - sorbet/rbi/dsl/**/*
-    - vendor/**/*
     - node_modules/**/*
+    - public/**/*
+    - tmp/**/*
+    - sorbet/rbi/dsl/**/*
+    - sorbet/rbi/gems/**/*
+    - sorbet/rbi/sorbet-typed/**/*
+    - storage/**/*
+    - vendor/**/*
+    - config.ru
+    - Rakefile
   Include:
     - "**/*.rb"
     - "**/*.rbi"

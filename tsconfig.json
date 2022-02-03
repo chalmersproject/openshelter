@@ -2,16 +2,19 @@
   "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": [
     ".cache",
+    ".devcontainer",
+    ".husky",
     "build",
-    "public/assets",
-    "node_modules",
-    "db",
     "bin",
+    "db",
     "log",
-    "tmp",
+    "node_modules",
+    "public/assets",
+    "sorbet",
     "storage",
-    "vendor",
-    "sorbet"
+    "test",
+    "tmp",
+    "vendor"
   ],
 
   "compilerOptions": {
@@ -25,7 +28,7 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "~/*": ["./app/*"]
+      "~/*": ["./app/*", "./lib/*"]
     },
 
     // Remix takes care of building everything in `remix build`.

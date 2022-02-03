@@ -1,5 +1,5 @@
 import { FC, useMemo } from "react";
-import { CSRFContext, useCSRFContext } from "~/utils/csrf";
+import { CSRFContext, useCSRFContext } from "~/csrf";
 
 export type CSRFProviderProps = {
   readonly csrf: Record<string, string>;

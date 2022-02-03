@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Form, redirect } from "remix";
 import { useActionData, ActionFunction } from "remix";
-import { apiBaseURL } from "~/utils/config";
+import { apiBaseURL } from "~/config";
 
 import { HiOutlineExclamation } from "react-icons/hi";
 

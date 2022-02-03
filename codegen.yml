@@ -6,7 +6,7 @@ documents:
   - app/routes/**/*.ts
   - app/routes/**/*.tsx
 generates:
-  app/graphql/schema.generated.ts:
+  lib/graphql/schema.generated.ts:
     plugins:
       - typescript
       - typescript-operations
@@ -14,9 +14,9 @@ generates:
     config:
       dedupeOperationSuffix: true
       dedupeFragments: true
-  app/graphql/apollo.generated.ts:
+  lib/graphql/apollo.generated.ts:
     plugins:
       - typescript-apollo-client-helpers
-  # app/graphql/schema.generated.json:
-  #   plugins:
-  #     - introspection
+  lib/graphql/schema.generated.json:
+    plugins:
+      - introspection

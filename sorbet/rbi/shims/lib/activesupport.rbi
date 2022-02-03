@@ -1815,6 +1815,7 @@ module ActiveSupport::Concern
   # Evaluate given block in context of base class,
   # so that you can write class macros here.
   # When you define more than one +included+ block, it raises an exception.
+  # sig { params(base:T.untyped, block: T.self_type).void}
   def included(base = T.unsafe(nil), &block); end
 
   def prepend_features(base); end
@@ -13784,22 +13785,16 @@ class String
   #
   # 'And they found that many people were sleeping better.'.truncate(25, omission: '... (continued)')
   # # => "And they f... (continued)"
-  def truncate(truncate_at, options = T.unsafe(nil)); end # => 20 # >> "🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪".bytesize # => 80 # >> "🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪".truncate_bytes(20) # => "🔪🔪🔪🔪…" # # The truncated text ends with the <tt>:omission</tt> string, defaulting # to "…", for a total length not exceeding <tt>bytesize</tt>.
+  def truncate(truncate_at, options = T.unsafe(nil)); end # => 20 # >> "🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪".bytesize # => 80 # >> "🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪".truncate_bytes(20) # => "🔪🔪🔪🔪…" # # The truncated text ends with the <tt>:omission</tt> string, defaulting # to "…", for a total length not exceeding <tt>bytesize</tt>. # Truncates +text+ to at most <tt>bytesize</tt> bytes in length without # breaking string encoding by splitting multibyte characters or breaking # grapheme clusters ("perceptual characters") by truncating at combining # characters. # # >> "🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪".size
 
-  # Truncates +text+ to at most <tt>bytesize</tt> bytes in length without
-  # breaking string encoding by splitting multibyte characters or breaking
-  # grapheme clusters ("perceptual characters") by truncating at combining
-  # characters.
-  #
-  # >> "🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪".size
-  def truncate_bytes(truncate_at, omission: T.unsafe(nil)); end # Truncates a given +text+ after a given number of words (<tt>words_count</tt>): # # 'Once upon a time in a world far far away'.truncate_words(4) # # => "Once upon a time..." # # Pass a string or regexp <tt>:separator</tt> to specify a different separator of words: # # 'Once<br>upon<br>a<br>time<br>in<br>a<br>world'.truncate_words(5, separator: '<br>') # # => "Once<br>upon<br>a<br>time<br>in..." # # The last characters will be replaced with the <tt>:omission</tt> string (defaults to "..."): # # 'And they found that many people were sleeping better.'.truncate_words(5, omission: '... (continued)') # # => "And they found that many... (continued)"
+  def truncate_bytes(truncate_at, omission: T.unsafe(nil)); end
 
-  def truncate_words(words_count, options = T.unsafe(nil)); end # The reverse of +camelize+. Makes an underscored, lowercase form from the expression in the string. # # +underscore+ will also change '::' to '/' to convert namespaces to paths. # # 'ActiveModel'.underscore         # => "active_model" # 'ActiveModel::Errors'.underscore # => "active_model/errors" # See ActiveSupport::Inflector.underscore.
+  # Truncates a given +text+ after a given number of words (<tt>words_count</tt>): # # 'Once upon a time in a world far far away'.truncate_words(4) # # => "Once upon a time..." # # Pass a string or regexp <tt>:separator</tt> to specify a different separator of words: # # 'Once<br>upon<br>a<br>time<br>in<br>a<br>world'.truncate_words(5, separator: '<br>') # # => "Once<br>upon<br>a<br>time<br>in..." # # The last characters will be replaced with the <tt>:omission</tt> string (defaults to "..."): # # 'And they found that many people were sleeping better.'.truncate_words(5, omission: '... (continued)') # # => "And they found that many... (continued)"
+  def truncate_words(words_count, options = T.unsafe(nil)); end #
 
-  #
-  def underscore; end # Converts just the first character to uppercase. # # 'what a Lovely Day'.upcase_first # => "What a Lovely Day"
+  # The reverse of +camelize+. Makes an underscored, lowercase form from the expression in the string. # # +underscore+ will also change '::' to '/' to convert namespaces to paths. # # 'ActiveModel'.underscore         # => "active_model" # 'ActiveModel::Errors'.underscore # => "active_model/errors" # See ActiveSupport::Inflector.underscore.
+  def underscore; end # Converts just the first character to uppercase. # # 'what a Lovely Day'.upcase_first # => "What a Lovely Day" # 'w'.upcase_first                 # => "W"
 
-  # 'w'.upcase_first                 # => "W"
   # ''.upcase_first                  # => ""
   #
   # See ActiveSupport::Inflector.upcase_first.
@@ -13884,12 +13879,10 @@ class Time
 
   def end_of_minute; end # Layers additional behavior on Time#eql? so that ActiveSupport::TimeWithZone instances # can be eql? to an equivalent Time
 
-  def eql?(other); end # can be eql? to an equivalent Time
+  def eql?(other); end # can be eql? to an equivalent Time # Layers additional behavior on Time#eql? so that ActiveSupport::TimeWithZone instances
 
-  # Layers additional behavior on Time#eql? so that ActiveSupport::TimeWithZone instances
-  def eql_with_coercion(other); end # Returns a formatted string of the offset from UTC, or an alternative # string if the time zone is already UTC. # # Time.local(2000).formatted_offset        # => "-06:00"
+  def eql_with_coercion(other); end # Returns a formatted string of the offset from UTC, or an alternative # string if the time zone is already UTC. # # Time.local(2000).formatted_offset        # => "-06:00" # Time.local(2000).formatted_offset(false) # => "-0600"
 
-  # Time.local(2000).formatted_offset(false) # => "-0600"
   def formatted_offset(
     colon = T.unsafe(nil),
     alternate_utc_string = T.unsafe(nil)
@@ -13930,23 +13923,17 @@ class Time
 
   def seconds_until_end_of_day; end # Returns a new Time representing the time a number of seconds since the instance time
 
-  def since(seconds); end # Converts to a formatted string. See DATE_FORMATS for built-in formats. # # This method is aliased to <tt>to_fs</tt>. # # time = Time.now                    # => 2007-01-18 06:10:17 -06:00 # # time.to_formatted_s(:time)         # => "06:10" # time.to_fs(:time)                  # => "06:10" # # time.to_formatted_s(:db)           # => "2007-01-18 06:10:17" # time.to_formatted_s(:number)       # => "20070118061017" # time.to_formatted_s(:short)        # => "18 Jan 06:10" # time.to_formatted_s(:long)         # => "January 18, 2007 06:10" # time.to_formatted_s(:long_ordinal) # => "January 18th, 2007 06:10" # time.to_formatted_s(:rfc822)       # => "Thu, 18 Jan 2007 06:10:17 -0600" # time.to_formatted_s(:iso8601)      # => "2007-01-18T06:10:17-06:00" # # == Adding your own time formats to +to_formatted_s+ # You can add your own formats to the Time::DATE_FORMATS hash. # Use the format name as the hash key and either a strftime string # or Proc instance that takes a time argument as the value. # # config/initializers/time_formats.rb # Time::DATE_FORMATS[:month_and_year] = '%B %Y' # Time::DATE_FORMATS[:short_ordinal]  = ->(time) { time.strftime("%B #{time.day.ordinalize}") }
+  def since(seconds); end # Converts to a formatted string. See DATE_FORMATS for built-in formats. # # This method is aliased to <tt>to_fs</tt>. # # time = Time.now                    # => 2007-01-18 06:10:17 -06:00 # # time.to_formatted_s(:time)         # => "06:10" # time.to_fs(:time)                  # => "06:10" # # time.to_formatted_s(:db)           # => "2007-01-18 06:10:17" # time.to_formatted_s(:number)       # => "20070118061017" # time.to_formatted_s(:short)        # => "18 Jan 06:10" # time.to_formatted_s(:long)         # => "January 18, 2007 06:10" # time.to_formatted_s(:long_ordinal) # => "January 18th, 2007 06:10" # time.to_formatted_s(:rfc822)       # => "Thu, 18 Jan 2007 06:10:17 -0600" # time.to_formatted_s(:iso8601)      # => "2007-01-18T06:10:17-06:00" # # == Adding your own time formats to +to_formatted_s+ # You can add your own formats to the Time::DATE_FORMATS hash. # Use the format name as the hash key and either a strftime string # or Proc instance that takes a time argument as the value. # # config/initializers/time_formats.rb # Time::DATE_FORMATS[:month_and_year] = '%B %Y' # Time::DATE_FORMATS[:short_ordinal]  = ->(time) { time.strftime("%B #{time.day.ordinalize}") } #
 
-  #
-  def to_formatted_s(format = T.unsafe(nil)); end # Converts to a formatted string. See DATE_FORMATS for built-in formats. # # This method is aliased to <tt>to_fs</tt>. # # time = Time.now                    # => 2007-01-18 06:10:17 -06:00 # # time.to_formatted_s(:time)         # => "06:10" # time.to_fs(:time)                  # => "06:10" # # time.to_formatted_s(:db)           # => "2007-01-18 06:10:17" # time.to_formatted_s(:number)       # => "20070118061017" # time.to_formatted_s(:short)        # => "18 Jan 06:10" # time.to_formatted_s(:long)         # => "January 18, 2007 06:10" # time.to_formatted_s(:long_ordinal) # => "January 18th, 2007 06:10" # time.to_formatted_s(:rfc822)       # => "Thu, 18 Jan 2007 06:10:17 -0600" # time.to_formatted_s(:iso8601)      # => "2007-01-18T06:10:17-06:00" # # == Adding your own time formats to +to_formatted_s+ # You can add your own formats to the Time::DATE_FORMATS hash. # Use the format name as the hash key and either a strftime string # or Proc instance that takes a time argument as the value. # # config/initializers/time_formats.rb # Time::DATE_FORMATS[:month_and_year] = '%B %Y' # Time::DATE_FORMATS[:short_ordinal]  = ->(time) { time.strftime("%B #{time.day.ordinalize}") }
+  def to_formatted_s(format = T.unsafe(nil)); end # Converts to a formatted string. See DATE_FORMATS for built-in formats. # # This method is aliased to <tt>to_fs</tt>. # # time = Time.now                    # => 2007-01-18 06:10:17 -06:00 # # time.to_formatted_s(:time)         # => "06:10" # time.to_fs(:time)                  # => "06:10" # # time.to_formatted_s(:db)           # => "2007-01-18 06:10:17" # time.to_formatted_s(:number)       # => "20070118061017" # time.to_formatted_s(:short)        # => "18 Jan 06:10" # time.to_formatted_s(:long)         # => "January 18, 2007 06:10" # time.to_formatted_s(:long_ordinal) # => "January 18th, 2007 06:10" # time.to_formatted_s(:rfc822)       # => "Thu, 18 Jan 2007 06:10:17 -0600" # time.to_formatted_s(:iso8601)      # => "2007-01-18T06:10:17-06:00" # # == Adding your own time formats to +to_formatted_s+ # You can add your own formats to the Time::DATE_FORMATS hash. # Use the format name as the hash key and either a strftime string # or Proc instance that takes a time argument as the value. # # config/initializers/time_formats.rb # Time::DATE_FORMATS[:month_and_year] = '%B %Y' # Time::DATE_FORMATS[:short_ordinal]  = ->(time) { time.strftime("%B #{time.day.ordinalize}") } #
 
-  #
-  def to_fs(format = T.unsafe(nil)); end
-
-  # def to_s(format = T.unsafe(nil)); end # Either return +self+ or the time in the local system timezone depending # on the setting of +ActiveSupport.to_time_preserves_timezone+.
+  def to_fs(format = T.unsafe(nil)); end # def to_s(format = T.unsafe(nil)); end # Either return +self+ or the time in the local system timezone depending # on the setting of +ActiveSupport.to_time_preserves_timezone+.
 
   def to_time; end
 
   class << self
     # Overriding case equality method so that it returns true for ActiveSupport::TimeWithZone instances
-    def ===(other); end # Layers additional behavior on Time.at so that ActiveSupport::TimeWithZone and DateTime # instances can be used when called with a single argument
-
-    # def at(*args, **kwargs); end # Layers additional behavior on Time.at so that ActiveSupport::TimeWithZone and DateTime # instances can be used when called with a single argument
+    def ===(other); end # Layers additional behavior on Time.at so that ActiveSupport::TimeWithZone and DateTime # instances can be used when called with a single argument # def at(*args, **kwargs); end # Layers additional behavior on Time.at so that ActiveSupport::TimeWithZone and DateTime # instances can be used when called with a single argument
 
     def at_with_coercion(*args, **kwargs); end # Returns <tt>Time.zone.now</tt> when <tt>Time.zone</tt> or <tt>config.time_zone</tt> are set, otherwise just returns <tt>Time.now</tt>.
 
@@ -13956,22 +13943,17 @@ class Time
 
     def days_in_year(year = T.unsafe(nil)); end # Returns a TimeZone instance matching the time zone provided. # Accepts the time zone in any format supported by <tt>Time.zone=</tt>. # Returns +nil+ for invalid time zones. # # Time.find_zone "America/New_York" # => #<ActiveSupport::TimeZone @name="America/New_York" ...> # Time.find_zone "NOT-A-TIMEZONE"   # => nil
 
-    def find_zone(time_zone); end # Returns a TimeZone instance matching the time zone provided. # Accepts the time zone in any format supported by <tt>Time.zone=</tt>. # Raises an +ArgumentError+ for invalid time zones. # # Time.find_zone! "EST"              # => #<ActiveSupport::TimeZone @name="EST" ...> # Time.find_zone! -5.hours           # => #<ActiveSupport::TimeZone @name="Bogota" ...> # Time.find_zone! nil                # => nil # Time.find_zone! false              # => false # Time.find_zone! "NOT-A-TIMEZONE"   # => ArgumentError: Invalid Timezone: NOT-A-TIMEZONE
+    def find_zone(time_zone); end # Returns a TimeZone instance matching the time zone provided. # Accepts the time zone in any format supported by <tt>Time.zone=</tt>. # Raises an +ArgumentError+ for invalid time zones. # # Time.find_zone! "EST"              # => #<ActiveSupport::TimeZone @name="EST" ...> # Time.find_zone! -5.hours           # => #<ActiveSupport::TimeZone @name="Bogota" ...> # Time.find_zone! nil                # => nil # Time.find_zone! false              # => false # Time.find_zone! "NOT-A-TIMEZONE"   # => ArgumentError: Invalid Timezone: NOT-A-TIMEZONE # Time.find_zone! "America/New_York" # => #<ActiveSupport::TimeZone @name="America/New_York" ...>
 
-    # Time.find_zone! "America/New_York" # => #<ActiveSupport::TimeZone @name="America/New_York" ...>
-    def find_zone!(time_zone); end # Creates a +Time+ instance from an RFC 3339 string. # # # If the time or offset components are missing then an +ArgumentError+ will be raised. # # Time.rfc3339('1999-12-31') # => ArgumentError: invalid date
+    def find_zone!(time_zone); end # Creates a +Time+ instance from an RFC 3339 string. # # # If the time or offset components are missing then an +ArgumentError+ will be raised. # # Time.rfc3339('1999-12-31') # => ArgumentError: invalid date # Time.rfc3339('1999-12-31T14:00:00-10:00') # => 2000-01-01 00:00:00 -1000
 
-    # Time.rfc3339('1999-12-31T14:00:00-10:00') # => 2000-01-01 00:00:00 -1000
-    def rfc3339(str); end # Allows override of <tt>Time.zone</tt> locally inside supplied block; # resets <tt>Time.zone</tt> to existing value when done. # class ApplicationController < ActionController::Base # around_action :set_time_zone # # private # # Time.use_zone(current_user.timezone) { yield } # end # # NOTE: This won't affect any <tt>ActiveSupport::TimeWithZone</tt> # objects that have already been created, e.g. any model timestamp # attributes that have been read before the block will remain in # the application's default timezone.
+    def rfc3339(str); end # Allows override of <tt>Time.zone</tt> locally inside supplied block; # resets <tt>Time.zone</tt> to existing value when done. # class ApplicationController < ActionController::Base # around_action :set_time_zone # # private # # Time.use_zone(current_user.timezone) { yield } # end # # NOTE: This won't affect any <tt>ActiveSupport::TimeWithZone</tt> # objects that have already been created, e.g. any model timestamp # attributes that have been read before the block will remain in # the application's default timezone. # # def set_time_zone # end
 
-    #
-    # def set_time_zone
-    # end
-    def use_zone(time_zone); end # Returns the TimeZone for the current request, if this has been set (via Time.zone=). # If <tt>Time.zone</tt> has not been set for the current request, returns the TimeZone specified in <tt>config.time_zone</tt>.
+    def use_zone(time_zone); end
 
-    def zone; end # Sets <tt>Time.zone</tt> to a TimeZone object for the current request/thread. # # This method accepts any of the following: # # * An identifier for a Rails TimeZone object (e.g., "Eastern Time (US & Canada)", <tt>-5.hours</tt>). # * A TZInfo::Timezone object. # * An identifier for a TZInfo::Timezone object (e.g., "America/New_York"). # # Here's an example of how you might set <tt>Time.zone</tt> on a per request basis and reset it when the request is done. # <tt>current_user.time_zone</tt> just needs to return a string identifying the user's preferred time zone: # # class ApplicationController < ActionController::Base # around_action :set_time_zone # # def set_time_zone # if logged_in? # Time.use_zone(current_user.time_zone) { yield } # else # yield # end # end # end
+    # Returns the TimeZone for the current request, if this has been set (via Time.zone=). # If <tt>Time.zone</tt> has not been set for the current request, returns the TimeZone specified in <tt>config.time_zone</tt>.
+    def zone; end # Sets <tt>Time.zone</tt> to a TimeZone object for the current request/thread. # # This method accepts any of the following: # # * An identifier for a Rails TimeZone object (e.g., "Eastern Time (US & Canada)", <tt>-5.hours</tt>). # * A TZInfo::Timezone object. # * An identifier for a TZInfo::Timezone object (e.g., "America/New_York"). # # Here's an example of how you might set <tt>Time.zone</tt> on a per request basis and reset it when the request is done. # <tt>current_user.time_zone</tt> just needs to return a string identifying the user's preferred time zone: # # class ApplicationController < ActionController::Base # around_action :set_time_zone # # def set_time_zone # if logged_in? # Time.use_zone(current_user.time_zone) { yield } # else # yield # end # end # end # * A Rails TimeZone object.
 
-    # * A Rails TimeZone object.
     def zone=(time_zone); end
 
     # Returns the value of attribute zone_default.

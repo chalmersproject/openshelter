@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-require "routes_ext"
+require "route_constraints"
 
 Rails.application.routes.draw do
   scope :api do
