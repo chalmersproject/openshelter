@@ -27,11 +27,14 @@ gem "email_validator", "~> 2.2"
 gem "validate_url", "~> 1.0"
 gem "phonelib", "~> 0.6.55"
 
-# Administrate app with Rails Admin.
+# Expose an admin interface with Rails Admin.
 gem "rails_admin", [">= 3.0.0.beta2", "< 4"]
 
 # Use the Puma web server [https://github.com/puma/puma].
 gem "puma", "~> 5.0"
+
+# Run background jobs with Good Job.
+gem "good_job", "~> 2.9"
 
 # Use Postgres as the database for Active Record.
 gem "pg", "~> 1.2.3"
@@ -45,9 +48,6 @@ gem "scanf", "~> 1.0.0"
 # Authorize actions with Action Policy.
 gem "action_policy", "~> 0.6.0"
 gem "action_policy-graphql", "~> 0.5.3"
-
-# Run background jobs with Good Job.
-gem "good_job", "~> 2.9"
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder].
 # gem "jbuilder", "~> 2.11"

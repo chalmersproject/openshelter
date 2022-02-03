@@ -7,6 +7,8 @@
 
 
 # == Rails ==
+/public/assets
+
 # Ignore bundler config.
 /.bundle
 
@@ -39,7 +41,7 @@
 # == Remix ==
 /.cache
 /build
-/public/build
+# /public/build
 
 
 # == Node ==

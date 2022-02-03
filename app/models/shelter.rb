@@ -16,6 +16,7 @@
 # Indexes
 #
 #  index_shelters_on_email  (email)
+#  index_shelters_on_name   (name) UNIQUE
 #  index_shelters_on_phone  (phone)
 #
 

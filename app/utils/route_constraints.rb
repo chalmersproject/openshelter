@@ -15,8 +15,7 @@ module RouteConstraints
 
     sig { params(request: T.untyped).returns(T::Boolean) }
     def matches?(request)
-      finder = AuthlogicFinder.new(request)
-      user = finder.find_authenticated_user
+      user = Session.for(request)&.user
       return false if user.blank?
       return false if @admin_only && !user.admin?
       true

@@ -9,6 +9,7 @@ chalmers:
   email_verified: false
   active: true
 
+  # Password is: chalmers
   password_hash: 400$8$4c$27c64fbce1c5b05a$e6d416e1c05db043fd8b63657034d8359dc1f9c46cbe697f71743b4d017c4b88
   password_salt: o6WjcHVIf_UNnidtznXl
 

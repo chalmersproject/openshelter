@@ -16,12 +16,6 @@ ActiveRecord::Schema.define(version: 2022_02_03_003419) do
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
-  create_table "ar_internal_metadata", primary_key: "key", id: :string, force: :cascade do |t|
-    t.string "value"
-    t.timestamp "created_at", precision: 6, null: false
-    t.timestamp "updated_at", precision: 6, null: false
-  end
-
   create_table "good_job_processes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

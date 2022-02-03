@@ -72,22 +72,12 @@ class Application < Rails::Application
   config.middleware.use(ActionDispatch::Flash)
   config.middleware.use(Rack::MethodOverride)
 
-  # Configure Active Record.
-  config.active_record.schema_migrations_table_name = "_migrations"
-  config.active_record.internal_metadata_table_name = "_metadata"
-
-  # Configure Active Job.
+  # Configure Active Record, Active Job, Active Storage, Action Cable.
+  config.active_record.schema_migrations_table_name = "ar_migrations"
   config.active_job.queue_adapter = :good_job
-
-  # Configure Active Support.
   config.active_support.remove_deprecated_time_with_zone_name = true
-
-  # Configure Action Cable, Active Storage routes.
-  config.action_cable.mount_path = "/api/cable"
   config.active_storage.routes_prefix = "/api/files"
-
-  # Configure assets.
-  config.assets.prefix = "/build/rails"
+  config.action_cable.mount_path = "/api/cable"
 
   # Configure logging.
   # config.log_formatter = LogFormatter.new

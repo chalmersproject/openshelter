@@ -4,18 +4,16 @@
 require "routes_ext"
 
 Rails.application.routes.draw do
-  scope :api, defaults: { format: :json }, format: false do
-    get :meta, to: "meta#show"
-    post :graphql, to: "graphql#execute"
-    scope :auth, controller: :auth do
-      post :login
-      post :logout
+  scope :api do
+    scope format: false, defaults: { format: :json } do
+      get :meta, to: "meta#show"
+      post :graphql, to: "graphql#execute"
+      scope :auth, controller: :auth do
+        post :login
+        post :logout
+      end
     end
-
-    mount GraphiQL::Rails::Engine,
-          at: :/,
-          graphql_path: "/api/graphql",
-          as: :graphiql
+    mount GraphiQL::Rails::Engine, at: :/, graphql_path: "/api/graphql"
   end
 
   scope :admin, constraints: authenticated(admin_only: true) do
@@ -33,9 +31,9 @@ end
 #                                  graphql POST   /api/graphql                                                                           graphql#execute {:format=>:json}
 #                                    login POST   /api/auth/login                                                                        auth#login {:format=>:json}
 #                                   logout POST   /api/auth/logout                                                                       auth#logout {:format=>:json}
-#                                 graphiql        /api                                                                                   GraphiQL::Rails::Engine {:format=>:json, :graphql_path=>"/api/graphql"}
-#                                    admin        /admin                                                                                 RailsAdmin::Engine
-#                               admin_jobs        /admin/jobs                                                                            GoodJob::Engine
+#                           graphiql_rails        /api                                                                                   GraphiQL::Rails::Engine {:graphql_path=>"/api/graphql"}
+#                                 good_job        /admin/good_job                                                                        GoodJob::Engine
+#                              rails_admin        /admin                                                                                 RailsAdmin::Engine
 #                       rails_service_blob GET    /api/files/blobs/redirect/:signed_id/*filename(.:format)                               active_storage/blobs/redirect#show
 #                 rails_service_blob_proxy GET    /api/files/blobs/proxy/:signed_id/*filename(.:format)                                  active_storage/blobs/proxy#show
 #                                          GET    /api/files/blobs/:signed_id/*filename(.:format)                                        active_storage/blobs/redirect#show
@@ -48,18 +46,6 @@ end
 #
 # Routes for GraphiQL::Rails::Engine:
 #        GET  /           graphiql/rails/editors#show
-#
-# Routes for RailsAdmin::Engine:
-#   dashboard GET         /                                      rails_admin/main#dashboard
-#       index GET|POST    /:model_name(.:format)                 rails_admin/main#index
-#         new GET|POST    /:model_name/new(.:format)             rails_admin/main#new
-#      export GET|POST    /:model_name/export(.:format)          rails_admin/main#export
-# bulk_delete POST|DELETE /:model_name/bulk_delete(.:format)     rails_admin/main#bulk_delete
-# bulk_action POST        /:model_name/bulk_action(.:format)     rails_admin/main#bulk_action
-#        show GET         /:model_name/:id(.:format)             rails_admin/main#show
-#        edit GET|PUT     /:model_name/:id/edit(.:format)        rails_admin/main#edit
-#      delete GET|DELETE  /:model_name/:id/delete(.:format)      rails_admin/main#delete
-# show_in_app GET         /:model_name/:id/show_in_app(.:format) rails_admin/main#show_in_app
 #
 # Routes for GoodJob::Engine:
 #               root GET    /                                   good_job/executions#index
@@ -79,3 +65,15 @@ end
 #          rails_ujs GET    /rails_ujs(.:format)                good_job/assets#rails_ujs_js {:format=>:js}
 #            chartjs GET    /chartjs(.:format)                  good_job/assets#chartjs_js {:format=>:js}
 #            scripts GET    /scripts(.:format)                  good_job/assets#scripts_js {:format=>:js}
+#
+# Routes for RailsAdmin::Engine:
+#   dashboard GET         /                                      rails_admin/main#dashboard
+#       index GET|POST    /:model_name(.:format)                 rails_admin/main#index
+#         new GET|POST    /:model_name/new(.:format)             rails_admin/main#new
+#      export GET|POST    /:model_name/export(.:format)          rails_admin/main#export
+# bulk_delete POST|DELETE /:model_name/bulk_delete(.:format)     rails_admin/main#bulk_delete
+# bulk_action POST        /:model_name/bulk_action(.:format)     rails_admin/main#bulk_action
+#        show GET         /:model_name/:id(.:format)             rails_admin/main#show
+#        edit GET|PUT     /:model_name/:id/edit(.:format)        rails_admin/main#edit
+#      delete GET|DELETE  /:model_name/:id/delete(.:format)      rails_admin/main#delete
+# show_in_app GET         /:model_name/:id/show_in_app(.:format) rails_admin/main#show_in_app

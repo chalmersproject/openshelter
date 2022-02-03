@@ -1,6 +1,6 @@
 .cache/
 build/
-public/build/
+public/assets/
 node_modules/
 db/schema.rb
 app/assets/build

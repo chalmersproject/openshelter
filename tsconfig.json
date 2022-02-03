@@ -3,8 +3,7 @@
   "exclude": [
     ".cache",
     "build",
-    "public/build",
-    "app/assets/build",
+    "public/assets",
     "node_modules",
     "db",
     "bin",

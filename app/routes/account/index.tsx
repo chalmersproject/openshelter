@@ -1,5 +1,5 @@
 import { Group, Text } from "@mantine/core";
-import { isBrowser } from "~/utils/config";
+// import { isBrowser } from "~/utils/config";
 
 import type { LoaderFunction } from "remix";
 import { gql } from "@apollo/client";
@@ -22,6 +22,9 @@ gql`
   query AccountIndexRouteQuery {
     viewer {
       id
+      email
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -55,7 +58,7 @@ export default function AccountIndexRoute() {
     AccountIndexRouteSubscription,
     AccountIndexRouteSubscriptionVariables
   >(AccountIndexRouteSubscriptionDocument, {
-    skip: !isBrowser,
+    skip: true,
     onSubscriptionData: ({ subscriptionData: { error } }) => {
       if (error) {
         console.error("Error from subscription:", error);

@@ -1,8 +1,6 @@
 # typed: strict
 # frozen_string_literal: true
 
-require "authlogic_finder"
-
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
     extend T::Sig
@@ -11,8 +9,7 @@ module ApplicationCable
 
     sig { void }
     def connect
-      finder = AuthlogicFinder.new(request)
-      self.current_user = finder.find_authenticated_user
+      self.current_user = Session.for(request)&.user
     end
   end
 end

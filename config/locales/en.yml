@@ -31,3 +31,9 @@
 
 en:
   hello: "Hello world"
+  admin:
+    actions:
+      dashboard:
+        title: Dashboard
+      good_job:
+        menu: "Good Job"
