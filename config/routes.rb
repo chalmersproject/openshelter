@@ -3,17 +3,7 @@
 
 require "route_constraints"
 
-Trestle::Engine.routes.draw do
-  resources :users,
-            only: %i[new edit],
-            module: "users_admin",
-            controller: "admin"
-  resources :shelters,
-            only: %i[new edit],
-            module: "shelters_admin",
-            controller: "admin"
-end
-
+# Register application routes.
 Rails.application.routes.draw do
   scope :api do
     scope format: false, defaults: { format: :json } do
@@ -28,12 +18,29 @@ Rails.application.routes.draw do
   end
 
   scope :admin do
-    constraints authenticated(admin_only: true) do
+    constraints authenticated(:admin) do
       mount GoodJob::Engine, at: "/good_job/embed"
       mount Trestle::Engine, at: "/"
+      get "/*splat", to: redirect("/admin")
     end
-    match "/", to: "auth#show", via: :all
-    match "/*splat", to: "auth#show", via: :all unless Rails.env.development?
+    constraints authenticated(false) do
+      get "/", to: "auth#show"
+      get "/*splat", to: "auth#show"
+    end
+  end
+end
+
+# Register resource admins routes.
+#
+# TODO: See if https://github.com/TrestleAdmin/trestle/issues/93 is ever
+# resolved.
+Trestle::Engine.routes.draw do
+  Trestle.registry.each do |admin|
+    next unless admin.ancestors.include?(Trestle::Resource)
+    resources admin.admin_name,
+              only: %i[new edit],
+              module: admin.route_name,
+              controller: "admin"
   end
 end
 
@@ -50,7 +57,6 @@ end
 #                                 good_job        /admin/good_job/embed                                                                  GoodJob::Engine
 #                                  trestle        /admin                                                                                 Trestle::Engine
 #                                                 /admin(.:format)                                                                       auth#show
-#                                                 /admin/*splat(.:format)                                                                auth#show {:unless=>true}
 #                       rails_service_blob GET    /api/files/blobs/redirect/:signed_id/*filename(.:format)                               active_storage/blobs/redirect#show
 #                 rails_service_blob_proxy GET    /api/files/blobs/proxy/:signed_id/*filename(.:format)                                  active_storage/blobs/proxy#show
 #                                          GET    /api/files/blobs/:signed_id/*filename(.:format)                                        active_storage/blobs/redirect#show
@@ -84,19 +90,22 @@ end
 #            scripts GET    /scripts(.:format)                  good_job/assets#scripts_js {:format=>:js}
 #
 # Routes for Trestle::Engine:
-#             new_user GET    /users/new(.:format)      users_admin/admin#new
-#            edit_user GET    /users/:id/edit(.:format) users_admin/admin#edit
-#      dashboard_admin GET    /dashboard(.:format)      dashboard_admin/admin#index
-# shelters_admin_index GET    /shelters(.:format)       shelters_admin/admin#index
-#                      POST   /shelters(.:format)       shelters_admin/admin#create
-#       shelters_admin GET    /shelters/:id(.:format)   shelters_admin/admin#show
-#                      PATCH  /shelters/:id(.:format)   shelters_admin/admin#update
-#                      PUT    /shelters/:id(.:format)   shelters_admin/admin#update
-#                      DELETE /shelters/:id(.:format)   shelters_admin/admin#destroy
-#    users_admin_index GET    /users(.:format)          users_admin/admin#index
-#                      POST   /users(.:format)          users_admin/admin#create
-#          users_admin GET    /users/:id(.:format)      users_admin/admin#show
-#                      PATCH  /users/:id(.:format)      users_admin/admin#update
-#                      PUT    /users/:id(.:format)      users_admin/admin#update
-#                      DELETE /users/:id(.:format)      users_admin/admin#destroy
-#                 root GET    /                         trestle/dashboard#index
+#          new_shelter GET    /shelters/new(.:format)      shelters_admin/admin#new
+#         edit_shelter GET    /shelters/:id/edit(.:format) shelters_admin/admin#edit
+#             new_user GET    /users/new(.:format)         users_admin/admin#new
+#            edit_user GET    /users/:id/edit(.:format)    users_admin/admin#edit
+#      dashboard_admin GET    /dashboard(.:format)         dashboard_admin/admin#index
+#       good_job_admin GET    /good_job(.:format)          good_job_admin/admin#index
+# shelters_admin_index GET    /shelters(.:format)          shelters_admin/admin#index
+#                      POST   /shelters(.:format)          shelters_admin/admin#create
+#       shelters_admin GET    /shelters/:id(.:format)      shelters_admin/admin#show
+#                      PATCH  /shelters/:id(.:format)      shelters_admin/admin#update
+#                      PUT    /shelters/:id(.:format)      shelters_admin/admin#update
+#                      DELETE /shelters/:id(.:format)      shelters_admin/admin#destroy
+#    users_admin_index GET    /users(.:format)             users_admin/admin#index
+#                      POST   /users(.:format)             users_admin/admin#create
+#          users_admin GET    /users/:id(.:format)         users_admin/admin#show
+#                      PATCH  /users/:id(.:format)         users_admin/admin#update
+#                      PUT    /users/:id(.:format)         users_admin/admin#update
+#                      DELETE /users/:id(.:format)         users_admin/admin#destroy
+#                 root GET    /                            trestle/dashboard#index

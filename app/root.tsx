@@ -1,19 +1,21 @@
-import type { FC } from "react";
 import { Meta, MetaFunction } from "remix";
 import { Links, LinksFunction } from "remix";
 import { LiveReload, Outlet, Scripts, ScrollRestoration } from "remix";
-import { useLoaderData, LoaderFunction } from "remix";
-import { apiBaseURL, isDevelopment } from "~/application";
+import { isDevelopment } from "~/application";
 
-import { MantineProvider } from "@mantine/core";
-import { AppShell, Header } from "@mantine/core";
-import { Box, Group } from "@mantine/core";
-import { Text, Badge } from "@mantine/core";
-import { NotificationsProvider } from "@mantine/notifications";
-import { themeOverride, sx } from "~/utils/mantine";
+import { CSRFMeta } from "~/components/csrf";
+import { AppProviders, AppLayout } from "~/components/app";
 
-import { CSRFProvider, CSRFMeta } from "~/components/csrf";
-import { ApolloProvider } from "~/components/apollo";
+import type { LoaderFunction } from "remix";
+import { gql } from "@apollo/client";
+import { runLoaderQuery } from "~/utils/apollo/remix";
+import { useLoaderData } from "remix";
+
+import {
+  AppQueryDocument,
+  AppQuery,
+  AppQueryVariables,
+} from "~/graphql/schema.generated";
 
 export const meta: MetaFunction = () => {
   return { title: "App" };
@@ -34,23 +36,35 @@ export const links: LinksFunction = () => {
   ];
 };
 
-export const loader: LoaderFunction = async () => {
-  const response = await fetch(apiBaseURL + "/meta");
-  if (!response.ok) {
-    throw new Error("Failed to load application metadata.");
+gql`
+  query AppQuery {
+    csrfToken
+    version
+    viewer {
+      id
+      ...AppLayoutViewer
+    }
   }
-  return response;
-};
+`;
 
-type AppData = {
-  readonly version: string;
-  readonly csrf: Record<string, string>;
+export const loader: LoaderFunction = async ({ request }) => {
+  const { data, error } = await runLoaderQuery<AppQuery, AppQueryVariables>({
+    request,
+    query: AppQueryDocument,
+  });
+  if (error) {
+    throw new Error(`Failed to load application data: ${error.message}`);
+  }
+  if (!data) {
+    throw new Error("Missing application data.");
+  }
+  return data;
 };
 
 export default function App() {
-  const { version, csrf } = useLoaderData<AppData>();
+  const { csrfToken, version, viewer } = useLoaderData<AppQuery>();
   return (
-    <AppProviders csrf={csrf}>
+    <AppProviders {...{ csrfToken }}>
       <html lang="en">
         <head>
           <meta charSet="utf-8" />
@@ -60,7 +74,7 @@ export default function App() {
           <Links />
         </head>
         <body>
-          <AppLayout version={version}>
+          <AppLayout {...{ version, viewer }}>
             <Outlet />
           </AppLayout>
           <ScrollRestoration />
@@ -71,68 +85,3 @@ export default function App() {
     </AppProviders>
   );
 }
-
-type AppProvidersProps = { readonly csrf: Record<string, string> };
-
-const AppProviders: FC<AppProvidersProps> = ({ csrf, children }) => {
-  return (
-    <CSRFProvider csrf={csrf}>
-      <MantineProvider theme={themeOverride} withNormalizeCSS withGlobalStyles>
-        <NotificationsProvider>
-          <ApolloProvider>{children}</ApolloProvider>
-        </NotificationsProvider>
-      </MantineProvider>
-    </CSRFProvider>
-  );
-};
-
-type AppLayoutProps = { version: string };
-
-const AppLayout: FC<AppLayoutProps> = ({ children, version }) => {
-  return (
-    <AppShell
-      header={
-        <Header
-          height={44}
-          sx={({ colors }) => ({
-            background: colors.gray[1],
-          })}
-        >
-          <Group
-            align="center"
-            sx={({ spacing }) => ({
-              height: "100%",
-              paddingLeft: spacing.sm,
-              paddingRight: spacing.sm,
-            })}
-          >
-            <Group position="left" sx={{ flex: 1 }} />
-            <Box>
-              <Text
-                color="gray"
-                size="md"
-                weight="bold"
-                sx={sx(({ letterSpacing }) => ({
-                  letterSpacing: letterSpacing.widest,
-                }))}
-              >
-                CHALMERS PROJECT
-              </Text>
-            </Box>
-            <Group position="right" sx={{ flex: 1 }}>
-              <Badge
-                size="sm"
-                variant="outline"
-                sx={{ textTransform: "unset" }}
-              >
-                v{version}
-              </Badge>
-            </Group>
-          </Group>
-        </Header>
-      }
-    >
-      {children}
-    </AppShell>
-  );
-};

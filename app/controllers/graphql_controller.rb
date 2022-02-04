@@ -7,6 +7,7 @@ class GraphQLController < ApplicationController
   # If accessing from outside this domain, nullify the session
   # This allows for outside API access while preventing CSRF attacks,
   # but you'll have to authenticate your user separately
+  #
   # protect_from_forgery with: :null_session
 
   sig { returns(T.untyped) }
@@ -23,9 +24,10 @@ class GraphQLController < ApplicationController
     variables = prepare_variables(params[:variables])
     extensions = prepare_extensions(params[:extensions])
     context = {
+      controller: self,
       extensions: extensions,
       current_user: current_user,
-      controller: self,
+      csrf_token: form_authenticity_token,
     }
 
     result =
@@ -96,6 +98,7 @@ class GraphQLController < ApplicationController
     )
   end
 
+  # Allow executing internal requests (i.e. from Remix).
   sig { returns(T::Boolean) }
   def protect_from_forgery?
     local = request.hostname.in?(%w[localhost 127.0.0.1])

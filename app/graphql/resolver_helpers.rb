@@ -45,4 +45,9 @@ module ResolverHelpers
   def current_user
     context[:current_user]
   end
+
+  sig { returns(T.nilable(String)) }
+  def csrf_token
+    context[:csrf_token]
+  end
 end

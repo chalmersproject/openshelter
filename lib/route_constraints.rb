@@ -8,23 +8,29 @@ module RouteConstraints
   class Authenticated
     extend T::Sig
 
-    sig { params(admin_only: T::Boolean).void }
-    def initialize(admin_only: false)
-      @admin_only = T.let(admin_only, T::Boolean)
+    sig { params(mode: T.any(T::Boolean, Symbol)).void }
+    def initialize(mode)
+      @mode = T.let(mode, T.any(T::Boolean, Symbol))
     end
 
     sig { params(request: T.untyped).returns(T::Boolean) }
     def matches?(request)
       user = Session.for(request)&.user
-      return false if user.blank?
-      return false if @admin_only && !user.admin?
-      true
+      case @mode
+      when :admin
+        return user&.admin? || false
+      when true
+        return user.present?
+      when false
+        return user.blank?
+      end
+      false
     end
   end
 
-  sig { params(admin_only: T::Boolean).returns(Authenticated) }
-  def authenticated(admin_only: false)
-    Authenticated.new(admin_only: admin_only)
+  sig { params(mode: T.any(T::Boolean, Symbol)).returns(Authenticated) }
+  def authenticated(mode)
+    Authenticated.new(mode)
   end
 end
 

@@ -1,8 +1,8 @@
 # typed: strict
 # frozen_string_literal: true
 
-Trestle.resource(:shelters) do
-  menu { item :shelters, icon: "fa fa-star" }
+Trestle.resource(:shelters, register_model: true) do
+  menu { item :shelters, icon: "fa fa-house-user" }
 
   form do
     text_field :name

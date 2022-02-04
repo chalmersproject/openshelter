@@ -51,9 +51,9 @@ export const createApolloClient = (
     cache: new InMemoryCache({ typePolicies }),
     defaultOptions: {
       watchQuery: {
-        // The first time a browser-side useQuery is called, only use data
-        // injected into the cache from Remix loaders.
-        fetchPolicy: "cache-only",
+        // The first time a browser-side `watchQuery` is run, attempt to load
+        // data from the cache, before making a network request.
+        fetchPolicy: "cache-first",
       },
     },
   });

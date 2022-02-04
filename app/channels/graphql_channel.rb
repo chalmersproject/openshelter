@@ -42,9 +42,9 @@ class GraphQLChannel < ApplicationCable::Channel
     variables = prepare_variables(params["variables"])
     extensions = prepare_extensions(params["extensions"])
     context = {
+      channel: self,
       extensions: extensions,
       current_user: current_user,
-      channel: self,
     }
 
     result =

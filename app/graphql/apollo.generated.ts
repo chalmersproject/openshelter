@@ -10,8 +10,9 @@ export type MutationFieldPolicy = {
 	createShelter?: FieldPolicy<any> | FieldReadFunction<any>,
 	greet?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type QueryKeySpecifier = ('testField' | 'testSignalType' | 'version' | 'viewer' | QueryKeySpecifier)[];
+export type QueryKeySpecifier = ('csrfToken' | 'testField' | 'testSignalType' | 'version' | 'viewer' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {
+	csrfToken?: FieldPolicy<any> | FieldReadFunction<any>,
 	testField?: FieldPolicy<any> | FieldReadFunction<any>,
 	testSignalType?: FieldPolicy<any> | FieldReadFunction<any>,
 	version?: FieldPolicy<any> | FieldReadFunction<any>,

@@ -53,10 +53,11 @@ export type MutationGreetArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  csrfToken: Scalars['String'];
   testField: Scalars['String'];
   testSignalType: SignalType;
   /** Application server version. */
-  version?: Maybe<Scalars['String']>;
+  version: Scalars['String'];
   /** The currently authenticated user. */
   viewer?: Maybe<User>;
 };
@@ -107,6 +108,13 @@ export type ValidationError = {
   message?: Maybe<Scalars['String']>;
 };
 
+export type AppLayoutViewerFragment = { __typename?: 'User', id: string };
+
+export type AppQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type AppQuery = { __typename?: 'Query', csrfToken: string, version: string, viewer?: { __typename?: 'User', id: string } | null };
+
 export type AccountIndexRouteQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -117,6 +125,7 @@ export type AccountIndexRouteSubscriptionVariables = Exact<{ [key: string]: neve
 
 export type AccountIndexRouteSubscription = { __typename?: 'Subscription', testField: { __typename?: 'TestFieldPayload', value?: number | null } };
 
-
+export const AppLayoutViewerFragmentDoc = {"kind":"Document","definitions":[{"kind":"FragmentDefinition","name":{"kind":"Name","value":"AppLayoutViewer"},"typeCondition":{"kind":"NamedType","name":{"kind":"Name","value":"User"}},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}}]}}]} as unknown as DocumentNode<AppLayoutViewerFragment, unknown>;
+export const AppQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AppQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"csrfToken"}},{"kind":"Field","name":{"kind":"Name","value":"version"}},{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"FragmentSpread","name":{"kind":"Name","value":"AppLayoutViewer"}}]}}]}},...AppLayoutViewerFragmentDoc.definitions]} as unknown as DocumentNode<AppQuery, AppQueryVariables>;
 export const AccountIndexRouteQueryDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"AccountIndexRouteQuery"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"viewer"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"email"}},{"kind":"Field","name":{"kind":"Name","value":"createdAt"}},{"kind":"Field","name":{"kind":"Name","value":"updatedAt"}}]}}]}}]} as unknown as DocumentNode<AccountIndexRouteQuery, AccountIndexRouteQueryVariables>;
 export const AccountIndexRouteSubscriptionDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"subscription","name":{"kind":"Name","value":"AccountIndexRouteSubscription"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"testField"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"value"}}]}}]}}]} as unknown as DocumentNode<AccountIndexRouteSubscription, AccountIndexRouteSubscriptionVariables>;

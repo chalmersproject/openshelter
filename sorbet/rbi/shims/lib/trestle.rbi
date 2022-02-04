@@ -1,10 +1,5 @@
 # typed: strict
 
-class Trestle::Engine
-  sig { returns(ActionDispatch::Routing::RouteSet) }
-  def self.routes(&block); end
-end
-
 module Trestle
   sig do
     params(
@@ -13,29 +8,20 @@ module Trestle
       block: T.proc.void.bind(Trestle::Resource::Builder),
     ).void
   end
-  def self.admin(name, options = T.unsafe(nil), &block); end
+  def self.admin(name, **options, &block); end
 
   sig do
     params(
       name: Symbol,
+      register_model: T.untyped,
       options: T.untyped,
       block: T.proc.void.bind(Trestle::Resource::Builder),
     ).void
   end
-  def self.resource(name, options = T.unsafe(nil), &block); end
+  def self.resource(name, register_model: T.unsafe(nil), **options, &block); end
 end
 
 class Trestle::Admin::Builder
-  sig do
-    params(
-      args: T.untyped,
-      block: T.proc.void.bind(Trestle::Navigation::Block::Evaluator),
-    ).void
-  end
-  def menu(*args, &block); end
-end
-
-class Trestle::Resource::Builder
   sig do
     params(
       args: T.untyped,

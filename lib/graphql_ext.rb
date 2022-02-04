@@ -33,7 +33,7 @@ class GraphQL::RailsLogger::Subscriber < ActionController::LogSubscriber
       # Skip introspection query, if applicable.
       if config.skip_introspection_query &&
            query.index(/query IntrospectionQuery/)
-        query = "query IntrospectionQuery { ... }"
+        query = "    query IntrospectionQuery { ... }"
       end
 
       if query.present?

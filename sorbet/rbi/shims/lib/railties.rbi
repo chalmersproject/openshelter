@@ -41,4 +41,7 @@ end
 class Rails::Engine < ::Rails::Railtie
   sig { returns(ActionDispatch::Routing::RouteSet) }
   def routes(&block); end
+
+  sig { returns(ActionDispatch::Routing::RouteSet) }
+  def self.routes(&block); end
 end

@@ -6,7 +6,6 @@ class MetaController < ApplicationController
 
   sig { void }
   def show
-    csrf = { request_forgery_protection_token => form_authenticity_token }
-    render(json: { version: app.version, csrf: csrf })
+    render(json: { version: app.version })
   end
 end

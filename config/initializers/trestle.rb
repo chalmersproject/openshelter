@@ -4,7 +4,7 @@
 
 Trestle.configure do |config|
   # Configuration:
-  config.site_title = "Chalmers Administration"
+  config.site_title = "Chalmers Admin"
   config.footer = nil
 
   # Mounting:

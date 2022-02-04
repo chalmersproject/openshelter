@@ -22846,7 +22846,7 @@ module ActiveRecord::Serialization
   extend ::ActiveSupport::Concern
   include GeneratedInstanceMethods
   include ::ActiveModel::Serializers::JSON
-  include ::ActiveModel::Serializers::Xml
+  # include ::ActiveModel::Serializers::Xml
 
   mixes_in_class_methods GeneratedClassMethods
   mixes_in_class_methods ::ActiveModel::Naming

@@ -17,23 +17,50 @@ module ActionController::Base::HelperMethods
 end
 
 module Trestle
-  def admins; end
-  def admins=(val); end
+  def registry; end
+  def registry=(val); end
 
   class << self
-    def admin(name, options = T.unsafe(nil), &block); end
-    def admins; end
-    def admins=(val); end
+    # Builds and registers a new plain admin
+    def admin(name, **options, &block); end
+
+    def admins(*_arg0, &_arg1); end
+
+    # Configuration methods
     def config; end
+
     def configure(&block); end
+
+    # Returns the I18n fallbacks for the given locale.
+    #
+    # This is used from within a Sprockets asset (JavaScript)
+    # to determine which locale files to include.
+    #
+    # Examples
+    #
+    # Trestle.i18n_fallbacks("pt-BR") => ["pt-BR", "pt"]
+    # Trestle.i18n_fallbacks("ca") => ["ca", "es-ES", "es"] %>
+    #
+    # Returns an array of locale Strings.
     def i18n_fallbacks(locale = T.unsafe(nil)); end
-    def lookup(admin); end
+
+    def lookup(*_arg0, &_arg1); end
+    def lookup_model(*_arg0, &_arg1); end
+
+    # Builds the global navigation by combining the menu options from the
+    # Trestle configuration along with menu blocks from admin resources.
     def navigation(context); end
+
     def railtie_helpers_paths; end
     def railtie_namespace; end
     def railtie_routes_url_helpers(include_path_helpers = T.unsafe(nil)); end
-    def register(admin); end
-    def resource(name, options = T.unsafe(nil), &block); end
+    def register(*_arg0, &_arg1); end
+    def registry; end
+    def registry=(val); end
+
+    # Builds and registers a new admin resource
+    def resource(name, register_model: T.unsafe(nil), **options, &block); end
+
     def table_name_prefix; end
     def use_relative_model_naming?; end
   end
@@ -67,6 +94,9 @@ module Trestle::Adapters::ActiveRecordAdapter
   def array_column?(column); end
   def counter_cache_column?(attribute); end
   def default_attributes; end
+  def enum_column?(column); end
+  def enum_human_name(column, value); end
+  def enum_values(column); end
   def inheritance_column?(attribute); end
   def primary_key?(attribute); end
 end
@@ -365,7 +395,7 @@ module Trestle::AdminController::HelperMethods
   include ::ActionController::Base::HelperMethods
   include ::Trestle::ApplicationController::HelperMethods
 
-  def admin(*args, &block); end
+  # def admin(*args, &block); end
 end
 
 class Trestle::ApplicationController < ::ActionController::Base
@@ -395,12 +425,12 @@ end
 module Trestle::ApplicationController::HelperMethods
   include ::ActionController::Base::HelperMethods
 
-  def breadcrumb(*args, &block); end
-  def breadcrumbs(*args, &block); end
-  def default_title(*args, &block); end
-  def dialog_request?(*args, &block); end
-  def toolbar(*args, &block); end
-  def toolbars(*args, &block); end
+  # def breadcrumb(*args, &block); end
+  # def breadcrumbs(*args, &block); end
+  # def default_title(*args, &block); end
+  # def dialog_request?(*args, &block); end
+  # def toolbar(*args, &block); end
+  # def toolbars(*args, &block); end
 end
 
 class Trestle::Attribute
@@ -428,6 +458,7 @@ end
 
 module Trestle::AvatarHelper
   def avatar(options = T.unsafe(nil)); end
+  def default_avatar_options; end
   def gravatar(email, options = T.unsafe(nil)); end
 end
 
@@ -618,7 +649,8 @@ end
 class Trestle::ContainerHelper::Context
   def initialize(template); end
 
-  def sidebar(&block); end
+  def default_sidebar_options; end
+  def sidebar(options = T.unsafe(nil), &block); end
 end
 
 module Trestle::Controller; end
@@ -1479,6 +1511,23 @@ module Trestle::ParamsHelper
   def persistent_params; end
 end
 
+class Trestle::Registry
+  include ::Enumerable
+
+  def initialize; end
+
+  # The admins hash is left exposed for backwards compatibility
+  def admins; end
+
+  def each(&block); end
+  def empty?; end
+  def lookup(admin); end
+  def lookup_admin(admin); end
+  def lookup_model(model); end
+  def register(admin, register_model: T.unsafe(nil)); end
+  def reset!; end
+end
+
 class Trestle::Reloader
   def initialize(files, dirs = T.unsafe(nil)); end
 
@@ -1767,8 +1816,8 @@ module Trestle::ResourceController::HelperMethods
   include ::Trestle::ApplicationController::HelperMethods
   include ::Trestle::AdminController::HelperMethods
 
-  def collection(*args, &block); end
-  def instance(*args, &block); end
+  # def collection(*args, &block); end
+  # def instance(*args, &block); end
 end
 
 class Trestle::Scopes

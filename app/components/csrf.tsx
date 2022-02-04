@@ -1,27 +1,26 @@
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import { CSRFContext, useCSRFContext } from "~/utils/csrf";
 
 export type CSRFProviderProps = {
-  readonly csrf: Record<string, string>;
+  readonly token: string;
 };
 
-export const CSRFProvider: FC<CSRFProviderProps> = ({ csrf, children }) => {
-  const [[param, token]] = useMemo(() => Object.entries(csrf), [csrf]);
-  const value: CSRFContext = { param, token };
+export const CSRFProvider: FC<CSRFProviderProps> = ({ token, children }) => {
+  const value: CSRFContext = { token };
   return <CSRFContext.Provider value={value}>{children}</CSRFContext.Provider>;
 };
 
 export const CSRFMeta: FC = () => {
-  const { param, token } = useCSRFContext();
+  const { token } = useCSRFContext();
   return (
     <>
-      <meta name="csrf-param" content={param} />
+      <meta name="csrf-param" content="form_authenticity_token" />
       <meta name="csrf-token" content={token} />
     </>
   );
 };
 
 export const FormAuthenticityField: FC = () => {
-  const { param, token } = useCSRFContext();
-  return <input type="hidden" name={param} value={token} />;
+  const { token } = useCSRFContext();
+  return <input type="hidden" name="form_authenticity_token" value={token} />;
 };

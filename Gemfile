@@ -28,7 +28,9 @@ gem "validate_url", "~> 1.0"
 gem "phonelib", "~> 0.6.55"
 
 # Expose an admin interface with Trestle.
-gem "trestle", "~> 0.9.5"
+gem "trestle",
+    github: "TrestleAdmin/trestle",
+    ref: "be01ce94429df4d5e2db98c393f3151d8cfe250c"
 gem "turbolinks", "~> 5.2"
 
 # Use the Puma web server [https://github.com/puma/puma].

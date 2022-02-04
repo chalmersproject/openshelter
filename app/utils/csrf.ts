@@ -1,7 +1,6 @@
 import { createContext, useContext } from "react";
 
 export type CSRFContext = {
-  readonly param: string;
   readonly token: string;
 };
 

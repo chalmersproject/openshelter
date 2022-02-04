@@ -9,7 +9,11 @@ module Types
     include GraphQL::Types::Relay::HasNodeField
     include GraphQL::Types::Relay::HasNodesField
 
-    field :version, String, description: "Application server version."
+    field :csrf_token, String, null: false, resolver_method: :resolve_csrf_token
+    field :version,
+          String,
+          null: false,
+          description: "Application server version."
 
     field :viewer,
           Types::UserType,
@@ -20,7 +24,15 @@ module Types
     field :test_field, String, null: false
     field :test_signal_type, SignalTypeType, null: false
 
-    delegate :version, to: :app
+    sig { returns(String) }
+    def resolve_csrf_token
+      T.must(csrf_token)
+    end
+
+    sig { returns(String) }
+    def version # rubocop:disable Rails/Delegate
+      app.version
+    end
 
     sig { returns(String) }
     def test_field
