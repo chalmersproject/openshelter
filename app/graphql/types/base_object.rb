@@ -7,9 +7,9 @@ module Types
 
     include ResolverHelpers
 
-    field_class BaseField
-    connection_type_class BaseConnection
-    edge_type_class BaseEdge
+    field_class Types::BaseField
+    connection_type_class Types::BaseConnection
+    edge_type_class Types::BaseEdge
 
     sig do
       params(

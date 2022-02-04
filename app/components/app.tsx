@@ -1,4 +1,7 @@
 import type { FC } from "react";
+import { CSRFProvider } from "~/components/csrf";
+
+import { HiUser } from "react-icons/hi";
 
 import { Global } from "@mantine/core";
 import { AppShell, Header } from "@mantine/core";
@@ -10,12 +13,9 @@ import { NotificationsProvider } from "@mantine/notifications";
 import { MantineProvider } from "~/components/mantine";
 import { customSx } from "~/utils/mantine";
 
-import { CSRFProvider } from "~/components/csrf";
 import { ApolloProvider } from "~/components/apollo";
-
 import { gql } from "@apollo/client";
 import type { AppLayoutViewerFragment } from "~/graphql/schema.generated";
-import { HiUser } from "react-icons/hi";
 
 export type AppProvidersProps = { readonly csrfToken: string };
 

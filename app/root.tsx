@@ -2,13 +2,14 @@ import { Meta, MetaFunction } from "remix";
 import { Links, LinksFunction } from "remix";
 import { LiveReload, Outlet, Scripts, ScrollRestoration } from "remix";
 import { isDevelopment } from "~/application";
+import { isEmpty, first } from "lodash";
 
 import { CSRFMeta } from "~/components/csrf";
 import { AppProviders, AppLayout } from "~/components/app";
 
 import type { LoaderFunction } from "remix";
 import { gql } from "@apollo/client";
-import { runLoaderQuery } from "~/utils/apollo/remix";
+import { runLoaderQuery, formatQueryError } from "~/utils/apollo/remix";
 import { useLoaderData } from "remix";
 
 import {
@@ -48,12 +49,13 @@ gql`
 `;
 
 export const loader: LoaderFunction = async ({ request }) => {
-  const { data, error } = await runLoaderQuery<AppQuery, AppQueryVariables>({
+  const { data, errors } = await runLoaderQuery<AppQuery, AppQueryVariables>({
     request,
     query: AppQueryDocument,
   });
-  if (error) {
-    throw new Error(`Failed to load application data: ${error.message}`);
+  if (!isEmpty(errors)) {
+    const message = formatQueryError(first(errors)!);
+    throw new Error(`Failed to load application data: ${message}`);
   }
   if (!data) {
     throw new Error("Missing application data.");

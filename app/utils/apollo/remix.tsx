@@ -2,18 +2,21 @@ import { useEffect } from "react";
 import { useLoaderData } from "remix";
 import { pick } from "lodash";
 
+import { HiOutlineExclamation } from "react-icons/hi";
+
 import type { DocumentNode, TypedDocumentNode } from "@apollo/client";
-import type { ApolloError, ApolloQueryResult } from "@apollo/client";
-import type { QueryOptions } from "@apollo/client";
+import type { QueryOptions, ApolloQueryResult } from "@apollo/client";
 import { useApolloClient } from "@apollo/client";
 import { createApolloClient } from "~/utils/apollo/client";
+import { useNotifications } from "@mantine/notifications";
+import { GraphQLError } from "graphql";
 
 function serializeQueryResult<TData, TVariables>(
   result: ApolloQueryResult<TData>,
   variables?: TVariables,
 ): LoaderQueryResult<TData, TVariables> {
   return {
-    ...pick(result, "data", "error"),
+    ...pick(result, "data", "errors"),
     variables,
   };
 }
@@ -27,7 +30,10 @@ export async function runLoaderQuery<T, TVariables>({
   LoaderQueryResult<T, TVariables>
 > {
   const client = createApolloClient({ request });
-  const result = await client.query<T, TVariables>({ ...options });
+  const result = await client.query<T, TVariables>({
+    ...options,
+    errorPolicy: "all",
+  });
   return serializeQueryResult(result, options.variables);
 }
 
@@ -40,23 +46,47 @@ export type LoaderQueryOptions<TData, TVariables> = QueryOptions<
 
 export type LoaderQueryResult<TData, TVariables> = Pick<
   ApolloQueryResult<TData>,
-  "data" | "error"
+  "data" | "errors"
 > & {
-  data: TData;
   variables?: TVariables;
-  error?: ApolloError;
 };
 
+export function formatQueryError({ message }: GraphQLError): string {
+  const capitalized = message.charAt(0).toUpperCase() + message.slice(1);
+  return capitalized + (message.endsWith(".") ? "" : ".");
+}
+
 // Like `useLoaderData`, but caches the query results.
+//
+// TODO: Allow customizing on-error behaviour?
 export function useLoaderQuery<TData, TVariables>(
   query: DocumentNode | TypedDocumentNode,
 ): LoaderQueryResult<TData, TVariables> {
   const client = useApolloClient();
   const result = useLoaderData<LoaderQueryResult<TData, TVariables>>();
+
+  // Cache results, and notify of errors.
+  const { showNotification } = useNotifications();
   useEffect(() => {
-    const { data, variables } = result;
+    const { data, variables, errors } = result;
     client.writeQuery({ query, data, variables });
+    if (errors) {
+      errors.forEach(error => {
+        const { path } = error;
+        const title = path
+          ? `Failed to load ${path.join(".")}`
+          : "Failed to load route data";
+        const message = formatQueryError(error);
+        showNotification({
+          title,
+          message,
+          color: "red",
+          icon: <HiOutlineExclamation />,
+        });
+      });
+    }
   }, [client, query, result]);
+
   return result;
 }
 

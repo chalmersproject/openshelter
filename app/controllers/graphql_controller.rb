@@ -101,7 +101,6 @@ class GraphQLController < ApplicationController
   # Allow executing internal requests (i.e. from Remix).
   sig { returns(T::Boolean) }
   def protect_from_forgery?
-    local = request.hostname.in?(%w[localhost 127.0.0.1])
-    !local || request.origin.present?
+    !request.hostname.in?(%w[localhost 127.0.0.1])
   end
 end

@@ -1,6 +1,10 @@
 import { useEffect, useMemo } from "react";
 import { useActionData, ActionFunction } from "remix";
+import { useSearchParams } from "remix";
 import { apiBaseURL } from "~/application";
+
+import { Form } from "remix";
+import { FormAuthenticityField } from "~/components/csrf";
 
 import { HiOutlineExclamation } from "react-icons/hi";
 
@@ -8,25 +12,33 @@ import { Button, Group } from "@mantine/core";
 import { TextInput, PasswordInput } from "@mantine/core";
 import { useNotifications } from "@mantine/notifications";
 
-import { FormAuthenticityField } from "~/components/csrf";
-
 import type { GraphQLErrors } from "@apollo/client/errors";
 
 export const action: ActionFunction = async ({ request }) => {
-  const { headers, body } = request;
+  const url = new URL(request.url);
+  const form = await request.formData();
+
+  const searchParams = new URLSearchParams(url.searchParams);
+  for (const [name, value] of form.entries()) {
+    if (typeof value === "string") {
+      searchParams.append(name, value);
+    }
+  }
+
   return fetch(apiBaseURL + "/auth/login", {
     method: "POST",
-    headers,
-    body,
+    headers: request.headers,
+    body: searchParams,
     redirect: "manual",
   });
 };
 
 type LoginData = {
-  errors: GraphQLErrors;
+  readonly errors: GraphQLErrors;
 };
 
 export default function AccountLogin() {
+  const [searchParams] = useSearchParams();
   const { showNotification } = useNotifications();
   const data = useActionData<LoginData>();
 
@@ -48,19 +60,15 @@ export default function AccountLogin() {
     }
   }, [data]);
 
-  const redirectURL = useMemo(() => {
-    if (typeof window === "undefined") {
-      return undefined;
+  const action = useMemo(() => {
+    if (searchParams) {
+      return "/account/login" + `?${searchParams}`;
     }
-    const url = new URL(window.location.href);
-    return url.searchParams.get("redirect_url");
-  }, []);
+    return undefined;
+  }, [searchParams]);
   return (
-    <form method="post">
+    <Form method="post" action={action} reloadDocument>
       <FormAuthenticityField />
-      {!!redirectURL && (
-        <input type="hidden" name="redirect_url" value={redirectURL} />
-      )}
       <Group direction="column" align="stretch">
         <TextInput
           type="text"
@@ -78,6 +86,6 @@ export default function AccountLogin() {
         />
         <Button type="submit">Sign In</Button>
       </Group>
-    </form>
+    </Form>
   );
 }

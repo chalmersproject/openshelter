@@ -1,5 +1,4 @@
 import { Group, Text } from "@mantine/core";
-// import { isBrowser } from "~/utils/config";
 
 import type { LoaderFunction } from "remix";
 import { gql } from "@apollo/client";

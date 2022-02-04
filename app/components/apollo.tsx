@@ -1,8 +1,8 @@
 import { FC, useCallback, useMemo } from "react";
 import { useCSRFContext } from "~/utils/csrf";
+import { useNotifications } from "@mantine/notifications";
 
 import { HiOutlineExclamation } from "react-icons/hi";
-import { useNotifications } from "@mantine/notifications";
 
 import type { ApolloError, ServerError } from "@apollo/client";
 import { ApolloProvider as Provider } from "@apollo/client";

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { CSRFContext, useCSRFContext } from "~/utils/csrf";
+import { useCSRFContext, CSRFContext } from "~/utils/csrf";
 
 export type CSRFProviderProps = {
   readonly token: string;
@@ -14,7 +14,7 @@ export const CSRFMeta: FC = () => {
   const { token } = useCSRFContext();
   return (
     <>
-      <meta name="csrf-param" content="form_authenticity_token" />
+      <meta name="csrf-param" content="authenticity_token" />
       <meta name="csrf-token" content={token} />
     </>
   );
@@ -22,5 +22,5 @@ export const CSRFMeta: FC = () => {
 
 export const FormAuthenticityField: FC = () => {
   const { token } = useCSRFContext();
-  return <input type="hidden" name="form_authenticity_token" value={token} />;
+  return <input type="hidden" name="authenticity_token" value={token} />;
 };

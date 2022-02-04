@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 module Types
-  class QueryType < BaseObject
+  class QueryType < Types::BaseObject
     extend T::Sig
 
     # Add node and nodes field.
