@@ -1,5 +1,4 @@
 # See https://github.com/Shopify/tapioca
-
 gem:
   doc: true
   exclude:

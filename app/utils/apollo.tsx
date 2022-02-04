@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useLoaderData } from "remix";
 import { pick } from "lodash";
+import { createApolloClient } from "~/graphql/apollo/client";
 
 import { HiOutlineExclamation } from "react-icons/hi";
 
+import type { GraphQLError } from "graphql";
 import type { DocumentNode, TypedDocumentNode } from "@apollo/client";
 import type { QueryOptions, ApolloQueryResult } from "@apollo/client";
 import { useApolloClient } from "@apollo/client";
-import { createApolloClient } from "~/utils/apollo/client";
 import { useNotifications } from "@mantine/notifications";
-import { GraphQLError } from "graphql";
 
 function serializeQueryResult<TData, TVariables>(
   result: ApolloQueryResult<TData>,

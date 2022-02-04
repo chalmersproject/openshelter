@@ -46,7 +46,7 @@ const themeOther = {
 
 type MantineThemeOther = typeof themeOther;
 
-export const theme: MantineThemeOverride = {
+const theme: MantineThemeOverride = {
   primaryColor: "green",
   colorScheme: "dark",
   colors: {
@@ -70,7 +70,9 @@ export const theme: MantineThemeOverride = {
   other: themeOther,
 };
 
-type CustomTheme = Omit<MantineTheme, "other"> & MantineThemeOther;
+export default theme;
+
+export type CustomTheme = Omit<MantineTheme, "other"> & MantineThemeOther;
 
 export function customTheme({ other, ...theme }: MantineTheme): CustomTheme {
   return { ...theme, ...(other as MantineThemeOther) };

@@ -1,7 +1,8 @@
 import { useEffect, useMemo } from "react";
 import { useActionData, ActionFunction } from "remix";
 import { useSearchParams } from "remix";
-import { apiBaseURL } from "~/application";
+import { redirect } from "remix";
+import { serverHost } from "~/application";
 
 import { Form } from "remix";
 import { FormAuthenticityField } from "~/components/csrf";
@@ -16,21 +17,14 @@ import type { GraphQLErrors } from "@apollo/client/errors";
 
 export const action: ActionFunction = async ({ request }) => {
   const url = new URL(request.url);
-  const form = await request.formData();
-
   const searchParams = new URLSearchParams(url.searchParams);
-  for (const [name, value] of form.entries()) {
-    if (typeof value === "string") {
-      searchParams.append(name, value);
-    }
-  }
-
-  return fetch(apiBaseURL + "/auth/login", {
+  const redirectURL = searchParams.get("redirect_url");
+  const response = await fetch(serverHost + "/api/auth/login", {
     method: "POST",
     headers: request.headers,
-    body: searchParams,
-    redirect: "manual",
+    body: request.body,
   });
+  return redirect(redirectURL || "/", { headers: response.headers });
 };
 
 type LoginData = {

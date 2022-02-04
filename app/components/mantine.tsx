@@ -1,7 +1,7 @@
 import type { FC } from "react";
 import { MantineProvider as Provider } from "@mantine/core";
 
-import { theme } from "~/utils/mantine";
+import theme from "~/theme";
 
 export const MantineProvider: FC = ({ children }) => (
   <Provider

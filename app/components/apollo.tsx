@@ -6,7 +6,7 @@ import { HiOutlineExclamation } from "react-icons/hi";
 
 import type { ApolloError, ServerError } from "@apollo/client";
 import { ApolloProvider as Provider } from "@apollo/client";
-import { createApolloClient } from "~/utils/apollo/client";
+import { createApolloClient } from "~/graphql/apollo/client";
 
 export const ApolloProvider: FC = ({ children }) => {
   const csrf = useCSRFContext();

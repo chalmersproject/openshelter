@@ -7,7 +7,7 @@ documents:
   - app/routes/**/*.tsx
   - app/root.tsx
 generates:
-  app/graphql/schema.generated.ts:
+  app/graphql/types.generated.ts:
     plugins:
       - typescript
       - typescript-operations
@@ -15,7 +15,12 @@ generates:
     config:
       dedupeOperationSuffix: true
       dedupeFragments: true
-  app/graphql/apollo.generated.ts:
+      defaultScalarType: string
+      maybeValue: T
+      constEnums: true
+      immutableTypes: true
+      useTypeImports: true
+  app/graphql/apollo/helpers.generated.ts:
     plugins:
       - typescript-apollo-client-helpers
   app/graphql/schema.generated.json:

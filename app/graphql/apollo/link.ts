@@ -1,12 +1,13 @@
-import { apiBaseURL, isBrowser } from "~/application";
+import { serverHost, isBrowser } from "~/application";
 
 import type { ApolloLink } from "@apollo/client";
 import { HttpLink } from "@apollo/client";
-import { createClientOnlyLink } from "~/utils/apollo/link.client";
+import { createSubscriptionsLink } from "~/graphql/apollo/link.client";
 
 export const createTerminatingLink = (request?: Request): ApolloLink => {
+  const host = isBrowser ? "" : serverHost;
   const link = new HttpLink({
-    uri: isBrowser ? "/api/graphql" : apiBaseURL + "/graphql",
+    uri: host + "/api/graphql",
     fetch: async (input, init = {}) => {
       if (request) {
         const headers = new Headers(init.headers);
@@ -21,5 +22,5 @@ export const createTerminatingLink = (request?: Request): ApolloLink => {
       return fetch(input, init);
     },
   });
-  return isBrowser ? createClientOnlyLink(link) : link;
+  return isBrowser ? createSubscriptionsLink(link) : link;
 };

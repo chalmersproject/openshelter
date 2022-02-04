@@ -1,20 +1,19 @@
-import { isBrowser } from "~/application";
 import { CSRFContext } from "~/utils/csrf";
+import { isBrowser } from "~/application";
 
+import type { ApolloLink, NormalizedCacheObject } from "@apollo/client";
 import { ApolloClient as Client } from "@apollo/client";
-import { InMemoryCache, NormalizedCacheObject } from "@apollo/client";
-
-import type { ApolloLink } from "@apollo/client";
+import { InMemoryCache } from "@apollo/client";
+import { from as fromLinks } from "@apollo/client";
 // import { RetryLink } from "@apollo/client/link/retry";
 // import { SentryLink } from "apollo-link-sentry";
 // import { createPersistedQueryLink } from "@apollo/client/link/persisted-queries";
-import { from as fromLinks } from "@apollo/client";
 
 // Split GraphQL requests between protocols.
 import { setContext as setLinkContext } from "@apollo/client/link/context";
-import { createTerminatingLink } from "~/utils/apollo/link";
+import { createTerminatingLink } from "~/graphql/apollo/link";
 
-import type { TypedTypePolicies as TypePolicies } from "~/graphql/apollo.generated";
+import type { StrictTypedTypePolicies as TypePolicies } from "~/graphql/apollo/helpers.generated";
 
 const typePolicies: TypePolicies = {};
 

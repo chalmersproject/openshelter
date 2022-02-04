@@ -9,8 +9,8 @@ import { AppProviders, AppLayout } from "~/components/app";
 
 import type { LoaderFunction } from "remix";
 import { gql } from "@apollo/client";
-import { runLoaderQuery, formatQueryError } from "~/utils/apollo/remix";
 import { useLoaderData } from "remix";
+import { runLoaderQuery, formatQueryError } from "~/utils/apollo";
 
 import {
   AppQueryDocument,

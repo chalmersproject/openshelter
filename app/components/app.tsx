@@ -11,7 +11,7 @@ import { Button } from "@mantine/core";
 import { Badge } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
 import { MantineProvider } from "~/components/mantine";
-import { customSx } from "~/utils/mantine";
+import { customSx } from "~/theme";
 
 import { ApolloProvider } from "~/components/apollo";
 import { gql } from "@apollo/client";

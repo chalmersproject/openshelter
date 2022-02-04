@@ -24,8 +24,7 @@ class AuthController < ApplicationController
     email, password = params.require(%i[email password])
     session = Session.new(email: email, password: password)
     if session.save
-      redirect_url = params.fetch(:redirect_url, "/account")
-      redirect_to(redirect_url)
+      head(:no_content)
     else
       logger.error("Login failed: #{session.errors.to_json}")
       render(
