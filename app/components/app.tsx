@@ -1,5 +1,5 @@
-import type { FC } from "react";
-import { CSRFProvider } from "~/components/csrf";
+import { FC, useMemo } from "react";
+import { useLocation } from "remix";
 
 import { HiUser } from "react-icons/hi";
 
@@ -13,7 +13,9 @@ import { NotificationsProvider } from "@mantine/notifications";
 import { MantineProvider } from "~/components/mantine";
 import { customSx } from "~/theme";
 
+import { CSRFProvider } from "~/components/csrf";
 import { ApolloProvider } from "~/components/apollo";
+
 import { gql } from "@apollo/client";
 import type { AppLayoutViewerFragment } from "~/graphql/schema.generated";
 
@@ -37,6 +39,17 @@ export const AppProviders: FC<AppProvidersProps> = ({
   );
 };
 
+export const AppCatchBoundaryProviders: FC = ({ children }) => {
+  return (
+    <MantineProvider>
+      <NotificationsProvider>{children}</NotificationsProvider>
+      <Global
+        styles={({ colors }) => ({ body: { background: colors.dark[8] } })}
+      />
+    </MantineProvider>
+  );
+};
+
 gql`
   fragment AppLayoutViewer on User {
     id
@@ -45,7 +58,7 @@ gql`
 
 export type AppLayoutProps = {
   version: string;
-  viewer: AppLayoutViewerFragment | null | undefined;
+  viewer: AppLayoutViewerFragment | undefined;
 };
 
 export const AppLayout: FC<AppLayoutProps> = ({
@@ -53,6 +66,12 @@ export const AppLayout: FC<AppLayoutProps> = ({
   viewer,
   children,
 }) => {
+  const location = useLocation();
+  const accountURL = "/account";
+  const accountLoginURL = useMemo<string>(() => {
+    const params = new URLSearchParams([["redirect_url", location.pathname]]);
+    return accountURL + "/login" + `?${params}`;
+  }, [location]);
   return (
     <AppShell
       header={
@@ -100,7 +119,7 @@ export const AppLayout: FC<AppLayoutProps> = ({
             <Group position="right" sx={{ flex: 1 }}>
               <Button
                 component="a"
-                href={viewer ? "/account" : "/account/login"}
+                href={viewer ? accountURL : accountLoginURL}
                 size="xs"
                 leftIcon={<HiUser />}
                 variant="outline"
@@ -111,6 +130,74 @@ export const AppLayout: FC<AppLayoutProps> = ({
                 }}
               >
                 {viewer ? "Account" : "Login"}
+              </Button>
+            </Group>
+          </Group>
+        </Header>
+      }
+    >
+      {children}
+    </AppShell>
+  );
+};
+
+export const AppCatchBoundaryLayout: FC = ({ children }) => {
+  return (
+    <AppShell
+      header={
+        <Header
+          height={44}
+          sx={({ colors }) => ({
+            background: colors.dark[9],
+          })}
+        >
+          <Group
+            align="center"
+            sx={({ spacing }) => ({
+              height: "100%",
+              paddingLeft: spacing.sm,
+              paddingRight: spacing.sm,
+            })}
+          >
+            <Group position="left" sx={{ flex: 1 }}>
+              <Badge size="md" variant="outline" color="red">
+                error
+              </Badge>
+            </Group>
+            <Box>
+              <Text
+                component="a"
+                href="/"
+                size="md"
+                weight={800}
+                sx={customSx(({ colors, letterSpacing, transition }) => ({
+                  letterSpacing: letterSpacing.widest,
+                  transition,
+                  transitionProperty: "color",
+                  "&:hover": {
+                    color: colors.gray[4],
+                  },
+                }))}
+              >
+                CHALMERS PROJECT
+              </Text>
+            </Box>
+            <Group position="right" sx={{ flex: 1 }}>
+              <Button
+                component="a"
+                href="/"
+                size="xs"
+                leftIcon={<HiUser />}
+                variant="outline"
+                radius="xl"
+                uppercase
+                sx={{
+                  padding: "0 8px",
+                  height: 24,
+                  fontWeight: 700,
+                }}
+              >
+                Home
               </Button>
             </Group>
           </Group>

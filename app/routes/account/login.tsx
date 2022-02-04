@@ -1,68 +1,69 @@
 import { useEffect, useMemo } from "react";
-import { useActionData, ActionFunction } from "remix";
+
+import type { Errors } from "~/utils/errors";
+import { formatError } from "~/utils/errors";
+
+import type { ActionFunction } from "remix";
+import { useActionData } from "remix";
 import { useSearchParams } from "remix";
 import { redirect } from "remix";
 import { serverHost } from "~/application";
-
-import { Form } from "remix";
-import { FormAuthenticityField } from "~/components/csrf";
+import { isEmpty, first } from "lodash";
 
 import { HiOutlineExclamation } from "react-icons/hi";
+
+import { Form } from "remix";
+import { FormAuthenticity } from "~/components/csrf";
 
 import { Button, Group } from "@mantine/core";
 import { TextInput, PasswordInput } from "@mantine/core";
 import { useNotifications } from "@mantine/notifications";
 
-import type { GraphQLErrors } from "@apollo/client/errors";
-
 export const action: ActionFunction = async ({ request }) => {
   const url = new URL(request.url);
-  const searchParams = new URLSearchParams(url.searchParams);
-  const redirectURL = searchParams.get("redirect_url");
+  const params = new URLSearchParams(url.searchParams);
+  const redirectURL = params.get("redirect_url");
   const response = await fetch(serverHost + "/api/auth/login", {
     method: "POST",
     headers: request.headers,
     body: request.body,
   });
-  return redirect(redirectURL || "/", { headers: response.headers });
+  if (response.ok) {
+    return redirect(redirectURL || "/", { headers: response.headers });
+  }
+  return response;
 };
 
-type LoginData = {
-  readonly errors: GraphQLErrors;
+export type ActionData = {
+  readonly errors: Errors;
 };
 
-export default function AccountLogin() {
-  const [searchParams] = useSearchParams();
+export default function AccountLoginRoute() {
   const { showNotification } = useNotifications();
-  const data = useActionData<LoginData>();
 
+  const data = useActionData<ActionData>();
   useEffect(() => {
-    const [firstError] = data?.errors || [];
-    if (firstError) {
-      const { message } = firstError;
-      const messageCapitalized =
-        message.charAt(0).toUpperCase() + message.slice(1);
-      const messageFormatted =
-        messageCapitalized + (message.endsWith(".") ? "" : ".");
-      console.log({ messageCapitalized, messageFormatted });
+    const { errors } = data ?? {};
+    if (!isEmpty(errors)) {
+      const message = formatError(first(errors!)!);
       showNotification({
         title: "Login failed",
-        message: messageFormatted,
+        message,
         color: "red",
         icon: <HiOutlineExclamation />,
       });
     }
   }, [data]);
 
+  const [params] = useSearchParams();
   const action = useMemo(() => {
-    if (searchParams) {
-      return "/account/login" + `?${searchParams}`;
-    }
-    return undefined;
-  }, [searchParams]);
+    const paramsString = params.toString();
+    return "/account/login" + paramsString ? `?${params}` : "";
+  }, [params]);
+
   return (
     <Form method="post" action={action} reloadDocument>
-      <FormAuthenticityField />
+      <FormAuthenticity />
       <Group direction="column" align="stretch">
         <TextInput
           type="text"

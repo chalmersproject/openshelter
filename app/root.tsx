@@ -1,16 +1,20 @@
-import { Meta, MetaFunction } from "remix";
-import { Links, LinksFunction } from "remix";
+import type { LoaderFunction, MetaFunction, LinksFunction } from "remix";
+import { Meta, Links } from "remix";
 import { LiveReload, Outlet, Scripts, ScrollRestoration } from "remix";
-import { isDevelopment } from "~/application";
+import { useLoaderData, useCatch } from "remix";
 import { isEmpty, first } from "lodash";
+import { isDevelopment } from "~/application";
+import { formatError } from "~/utils/errors";
 
 import { CSRFMeta } from "~/components/csrf";
-import { AppProviders, AppLayout } from "~/components/app";
+import { AppProviders, AppCatchBoundaryProviders } from "~/components/app";
+import { AppLayout, AppCatchBoundaryLayout } from "~/components/app";
 
-import type { LoaderFunction } from "remix";
+import { Container, Group } from "@mantine/core";
+import { Title, Text } from "@mantine/core";
+
 import { gql } from "@apollo/client";
-import { useLoaderData } from "remix";
-import { runLoaderQuery, formatQueryError } from "~/utils/apollo";
+import { runLoaderQuery } from "~/utils/apollo";
 
 import {
   AppQueryDocument,
@@ -54,7 +58,7 @@ export const loader: LoaderFunction = async ({ request }) => {
     query: AppQueryDocument,
   });
   if (!isEmpty(errors)) {
-    const message = formatQueryError(first(errors)!);
+    const message = formatError(first(errors)!);
     throw new Error(`Failed to load application data: ${message}`);
   }
   if (!data) {
@@ -85,5 +89,34 @@ export default function App() {
         </body>
       </html>
     </AppProviders>
+  );
+}
+
+export function CatchBoundary() {
+  const { status, statusText } = useCatch();
+  return (
+    <AppCatchBoundaryProviders>
+      <html lang="en">
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width,initial-scale=1" />
+          <Meta />
+          <Links />
+        </head>
+        <body>
+          <AppCatchBoundaryLayout>
+            <Container size="sm" sx={{ paddingTop: 20, paddingBottom: 10 }}>
+              <Group direction="column" align="stretch" spacing="xs">
+                <Title>{status}</Title>
+                <Text>{statusText}</Text>
+              </Group>
+            </Container>
+          </AppCatchBoundaryLayout>
+          <ScrollRestoration />
+          <Scripts />
+          {isDevelopment && <LiveReload port={3100} />}
+        </body>
+      </html>
+    </AppCatchBoundaryProviders>
   );
 }

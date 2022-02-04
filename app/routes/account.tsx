@@ -1,5 +1,5 @@
 import { Outlet } from "remix";
 
-export default function Account() {
+export default function AccountRoute() {
   return <Outlet />;
 }

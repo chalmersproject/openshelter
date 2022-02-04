@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import { useLoaderData } from "remix";
 import { pick } from "lodash";
-import { createApolloClient } from "~/graphql/apollo/client";
+import { formatError } from "~/utils/errors";
 
 import { HiOutlineExclamation } from "react-icons/hi";
+import { useNotifications } from "@mantine/notifications";
 
-import type { GraphQLError } from "graphql";
 import type { DocumentNode, TypedDocumentNode } from "@apollo/client";
 import type { QueryOptions, ApolloQueryResult } from "@apollo/client";
 import { useApolloClient } from "@apollo/client";
-import { useNotifications } from "@mantine/notifications";
+import { createApolloClient } from "~/graphql/apollo/client";
 
 function serializeQueryResult<TData, TVariables>(
   result: ApolloQueryResult<TData>,
@@ -51,11 +51,6 @@ export type LoaderQueryResult<TData, TVariables> = Pick<
   variables?: TVariables;
 };
 
-export function formatQueryError({ message }: GraphQLError): string {
-  const capitalized = message.charAt(0).toUpperCase() + message.slice(1);
-  return capitalized + (message.endsWith(".") ? "" : ".");
-}
-
 // Like `useLoaderData`, but caches the query results.
 //
 // TODO: Allow customizing on-error behaviour?
@@ -76,7 +71,7 @@ export function useLoaderQuery<TData, TVariables>(
         const title = path
           ? `Failed to load ${path.join(".")}`
           : "Failed to load route data";
-        const message = formatQueryError(error);
+        const message = formatError(error);
         showNotification({
           title,
           message,

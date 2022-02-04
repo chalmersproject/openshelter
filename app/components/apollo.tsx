@@ -1,4 +1,7 @@
 import { FC, useCallback, useMemo } from "react";
+import { first } from "lodash";
+import { formatError } from "~/utils/errors";
+
 import { useCSRFContext } from "~/utils/csrf";
 import { useNotifications } from "@mantine/notifications";
 
@@ -16,11 +19,9 @@ export const ApolloProvider: FC = ({ children }) => {
 
 export const formatApolloError = (error: ApolloError): string => {
   const { graphQLErrors, networkError, message } = error;
-  if (graphQLErrors) {
-    const [firstError] = graphQLErrors;
-    if (firstError) {
-      return firstError.message;
-    }
+  const graphQLError = first(graphQLErrors);
+  if (graphQLError) {
+    return formatError(graphQLError);
   }
   if (networkError) {
     if ((networkError as ServerError | undefined)?.statusCode === 500) {

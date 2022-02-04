@@ -13787,12 +13787,11 @@ class String
   # # => "And they f... (continued)"
   def truncate(truncate_at, options = T.unsafe(nil)); end # => 20 # >> "🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪".bytesize # => 80 # >> "🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪".truncate_bytes(20) # => "🔪🔪🔪🔪…" # # The truncated text ends with the <tt>:omission</tt> string, defaulting # to "…", for a total length not exceeding <tt>bytesize</tt>. # Truncates +text+ to at most <tt>bytesize</tt> bytes in length without # breaking string encoding by splitting multibyte characters or breaking # grapheme clusters ("perceptual characters") by truncating at combining # characters. # # >> "🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪🔪".size
 
-  def truncate_bytes(truncate_at, omission: T.unsafe(nil)); end
+  def truncate_bytes(truncate_at, omission: T.unsafe(nil)); end # Truncates a given +text+ after a given number of words (<tt>words_count</tt>): # # 'Once upon a time in a world far far away'.truncate_words(4) # # => "Once upon a time..." # # Pass a string or regexp <tt>:separator</tt> to specify a different separator of words: # # 'Once<br>upon<br>a<br>time<br>in<br>a<br>world'.truncate_words(5, separator: '<br>') # # => "Once<br>upon<br>a<br>time<br>in..." # # The last characters will be replaced with the <tt>:omission</tt> string (defaults to "..."): # # 'And they found that many people were sleeping better.'.truncate_words(5, omission: '... (continued)') # # => "And they found that many... (continued)"
 
-  # Truncates a given +text+ after a given number of words (<tt>words_count</tt>): # # 'Once upon a time in a world far far away'.truncate_words(4) # # => "Once upon a time..." # # Pass a string or regexp <tt>:separator</tt> to specify a different separator of words: # # 'Once<br>upon<br>a<br>time<br>in<br>a<br>world'.truncate_words(5, separator: '<br>') # # => "Once<br>upon<br>a<br>time<br>in..." # # The last characters will be replaced with the <tt>:omission</tt> string (defaults to "..."): # # 'And they found that many people were sleeping better.'.truncate_words(5, omission: '... (continued)') # # => "And they found that many... (continued)"
-  def truncate_words(words_count, options = T.unsafe(nil)); end #
+  def truncate_words(words_count, options = T.unsafe(nil)); end # The reverse of +camelize+. Makes an underscored, lowercase form from the expression in the string. # # +underscore+ will also change '::' to '/' to convert namespaces to paths. # # 'ActiveModel'.underscore         # => "active_model" # 'ActiveModel::Errors'.underscore # => "active_model/errors" # See ActiveSupport::Inflector.underscore.
 
-  # The reverse of +camelize+. Makes an underscored, lowercase form from the expression in the string. # # +underscore+ will also change '::' to '/' to convert namespaces to paths. # # 'ActiveModel'.underscore         # => "active_model" # 'ActiveModel::Errors'.underscore # => "active_model/errors" # See ActiveSupport::Inflector.underscore.
+  #
   def underscore; end # Converts just the first character to uppercase. # # 'what a Lovely Day'.upcase_first # => "What a Lovely Day" # 'w'.upcase_first                 # => "W"
 
   # ''.upcase_first                  # => ""
@@ -13949,14 +13948,12 @@ class Time
 
     def rfc3339(str); end # Allows override of <tt>Time.zone</tt> locally inside supplied block; # resets <tt>Time.zone</tt> to existing value when done. # class ApplicationController < ActionController::Base # around_action :set_time_zone # # private # # Time.use_zone(current_user.timezone) { yield } # end # # NOTE: This won't affect any <tt>ActiveSupport::TimeWithZone</tt> # objects that have already been created, e.g. any model timestamp # attributes that have been read before the block will remain in # the application's default timezone. # # def set_time_zone # end
 
-    def use_zone(time_zone); end
+    def use_zone(time_zone); end # Returns the TimeZone for the current request, if this has been set (via Time.zone=). # If <tt>Time.zone</tt> has not been set for the current request, returns the TimeZone specified in <tt>config.time_zone</tt>.
 
-    # Returns the TimeZone for the current request, if this has been set (via Time.zone=). # If <tt>Time.zone</tt> has not been set for the current request, returns the TimeZone specified in <tt>config.time_zone</tt>.
     def zone; end # Sets <tt>Time.zone</tt> to a TimeZone object for the current request/thread. # # This method accepts any of the following: # # * An identifier for a Rails TimeZone object (e.g., "Eastern Time (US & Canada)", <tt>-5.hours</tt>). # * A TZInfo::Timezone object. # * An identifier for a TZInfo::Timezone object (e.g., "America/New_York"). # # Here's an example of how you might set <tt>Time.zone</tt> on a per request basis and reset it when the request is done. # <tt>current_user.time_zone</tt> just needs to return a string identifying the user's preferred time zone: # # class ApplicationController < ActionController::Base # around_action :set_time_zone # # def set_time_zone # if logged_in? # Time.use_zone(current_user.time_zone) { yield } # else # yield # end # end # end # * A Rails TimeZone object.
 
-    def zone=(time_zone); end
+    def zone=(time_zone); end # Returns the value of attribute zone_default.
 
-    # Returns the value of attribute zone_default.
     def zone_default; end # Sets the attribute zone_default
 
     def zone_default=(_arg0); end

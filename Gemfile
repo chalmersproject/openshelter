@@ -106,6 +106,3 @@ gem "annotate",
 # gem "debug", group: %i[development test], platforms: %i[mri mingw x64_mingw]
 gem "pry", group: %i[development test]
 gem "pry-rails", group: :development
-
-
-

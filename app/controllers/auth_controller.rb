@@ -6,7 +6,7 @@ class AuthController < ApplicationController
 
   sig { void }
   def show
-    params = { redirect_url: request.url }
+    params = { redirect_url: request.path }
     redirect_to("/account/login?#{params.to_query}")
   end
 

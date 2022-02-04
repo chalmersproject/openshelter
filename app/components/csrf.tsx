@@ -20,7 +20,8 @@ export const CSRFMeta: FC = () => {
   );
 };
 
-export const FormAuthenticityField: FC = () => {
+// A hidden field that protects against forgery.
+export const FormAuthenticity: FC = () => {
   const { token } = useCSRFContext();
   return <input type="hidden" name="authenticity_token" value={token} />;
 };

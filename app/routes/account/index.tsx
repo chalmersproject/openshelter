@@ -1,20 +1,18 @@
-import { Group, Text } from "@mantine/core";
+import { Form } from "remix";
+import { FormAuthenticity } from "~/components/csrf";
+
+import { Group } from "@mantine/core";
+import { Button } from "@mantine/core";
+import { Text } from "@mantine/core";
 
 import type { LoaderFunction } from "remix";
 import { gql } from "@apollo/client";
-import { useSubscription } from "@apollo/client";
 import { useLoaderQuery, runLoaderQuery } from "~/utils/apollo";
 
 import {
   AccountIndexRouteQueryDocument,
   AccountIndexRouteQuery,
   AccountIndexRouteQueryVariables,
-} from "~/graphql/schema.generated";
-
-import {
-  AccountIndexRouteSubscriptionDocument,
-  AccountIndexRouteSubscription,
-  AccountIndexRouteSubscriptionVariables,
 } from "~/graphql/schema.generated";
 
 gql`
@@ -24,14 +22,6 @@ gql`
       email
       createdAt
       updatedAt
-    }
-  }
-`;
-
-gql`
-  subscription AccountIndexRouteSubscription {
-    testField {
-      value
     }
   }
 `;
@@ -48,29 +38,26 @@ export const loader: LoaderFunction = async ({ request }) => {
 };
 
 export default function AccountIndexRoute() {
-  const { data } = useLoaderQuery<
-    AccountIndexRouteQuery,
-    AccountIndexRouteQueryVariables
-  >(AccountIndexRouteQueryDocument);
-
-  const { data: subscriptionData } = useSubscription<
-    AccountIndexRouteSubscription,
-    AccountIndexRouteSubscriptionVariables
-  >(AccountIndexRouteSubscriptionDocument, {
-    skip: true,
-    onSubscriptionData: ({ subscriptionData: { error } }) => {
-      if (error) {
-        console.error("Error from subscription:", error);
-      }
-    },
-  });
+  const {
+    data: { viewer },
+  } = useLoaderQuery<AccountIndexRouteQuery, AccountIndexRouteQueryVariables>(
+    AccountIndexRouteQueryDocument,
+  );
 
   return (
     <Group direction="column" align="stretch" spacing="md">
-      <Text component="pre">{JSON.stringify(data, undefined, 2)}</Text>
-      <Text component="pre">
-        {JSON.stringify(subscriptionData, undefined, 2)}
-      </Text>
+      <Group direction="column" align="stretch" spacing={0}>
+        <Text weight={600}>Viewer:</Text>
+        <Text component="pre" sx={{ margin: 0 }}>
+          {JSON.stringify(viewer, undefined, 2)}
+        </Text>
+      </Group>
+      {viewer && (
+        <Form method="post" action="/account/logout">
+          {/* <FormAuthenticityField /> */}
+          <Button type="submit">Logout</Button>
+        </Form>
+      )}
     </Group>
   );
 }

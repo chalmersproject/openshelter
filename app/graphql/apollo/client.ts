@@ -1,5 +1,5 @@
 import { CSRFContext } from "~/utils/csrf";
-import { isBrowser } from "~/application";
+import { isBrowser, isServer } from "~/application";
 
 import type { ApolloLink, NormalizedCacheObject } from "@apollo/client";
 import { ApolloClient as Client } from "@apollo/client";
@@ -45,7 +45,7 @@ export const createApolloClient = (
     createTerminatingLink(request),
   ]);
   return new Client({
-    ssrMode: !isBrowser,
+    ssrMode: isServer,
     link,
     cache: new InMemoryCache({ typePolicies }),
     defaultOptions: {
