@@ -12,7 +12,7 @@
       "flex items-center gap-1",
     ),
   ) do %>
-    <%= heroicon :menu, class: "w-4" %>
+    <%= heroicon "bars-3", variant: :mini, class: "w-4 h-4" %>
     <%= render AvatarComponent.new(
       profileable: current_user,
       size: :xs,
@@ -41,7 +41,7 @@
       <%= i.label "Profile" %>
     <% end %>
     <% c.with_item link: [:user, :registration, action: :edit] do |i| %>
-      <%= i.icon :adjustments %>
+      <%= i.icon "adjustments-horizontal" %>
       <%= i.label "Account" %>
     <% end %>
     <% c.with_item class: "custom" do |i| %>
@@ -57,13 +57,13 @@
           "text-left",
         ),
       ) do %>
-        <%= i.icon :logout %>
+        <%= i.icon "arrow-left-on-rectangle" %>
         <%= i.label "Sign Out" %>
       <% end %>
     <% end %>
   <% else %>
     <% c.with_item link: [:user, :session, action: :new] do |i| %>
-      <%= i.icon :login %>
+      <%= i.icon "arrow-right-on-rectangle" %>
       <%= i.label "Sign In" %>
     <% end %>
   <% end %>
@@ -81,11 +81,11 @@
     link: "mailto:Team Chalmers<info@chalmers.cards>",
     class: "external",
   ) do |i| %>
-    <%= i.icon :mail %>
+    <%= i.icon :envelope %>
     <%= i.label "Contact Us" %>
   <% end %>
   <% c.with_item(
-    link: internal_path,
+    link: :internal,
     class: "internal",
   ) do |i| %>
     <%= i.icon :beaker %>

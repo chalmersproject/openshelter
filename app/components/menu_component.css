@@ -40,9 +40,6 @@
       }
     }
 
-    &--icon {
-      @apply !w-5 !h-5;
-    }
     &--label {
       @apply flex-1 font-medium text-sm text-zinc-400 leading-tight;
     }

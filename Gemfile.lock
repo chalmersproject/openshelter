@@ -444,8 +444,9 @@ GEM
       ruby-pg-extras (= 4.8.1)
     rails_feather (0.1.0)
       rails
-    rails_heroicon (1.0.4)
-      rails
+    rails_heroicon (2.0.2)
+      actionview
+      railties
     railties (7.0.3.1)
       actionpack (= 7.0.3.1)
       activesupport (= 7.0.3.1)
@@ -701,7 +702,7 @@ DEPENDENCIES
   rails-healthcheck
   rails-pg-extras
   rails_feather (~> 0.1.0)
-  rails_heroicon (~> 1.0)
+  rails_heroicon (~> 2.0)
   responders!
   rgeo (~> 2.4)
   rgeo-activerecord (~> 7.0)

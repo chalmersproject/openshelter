@@ -1,20 +1,22 @@
 .action-bar-component {
-  .action-bar-component--action {
-    @apply btn btn-primary;
-    @apply pl-1.5 pr-2 py-0.5;
-    @apply flex items-center gap-1;
-    @apply font-medium;
+  .action-bar-component {
+    &--action {
+      @apply btn btn-primary;
+      @apply pl-1.5 pr-2 py-0.5;
+      @apply flex items-center gap-1;
+      @apply font-medium;
 
-    .icon {
+      &.active {
+        @apply hidden;
+      }
+
+      &.danger {
+        @apply btn-danger;
+      }
+    }
+
+    &--icon {
       @apply w-4 h-4;
-    }
-
-    &.active {
-      @apply hidden;
-    }
-
-    &.danger {
-      @apply btn-danger;
     }
   }
 }

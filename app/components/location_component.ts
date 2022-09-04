@@ -69,20 +69,22 @@ const LocationComponentMapData = ({
     init() {
       this.map = new mapboxgl.Map({
         container: context(this).$root,
-        style: "mapbox://styles/mapbox/streets-v11",
-        center: first(points) || [-79.402593, 43.671732],
-        zoom: 13,
+        style: "mapbox://styles/mapbox/dark-v10",
+        center: first(points) || [-79.402593, 43.661732],
+        zoom: 12.5,
         cooperativeGestures: true,
         interactive,
-      })
-        .addControl(
+      });
+      if (interactive) {
+        this.map.addControl(
           new MapboxGeocoder({
             mapboxgl,
             accessToken: mapboxgl.accessToken,
             marker: false,
           }),
-        )
-        .once("load", this.handleLoad.bind(this));
+        );
+      }
+      this.map.once("load", this.handleLoad.bind(this));
     },
     destroy() {
       if (this.map) {

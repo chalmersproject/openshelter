@@ -1,4 +1,4 @@
-<%= render "shelters/layout", shelter: @shelter do %>
+<%= render "shelters/layout", shelter: @shelter, class: "gap-y-8" do %>
   <% if @shelter.images.attached? %>
     <section>
       <%= render GalleryComponent.new(
@@ -16,22 +16,22 @@
     </div>
   </section>
   <% if @shelter.location? %>
-    <hr class="section" />
-    <section class="section-lg">
-      <h2>Location</h2>
-      <p>
-        <span class="font-semibold">
-          <%= @shelter.name %>
-        </span>
-        is located at
-        <%= external_link_to(
-          @shelter.address,
-          @shelter.google_maps_directions_url,
-          class: "link font-semibold",
-        ) %>.
-      </p>
-    </section>
-    <section>
+    <hr class="section-lg" />
+    <section class="flex flex-col gap-y-4">
+      <div class="mx-auto w-full max-w-2xl">
+        <h2>Location</h2>
+        <p>
+          <span class="font-semibold">
+            <%= @shelter.name %>
+          </span>
+          is located at
+          <%= external_link_to(
+            @shelter.address,
+            @shelter.google_maps_directions_url,
+            class: "link font-semibold",
+          ) %>.
+        </p>
+      </div
       <%= render LocationComponent.new(
         location: @shelter.location,
         interactive: true,

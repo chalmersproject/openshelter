@@ -118,4 +118,9 @@ class ActionBarComponent < ApplicationComponent
   def show_action?(action)
     @only.nil? ? true : @only.include?(action)
   end
+
+  sig { params(name: T.any(Symbol, String)).returns(String) }
+  def icon(name)
+    heroicon(name, class: component_name("icon"), variant: :mini)
+  end
 end

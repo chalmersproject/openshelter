@@ -78,7 +78,7 @@ class MenuComponent < ApplicationComponent
 
     sig { params(name: T.any(Symbol, String)).returns(String) }
     def icon(name)
-      heroicon(name, class: component_name("icon"))
+      heroicon(name, class: component_name("icon"), variant: :mini)
     end
 
     # TODO: Make this helper take a block when the following issue is

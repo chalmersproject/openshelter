@@ -74,5 +74,11 @@
   .layout {
     @apply flex-1 p-4 sm:p-8;
     @apply flex flex-col gap-y-4;
+
+    body.breadcrumbs &,
+    body.flash &,
+    body.action-bar & {
+      @apply pt-2 sm:pt-6;
+    }
   }
 }

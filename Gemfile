@@ -119,7 +119,7 @@ gem "sorbet-runtime", "~> 0.5.9878"
 gem "dotenv", "~> 2.7", require: false
 
 # Use Heroicons and Feather icons
-gem "rails_heroicon", "~> 1.0"
+gem "rails_heroicon", "~> 2.0"
 gem "rails_feather", "~> 0.1.0"
 
 # Launch an interactive editor session within Pry / IRB

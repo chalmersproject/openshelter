@@ -15,15 +15,12 @@ module Named
 
     # == Validations ==
     validates :name, presence: true, length: { maximum: 64 }
-
-    # == Callbacks ==
-    before_validation :normalize_name
   end
 
   private
 
   # == Setters ==
-  sig { override.params(value: String).returns(String) }
+  sig { params(value: String).returns(String) }
   def name=(value)
     super(name.strip)
   end

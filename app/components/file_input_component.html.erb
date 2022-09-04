@@ -57,7 +57,7 @@
           x-bind:id="$id('file_input_component_uppy')"
           x-on:file-input-component-uppy:complete="$dispatch('file-input-component-attachment:upload', $event.detail)"
         >
-          <%= heroicon :upload %>
+          <%= heroicon "arrow-up-on-square", variant: :mini %>
         </button>
         <button
           class="<%= class_names(
@@ -67,7 +67,7 @@
           type="button"
           x-on:click="$dispatch('file-input-component-attachment:remove')"
         >
-          <%= heroicon :trash %>
+          <%= heroicon :trash, variant: :mini %>
         </button>
       </div>
     </div>
@@ -91,7 +91,7 @@
       x-bind:id="$id('file_input_component_uppy')"
       x-on:file-input-component-uppy:complete="$dispatch('file-input-component:upload', $event.detail)"
     >
-      <%= heroicon :upload %>
+      <%= heroicon "arrow-up-on-square", variant: :mini %>
     </button>
   </div>
 

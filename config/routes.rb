@@ -4,8 +4,6 @@
 require "constraints"
 
 Rails.application.routes.draw do
-  resources :shelters
-
   # == Healthcheck ==
   Healthcheck.routes(self)
 
@@ -36,7 +34,11 @@ Rails.application.routes.draw do
   end
 
   # == Resources ==
-  resources :users, only: %i[show]
+  resources :users, only: :show
+  resources :shelters
+
+  # == Pages ==
+  resource :map, only: :show
 
   # == Frames ==
   scope :frames, module: :frames, only: :show do

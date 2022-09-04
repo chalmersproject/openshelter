@@ -22,6 +22,11 @@
 <% end %>
 
 <%# == Main == %>
-<div class="layout">
+<div
+  class="<%= class_names("layout", local_assigns.delete(:class)) %>"
+  <%= tag.attributes(
+    local_assigns.except(:meta_tags, :breadcrumbs, :action_bar),
+  ) %>
+>
   <%= yield %>
 </div>

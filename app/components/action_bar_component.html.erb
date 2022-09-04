@@ -25,11 +25,11 @@
   </p>
   <div class="flex flex-wrap items-center justify-end gap-1">
     <%= action_link_to show_path do %>
-      <%= heroicon :eye, class: "icon" %>
+      <%= icon :eye %>
       View
     <% end if show_action?(:show) %>
     <%= action_link_to edit_path do %>
-      <%= heroicon :pencil, class: "icon" %>
+      <%= icon :pencil %>
       Edit
     <% end if show_action?(:edit) %>
     <%= button_to(
@@ -43,7 +43,7 @@
         "danger",
       ),
     ) do %>
-      <%= heroicon :trash, class: "icon" %>
+      <%= icon :trash %>
       Delete
     <% end if show_action?(:delete) %>
   </div>

@@ -1,5 +1,5 @@
 .flash-component {
   .flash-component--alert {
-    @apply flex gap-x-2;
+    @apply flex gap-x-1.5;
   }
 }

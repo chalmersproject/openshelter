@@ -1,5 +1,23 @@
 <div class="layout">
-  <section class="section">
-    <%= link_to "Shelters", Shelter, class: "link" %>
+  <section class="section flex flex-col gap-y-2">
+    <div>
+      <h3>This website is under active development.</h3>
+      <p class="text-sm text-zinc-400">Quick navigation:</p>
+    </div>
+    <ul
+      class="<%= class_names(
+        "[&>*]:flex [&>*]:items-center [&>*]:gap-x-1",
+        "[&_svg]:w-4 [&_svg]:h-4 [&_svg]:text-white",
+      ) %>"
+    >
+      <li>
+        <%= heroicon :home, variant: "mini" %>
+        <%= link_to "Shelters", Shelter, class: "link" %>
+      </li>
+      <li>
+        <%= heroicon :map, variant: "mini" %>
+        <%= link_to "Map", Shelter, class: "link" %>
+      </li>
+    </ul>
   </section>
 </div>

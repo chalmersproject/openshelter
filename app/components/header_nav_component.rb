@@ -17,7 +17,7 @@ class HeaderNavComponent < ApplicationComponent
     # == Helpers ==
     sig { params(name: T.any(Symbol, String)).returns(String) }
     def icon(name)
-      heroicon(name, class: component_name("icon"))
+      heroicon(name, class: component_name("icon"), variant: :mini)
     end
 
     sig { params(text: String).returns(String) }
