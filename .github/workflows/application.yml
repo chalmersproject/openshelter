@@ -20,7 +20,7 @@ jobs:
         id: generate-tags
         uses: hulloitskai/generate-docker-tags-action@v0.2.1
         with:
-          repo: hulloitskai/chalmersproject-com-app
+          repo: ghcr.io/chalmersproject/chalmersproject-app
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
