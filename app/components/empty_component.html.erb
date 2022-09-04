@@ -1,0 +1,25 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "p-7",
+    "text-zinc-500 bg-zinc-100 rounded-md",
+    "flex flex-col gap-y-1 items-center",
+    other_classes,
+  ) %>"
+  <%= tag.attributes other_attributes %>
+>
+  <%= heroicon "inbox-in" %>
+  <div class="text-sm">
+    <% if content? %>
+      <%= content %>
+    <% else %>
+      <% if subject %>
+        <%= link_to subject.name, subject, class: "link font-medium" %>
+        has
+      <% else %>
+        You have
+      <% end %>
+      no <%= object_name %>.
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "mx-3 p-2",
+    "flex items-center gap-x-2",
+    "border rounded-md",
+    "bg-zinc-700/20 text-sm text-zinc-400",
+    other_classes,
+  ) %>"
+  <%= tag.attributes other_attributes %>
+>
+  <p class="ml-1 min-w-44 flex-1">
+    <% if content? %>
+      <%= content %>
+    <% else %>
+      You are <%= action %>
+      <% if object_name.present? %>
+        <span class="font-semibold">
+          <%= object_name %>
+        </span>
+      <% else %>
+        <%= object_label %>
+      <% end %>
+    <% end %>
+  </p>
+  <div class="flex flex-wrap items-center justify-end gap-1">
+    <%= action_link_to show_path do %>
+      <%= heroicon :eye, class: "icon" %>
+      View
+    <% end if show_action?(:show) %>
+    <%= action_link_to edit_path do %>
+      <%= heroicon :pencil, class: "icon" %>
+      Edit
+    <% end if show_action?(:edit) %>
+    <%= button_to(
+      delete_path,
+      method: :delete,
+      data: {
+        turbo_confirm: "Are you sure? This action cannot be undone.",
+      },
+      class: class_names(
+        component_name("action"),
+        "danger",
+      ),
+    ) do %>
+      <%= heroicon :trash, class: "icon" %>
+      Delete
+    <% end if show_action?(:delete) %>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="layout !pt-6 !gap-y-1">
+  <section class="section-sm">
+    <div>
+      <h2>You are being redirected...</h2>
+      <p class="text-sm text-zinc-500">
+        If you are not redirected within 10 seconds, please click the following
+        link:
+      </p>
+    </div>
+  </section>
+  <section class="section-sm">
+    <%= button_to(
+      omniauth_authorize_url(
+        :user,
+        @provider,
+        redirect_uri: user_omniauth_callback_redirect_url(@provider),
+      ),
+      method: :post,
+      form: {
+        data: {
+          turbo: false,
+          controller: "submit",
+          autosubmit: "",
+        },
+      },
+      class: "link",
+    ) do %>
+      Continue authorization with
+      <span class="font-semibold">
+        <%= OmniAuth::Utils.camelize(@provider) %>
+      </span>
+    <% end %>
+  </section>
+</div>

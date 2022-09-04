@@ -1,0 +1,93 @@
+<%# == Meta Tags == %>
+<% set_meta_tags(
+  title: ["Sign Up"],
+  description: "Register for an account on Chalmers.",
+) %>
+
+<%# == Main == %>
+<div class="layout">
+  <section class="section-xs">
+    <h1>Sign Up</h1>
+    <div>
+      <p class="text-sm text-zinc-400">
+        Welcome to Chalmers! Please register to continue.
+      </p>
+      <p class="text-sm text-zinc-500">
+        Already have an account? <%= link_to(
+          "Sign in instead.",
+          new_user_session_path,
+          class: class_names(
+            "text-primary-500 underline",
+            "transition-opacity hover:opacity-80",
+          ),
+        ) %>
+      </p>
+    </div>
+  </section>
+  <% if devise_mapping.omniauthable? && Devise.omniauth_providers.present? %>
+    <section class="section-xs flex flex-col gap-y-4">
+      <%= render "devise/shared/social_auth" %>
+    </section>
+  <% end %>
+  <section class="section-xs">
+    <%= simple_form_for(
+      resource,
+      as: resource_name,
+      url: registration_path(resource_name),
+      data: {
+        turbo: false,
+      },
+    ) do |f| %>
+      <%= render FormNoticeComponent.new(form: f) %>
+      <div class="form-inputs">
+        <%= f.input(
+          :first_name,
+          required: true,
+          autofocus: true,
+          input_html: {
+            autocomplete: "given-name",
+          },
+        ) %>
+        <%= f.input(
+          :last_name,
+          required: true,
+          input_html: {
+            autocomplete: "family-name",
+          },
+        )%>
+        <%= f.input(
+          :email,
+          input_html: {
+            autocomplete: "email",
+          },
+        ) %>
+        <%= f.input(
+          :password,
+          required: true,
+          hint: ("Must be at least #{@minimum_password_length} characters." if @minimum_password_length),
+          input_html: {
+            autocomplete: "new-password",
+          },
+        ) %>
+        <%= f.input(
+          :password_confirmation,
+          required: true,
+          hint: "Enter your password again.",
+          input_html: {
+            autocomplete: "new-password",
+          },
+        ) %>
+      </div>
+      <div class="form-actions">
+        <%= f.button(
+          :submit,
+          "Sign Up",
+          class: class_names("btn btn-primary", "w-full"),
+        ) %>
+      </div>
+    <% end %>
+  </section>
+  <section class="section-xs">
+    <%= render "devise/shared/links" %>
+  </section>
+</div>

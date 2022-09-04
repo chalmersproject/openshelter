@@ -1,0 +1,68 @@
+<% set_meta_tags(
+  title: "Internal Tools",
+  description: "Internal operations tools for the Chalmers team."
+) %>
+<% breadcrumb "Internal Tools", :internal %>
+<div class="layout [&_li>a]:font-semibold">
+  <section class="section-sm flex flex-col gap-y-1.5">
+    <h1>Internal Tools</h1>
+    <ul class="leading-none flex flex-col gap-y-2">
+      <li>
+        <%= link_to "Good Job", :good_job, class: "link" %>
+        <p class="text-sm text-zinc-500">
+          Inspect and manage background jobs
+        </p>
+      </li>
+      <li>
+        <%= link_to "PG Extras", :pg_extras, class: "link" %>
+        <p class="text-sm text-zinc-500">
+          Postgres performance insights: Locks, index usage, buffer cache hit
+          ratios, vacuum stats and more
+        </p>
+      </li>
+    </ul>
+  </section>
+  <% if Rails.env.development? %>
+    <hr class="section-sm" />
+    <section class="section-sm flex flex-col gap-y-1.5">
+      <h1>Dev Tools</h1>
+      <ul class="leading-none flex flex-col gap-y-2">
+        <li>
+          <%= external_link_to(
+            "Mailcatcher",
+            "http://localhost:1080",
+            class: "link",
+          ) %>
+          <p class="text-sm text-zinc-500">
+            View emails sent in development that were caught by
+            <%= external_link_to(
+              "MailCatcher",
+              "https://mailcatcher.me/",
+              class: "link",
+            ) %>
+          </p>
+        </li>
+        <li>
+          <%= external_link_to(
+            "Pgweb",
+            "http://localhost:8081",
+            class: "link",
+          ) %>
+          <p class="text-sm text-zinc-500">
+            A web UI for Postgres
+          </p>
+        </li>
+        <li>
+          <%= external_link_to(
+            "Kibana",
+            "http://localhost:5601",
+            class: "link",
+          ) %>
+          <p class="text-sm text-zinc-500">
+            Visualize Elasticsearch data
+          </p>
+        </li>
+      </ul>
+    </section>
+  <% end %>
+</div>

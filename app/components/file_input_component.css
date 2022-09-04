@@ -1,0 +1,28 @@
+.file-input-component {
+  &--attachment {
+    &.attached {
+      .overlay {
+        @apply opacity-0 hover:opacity-100;
+      }
+    }
+
+    &:not(.attached) {
+      .overlay {
+        @apply opacity-100;
+      }
+      .trigger.remove {
+        @apply hidden;
+      }
+    }
+  }
+
+  &--trigger {
+    @apply btn p-1.5 rounded-full;
+  }
+
+  &--preview {
+    &:not([src]) {
+      @apply hidden;
+    }
+  }
+}

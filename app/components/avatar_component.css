@@ -1,0 +1,66 @@
+.avatar-component {
+  &.xs {
+    @apply w-[1.35rem] h-[1.35rem];
+
+    .avatar-component {
+      &--icon {
+        @apply w-3 h-3;
+      }
+      &--initials {
+        @apply text-[0.6rem];
+      }
+    }
+  }
+
+  &.sm {
+    @apply w-9 h-9;
+
+    .avatar-component {
+      &--icon {
+        @apply w-5 h-5;
+      }
+      &--initials {
+        @apply text-base;
+      }
+    }
+  }
+
+  &.md {
+    @apply w-12 h-12;
+
+    .avatar-component {
+      &--icon {
+        @apply w-6 h-6;
+      }
+      &--initials {
+        @apply text-xl;
+      }
+    }
+  }
+
+  &.lg {
+    @apply w-16 h-16;
+
+    .avatar-component {
+      &--icon {
+        @apply w-7 h-7;
+      }
+      &--initials {
+        @apply text-2xl;
+      }
+    }
+  }
+
+  &.xl {
+    @apply w-20 h-20;
+
+    .avatar-component {
+      &--icon {
+        @apply w-9 h-9;
+      }
+      &--initials {
+        @apply text-3xl;
+      }
+    }
+  }
+}

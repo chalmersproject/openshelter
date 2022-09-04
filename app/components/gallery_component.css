@@ -1,0 +1,36 @@
+.gallery-component {
+  --swiper-navigation-size: theme("height.6");
+  --swiper-theme-color: theme("colors.white");
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    @apply top-0 bottom-0 h-auto w-auto;
+    @apply flex flex-col items-center justify-center;
+    @apply bg-black/40;
+    @apply transition-opacity;
+
+    &:after {
+      content: none;
+    }
+
+    svg {
+      @apply w-7 h-7 -mx-1;
+    }
+  }
+
+  .swiper-button-disabled {
+    @apply opacity-0;
+  }
+
+  .swiper-button-prev {
+    @apply left-0;
+  }
+
+  .swiper-button-next {
+    @apply right-0;
+  }
+
+  .swiper-pagination {
+    @apply bottom-1.5;
+  }
+}

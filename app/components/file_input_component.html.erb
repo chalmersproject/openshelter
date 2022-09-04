@@ -1,0 +1,114 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "flex flex-wrap gap-2",
+    other_classes,
+  ) %>"
+  x-data="<%= component_data(
+    direct_upload_url: rails_direct_uploads_path,
+    multiple: multiple?,
+    attachments: attachments_data,
+  ) %>"
+  x-on:file-input-component-attachment:remove="$dispatch('change')"
+  <%= tag.attributes other_attributes %>
+>
+  <!-- Attachments -->
+  <template x-for="({ signedId, filename, url, data }, index) in attachments">
+    <div
+      class="<%= class_names(
+        component_name("attachment"),
+        "relative w-32 h-32 overflow-hidden",
+        "border border-zinc-800 rounded-md",
+      ) %>"
+      x-bind:class="{ attached: !!signedId }"
+      x-on:file-input-component-attachment:upload="attachments[index] = $event.detail"
+      x-on:file-input-component-attachment:remove="attachments.splice(index, 1)"
+    >
+      <%= f.hidden_field(
+        method,
+        **options,
+        id: nil,
+        value: nil,
+        multiple: multiple?,
+        "x-bind:value": "signedId || ''",
+        "x-effect": "$dispatch('change', { value: signedId })"
+      ) %>
+      <img
+        class="preview h-full w-full object-cover"
+        x-bind:src="url || data"
+      />
+      <template x-if="signedId && !(url || data)">
+        <div class="h-full w-full grid place-content-center">
+          <div class="no-preview flex flex-col items-center gap-1">
+            <%= heroicon :document, class: "text-zinc-500" %>
+            <p class="text-center text-xs text-zinc-600 line-clamp-3" x-text="filename"></p>
+          </div>
+        </div>
+      </template>
+      <div class="overlay absolute inset-0 flex items-center justify-center gap-1.5 bg-zinc-700/60 transition-opacity duration-200">
+        <button
+          class="<%= class_names(
+            component_name("trigger"),
+            "text-primary-100 bg-primary-700"
+          ) %>"
+          type="button"
+          x-data="file_input_component_uppy({ directUploadUrl })"
+          x-id="['file_input_component_uppy']"
+          x-bind:id="$id('file_input_component_uppy')"
+          x-on:file-input-component-uppy:complete="$dispatch('file-input-component-attachment:upload', $event.detail)"
+        >
+          <%= heroicon :upload %>
+        </button>
+        <button
+          class="<%= class_names(
+            component_name("trigger"),
+            "text-red-200 bg-red-700",
+          ) %>"
+          type="button"
+          x-on:click="$dispatch('file-input-component-attachment:remove')"
+        >
+          <%= heroicon :trash %>
+        </button>
+      </div>
+    </div>
+  </template>
+
+  <!-- New Attachment -->
+  <div
+    class="w-32 h-32 bg-zinc-800/50 border border-zinc-800 rounded-md overflow-hidden grid place-content-center cloak:hidden"
+    x-on:file-input-component:upload="attachments.push($event.detail)"
+    x-show="multiple || !attachments.length"
+    x-cloak
+  >
+    <button
+      class="<%= class_names(
+        component_name("trigger"),
+        "text-primary-200 bg-primary-700",
+      ) %>"
+      type="button"
+      x-data="file_input_component_uppy({ directUploadUrl, multiple })"
+      x-id="['file_input_component_uppy']"
+      x-bind:id="$id('file_input_component_uppy')"
+      x-on:file-input-component-uppy:complete="$dispatch('file-input-component:upload', $event.detail)"
+    >
+      <%= heroicon :upload %>
+    </button>
+  </div>
+
+  <!-- Empty -->
+  <template x-if="!attachments.length">
+    <%= f.hidden_field(
+      method,
+      **options,
+      id: nil,
+      value: nil,
+    ) %>
+  </template>
+
+  <!-- Skeleton -->
+  <div
+    class="hidden cloak:block w-32 h-32 bg-zinc-300/50 border border-zinc-300 rounded-md"
+    x-cloak
+  >
+  </div>
+</div>

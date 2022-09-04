@@ -1,0 +1,32 @@
+<% if false %>
+  <div class="layout">
+    <section class="section-xs">
+      <h1>
+        <%= t "devise.invitations.new.header" %>
+      </h1>
+    </section>
+    <section class="section-xs">
+      <%= simple_form_for(
+        resource,
+        as: resource_name,
+        url: invitation_path(resource_name),
+        data: {
+          turbo: false
+        },
+        html: {
+          method: :post,
+        },
+      ) do |f| %>
+        <%= render FormNoticeComponent.new(form: f) %>
+        <% resource.class.invite_key_fields.each do |field| -%>
+          <div class="form-inputs">
+            <%= f.input field %>
+          </div>
+        <% end -%>
+        <div class="form-actions">
+          <%= f.button :submit, t("devise.invitations.new.submit_button") %>
+        </div>
+      <% end %>
+    </section>
+  </div>
+<% end %>

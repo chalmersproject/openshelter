@@ -1,0 +1,43 @@
+<div class="layout">
+  <section class="section-xs">
+    <h1>Forgot your password?</h1>
+    <p class="text-sm text-zinc-400">
+      Enter your email to receive instructions to reset your password.
+    </p>
+  </section>
+  <section class="section-xs">
+    <%= simple_form_for(
+      resource,
+      as: resource_name,
+      url: password_path(resource_name),
+      data: {
+        turbo: false,
+      },
+      html: {
+        method: :post,
+        class: "gap-2",
+      },
+    ) do |f| %>
+      <%= render FormNoticeComponent.new(form: f) %>
+      <div class="form-inputs gap-2">
+        <%= f.input(
+          :email,
+          autofocus: true,
+          input_html: {
+            autocomplete: "email",
+          },
+        ) %>
+      </div>
+      <div class="form-actions">
+        <%= f.button(
+          :submit,
+          "Send me reset password instructions",
+          class: "btn btn-primary w-full"
+        ) %>
+      </div>
+    <% end %>
+  </section>
+  <section class="section-xs">
+    <%= render "devise/shared/links" %>
+  </section>
+</div>

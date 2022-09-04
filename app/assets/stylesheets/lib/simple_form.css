@@ -1,0 +1,52 @@
+.simple_form {
+  @apply flex flex-col gap-y-2.5;
+
+  .form-inputs {
+    @apply flex flex-col gap-y-2.5;
+
+    .input-wrapper {
+      @apply flex flex-col gap-y-0.5;
+
+      .collection {
+        @apply flex flex-col;
+      }
+
+      .label {
+        @apply font-semibold text-sm text-zinc-400;
+
+        &:not(:last-child) {
+          @apply -mb-0.5;
+        }
+
+        abbr[title="required"] {
+          @apply text-red-600;
+        }
+      }
+
+      label.checkbox,
+      .checkbox label,
+      label.radio,
+      .radio label {
+        @apply text-zinc-300;
+      }
+
+      .input {
+        @apply form-input;
+      }
+    }
+  }
+
+  .form-actions {
+    [type="submit"]:not([class]) {
+      @apply btn btn-primary;
+    }
+  }
+
+  .error {
+    @apply text-sm text-red-500;
+  }
+
+  .hint {
+    @apply text-sm text-zinc-500;
+  }
+}

@@ -1,0 +1,52 @@
+@import "trix/dist/trix.css";
+
+trix-toolbar {
+  .trix-button-group {
+    @apply mb-0.5;
+    @apply border-zinc-400;
+
+    .trix-button {
+      @apply p-0 w-8 h-6;
+      @apply border-b-0 border-zinc-400;
+      @apply bg-zinc-300 disabled:bg-zinc-300 disabled:opacity-30;
+    }
+  }
+}
+
+trix-editor,
+.trix-content {
+  img {
+    @apply !my-0 mx-auto;
+  }
+
+  figcaption {
+    @apply !mt-0;
+    @apply text-sm text-zinc-500;
+  }
+}
+
+trix-editor {
+  @apply w-full !prose !prose-invert marker:text-zinc-400;
+
+  max-width: unset !important;
+
+  .attachment {
+    @apply inline-block !my-1;
+  }
+}
+
+.trix-content {
+  @apply !prose !prose-invert;
+
+  > :first-child {
+    margin-top: 0 !important;
+  }
+
+  action-text-attachment {
+    @apply inline-block;
+
+    figure {
+      @apply !my-1;
+    }
+  }
+}

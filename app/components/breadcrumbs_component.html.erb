@@ -1,0 +1,28 @@
+<ol
+  class="<%= class_names(
+    component_name,
+    "px-2 pt-0.5",
+    "flex flex-wrap gap-x-1",
+    "text-xs",
+    other_classes,
+  ) %>"
+  <%= tag.attributes other_attributes %>
+>
+  <%= content %>
+  <% breadcrumb_trail do |crumb| %>
+    <li class="<%= class_names(active: crumb.current?) %>">
+      <%= link_to(
+        crumb.name.truncate(32),
+        crumb.url,
+        class: class_names(
+          "link",
+          "font-medium": crumb.current?,
+          "text-zinc-400": !crumb.current?,
+        ),
+        aria: {
+          current: ("page" if crumb.current?)
+        },
+      ) %>
+    </li>
+  <% end %>
+</ol>

@@ -1,0 +1,41 @@
+en:
+  enumerize:
+    # == Forms ==
+    community_business_membership_form:
+      offering_inclusion:
+        all: Include all offerings
+        some: Include some offerings
+    explore_search_form:
+      objects:
+        business: Businesses
+        offering: Offerings
+    internal_mailer_form:
+      target:
+        user_list: User List
+        business_list: Business List
+        community_list: Community List
+
+    # == Records ==
+    offering:
+      type:
+        multi_day_tour: Multi-day Tour
+      audience_ages:
+        child: 5 years and younger
+        teen: 6-12 years
+        youth: 13-17 years
+        young_adult: 18-39 years
+        older_adult: 40-59 years
+        senior: 60 years and older
+      audience_groupings:
+        couple: Couples
+        family: Families
+        friend: Friends
+        group: Groups
+    reaction:
+      type:
+        thumbsup: 👍
+        heart: ❤️
+        heart_eyes: 😍
+        smile: 😄
+        sunglasses: 😎
+        fire: 🔥

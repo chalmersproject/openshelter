@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <%= turbo_frame_tag @frame.id do %>
+      <% yield %>
+    <% end %>
+  </body>
+</html>

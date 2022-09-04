@@ -1,0 +1,30 @@
+.header-nav-component {
+  .header-nav-component--item {
+    &--icon {
+      @apply w-4 h-4;
+    }
+
+    &--label {
+      @apply text-sm;
+    }
+
+    a {
+      @apply flex items-center gap-x-0.5 sm:gap-x-1;
+
+      &:not(.active) {
+        @apply text-primary-600;
+        @apply transition-opacity hover:opacity-80;
+      }
+
+      &.active {
+        @apply text-primary-400;
+      }
+    }
+
+    a.active {
+      .header-nav-component--item--label {
+        @apply font-semibold;
+      }
+    }
+  }
+}

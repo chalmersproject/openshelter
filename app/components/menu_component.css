@@ -1,0 +1,55 @@
+.menu-component {
+  .menu-component--item {
+    @apply transition-colors;
+
+    &:not(.danger) {
+      .menu-component--item--icon {
+        @apply text-primary-500;
+      }
+
+      &:not(.disabled):hover {
+        @apply bg-primary-700/20;
+
+        .menu-component--item {
+          &--icon {
+            @apply text-primary-400;
+          }
+          &--label {
+            @apply text-zinc-200;
+          }
+        }
+      }
+    }
+
+    &.danger {
+      .menu-component--item--icon {
+        @apply text-red-500;
+      }
+
+      &:not(.disabled):hover {
+        @apply bg-red-500;
+
+        .menu-component--item {
+          &--icon {
+            @apply text-red-400;
+          }
+          &--label {
+            @apply text-red-200;
+          }
+        }
+      }
+    }
+
+    &--icon {
+      @apply !w-5 !h-5;
+    }
+    &--label {
+      @apply flex-1 font-medium text-sm text-zinc-400 leading-tight;
+    }
+
+    a {
+      @apply w-full px-2.5 py-2;
+      @apply flex items-center gap-x-1.5;
+    }
+  }
+}

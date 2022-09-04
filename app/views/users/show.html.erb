@@ -1,0 +1,27 @@
+<%# == Meta Tags == %>
+<% render(
+  "users/meta_tags",
+  user: @user,
+  title: ("Account" if @user == current_user),
+) %>
+
+<%# == Breadcrumbs == %>
+<% render "users/breadcrumbs", user: @user %>
+
+<%# == Action Bar == %>
+<% content_for :action_bar do %>
+  <%= render ActionBarComponent.new(
+    object: @user,
+    only: %i[show edit],
+    show_path: [:user, :registration],
+    edit_path: [:user, :registration, action: :edit],
+  ) do %>
+    You are viewing your profile.
+  <% end %>
+<% end if @user == current_user %>
+
+<%# == Main == %>
+<div class="layout">
+  <h1><%= @user.name %></h1>
+  <%= image_tag @user.avatar_blob %>
+</div>

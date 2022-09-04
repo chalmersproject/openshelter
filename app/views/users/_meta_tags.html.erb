@@ -1,0 +1,16 @@
+<% set_meta_tags(
+  title: local_assigns[:title] || user.name_in_database,
+  description: local_assigns[:description] || user.bio.to_plain_text.presence,
+  og: {
+    image: (local_assigns[:image] || user.avatar_blob).try! do |blob|
+      variant = blob.variant(
+        resize_to_limit: [1200, 630],
+        saver: {
+          strip: true,
+          quality: 80,
+        },
+      )
+      rails_blob_url(variant)
+    end
+  }
+) %>

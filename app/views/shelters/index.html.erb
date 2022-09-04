@@ -1,0 +1,15 @@
+<div class="layout">
+  <section class="section flex flex-col gap-y-2">
+    <h1>Shelters</h1>
+    <div id="shelters" class="flex flex-col gap-y-2">
+      <% @shelters.each do |shelter| %>
+        <%= link_to shelter.name, shelter, class: "link" %>
+      <% end %>
+      <%= link_to(
+        "New Shelter",
+        new_shelter_path,
+        class: "self-start btn btn-primary",
+      ) %>
+    </div>
+  </section>
+</div>

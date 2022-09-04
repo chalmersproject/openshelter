@@ -1,0 +1,7 @@
+<% if local_assigns.include?(:user) %>
+  <% if user == current_user %>
+    <% breadcrumb "Account", :user_profile %>
+  <% else %>
+    <% breadcrumb user.name_in_database, user %>
+  <% end %>
+<% end %>

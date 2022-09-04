@@ -1,0 +1,18 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "flex flex-col items-center",
+    other_classes,
+  ) %>"
+  data-controller="pagination-component"
+  <%= tag.attributes other_attributes %>
+>
+  <%= paginate(
+    paginatable,
+    window: window,
+    outer_window: outer_window,
+    data: {
+      turbo_frame: turbo_frame,
+    },
+  ) %>
+</div>

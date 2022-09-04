@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html id="root">
+  <head>
+    <%# == Meta: Functional == %>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <%# == Meta: Security == %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%# == Meta: Configuration == %>
+    <%= action_cable_meta_tag %>
+    <meta name="env" content="<%= Rails.env %>">
+    <% if debug? %>
+      <meta name="debug" content="<%= debug_targets %>">
+    <% end %>
+    <meta name="honeybadger-api-key" content="<%= Honeybadger.config[:client_api_key] %>">
+    <meta name="honeybadger-revision" content="<%= Honeybadger.config[:revision] %>">
+    <meta name="fullstory-org-id" content="<%= ENV["FULLSTORY_ORG_ID"] %>">
+    <% if user_signed_in? %>
+      <meta name="honeybadger-context" content="<%= current_user.honeybadger_context.to_json %>">
+      <meta name="fullstory-identity" content="<%= current_user.fullstory_identity.to_json %>">
+    <% end %>
+
+    <%# == Meta: Informational == %>
+    <%= display_meta_tags(
+      reverse: true,
+      site: "Chalmers Project",
+      description: "A guerilla project fighting homelessness in Toronto, " \
+        "Ontario.",
+      og: {
+        title: :title,
+        site_name: :site,
+        description: :description,
+        image: image_url("logo.png", skip_pipeline: true),
+      },
+    ) %>
+
+    <%# == Favicon & Theme == %>
+    <link rel="apple-touch-icon" type="image/png" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="manifest" href="/site.webmanifest">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5046e6">
+    <meta name="apple-mobile-web-app-title" content="Chalmers">
+    <meta name="msapplication-TileColor" content="#603cba">
+    <meta name="theme-color" content="#ffffff">
+
+    <%# == Stylesheets: Application == %>
+    <%#= stylesheet_link_tag "inter" %>
+    <%= stylesheet_link_tag "application", data: { turbo_track: :reload } %>
+
+    <%# == Stylesheets: Google Fonts %>
+    <link rel="preconnect" href="https://fonts.googleapis.com" >
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&family=Montserrat:wght@400;500;600;700;800;900&display=swap">
+
+    <%# == Stylesheets: Mapbox == %>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.css">
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css">
+
+    <%# == Scripts: Application == %>
+    <%= javascript_include_tag "application", defer: true, data: { turbo_track: :reload } %>
+    <%= hotwire_livereload_tags if Rails.env.development? %>
+
+    <%# == Scripts: Analytics == %>
+    <% if id = ENV["GOOGLE_ANALYTICS_MEASUREMENT_ID"] %>
+      <script src="https://www.googletagmanager.com/gtag/js?id=<%= id %>" async></script>
+    <% end %>
+
+    <%# == Scripts: Mapbox == %>
+    <%# TODO: Can we load Mapbox asynchronously? %>
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.8.2/mapbox-gl.js"></script>
+    <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+  </head>
+
+  <body class="min-h-screen flex flex-col bg-zinc-900 text-zinc-200">
+    <%# == Header == %>
+    <%= render HeaderComponent.new %>
+
+    <%# == Main == %>
+    <main class="flex-1 flex flex-col gap-y-1.5">
+      <%= render BreadcrumbsComponent.new %>
+      <% if !breadcrumbs? && (flash? || content_for?(:action_bar)) %>
+        <div class="spacer"></div>
+      <% end %>
+      <%= render FlashComponent.new %>
+      <%= yield :action_bar %>
+      <div class="flex-1 flex flex-col">
+        <%= yield %>
+      </div>
+    </main>
+
+    <%# == Footer == %>
+    <footer></footer>
+
+    <%# == Scripts == %>
+    <%= render "scripts/analytics" %>
+    <%= render "scripts/mapbox" %>
+  </body>
+</html>

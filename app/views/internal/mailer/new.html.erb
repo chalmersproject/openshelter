@@ -1,0 +1,27 @@
+<%# == Meta == %>
+<% set_meta_tags(
+  title: ["Internal Tools", "Mailer"],
+  description: "Internal mailer for the Chalmers team."
+) %>
+
+<%# == Breadcrumbs == %>
+<% breadcrumb "Internal Tools", :internal %>
+<% breadcrumb "Mailer", %i[internal mailer] %>
+
+<%# == Main == %>
+<div class="layout">
+  <section class="section">
+    <h1>Mailer</h1>
+    <p class="text-sm text-zinc-500 -mt-1">
+      Send an email to one or more recipients.
+    </p>
+  </section>
+  <section class="section">
+    <%= turbo_frame_tag @mailer_form, target: "_top" do %>
+      <%= render InternalMailerFormComponent.new(
+        mailer_form: @mailer_form,
+        turbo_frame: true,
+      ) %>
+    <% end %>
+  </section>
+</div>

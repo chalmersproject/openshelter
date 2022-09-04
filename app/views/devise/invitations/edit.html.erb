@@ -1,0 +1,68 @@
+<div class="layout">
+  <section class="section-xs">
+    <h1>
+      <%= t "devise.invitations.edit.header" %>
+    </h1>
+    <p class="text-sm text-gray-400">
+      Create a password and continue onto Playces!
+    </p>
+  </section>
+  <% if devise_mapping.omniauthable? && Devise.omniauth_providers.present? %>
+    <section class="section-xs flex flex-col gap-y-4">
+      <%= render "devise/shared/social_auth" %>
+    </section>
+  <% end %>
+  <section class="section-xs">
+    <%= simple_form_for(
+      resource,
+      as: resource_name,
+      url: invitation_path(resource_name),
+      html: {
+        method: :put,
+      },
+    ) do |f| %>
+      <%= render FormNoticeComponent.new(form: f) %>
+      <%= f.hidden_field :invitation_token %>
+      <div class="form-inputs">
+        <%= f.input(
+          :first_name,
+          required: true,
+          autofocus: true,
+          input_html: {
+            autocomplete: "given-name",
+          },
+        ) %>
+        <%= f.input(
+          :last_name,
+          required: true,
+          input_html: {
+            autocomplete: "family-name",
+          },
+        )%>
+        <%= f.input(
+          :password,
+          required: true,
+          hint: ("Must be at least #{@minimum_password_length} characters." if @minimum_password_length),
+          input_html: {
+            autocomplete: "new-password",
+          },
+        ) %>
+        <%= f.input(
+          :password_confirmation,
+          required: true,
+          hint: "Enter your password again.",
+          input_html: {
+            autocomplete: "new-password",
+          },
+        ) %>
+      </div>
+      <div class="form-actions">
+        <%= f.button(
+          :submit,
+          t("devise.invitations.edit.submit_button"),
+          class: "btn btn-primary w-full",
+        ) %>
+      </div>
+    <% end %>
+  </section>
+</div>

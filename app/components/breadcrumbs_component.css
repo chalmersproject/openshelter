@@ -1,0 +1,7 @@
+.breadcrumbs-component {
+  > li:not(:last-child)::after {
+    content: "/";
+
+    @apply ml-0 sm:ml-0.5 text-zinc-600;
+  }
+}

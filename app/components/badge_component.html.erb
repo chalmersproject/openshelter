@@ -1,0 +1,13 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "rounded-full",
+    "px-2 py-1",
+    "font-semibold text-sm text-zinc-200 bg-zinc-700 leading-none",
+    { "transition-opacity hover:opacity-80": interactive? },
+    other_classes,
+  ) %>"
+  <%= tag.attributes other_attributes %>
+>
+  <%= content %>
+</div>

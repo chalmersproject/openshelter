@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if ! docker info > /dev/null 2>&1; then
+  echo "Docker isn't running! Please start Docker and try again." >&2
+  exit 1
+fi
+
+bin/overmind start -f Procfile.dev --no-port "$@"

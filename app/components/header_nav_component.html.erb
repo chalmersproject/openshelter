@@ -1,0 +1,23 @@
+<ul
+  class="<%= class_names(
+    component_name,
+    "bg-primary-900/20 rounded-full border border-primary-900",
+    "py-1 px-2",
+    "flex gap-x-1.5 sm:gap-x-2",
+    other_classes,
+  ) %>"
+  <%= tag.attributes other_attributes %>
+>
+  <%= item do |i| %>
+    <%= active_link_to :root, active: :exclusive do %>
+      <%= i.icon :home %>
+      <%= i.label "Home" %>
+    <% end %>
+  <% end %>
+  <%= item do |i| %>
+    <%= active_link_to :internal, active: :exclusive do %>
+      <%= i.icon :map %>
+      <%= i.label "Map" %>
+    <% end %>
+  <% end %>
+</ul>

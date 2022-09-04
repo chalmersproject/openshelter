@@ -1,0 +1,20 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "px-2 pt-1 pb-1.5",
+    "text-red-100 bg-red-700 rounded-md",
+    other_classes,
+  ) %>"
+  data-controller="scroll"
+  data-autoscroll
+  <%= tag.attributes other_attributes %>
+>
+  <%= f.error_notification(class: "font-semibold") %>
+  <ul class="list-disc pl-4">
+    <% f.object.errors.full_messages.each do |message| %>
+      <li class="error text-sm text-red-100">
+        <%= message %>.
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -1,0 +1,34 @@
+.pagination-component {
+  > .pagination {
+    @apply flex gap-x-1;
+
+    > .page,
+    > .first,
+    > .prev,
+    > .next,
+    > .last {
+      @apply btn p-0 border rounded-md bg-white text-zinc-500;
+      @apply text-sm;
+
+      &.disabled,
+      &.gap {
+        @apply px-2 py-1;
+        @apply opacity-50 cursor-not-allowed;
+      }
+
+      &:not(.disabled):not(.gap):not(.current) {
+        a {
+          @apply inline-block;
+          @apply px-2 py-1;
+        }
+      }
+    }
+
+    > .page {
+      &.current {
+        @apply px-2 py-1;
+        @apply text-white bg-primary-500;
+      }
+    }
+  }
+}

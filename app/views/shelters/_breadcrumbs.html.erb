@@ -1,0 +1,4 @@
+<% breadcrumb "Shelters", Shelter %>
+<% if local_assigns.include?(:shelter) && !shelter.new_record? %>
+  <% breadcrumb shelter.name_in_database, shelter %>
+<% end %>

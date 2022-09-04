@@ -1,0 +1,33 @@
+.header-menu-component {
+  .menu-component {
+    &--menu {
+      @apply !z-20;
+    }
+
+    &--item {
+      &.external {
+        .menu-component--item--icon {
+          @apply !text-blue-500;
+        }
+
+        &:hover {
+          .menu-component--item--icon {
+            @apply !text-blue-400;
+          }
+        }
+      }
+
+      &.internal {
+        .menu-component--item--icon {
+          @apply !text-red-500;
+        }
+
+        &:hover {
+          .menu-component--item--icon {
+            @apply !text-red-400;
+          }
+        }
+      }
+    }
+  }
+}

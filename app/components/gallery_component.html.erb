@@ -1,0 +1,58 @@
+<div
+  id="<%= component_name %>_<%= SecureRandom.uuid %>"
+  class="<%= class_names(
+    component_name,
+    "swiper-container",
+    "relative overflow-x-hidden",
+    other_classes,
+  ) %>"
+  data-controller="<%= token_list(component_name, "carousel") %>"
+  data-gallery-component-expandable-value="<%= expandable? %>"
+  data-carousel-options-value="<%= {
+    "centerInsufficientSlides": true,
+    "slidesPerView": "auto",
+    "navigation": {
+      "nextEl": ".swiper-button-next",
+      "prevEl": ".swiper-button-prev",
+    },
+    "pagination": {
+      "el": ".swiper-pagination",
+      "type": "bullets",
+    },
+  }.to_json %>"
+  <%= tag.attributes other_attributes %>
+>
+  <div class="swiper-wrapper">
+    <% images.each do |blob| %>
+      <div class="swiper-slide w-auto">
+        <% image = capture do %>
+          <%= image_tag image_path(blob: blob), class: "h-full object-cover" %>
+        <% end %>
+        <% if expandable? %>
+          <%= external_link_to(
+            image,
+            rails_blob_path(blob, disposition: "preview"),
+            class: class_names(
+              "glightbox",
+              "flex-shrink-0",
+              "cursor-zoom-in": expandable?,
+            ),
+            data: {
+              glightbox: "type: image",
+              gallery_component_target: "imageWrapper",
+            },
+          ) %>
+        <% else %>
+          <%= image %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+  <button type="button" class="swiper-button-prev">
+    <%= heroicon "chevron-left" %>
+  </button>
+  <button type="button" class="swiper-button-next">
+    <%= heroicon "chevron-right" %>
+  </button>
+  <div class="swiper-pagination"></div>
+</div>

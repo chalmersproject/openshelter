@@ -1,0 +1,33 @@
+<%# TODO: Automatically set address when map pin is set. %>
+<%= simple_form_for(
+  shelter,
+  data: {
+    turbo_frame: turbo_frame,
+  },
+  html: {
+    class: class_names(component_name, other_classes),
+    **other_attributes,
+  },
+) do |f| %>
+  <%= render FormNoticeComponent.new(form: f) %>
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :slug unless new_record? %>
+    <%= f.input :address, placeholder: "25 Augusta Ave, Toronto" %>
+    <%= f.input :contact_email, label: "Contact Email" %>
+    <%= f.input :contact_phone, label: "Contact Phone" %>
+    <%= f.input :website_url, label: "Website URL" %>
+    <%= f.input(
+      :about,
+      as: :rich_text_area,
+      input_html: {
+        class: "min-h-40",
+      },
+    ) %>
+    <%= f.input :images %>
+    <%= f.input :tags %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit %>
+  </div>
+<% end %>

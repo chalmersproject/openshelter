@@ -1,0 +1,31 @@
+<% if devise_mapping.omniauthable? %>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-2 gap-y-1">
+    <% resource_class.omniauth_providers.each do |provider| %>
+      <%= button_to(
+        omniauth_authorize_url(resource_name, provider),
+        method: :post,
+        data: {
+          turbo: false,
+        },
+        class: class_names(
+          "btn py-2 w-full",
+          "font-medium leading-tight",
+          "bg-red-600 text-red-100": provider == :google,
+          "bg-blue-600 text-blue-100": provider == :facebook,
+        ),
+      ) do %>
+        Continue with
+        <span class="font-semibold text-white">
+          <%= OmniAuth::Utils.camelize(provider) %>
+        </span>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="w-full flex items-center gap-x-2">
+    <hr class="flex-1" />
+    <span class="font-semibold text-xs text-zinc-500">
+      OR
+    </span>
+    <hr class="flex-1" />
+  </div>
+<% end %>

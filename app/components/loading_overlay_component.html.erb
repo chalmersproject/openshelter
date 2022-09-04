@@ -1,0 +1,24 @@
+<div
+  class="<%= class_names(component_name, "relative", other_classes) %>"
+  <%= tag.attributes(
+    data: {
+      controller: component_name,
+      loading_overlay_component_loading_value: loading?,
+    },
+    **other_attributes,
+  ) %>
+>
+  <%= content %>
+  <div
+    class="<%= class_names(
+      "absolute inset-0",
+      "bg-white/75",
+      "grid place-items-center",
+      "transition-opacity",
+      "hidden": !@loading,
+    ) %>"
+    data-loading-overlay-component-target="overlay"
+  >
+    <%= render SpinnerComponent.new(class: "spinner") %>
+  </div>
+</div>

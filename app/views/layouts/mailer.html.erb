@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html id="root">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width">
+    <%= stylesheet_link_tag "mailer" %>
+  </head>
+  <body>
+    <style>
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+      }
+    </style>
+    <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%" bgcolor="#f3f4f6">
+      <tr>
+      <td>
+        <div style="margin: 0 auto; max-width: 600px; padding: 20px 10px">
+          <table border="0" cellpadding="0" cellspacing="0" width="100%" height="100%">
+            <tr>
+            <td>
+              <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                <tr>
+                  <td>
+                    <%= link_to "/", style: "display: block; text-align: left !important; text-decoration: none" do %>
+                      <%= image_tag "logo.png", skip_pipeline: true, style: "height: 33px; width: 33px" %>
+                      <span style="color: #374151; font-family: 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif; font-size: 15px; font-weight: 600; line-height: 33px; margin-left: 5px; vertical-align: top; letter-spacing: 1.5px">
+                        CHALMERS
+                      </span>
+                    <% end %>
+                  </td>
+                  <td style="color: #6b7280; font-size: 13px; text-align: right">
+                    <% date = Time.current %>
+                    <%= date.strftime("%A, %B #{date.day.ordinalize}") %>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            </tr>
+            <tr><td height="20"></td></tr>
+            <tr><td height="20"></td></tr>
+            <tr>
+            <td>
+              <div style="background: #fff; border-radius: 3px; margin-bottom: 20px; padding: 20px">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%" bgcolor="#ffffff">
+                  <tr>
+                    <td style="font-size: 16px; line-height: 23px">
+                      <%= yield %>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <div style="color: #6b7280; font-size: 12px; margin: 54px auto auto; text-align: center; width: 510px" align="center">
+                <p>If you have any questions, feedback, ideas or problems don't hesitate to contact us!</p>
+                <% if false %>
+                  <span>
+                    <%= external_link_to("https://instagram.com/chalmersproject.com") do %>
+                      <% image_tag "instagram-icon.svg", style: "width: 20px; height: 20px" %>
+                    <% end %>
+                    <%= external_link_to("https://facebook.com/chalmersproject.com") do %>
+                      <% image_tag "facebook-icon.svg", style: "width: 20px; height: 20px" %>
+                    <% end %>
+                  </span>
+                <% end %>
+              </div>
+            </td>
+            </tr>
+          </table>
+        </div>
+      </td>
+      </tr>
+    </table>
+  </body>
+</html>

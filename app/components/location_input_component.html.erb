@@ -1,0 +1,33 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "h-80 overflow-hidden",
+    "bg-zinc-800 border border-zinc-300 rounded-md",
+    other_classes,
+  ) %>"
+  x-data="<%= component_data(value: @location) %>"
+  x-on:location-input-component:change="$dispatch('change')"
+  <%= tag.attributes other_attributes %>
+>
+  <%= @form.hidden_field(
+    @method,
+    **@options,
+    "x-on:location-input-component:change.window": "$el.value = $event.detail.wkt",
+  ) %>
+  <%= render LoadingOverlayComponent.new(
+    loading: true,
+    class: "h-full w-full",
+    data: {
+      action: "location-input-component:load->loading-overlay-component#stop",
+    },
+  ) do %>
+    <div
+      class="h-full w-full"
+      x-data="LocationInputComponentMap({ value })"
+      x-on:keyup.document="handleKey($event)"
+      x-on:keydown.document="handleKey($event)"
+      x-on:location-input-component-map:click="$dispatch('location-input-component:change', $event.detail)"
+      x-on:location-input-component-map:load="$dispatch('location-input-component:load')"
+    ></div>
+  <% end %>
+</div>

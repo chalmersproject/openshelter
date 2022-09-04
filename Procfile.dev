@@ -1,0 +1,7 @@
+docker: docker compose up postgres elasticsearch mailcatcher > /dev/null
+pg: docker compose logs -f --no-log-prefix postgres
+es: docker compose logs -f --no-log-prefix elasticsearch
+emails: docker compose logs -f --no-log-prefix mailcatcher
+js: bundle exec rails javascript:build:watch
+css: bundle exec rails css:build:watch
+web: bundle exec rails server

@@ -1,0 +1,31 @@
+.mapboxgl-ctrl-geocoder {
+  @apply !rounded-md border border-gray-300;
+  @apply !shadow-none;
+
+  .mapboxgl-ctrl-geocoder--input {
+    @apply rounded-md;
+    @apply !font-sans !text-base;
+
+    &:focus {
+      @apply ring-1;
+
+      outline: none;
+      border: none;
+    }
+  }
+}
+
+.mapboxgl-popup {
+  @apply !max-w-72;
+
+  .mapboxgl-popup-content {
+    @apply !bg-transparent !p-0;
+
+    .mapboxgl-popup-close-button {
+      @apply z-20 -mt-1.5 -mr-1.5;
+      @apply !btn btn-danger hover:!bg-red-600;
+      @apply !p-0 !w-4 !h-4 rounded-full !border;
+      @apply leading-none;
+    }
+  }
+}

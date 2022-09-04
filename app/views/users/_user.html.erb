@@ -1,0 +1,4 @@
+<%= render ProfileCardComponent.new(
+  profileable: local_assigns.delete(:user),
+  **local_assigns,
+) %>

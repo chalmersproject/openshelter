@@ -1,0 +1,24 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "overflow-hidden",
+    "bg-zinc-800 rounded-md",
+    other_classes,
+  ) %>"
+  x-data="<%= component_data(value: location, interactive: interactive?) %>"
+  <%= tag.attributes other_attributes %>
+>
+  <%= render LoadingOverlayComponent.new(
+    loading: true,
+    class: "h-full w-full",
+    data: {
+      action: "location-component:load->loading-overlay-component#stop",
+    },
+  ) do %>
+    <div
+      class="h-full w-full"
+      x-data="LocationComponentMap({ value, interactive })"
+      x-on:location-component-map:load="$dispatch('location-component:load')"
+    ></div>
+  <% end %>
+</div>

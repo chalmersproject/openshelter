@@ -1,0 +1,14 @@
+<%# == Meta Tags == %>
+<% set_meta_tags title: "New Shelter" %>
+
+<%# == Breadcrumbs == %>
+<% render "shelters/breadcrumbs", shelter: @shelter %>
+<% breadcrumb "New", [@shelter, action: :new] %>
+
+<%# == Main == %>
+<div class="layout">
+  <section class="section flex flex-col gap-y-2">
+    <h1>New Shelter</h1>
+    <%= render ShelterFormComponent.new(shelter: @shelter) %>
+  </section>
+</div>

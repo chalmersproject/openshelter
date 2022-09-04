@@ -1,0 +1,142 @@
+<%# == Meta Tags == %>
+<% set_meta_tags(
+  title: ["Account", "Edit"],
+  description: "Edit your account on Chalmers.",
+) %>
+
+<%# == Breadcrumbs == %>
+<% render "users/breadcrumbs", user: resource %>
+<% breadcrumb "Edit", [:user_registration, action: :edit] %>
+
+<%# == Action Bar == %>
+<% content_for :action_bar do %>
+  <%= render ActionBarComponent.new(
+    object: resource,
+    only: %i[show edit],
+    show_path: registration_path(resource_name),
+    edit_path: edit_registration_path(resource_name),
+  ) do %>
+    You are editing your account.
+  <% end %>
+<% end %>
+
+<%# == Main == %>
+<div class="layout">
+  <section class="section flex flex-col gap-2">
+    <div>
+      <h1>Account</h1>
+      <p class="text-sm text-zinc-400">
+        Manage your account information.
+      </p>
+    </div>
+    <%= simple_form_for(
+      resource,
+      as: resource_name,
+      url: registration_path(resource_name),
+      data: {
+        turbo: false,
+      },
+      html: {
+        method: :put,
+      },
+    ) do |f| %>
+      <%= render FormNoticeComponent.new(form: f) %>
+      <div class="form-inputs" x-data="{ currentPasswordRequired: false }">
+        <%= f.input(
+          :first_name,
+          placeholder: resource.first_name,
+          autofocus: true,
+        ) %>
+        <%= f.input(
+          :last_name,
+          placeholder: resource.last_name,
+        ) %>
+        <%= f.input(
+          :display_name,
+          placeholder: resource.name,
+          hint: safe_join([
+            "Your public display name (i.e. on posts and comments); defaults to ",
+            tag.span(
+              resource.display_name,
+              class: 'font-medium text-zinc-600',
+            ),
+          ])
+        ) %>
+        <%= f.input(
+          :avatar,
+          hint: "Your public profile picture."
+        ) %>
+        <%= f.input(
+          :bio,
+          as: :rich_text_area,
+          input_html: { class: "min-h-36" },
+        ) %>
+        <% if resource.from_omniauth? %>
+          <%= f.input(
+            :email,
+            required: true,
+            input_html: {
+              disabled: true,
+            },
+          ) %>
+        <% else %>
+          <%= f.input :email, required: true %>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+            <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
+          <% end %>
+          <%= f.input(
+            :password,
+            hint: "Leave it blank if you don't want to change it.",
+            required: false,
+            input_html: {
+              autocomplete: "new-password",
+              "x-on:change": "currentPasswordRequired = !!$el.value",
+            },
+          ) %>
+          <%= f.input(
+            :password_confirmation,
+            required: false,
+            input_html: {
+              autocomplete: "new-password",
+            },
+        ) %>
+        <%= f.input(
+            :current_password,
+            hint: "We need your current password to confirm your changes.",
+            required: true,
+            wrapper_html: {
+              class: "cloak:hidden",
+              "x-show": "currentPasswordRequired",
+              "x-cloak": "true",
+            },
+            input_html: {
+              autocomplete: "current-password",
+            },
+          ) %>
+        <% end %>
+      </div>
+      <div class="form-actions">
+        <%= f.submit "Update Account", class: "btn btn-primary w-full sm:w-auto" %>
+      </div>
+    <% end %>
+  </section>
+  <hr class="section my-2" />
+  <section class="section flex flex-col gap-2">
+    <div>
+      <h3 class="h3">Cancel Account</h3>
+      <p class="text-sm text-zinc-400">
+        All your account data will be deleted, and cannot be recovered.
+      </p>
+    </div>
+    <%= button_to(
+      "Cancel Account",
+      registration_path(resource_name),
+      class: "btn btn-danger w-full sm:w-auto",
+      method: :delete,
+      disabled: true,
+      data: {
+        turbo_confirm: "Are you sure? This action cannot be undone.",
+      },
+    ) %>
+  </section>
+</div>

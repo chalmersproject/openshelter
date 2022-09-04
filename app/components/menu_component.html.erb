@@ -1,0 +1,57 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "relative",
+    other_classes,
+  ) %>"
+  data-controller="<%= token_list(component_name, "escape") %>"
+  data-action="escape:keydown->menu-component#leave"
+  <%= tag.attributes other_attributes %>
+>
+  <%= trigger %>
+  <div
+    class="<%= class_names(
+      component_name("anchor"),
+      "absolute",
+      "-top-1": @position == :top,
+      "-bottom-1": @position == :bottom,
+      "right-0": @align == :right,
+      "left-0": @align == :left,
+    ) %>"
+  >
+    <div class="relative">
+      <div
+        class="<%= class_names(
+          component_name("menu"),
+          "min-w-52",
+          "absolute z-30 transition transform",
+          "bg-black rounded border border-zinc-800 shadow-md",
+          "overflow-hidden",
+          "hidden",
+          "bottom-0": @position == :top,
+          "top-0": @position == :bottom,
+          "left-0": @align == :left,
+          "right-0": @align == :right,
+          "origin-bottom-left": [@position, @align] == [:top, :left],
+          "origin-bottom-right": [@position, @align] == [:top, :right],
+          "origin-top-left": [@position, @align] == [:bottom, :left],
+          "origin-top-right": [@position, @align] == [:bottom, :right],
+        ) %>"
+        data-menu-component-target="menu"
+        data-transition-enter-from="opacity-0 scale-95"
+        data-transition-enter-to="opacity-100 scale-100"
+        data-transition-leave-from="opacity-100 scale-100"
+        data-transition-leave-to="opacity-0 scale-95"
+      >
+        <ul>
+          <% items.each_with_index do |item, index| %>
+            <% if index > 0 %>
+              <hr />
+            <% end %>
+            <%= item %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

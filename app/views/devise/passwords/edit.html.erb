@@ -1,0 +1,55 @@
+<div class="layout">
+  <section class="section-xs">
+    <h1>Change your password</h1>
+    <p class="text-sm text-zinc-400">
+      Enter a new password that you will use to sign in to your account.
+    </p>
+  </section>
+  <section class="section-xs">
+    <%= simple_form_for(
+      resource,
+      as: resource_name,
+      url: password_path(resource_name),
+      data: {
+        turbo: false
+      },
+      html: {
+        method: :put ,
+      },
+    ) do |f| %>
+      <%= render FormNoticeComponent.new(form: f) %>
+      <%= f.input :reset_password_token, as: :hidden %>
+      <%= f.full_error :reset_password_token %>
+      <div class="form-inputs">
+        <%= f.input(
+          :password,
+          label: "New password",
+          required: true,
+          autofocus: true,
+          hint: ("#{@minimum_password_length} characters minimum." if @minimum_password_length),
+          input_html: {
+            autocomplete: "new-password",
+          },
+        ) %>
+        <%= f.input(
+          :password_confirmation,
+          label: "Confirm your new password",
+          required: true,
+          input_html: {
+            autocomplete: "new-password",
+          },
+        ) %>
+      </div>
+      <div class="form-actions">
+        <%= f.button(
+          :submit,
+          "Change my password",
+          class: "btn btn-primary w-full",
+        ) %>
+      </div>
+    <% end %>
+  </section>
+  <section class="section-xs">
+    <%= render "devise/shared/links" %>
+  </section>
+</div>

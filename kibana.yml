@@ -1,0 +1,21 @@
+elasticsearch.hosts: ["http://elasticsearch:9200"]
+enterpriseSearch.enabled: false
+server.host: 0.0.0.0
+status.allowAnonymous: true
+telemetry.enabled: false
+monitoring.enabled: false
+xpack:
+  apm.enabled: false
+  ccr.ui.enabled: false
+  encryptedSavedObjects.encryptionKey: be1f441a0aa14508c42fe9c05aff864c797b46748813a8357fbeebb93cae585a
+  fleet.enabled: false
+  ilm.ui.enabled: false
+  infra.enabled: false
+  license_management.enabled: false
+  ml.enabled: false
+  # NOTE: Disabling observability seems to break the Kibana UI.
+  # observability.enabled: false
+  reporting.enabled: false
+  rollup.enabled: false
+  security.enabled: false
+  securitySolution.enabled: false

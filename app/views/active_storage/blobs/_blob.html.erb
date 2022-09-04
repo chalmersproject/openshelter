@@ -1,0 +1,43 @@
+<figure
+  class="<%= class_names(
+    "attachment not-prose !my-1",
+    blob.representable? ? "preview" : "file",
+    blob.filename.extension,
+  ) %>"
+>
+  <%= external_link_to(
+    rails_blob_url(
+      blob,
+      disposition: "preview",
+      only_path: respond_to?(:rails_blob_path),
+    ),
+  ) do %>
+    <%= image_tag blob.representation(
+      resize_to_limit: local_assigns[:in_gallery] ? [800, 600] : [1024, 768],
+      saver: {
+        strip: true,
+        quality: 80,
+      },
+    ) %>
+  <% end if blob.representable? %>
+  <%= link_to(
+    rails_blob_url(
+      blob,
+      disposition: "attachment",
+      only_path: respond_to?(:rails_blob_path),
+    ),
+  ) do %>
+    <figcaption class="attachment--caption">
+      <% if blob.try(:caption).present? %>
+        <%= blob.caption %>
+      <% elsif !blob.content_type.match?(/image/) %>
+        <span class="attachment--name">
+          <%= blob.filename %>
+        </span>
+        <span class="attachment--size">
+          <%= number_to_human_size blob.byte_size %>
+        </span>
+      <% end %>
+    </figcaption>
+  <% end %>
+</figure>

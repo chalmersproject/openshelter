@@ -1,0 +1,37 @@
+<div class="layout">
+  <section class="section-xs">
+    <h1>Resend unlock instructions</h1>
+  </section>
+  <section class="section-xs">
+    <%= simple_form_for(
+      resource,
+      as: resource_name,
+      url: unlock_path(resource_name),
+      data: {
+        turbo: false,
+      },
+      html: {
+        method: :post,
+      },
+    ) do |f| %>
+      <%= f.error_notification %>
+      <%= f.full_error :unlock_token %>
+      <div class="form-inputs">
+        <%= f.input(
+          :email,
+          required: true,
+          autofocus: true,
+          input_html: {
+            autocomplete: "email",
+          },
+        ) %>
+      </div>
+      <div class="form-actions">
+        <%= f.submit "Resend unlock instructions" %>
+      </div>
+    <% end %>
+  </section>
+  <section class="section-xs">
+    <%= render "devise/shared/links" %>
+  </section>
+</div>

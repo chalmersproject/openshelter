@@ -1,0 +1,94 @@
+<%= render MenuComponent.new(
+  align: :right,
+  class: class_names(component_name, other_classes),
+  **other_attributes,
+) do |c| %>
+  <% c.with_trigger(
+    class: class_names(
+      "btn btn-primary",
+      "text-primary-500",
+      "border rounded-lg",
+      "px-1 sm:px-2 py-0.5 sm:py-1",
+      "flex items-center gap-1",
+    ),
+  ) do %>
+    <%= heroicon :menu, class: "w-4" %>
+    <%= render AvatarComponent.new(
+      profileable: current_user,
+      size: :xs,
+    ) %>
+  <% end %>
+  <% c.with_item(
+    link: :dashboard,
+    link_options: {
+      class: "!items-start",
+    },
+  ) do |i| %>
+    <%= i.icon :template %>
+    <%= scoped do %>
+      <% content = capture do %>
+        <p>Dashboard</p>
+        <p class="text-xs opacity-70">
+          Manage your businesses & communities
+        </p>
+      <% end %>
+      <% i.label content, tag: :div %>
+    <% end %>
+  <% end if false %>
+  <% if user_signed_in? %>
+    <% c.with_item link: [:user, :profile] do |i| %>
+      <%= i.icon :user %>
+      <%= i.label "Profile" %>
+    <% end %>
+    <% c.with_item link: [:user, :registration, action: :edit] do |i| %>
+      <%= i.icon :adjustments %>
+      <%= i.label "Account" %>
+    <% end %>
+    <% c.with_item class: "custom" do |i| %>
+      <%= button_to(
+        [:user, :session, action: :destroy],
+        method: :delete,
+        data: {
+          turbo: false,
+        },
+        class: class_names(
+          "w-full px-2.5 py-2",
+          "flex items-center gap-x-1.5",
+          "text-left",
+        ),
+      ) do %>
+        <%= i.icon :logout %>
+        <%= i.label "Sign Out" %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <% c.with_item link: [:user, :session, action: :new] do |i| %>
+      <%= i.icon :login %>
+      <%= i.label "Sign In" %>
+    <% end %>
+  <% end %>
+  <% c.with_item(
+    link: "https://chalmers.cards",
+    link_options: {
+      external: true,
+    },
+    class: "external",
+  ) do |i| %>
+    <%= i.icon "information-circle" %>
+    <%= i.label "About" %>
+  <% end %>
+  <% c.with_item(
+    link: "mailto:Team Chalmers<info@chalmers.cards>",
+    class: "external",
+  ) do |i| %>
+    <%= i.icon :mail %>
+    <%= i.label "Contact Us" %>
+  <% end %>
+  <% c.with_item(
+    link: internal_path,
+    class: "internal",
+  ) do |i| %>
+    <%= i.icon :beaker %>
+    <%= i.label "Internal" %>
+  <% end if admin? %>
+<% end %>

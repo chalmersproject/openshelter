@@ -1,0 +1,19 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "overflow-hidden",
+    "rounded-full",
+    { "bg-zinc-300": image? },
+    { "bg-primary-600 text-primary-50": !image? },
+    { "grid place-content-center": !image? },
+    size,
+    other_classes,
+  ) %>"
+  <%= tag.attributes other_attributes %>
+>
+  <% if image? %>
+    <%= image_tag image_src, class: "w-full h-full object-cover" %>
+  <% else %>
+    <%= heroicon :user, class: component_name("icon") %>
+  <% end %>
+</div>

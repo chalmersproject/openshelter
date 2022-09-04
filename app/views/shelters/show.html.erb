@@ -1,0 +1,42 @@
+<%= render "shelters/layout", shelter: @shelter do %>
+  <% if @shelter.images.attached? %>
+    <section>
+      <%= render GalleryComponent.new(
+        galleryable: @shelter,
+        class: "h-64 rounded-md",
+      ) %>
+    </section>
+  <% end %>
+  <section class="section-lg flex flex-col gap-y-2">
+    <h1>
+      <%= @shelter.name %>
+    </h1>
+    <div>
+      <%= @shelter.about %>
+    </div>
+  </section>
+  <% if @shelter.location? %>
+    <hr class="section" />
+    <section class="section-lg">
+      <h2>Location</h2>
+      <p>
+        <span class="font-semibold">
+          <%= @shelter.name %>
+        </span>
+        is located at
+        <%= external_link_to(
+          @shelter.address,
+          @shelter.google_maps_directions_url,
+          class: "link font-semibold",
+        ) %>.
+      </p>
+    </section>
+    <section>
+      <%= render LocationComponent.new(
+        location: @shelter.location,
+        interactive: true,
+        class: "h-[32rem] max-h-[calc(theme('height.screen')-theme('height.20'))]",
+      ) %>
+    </section>
+  <% end %>
+<% end %>

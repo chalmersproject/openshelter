@@ -1,0 +1,19 @@
+<% set_meta_tags(
+  title: shelter.name,
+  description: shelter.about.to_plain_text.presence,
+  canonical: shelter.to_url,
+  og: {
+    image: (local_assigns[:image] ||
+      shelter.images_blobs_ordered.first).try do |blob|
+        variant = blob.variant(
+          resize_to_limit: [1200, 630],
+          saver: {
+            strip: true,
+            quality: 80,
+          },
+        )
+        rails_blob_url(variant)
+      end,
+    url: shelter.to_url,
+  },
+) %>

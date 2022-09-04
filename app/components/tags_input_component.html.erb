@@ -1,0 +1,103 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "flex flex-col gap-1.5",
+    other_classes,
+  ) %>"
+  x-data="<%= component_data(tags: @tags) %>"
+  x-on:tags-input-component:remove="$dispatch('change')"
+  <%= tag.attributes other_attributes %>
+>
+  <!-- Field -->
+  <div>
+    <div
+      class="relative"
+      x-on:click.away="clear()"
+    >
+      <input
+        class="<%= class_names(@options[:class], "w-full") %>"
+        type="text"
+        required
+        pattern="[\w ]+"
+        title="Only numbers, letters, and spaces."
+        x-model="value"
+        x-ref="input"
+        x-on:keydown.escape="clear()"
+        x-on:keydown.enter.prevent="add()"
+        <%= tag.attributes @options.slice(:placeholder) %>
+      />
+      <button
+        type="button"
+        class="<%= class_names(
+          "btn py-0 px-1.5 bg-black text-sm text-zinc-400",
+          "absolute left-auto inset-2",
+          "grid place-content-center",
+          "transition-transform",
+          "cloak:hidden",
+        ) %>"
+        x-on:click="add()"
+        x-show="!!value"
+        x-transition:enter-start="scale-0"
+        x-transition:enter="scale-100"
+        x-transition:leave="scale-0"
+        x-cloak
+      >
+        Add
+      </button>
+    </div>
+    <span class="hint">
+      Only numbers, letters, and spaces.
+    </span>
+  </div>
+
+  <!-- Tags -->
+  <div class="flex flex-wrap gap-1" x-show="tags.length">
+    <template x-for="(tag, index) in tags">
+      <div>
+        <%= @form.hidden_field(
+          @method,
+          **@options,
+          id: nil,
+          value: nil,
+          multiple: true,
+          "x-bind:value": "tag",
+        ) %>
+        <%= render BadgeComponent.new(
+          class: class_names(
+            "pl-1.5 pr-1 py-0.5",
+            "rounded border border-secondary-900 bg-secondary-900/20",
+            "flex gap-1 items-center",
+          ),
+        ) do %>
+          <p
+            class="truncate max-w-sm font-normal"
+            x-text="tag"></p>
+          <button
+            class="btn border-none bg-transparent p-0"
+            type="button"
+            x-on:click.prevent="tags.splice(index, 1); $dispatch('tags-input-component:remove')"
+          >
+            <%= heroicon "minus-circle", variant: :solid, class: "w-4 h-4 text-red-500" %>
+          </button>
+        <% end %>
+      </div>
+    </template>
+  </div>
+
+  <!-- Empty -->
+  <template x-if="!tags.length">
+    <div>
+      <%= @form.hidden_field(
+        @method,
+        **@options,
+        id: nil,
+        value: nil,
+      ) %>
+      <div class="alert">
+        <span class="font-medium">No tags added.</span>
+        Type a tag in the field and press enter to add it.
+      </div>
+    </div>
+  </template>
+</div>
+

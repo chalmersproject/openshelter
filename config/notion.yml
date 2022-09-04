@@ -1,0 +1,21 @@
+development:
+  databases:
+    - name: users
+      id: 2a9078817ee94706b0cf2cb00071208e
+    - name: businesses
+      id: 0e0f66282ec6481da5bc102f0206ef2f
+    - name: communities
+      id: 106914e92412497b8ae88f7b59913ada
+    - name: offerings
+      id: 7b251b0a7a7b403b89bb6ee5a8e7e8e2
+
+production:
+  databases:
+    - name: users
+      id: fbe6279df99e45cabcb26e989d67e92f
+    - name: businesses
+      id: 6df070173eda4f87856252b2794096b6
+    - name: communities
+      id: e5a5a5c4e9d344d8806b97d72dede6cb
+    - name: offerings
+      id: aff7e0fcfddb4e299f18d69a331514b3

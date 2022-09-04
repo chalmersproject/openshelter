@@ -1,0 +1,31 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "mx-3 flex flex-col gap-y-1.5",
+    other_classes,
+  ) %>"
+  data-turbo-cache="false"
+  <%= tag.attributes other_attributes %>
+>
+  <% if notice.present? %>
+    <section
+      class="<%= class_names(component_name("alert"), "alert alert-success") %>"
+    >
+      <%= heroicon "information-circle", variant: :solid %>
+      <p class="flex-1">
+        <%= notice %>
+      </p>
+    </section>
+  <% end %>
+  <% if alert.present? %>
+    <section
+      class="<%= class_names(component_name("alert"), "alert alert-danger") %>"
+      data-turbo-cache="false"
+    >
+      <%= heroicon "information-circle", variant: :solid %>
+      <p class="flex-1">
+        <%= alert %>
+      </p>
+    </section>
+  <% end %>
+</div>

@@ -1,0 +1,5 @@
+<% if token = ENV["MAPBOX_ACCESS_TOKEN"] %>
+  <script>
+    mapboxgl.accessToken = "<%= token %>";
+  </script>
+<% end %>

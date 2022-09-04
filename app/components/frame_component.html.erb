@@ -1,0 +1,9 @@
+<%= turbo_frame_tag(
+  frame.id,
+  src: frame.to_path,
+  loading: :lazy,
+  class: class_names(component_name, other_classes),
+  **other_attributes
+) do %>
+  <%= content %>
+<% end %>

@@ -1,0 +1,22 @@
+<div class="layout">
+  <section class="section-sm">
+    <h1>Not Authorized</h1>
+    <p class="text-sm text-zinc-500">
+      Oops! It looks like you don't have permission to access this page.
+    </p>
+  </section>
+  <section class="section-sm">
+    <ul>
+      <li>
+        <%= link_to(
+          "Try logging in?",
+          [:user, :session, action: :new],
+          class: "link",
+        ) unless user_signed_in? %>
+      </li>
+      <li>
+        <%= link_to "Let's just go back home.", :root, class: "link" %>
+      </li>
+    </ul>
+  </section>
+</div>
