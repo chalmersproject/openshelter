@@ -9,7 +9,7 @@
 <span class="<%= class_names("next", "disabled": current_page.last?) %>">
   <%= link_to_unless(
     current_page.last?,
-    t("views.pagination.next").html_safe,
+    heroicon("chevron-right", variant: :mini),
     url,
     rel: "next",
     remote: remote,

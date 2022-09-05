@@ -18,17 +18,17 @@
         ) %>"
       >
         <%= image_tag "logo.svg", class: "w-8 h-full" %>
-        <div class="hidden md:flex flex-col">
-          <span class="font-bold text-sm text-white tracking-widest leading-tight">
-            CHALMERS PROJECT
+        <div
+          class="<%= class_names(
+            "hidden sm:flex flex-col gap-y-px",
+            "font-bold tracking-widest [&>*]:leading-none",
+          ) %>"
+        >
+          <span class="text-sm text-white">
+            CHALMERS
           </span>
-          <span
-            class="<%= class_names(
-              "text-xs text-zinc-500",
-              "hidden sm:inline"
-            ) %>"
-          >
-            Fighting homelessness in Toronto, Ontario
+          <span class="text-xs text-primary-700">
+            PROJECT
           </span>
         </div>
       </div>

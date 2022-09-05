@@ -9,7 +9,7 @@
 <span class="<%= class_names("prev", "disabled": current_page.first?) %>">
   <%= link_to_unless(
     current_page.first?,
-    t("views.pagination.previous").html_safe,
+    heroicon("chevron-left", variant: :mini),
     url,
     rel: "prev",
     remote: remote,

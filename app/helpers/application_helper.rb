@@ -8,7 +8,7 @@ module ApplicationHelper
   abstract!
   requires_ancestor { Kernel }
 
-  # == Prerequisites ==
+  # == Dependencies ==
   sig { abstract.returns(T::Enumerable[T.untyped]) }
   def flash; end
 

@@ -76,15 +76,7 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
   </head>
 
-  <body
-    class="<%= class_names(
-      "min-h-screen bg-zinc-900 text-zinc-200",
-      "flex flex-col",
-      "breadcrumbs": breadcrumbs?,
-      "flash": flash?,
-      "action-bar": content_for?(:action_bar),
-    ) %>"
-  >
+  <body class="min-h-screen bg-zinc-900 text-zinc-200 flex flex-col">
     <%# == Header == %>
     <%= render HeaderComponent.new %>
 
@@ -96,7 +88,12 @@
       <% end %>
       <%= render FlashComponent.new %>
       <%= yield :action_bar %>
-      <div class="flex-1 flex flex-col">
+      <div
+        class="<%= class_names(
+          "flex-1 flex flex-col",
+          "mt-0.5": breadcrumbs? && (flash? || content_for?(:action_bar)),
+        ) %>"
+      >
         <%= yield %>
       </div>
     </main>

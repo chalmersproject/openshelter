@@ -14,9 +14,8 @@ module Galleryable
   included do
     T.bind(self, T.class_of(ApplicationRecord))
 
-    unless attribute_names.include?("images_attachment_ids")
-      raise "missing attribute images_attachment_ids"
-    end
+    # == Dependencies ==
+    requires_columns :images_attachment_ids
 
     # == Associations ==
     has_many_attached :images

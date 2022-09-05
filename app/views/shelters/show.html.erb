@@ -1,12 +1,12 @@
+<% if @shelter.images.attached? %>
+  <section>
+    <%= render GalleryComponent.new(
+      galleryable: @shelter,
+      class: "h-64 rounded-md",
+    ) %>
+  </section>
+<% end %>
 <%= render "shelters/layout", shelter: @shelter, class: "gap-y-8" do %>
-  <% if @shelter.images.attached? %>
-    <section>
-      <%= render GalleryComponent.new(
-        galleryable: @shelter,
-        class: "h-64 rounded-md",
-      ) %>
-    </section>
-  <% end %>
   <section class="section-lg flex flex-col gap-y-2">
     <h1>
       <%= @shelter.name %>

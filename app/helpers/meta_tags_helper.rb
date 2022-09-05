@@ -8,7 +8,7 @@ module MetaTagsHelper
   abstract!
   requires_ancestor { Kernel }
 
-  # == Prerequisites ==
+  # == Dependencies ==
   sig { abstract.returns(MetaTags::MetaTagsCollection) }
   def meta_tags; end
 

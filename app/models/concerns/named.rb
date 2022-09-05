@@ -13,6 +13,9 @@ module Named
   included do
     T.bind(self, T.class_of(ApplicationRecord))
 
+    # == Dependencies ==
+    requires_columns :name
+
     # == Validations ==
     validates :name, presence: true, length: { maximum: 64 }
   end

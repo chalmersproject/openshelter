@@ -4,30 +4,50 @@
 
     > .page,
     > .first,
+    > .last,
     > .prev,
-    > .next,
-    > .last {
-      @apply btn p-0 border rounded-md bg-white text-zinc-500;
+    > .next {
+      @apply btn p-0 h-7 border rounded-md bg-white text-gray-500;
+      @apply flex flex-col items-stretch justify-center;
       @apply text-sm;
 
       &.disabled,
       &.gap {
-        @apply px-2 py-1;
         @apply opacity-50 cursor-not-allowed;
       }
+    }
 
+    > .page,
+    > .first,
+    > .last {
       &:not(.disabled):not(.gap):not(.current) {
         a {
-          @apply inline-block;
-          @apply px-2 py-1;
+          @apply flex-1 inline-flex px-2 flex-col justify-center;
         }
       }
     }
 
     > .page {
+      &.gap,
       &.current {
-        @apply px-2 py-1;
+        @apply px-2;
+      }
+
+      &.current {
         @apply text-white bg-primary-500;
+      }
+    }
+
+    > .prev,
+    > .next {
+      &:not(.disabled) {
+        a {
+          @apply px-1;
+        }
+      }
+
+      &.disabled {
+        @apply px-1;
       }
     }
   }

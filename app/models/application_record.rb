@@ -2,6 +2,33 @@
 # frozen_string_literal: true
 
 class ApplicationRecord < ActiveRecord::Base
+  class << self
+    extend T::Sig
+
+    private
+
+    # == Helpers ==
+    sig { params(column_names: T.any(Symbol, String)).void }
+    def requires_columns(*column_names)
+      Kernel.suppress(ActiveRecord::ConnectionNotEstablished) do
+        missing_columns = column_names.map(&:to_s) - self.column_names
+        if missing_columns.present?
+          subject =
+            if missing_columns.count == 1
+              "column '#{missing_columns.first}'"
+            else
+              missing_columns_sentence =
+                missing_columns.map { |name| "'#{name}'" }.to_sentence
+              "columns #{missing_columns_sentence}"
+            end
+          raise "missing #{subject} on #{model_name}"
+        end
+      end
+    end
+  end
+end
+
+class ApplicationRecord
   extend T::Sig
 
   primary_abstract_class

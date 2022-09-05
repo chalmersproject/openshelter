@@ -13,6 +13,9 @@ module Slugged
   included do
     T.bind(self, T.class_of(ApplicationRecord))
 
+    # == Dependencies ==
+    requires_columns :slug
+
     # == Validations ==
     validates :slug,
               presence: true,

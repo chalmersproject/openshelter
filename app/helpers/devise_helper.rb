@@ -8,7 +8,7 @@ module DeviseHelper
   abstract!
   requires_ancestor { Kernel }
 
-  # == Prerequisites ==
+  # == Dependencies ==
   sig { abstract.returns(T.nilable(User)) }
   def current_user; end
 
