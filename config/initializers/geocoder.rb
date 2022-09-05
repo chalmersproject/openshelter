@@ -1,13 +1,12 @@
 # typed: strict
 # frozen_string_literal: true
 
+service = ENV.fetch("GEOCODER_SERVICE", "nominatim").to_sym
+
 # prettier-ignore
 config = {
   # == Geocoding ==
-  lookup: :nominatim,
-  http_headers: {
-    "User-Agent" => "Chalmers Project Team <hulloitskai@gmail.com>",
-  },
+  lookup: service,
   use_https: true,
   # timeout: 3,            # geocoding service timeout (secs)
   # ip_lookup: :ipinfo_io, # name of IP address geocoding service (symbol)
@@ -33,11 +32,13 @@ config = {
   },
 }
 
-# Use Google if GOOGLE_API_KEY variable is present.
-# google_api_key = ENV["GOOGLE_API_KEY"]
-# if google_api_key.present?
-#   config[:lookup] = :google
-#   config[:api_key] = google_api_key
-# end
+case service
+when :nominatim
+  config[:http_headers] = {
+    "User-Agent" => "Chalmers Project Team <hulloitskai@gmail.com>",
+  }
+when :google
+  config[:api_key] = ENV["GOOGLE_API_KEY"]
+end
 
 Geocoder.configure(config)
