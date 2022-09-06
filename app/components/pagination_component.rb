@@ -3,13 +3,7 @@
 
 class PaginationComponent < ApplicationComponent
   Paginatable =
-    T.type_alias do
-      T.any(
-        ActiveRecord::Relation,
-        Searchkick::Relation,
-        Kaminari::PaginatableArray,
-      )
-    end
+    T.type_alias { T.any(ActiveRecord::Relation, Kaminari::PaginatableArray) }
 
   sig do
     params(

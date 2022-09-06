@@ -48,6 +48,9 @@ module GeneratedUrlHelpersModule
   def internal_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def map_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_source_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }

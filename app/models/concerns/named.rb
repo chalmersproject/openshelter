@@ -20,11 +20,9 @@ module Named
     validates :name, presence: true, length: { maximum: 64 }
   end
 
-  private
-
   # == Setters ==
   sig { params(value: String).returns(String) }
   def name=(value)
-    super(name.strip)
+    super(value.strip)
   end
 end

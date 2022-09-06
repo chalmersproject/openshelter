@@ -67,28 +67,36 @@ class RailsHeroicon::RailsHeroicon
   #
   # @raise [UndefinedIcon]
   #
-  # source://rails_heroicon//lib/rails_heroicon/rails_heroicon.rb#29
+  # source://rails_heroicon//lib/rails_heroicon/rails_heroicon.rb#22
   def svg_path; end
 
   private
 
-  # source://rails_heroicon//lib/rails_heroicon/rails_heroicon.rb#38
+  # source://rails_heroicon//lib/rails_heroicon/rails_heroicon.rb#31
   def a11y; end
 
   # If the user has explicitly stated the size attribute, then use that. If size attribute is not passed
-  # then default to 24 if variant is outline, else default to 20 if variant is solid.
+  # then default to 24 if variant is outline or solid, else default to 20 if variant is mini.
   #
-  # source://rails_heroicon//lib/rails_heroicon/rails_heroicon.rb#52
+  # source://rails_heroicon//lib/rails_heroicon/rails_heroicon.rb#59
   def icon_size_with(size); end
 
   # @return [Boolean]
   #
-  # source://rails_heroicon//lib/rails_heroicon/rails_heroicon.rb#62
-  def outline?; end
+  # source://rails_heroicon//lib/rails_heroicon/rails_heroicon.rb#74
+  def mini?; end
+
+  # source://rails_heroicon//lib/rails_heroicon/rails_heroicon.rb#43
+  def misc; end
 
   # @return [Boolean]
   #
   # source://rails_heroicon//lib/rails_heroicon/rails_heroicon.rb#66
+  def outline?; end
+
+  # @return [Boolean]
+  #
+  # source://rails_heroicon//lib/rails_heroicon/rails_heroicon.rb#70
   def solid?; end
 end
 

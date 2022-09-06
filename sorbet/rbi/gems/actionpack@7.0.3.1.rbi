@@ -1251,7 +1251,6 @@ class ActionController::API < ::ActionController::Metal
   include ::ActionController::Rescue
   include ::ActionController::Instrumentation
   include ::ActionController::ParamsWrapper
-  include ::Searchkick::ControllerRuntime
   include ::ActionController::RespondWith
   include ::DeviseInvitable::Controllers::Helpers
   include ::ActionDispatch::Routing::RouteSet::MountedHelpers
@@ -1271,7 +1270,6 @@ class ActionController::API < ::ActionController::Metal
   extend ::ActiveSupport::Rescuable::ClassMethods
   extend ::ActionController::Instrumentation::ClassMethods
   extend ::ActionController::ParamsWrapper::ClassMethods
-  extend ::Searchkick::ControllerRuntime::ClassMethods
   extend ::ActionController::RespondWith::ClassMethods
   extend ::ActionController::Railties::Helpers
   extend ::ActiveRecord::Railties::ControllerRuntime::ClassMethods
@@ -1774,7 +1772,6 @@ class ActionController::Base < ::ActionController::Metal
   include ::ActionController::Rescue
   include ::ActionController::Instrumentation
   include ::ActionController::ParamsWrapper
-  include ::Searchkick::ControllerRuntime
   include ::ActionController::RespondWith
   include ::DeviseInvitable::Controllers::Helpers
   include ::Devise::Controllers::SignInOut
@@ -1815,7 +1812,6 @@ class ActionController::Base < ::ActionController::Metal
   extend ::ActionController::Instrumentation::ClassMethods
   extend ::ActionController::ParamsWrapper::ClassMethods
   extend ::Responders::ControllerMethod
-  extend ::Searchkick::ControllerRuntime::ClassMethods
   extend ::ActionController::RespondWith::ClassMethods
   extend ::ActionPolicy::Behaviour::ClassMethods
 
@@ -18112,22 +18108,22 @@ module ActionDispatch::Routing::RouteSet::MountedHelpers
   mixes_in_class_methods GeneratedClassMethods
 
   # source://actionpack//lib/action_dispatch/routing/route_set.rb#468
-  def _internal_good_job; end
-
-  # source://actionpack//lib/action_dispatch/routing/route_set.rb#468
-  def _internal_rails_pg_extras_web; end
+  def _good_job; end
 
   # source://actionpack//lib/action_dispatch/routing/route_set.rb#468
   def _main_app; end
 
-  # source://actionpack//lib/action_dispatch/routing/route_set.rb#474
-  def internal_good_job; end
+  # source://actionpack//lib/action_dispatch/routing/route_set.rb#468
+  def _rails_pg_extras_web; end
 
   # source://actionpack//lib/action_dispatch/routing/route_set.rb#474
-  def internal_rails_pg_extras_web; end
+  def good_job; end
 
   # source://actionpack//lib/action_dispatch/routing/route_set.rb#474
   def main_app; end
+
+  # source://actionpack//lib/action_dispatch/routing/route_set.rb#474
+  def rails_pg_extras_web; end
 
   module GeneratedClassMethods
     def default_url_options; end

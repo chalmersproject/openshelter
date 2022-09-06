@@ -9,8 +9,8 @@ module ActionText::Attachments::TrixConversion
     def to_trix_attachment(content = trix_attachment_content)
       attributes = full_attributes.dup
       attributes["content"] = content if content
-      attributes["url"] = trix_attachable_url if previewable? &&
-        preview_attachable?
+      attributes["url"] = trix_attachable_url if try(:previewable?) &&
+        try(:preview_attachable?)
       ActionText::TrixAttachment.from_attributes(attributes)
     end
 

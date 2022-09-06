@@ -30,13 +30,6 @@ gem "activerecord-typedstore", "~> 1.4"
 # Enable additional operators and utilities for Active Record with PostgreSQL
 gem "active_record_extended", "~> 2.1"
 
-# Use Elasticsearch and Searchkick to search models.
-#
-# NOTE: This gem is pinned to versions < 7.14 to avoid UnsupportedProductError
-# when connecting to open-source versions of Elasticsearch.
-gem "elasticsearch", "~> 7.13", "< 7.14"
-gem "searchkick", "~> 5.0"
-
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 gem "image_processing", "~> 1.2"
 gem "ruby-vips", "~> 2.1", require: false
@@ -220,10 +213,6 @@ gem "sitemap_generator", "~> 6.2"
 
 # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
 gem "debug", platforms: %i[mri mingw x64_mingw]
-
-# Some gems use Faraday as an HTTP client
-gem "faraday", "~> 1.10", require: false
-gem "faraday_middleware-aws-sigv4", "~> 0.6.1", require: false
 
 # Display times and dates to users in their local time
 gem "local_time", "~> 2.1"

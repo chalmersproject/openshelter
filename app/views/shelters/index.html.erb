@@ -2,14 +2,18 @@
   <section class="section flex flex-col gap-y-2">
     <h1>Shelters</h1>
     <div id="shelters" class="flex flex-col gap-y-2">
-      <% @shelters.each do |shelter| %>
-        <%= link_to shelter.name, shelter, class: "link" %>
-      <% end %>
+      <ul>
+        <% @shelters.each do |shelter| %>
+          <li>
+            <%= link_to shelter.name, shelter, class: "link" %>
+          </li>
+        <% end %>
+      </ul>
       <%= link_to(
         "New Shelter",
         new_shelter_path,
         class: "self-start btn btn-primary",
-      ) %>
+      ) if signed_in? %>
     </div>
   </section>
 </div>

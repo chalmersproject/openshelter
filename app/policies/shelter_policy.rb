@@ -6,6 +6,11 @@ class ShelterPolicy < ApplicationPolicy
 
   # == Rules ==
   sig { returns(T::Boolean) }
+  def index?
+    true
+  end
+
+  sig { returns(T::Boolean) }
   def show?
     true
   end

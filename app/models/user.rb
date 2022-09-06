@@ -55,9 +55,13 @@
 class User < ApplicationRecord
   extend T::Sig
 
-  ADMIN_EMAILS = T.let(%w[hulloitskai@gmail.com], T::Array[String])
+  ADMIN_EMAILS =
+    T.let(%w[hulloitskai@gmail.com zachary.donsky@gmail.com], T::Array[String])
   ADMIN_EMAIL_DOMAINS =
-    T.let(%w[chalmersproject.com chalmerscards.com], T::Array[String])
+    T.let(
+      %w[chalmersproject.com chalmerscards.com chalmers.cards],
+      T::Array[String],
+    )
 
   sig { returns(User) }
   def self.example

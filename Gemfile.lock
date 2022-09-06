@@ -182,14 +182,6 @@ GEM
     domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     dotenv (2.8.1)
-    elasticsearch (7.13.3)
-      elasticsearch-api (= 7.13.3)
-      elasticsearch-transport (= 7.13.3)
-    elasticsearch-api (7.13.3)
-      multi_json
-    elasticsearch-transport (7.13.3)
-      faraday (~> 1)
-      multi_json
     email_reply_parser (0.5.10)
     email_validator (2.2.3)
       activemodel
@@ -225,9 +217,6 @@ GEM
     faraday-patron (1.0.0)
     faraday-rack (1.0.0)
     faraday-retry (1.0.3)
-    faraday_middleware-aws-sigv4 (0.6.1)
-      aws-sigv4 (~> 1.0)
-      faraday (>= 1.8, < 2)
     ffi (1.15.5)
     friendly_id (5.4.2)
       activerecord (>= 4.0.0)
@@ -518,9 +507,6 @@ GEM
       ffi (~> 1.12)
     ruby2_keywords (0.0.5)
     rubyzip (2.3.2)
-    searchkick (5.0.4)
-      activemodel (>= 5.2)
-      hashie
     selenium-webdriver (4.3.0)
       childprocess (>= 0.5, < 5.0)
       rexml (~> 3.2, >= 3.2.5)
@@ -651,14 +637,11 @@ DEPENDENCIES
   devise_invitable (~> 2.0)
   discard (~> 1.2)
   dotenv (~> 2.7)
-  elasticsearch (~> 7.13, < 7.14)
   email_reply_parser (~> 0.5.10)
   email_validator (~> 2.2)
   enumerize (~> 2.5)
   external_link_to (~> 1.0)
   faker (~> 2.20)
-  faraday (~> 1.10)
-  faraday_middleware-aws-sigv4 (~> 0.6.1)
   friendly_id (~> 5.4)
   geocoder (~> 1.8)
   good_job (~> 3.1)
@@ -714,7 +697,6 @@ DEPENDENCIES
   rubocop-shopify
   rubocop-sorbet
   ruby-vips (~> 2.1)
-  searchkick (~> 5.0)
   selenium-webdriver
   shortuuid (~> 0.6.0)
   silencer (~> 2.0.0)

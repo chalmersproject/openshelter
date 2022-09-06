@@ -51,8 +51,8 @@ class Shelter < ApplicationRecord
             allow_nil: true
 
   # == Validations ==
-  validates :location, presence: true
   validates :address, presence: true
+  validates :location, presence: true
   validates :website_url,
             url: {
               no_local: true,
@@ -72,11 +72,6 @@ class Shelter < ApplicationRecord
   include Tagged
 
   # == Setters ==
-  sig { override.params(value: String).returns(String) }
-  def name=(value)
-    super(name.strip)
-  end
-
   sig { override.params(value: String).returns(String) }
   def address=(value)
     super(value.strip)
