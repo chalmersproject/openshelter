@@ -10,6 +10,17 @@ class ApplicationRecord < ActiveRecord::Base
     # == Helpers ==
     sig { params(column_names: T.any(Symbol, String)).void }
     def requires_columns(*column_names)
+
+      #
+      # These checks are for ensuring all required columns for each model are
+      # present in the db
+      # These checks only run in server or console context
+      #
+      unless Rails.const_defined?(:Server) || Rails.const_defined?(:Console)
+        return
+      end
+
+
       Kernel.suppress(ActiveRecord::ConnectionNotEstablished) do
         missing_columns = column_names.map(&:to_s) - self.column_names
         if missing_columns.present?
