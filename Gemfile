@@ -239,7 +239,7 @@ group :development do
 
   # Use Rubocop to lint code
   gem "rubocop", "~> 1.32", require: false
-  gem "rubocop-lsp", require: false
+  # gem "rubocop-lsp", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-shopify", require: false
