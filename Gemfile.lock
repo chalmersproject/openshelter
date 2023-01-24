@@ -524,6 +524,7 @@ GEM
     sorbet (0.5.10346)
       sorbet-static (= 0.5.10346)
     sorbet-runtime (0.5.10346)
+    sorbet-static (0.5.10346-universal-darwin-20)
     sorbet-static (0.5.10346-universal-darwin-21)
     sorbet-static (0.5.10346-x86_64-linux)
     sorbet-static-and-runtime (0.5.10346)
@@ -611,6 +612,7 @@ GEM
 
 PLATFORMS
   arm64-darwin-21
+  x86_64-darwin-20
   x86_64-darwin-21
   x86_64-linux-e
 
