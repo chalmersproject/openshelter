@@ -280,7 +280,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    language_server-protocol (3.16.0.3)
+    language_server-protocol (3.17.0.2)
     liquid (5.4.0)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -383,6 +383,7 @@ GEM
     premailer-rails (1.11.1)
       actionmailer (>= 3)
       premailer (~> 1.7, >= 1.7.9)
+    prettier_print (1.2.0)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -486,9 +487,6 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.21.0)
       parser (>= 3.1.1.0)
-    rubocop-lsp (0.1.6)
-      language_server-protocol (>= 3.16)
-      rubocop (>= 1.0)
     rubocop-performance (1.14.3)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
@@ -500,6 +498,10 @@ GEM
       rubocop (~> 1.33)
     rubocop-sorbet (0.6.11)
       rubocop (>= 0.90.0)
+    ruby-lsp (0.3.8)
+      language_server-protocol (~> 3.17.0)
+      sorbet-runtime
+      syntax_tree (>= 5.0.0, < 6)
     ruby-next-core (0.15.2)
     ruby-pg-extras (4.8.1)
       pg
@@ -548,6 +550,8 @@ GEM
     stimulus-rails (1.1.0)
       railties (>= 6.0.0)
     strscan (3.0.4)
+    syntax_tree (5.2.0)
+      prettier_print (>= 1.2.0)
     tapioca (0.10.0)
       bundler (>= 1.17.3)
       netrc (>= 0.11.0)
@@ -696,11 +700,11 @@ DEPENDENCIES
   rgeo-activerecord (~> 7.0)
   rgeo-geojson (~> 2.1)
   rubocop (~> 1.32)
-  rubocop-lsp
   rubocop-performance
   rubocop-rails
   rubocop-shopify
   rubocop-sorbet
+  ruby-lsp (~> 0.3.8)
   ruby-vips (~> 2.1)
   selenium-webdriver
   shortuuid (~> 0.6.0)
