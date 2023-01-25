@@ -24,6 +24,9 @@ module GeneratedPathHelpersModule
   def edit_shelter_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_shelter_signal_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def edit_user_password_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -58,6 +61,9 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def new_shelter_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_shelter_signal_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_user_confirmation_path(*args); end
@@ -166,6 +172,12 @@ module GeneratedPathHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def shelter_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def shelter_signal_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def shelter_signals_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def shelters_path(*args); end

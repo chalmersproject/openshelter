@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   # == Resources ==
   resources :users, only: :show
   resources :shelters
+  resources :shelter_signals, path: "/signals"
 
   # == Pages ==
   resource :map, only: :show

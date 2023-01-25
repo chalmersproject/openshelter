@@ -3,10 +3,8 @@
 
 class MapsController < ApplicationController
   extend T::Sig
-  sig do
-    returns(T.untyped)
-  end
 
+  sig { void }
   def show
     @shelters = T.let(Shelter.all, T.untyped)
   end

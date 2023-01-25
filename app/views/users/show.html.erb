@@ -23,5 +23,5 @@
 <%# == Main == %>
 <div class="layout">
   <h1><%= @user.name %></h1>
-  <%= image_tag @user.avatar_blob %>
+  <%= image_tag @user.avatar_blob if @user.avatar.attached? %>
 </div>

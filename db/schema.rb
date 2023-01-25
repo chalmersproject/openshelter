@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_30_155058) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_24_235332) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -93,6 +93,28 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_155058) do
     t.index ["scheduled_at"], name: "index_good_jobs_on_scheduled_at", where: "(finished_at IS NULL)"
   end
 
+  create_table "shelter_measurements", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "type", null: false
+    t.integer "value", null: false
+    t.uuid "shelter_id", null: false
+    t.uuid "signal_id", null: false
+    t.timestamptz "created_at", null: false
+    t.index ["created_at"], name: "index_shelter_measurements_on_created_at"
+    t.index ["shelter_id"], name: "index_shelter_measurements_on_shelter_id"
+    t.index ["signal_id"], name: "index_shelter_measurements_on_signal_id"
+    t.index ["type"], name: "index_shelter_measurements_on_type"
+    t.index ["value"], name: "index_shelter_measurements_on_value"
+  end
+
+  create_table "shelter_signals", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "type", null: false
+    t.uuid "shelter_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["shelter_id"], name: "index_shelter_signals_on_shelter_id"
+    t.index ["type"], name: "index_shelter_signals_on_type"
+  end
+
   create_table "shelters", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name", null: false
     t.string "address", null: false
@@ -152,5 +174,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_08_30_155058) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "shelter_measurements", "shelter_signals", column: "signal_id"
+  add_foreign_key "shelter_measurements", "shelters"
+  add_foreign_key "shelter_signals", "shelters"
   add_foreign_key "users", "users", column: "invited_by_id"
 end

@@ -1,0 +1,4 @@
+<% breadcrumb "Signals", ShelterSignal %>
+<% if local_assigns.include?(:signal) && !signal.new_record? %>
+  <% breadcrumb signal.name, signal %>
+<% end %>

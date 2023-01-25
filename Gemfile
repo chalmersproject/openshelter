@@ -254,7 +254,7 @@ group :development do
   gem "stackprof"
 
   # Display a better error page during development
-  gem "better_errors"
+  # gem "better_errors"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   gem "spring"

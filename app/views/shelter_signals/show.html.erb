@@ -1,0 +1,10 @@
+<%= render "shelter_signals/layout", signal: @signal, class: "gap-y-8" do %>
+  <section class="section-lg flex flex-col gap-y-2">
+    <h1>
+      <%= @signal.name %>
+    </h1>
+    <div>
+      <%= @signal.shelter.name %>
+    </div>
+  </section>
+<% end %>

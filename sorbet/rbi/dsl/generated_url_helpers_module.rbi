@@ -21,6 +21,9 @@ module GeneratedUrlHelpersModule
   def edit_rails_conductor_inbound_email_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def edit_shelter_signal_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def edit_shelter_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
@@ -55,6 +58,9 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def new_rails_conductor_inbound_email_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def new_shelter_signal_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def new_shelter_url(*args); end
@@ -163,6 +169,12 @@ module GeneratedUrlHelpersModule
 
   sig { params(args: T.untyped).returns(String) }
   def root_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def shelter_signal_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
+  def shelter_signals_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
   def shelter_url(*args); end

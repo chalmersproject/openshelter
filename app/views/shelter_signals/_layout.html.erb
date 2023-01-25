@@ -1,0 +1,32 @@
+<%# == Meta Tags == %>
+<% if !meta_tags? && local_assigns[:meta_tags] != false %>
+  <% options = local_assigns[:meta_tags] %>
+  <% options = {} unless options.is_a? Hash %>
+  <% render "shelter_signals/meta_tags", signal: signal, **options %>
+<% end %>
+
+<%# == Breadcrumbs == %>
+<% if !breadcrumbs? && local_assigns[:breadcrumbs] != false %>
+  <% options = local_assigns[:breadcrumbs] %>
+  <% options = {} unless options.is_a? Hash %>
+  <% render "shelter_signals/breadcrumbs", signal: signal, **options %>
+<% end %>
+
+<%# == Action Bar == %>
+<% if !content_for?(:action_bar) && local_assigns[:action_bar] != false %>
+  <% options = local_assigns[:action_bar] %>
+  <% options = {} unless options.is_a? Hash %>
+  <% content_for :action_bar do %>
+    <%= render ActionBarComponent.new(object: signal, **options) %>
+  <% end %>
+<% end %>
+
+<%# == Main == %>
+<div
+  class="<%= class_names("layout", local_assigns.delete(:class)) %>"
+  <%= tag.attributes(
+    local_assigns.except(:meta_tags, :breadcrumbs, :action_bar),
+  ) %>
+>
+  <%= yield %>
+</div>

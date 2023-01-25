@@ -31,6 +31,8 @@ class Shelter < ApplicationRecord
 
   # == Associations ==
   has_rich_text :about
+  has_many :signals, class_name: "ShelterSignal", dependent: :destroy
+  has_many :measurements, class_name: "ShelterMeasurement", dependent: :destroy
 
   # == Validations: Contact ==
   validates :contact_phone,
@@ -98,6 +100,15 @@ class Shelter < ApplicationRecord
       "travelmode" => "walking",
     }
     url.to_s
+  end
+
+  #
+  # takes in "type" of shelter signal measurement
+  # returns the most recent measurement of that type for this shelter
+
+  sig { params(type: String).returns(T.nilable(ShelterMeasurement)) }
+  def last_measurements(type:)
+    measurements.where(type: type).chronological.last
   end
 
   private

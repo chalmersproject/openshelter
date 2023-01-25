@@ -1,17 +1,17 @@
 <div class="layout">
   <section class="section flex flex-col gap-y-2">
-    <h1>Shelters</h1>
-    <div id="shelters" class="flex flex-col gap-y-2">
+    <h1>Signals</h1>
+    <div id="signals" class="flex flex-col gap-y-2">
       <ul>
-        <% @shelters.each do |shelter| %>
+        <% @signals.each do |signal| %>
           <li>
-            <%= link_to shelter.name, shelter, class: "link" %>
+            <%= link_to signal.name, signal, class: "link" %>
           </li>
         <% end %>
       </ul>
       <%= link_to(
-        "New Shelter",
-        [Shelter, action: :new],
+        "New Signal",
+        [ShelterSignal, action: :new],
         class: "self-start btn btn-primary",
       ) if signed_in? %>
     </div>
