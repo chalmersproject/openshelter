@@ -1,3 +1,5 @@
+# typed: true
+
 # == Schema Information
 #
 # Table name: shelter_measurements
@@ -31,4 +33,16 @@ class ShelterMeasurement < ApplicationRecord
   # == Associations ==
   belongs_to :shelter, inverse_of: :measurements
   belongs_to :signal, class_name: "ShelterSignal", inverse_of: :measurements
+
+  sig{ returns(Integer) }
+  def max_value
+    case type
+    when "bedcount"
+      T.must(shelter).max_bedcount
+    when "headcount"
+      T.must(shelter).max_headcount
+    else
+      raise "Unknown type"
+    end
+  end
 end

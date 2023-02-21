@@ -84,6 +84,9 @@ module GeneratedPathHelpersModule
   def pg_extras_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def popup_shelter_path(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def preview_view_component_path(*args); end
 
   sig { params(args: T.untyped).returns(String) }

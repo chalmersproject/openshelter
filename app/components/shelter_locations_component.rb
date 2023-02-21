@@ -21,6 +21,8 @@ class ShelterLocationsComponent < ApplicationComponent
       {
         "id" => shelter.id,
         "location" => RGeo::GeoJSON.encode(shelter.location),
+        "popupFrameId" => [dom_id(shelter), "popup"].join("_"),
+        "popupFrameUrl" => popup_shelter_path(shelter)
       }
     end
   end

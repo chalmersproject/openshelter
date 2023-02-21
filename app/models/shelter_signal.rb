@@ -30,12 +30,18 @@ class ShelterSignal < ApplicationRecord
   belongs_to :shelter
   has_many :measurements,
            class_name: "ShelterMeasurement",
+           foreign_key: :signal_id,
            inverse_of: :signal,
            dependent: :destroy
 
   # == Method
   sig { returns(String )}
   def name
-    "#{type.humanize} Signal at #{shelter.name}"
+    "#{type.humanize} Signal at #{T.must(shelter).name}"
+  end
+
+  sig {params(value: Integer).returns(ShelterMeasurement)}
+  def measure(value)
+    measurements.create(type: type, shelter: shelter, value: value)
   end
 end

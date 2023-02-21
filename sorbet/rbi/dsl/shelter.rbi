@@ -772,6 +772,96 @@ class Shelter
     sig { void }
     def location_will_change!; end
 
+    sig { returns(::Integer) }
+    def max_bedcount; end
+
+    sig { params(value: ::Integer).returns(::Integer) }
+    def max_bedcount=(value); end
+
+    sig { returns(T::Boolean) }
+    def max_bedcount?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def max_bedcount_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def max_bedcount_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def max_bedcount_came_from_user?; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def max_bedcount_change; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def max_bedcount_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def max_bedcount_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def max_bedcount_in_database; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def max_bedcount_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def max_bedcount_previously_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def max_bedcount_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def max_bedcount_was; end
+
+    sig { void }
+    def max_bedcount_will_change!; end
+
+    sig { returns(::Integer) }
+    def max_headcount; end
+
+    sig { params(value: ::Integer).returns(::Integer) }
+    def max_headcount=(value); end
+
+    sig { returns(T::Boolean) }
+    def max_headcount?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def max_headcount_before_last_save; end
+
+    sig { returns(T.untyped) }
+    def max_headcount_before_type_cast; end
+
+    sig { returns(T::Boolean) }
+    def max_headcount_came_from_user?; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def max_headcount_change; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def max_headcount_change_to_be_saved; end
+
+    sig { returns(T::Boolean) }
+    def max_headcount_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def max_headcount_in_database; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def max_headcount_previous_change; end
+
+    sig { returns(T::Boolean) }
+    def max_headcount_previously_changed?; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def max_headcount_previously_was; end
+
+    sig { returns(T.nilable(::Integer)) }
+    def max_headcount_was; end
+
+    sig { void }
+    def max_headcount_will_change!; end
+
     sig { returns(::String) }
     def name; end
 
@@ -839,6 +929,12 @@ class Shelter
     def restore_location!; end
 
     sig { void }
+    def restore_max_bedcount!; end
+
+    sig { void }
+    def restore_max_headcount!; end
+
+    sig { void }
     def restore_name!; end
 
     sig { void }
@@ -894,6 +990,18 @@ class Shelter
 
     sig { returns(T::Boolean) }
     def saved_change_to_location?; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def saved_change_to_max_bedcount; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_max_bedcount?; end
+
+    sig { returns(T.nilable([::Integer, ::Integer])) }
+    def saved_change_to_max_headcount; end
+
+    sig { returns(T::Boolean) }
+    def saved_change_to_max_headcount?; end
 
     sig { returns(T.nilable([::String, ::String])) }
     def saved_change_to_name; end
@@ -1125,6 +1233,12 @@ class Shelter
 
     sig { returns(T::Boolean) }
     def will_save_change_to_location?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_max_bedcount?; end
+
+    sig { returns(T::Boolean) }
+    def will_save_change_to_max_headcount?; end
 
     sig { returns(T::Boolean) }
     def will_save_change_to_name?; end

@@ -6,7 +6,7 @@ class SheltersController < ApplicationController
 
   # == Filters ==
   before_action :authenticate_user!, only: %i[new edit create update destroy]
-  before_action :set_shelter, only: %i[show edit update destroy]
+  before_action :set_shelter, only: %i[show popup edit update destroy]
 
   # == Actions ==
   def index
@@ -19,6 +19,12 @@ class SheltersController < ApplicationController
     @shelter = T.must(@shelter)
     authorize!(@shelter)
     respond_with(@shelter)
+  end
+
+  def popup
+    @shelter = T.must(@shelter)
+    authorize!(@shelter, to: :show?)
+    respond_with(@shelter, layout: false)
   end
 
   def new
@@ -56,6 +62,7 @@ class SheltersController < ApplicationController
 
   # == Filters ==
   def set_shelter
+    @shelter = T.let(@shelter, T.nilable(Shelter))
     @shelter = Shelter.friendly.find(params[:id])
   end
 

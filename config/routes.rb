@@ -35,7 +35,14 @@ Rails.application.routes.draw do
 
   # == Resources ==
   resources :users, only: :show
-  resources :shelters
+  resources :shelters do
+    collection do
+      # /shelters/my_custom_action
+    end
+    member do # /shelters/:id/my_custom_action
+      get :popup
+    end
+  end
   resources :shelter_signals, path: "/signals"
 
   # == Pages ==

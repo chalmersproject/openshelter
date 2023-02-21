@@ -6,5 +6,15 @@
     <div>
       <%= @signal.shelter.name %>
     </div>
+    <div>
+      <h3>Measurements</h3>
+      <ul>
+        <% @signal.measurements.each do |measurement| %>
+        <li>
+          <%= measurement.value %> / <%= measurement.max_value %> (measured on: <%= l(measurement.created_at, format: :short) %>)
+        </li>
+        <% end %>
+      </ul>
+    </div>
   </section>
 <% end %>

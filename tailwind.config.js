@@ -9,7 +9,7 @@ module.exports = {
     "./app/helpers/**/*.rb",
     "./app/javascript/**/*.js",
     "./app/views/**/*.{html,html.erb}",
-    "./app/components/**/*.{rb,html,html.erb}",
+    "./app/components/**/*.{rb,html,html.erb,ts}",
     "./test/components/**/*.rb",
   ],
   safelist: ["hidden"],

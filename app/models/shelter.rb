@@ -11,6 +11,8 @@
 #  contact_phone         :string           not null
 #  images_attachment_ids :string           default([]), not null, is an Array
 #  location              :geography        geometry, 4326
+#  max_bedcount          :integer          default(0), not null
+#  max_headcount         :integer          default(0), not null
 #  name                  :string           not null
 #  slug                  :string           not null
 #  tags                  :string           default([]), not null, is an Array
@@ -107,8 +109,18 @@ class Shelter < ApplicationRecord
   # returns the most recent measurement of that type for this shelter
 
   sig { params(type: String).returns(T.nilable(ShelterMeasurement)) }
-  def last_measurements(type:)
+  def last_measurement(type:)
     measurements.where(type: type).chronological.last
+  end
+
+  sig {returns(Integer)}
+  def last_bedcount
+    last_measurement(type: "bedcount")&.value || 0
+  end
+
+  sig {returns(Integer)}
+  def last_headcount
+    last_measurement(type: "headcount")&.value || 0
   end
 
   private

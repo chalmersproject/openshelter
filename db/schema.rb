@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_24_235332) do
+ActiveRecord::Schema[7.0].define(version: 2023_01_27_224241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -127,6 +127,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_24_235332) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "images_attachment_ids", default: [], null: false, array: true
+    t.integer "max_headcount", default: 0, null: false
+    t.integer "max_bedcount", default: 0, null: false
     t.index ["contact_email"], name: "index_shelters_on_contact_email", unique: true
     t.index ["contact_phone"], name: "index_shelters_on_contact_phone", unique: true
     t.index ["slug"], name: "index_shelters_on_slug", unique: true

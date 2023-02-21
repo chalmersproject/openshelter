@@ -7,13 +7,15 @@ import type { GeoJSONGeometry } from "wellknown";
 import type { Point } from "geojson"
 import { Map, MapboxEvent, LngLat } from "mapbox-gl";
 
-type ShelterLocation = {
+type Shelter = {
   readonly id: string;
   readonly location: Point;
+  readonly popupFrameId: string;
+  readonly popupFrameUrl: string;
 }
 
 type ShelterLocationsComponentParams = {
-  readonly shelters: ShelterLocation[];
+  readonly shelters: Shelter[];
   readonly interactive?: boolean;
 };
 
@@ -29,7 +31,7 @@ const ShelterLocationsComponentData = ({
 register("ShelterLocationsComponent", ShelterLocationsComponentData);
 
 type ShelterLocationsComponentMapParams = {
-  readonly shelters: ShelterLocation[];
+  readonly shelters: Shelter[];
   readonly interactive: boolean;
 };
 
@@ -65,9 +67,15 @@ const ShelterLocationsComponentMapData = ({
     handleLoad({ target }: MapboxEvent) {
       context(this).$dispatch("shelter-locations-component-map:load");
       console.log(JSON.parse(JSON.stringify(shelters)))
-      shelters.forEach(({location: { coordinates }}) => {
+      shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl}) => {
+        console.log({popupFrameUrl})
+        const popup = new mapboxgl.Popup({ closeOnClick: true })
+            .setLngLat(coordinates as [number, number])
+            .setHTML(`<div class="w-60 h-40 bg-white text-black text-sm p-2 rounded-md"><turbo-frame id="${popupFrameId}" src="${popupFrameUrl}"><p>Loading...</p></turbo-frame></div>`)
+
         new mapboxgl.Marker()
           .setLngLat(coordinates as [number, number])
+          .setPopup(popup)
           .addTo(target);
       });
     },

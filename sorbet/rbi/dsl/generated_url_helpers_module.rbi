@@ -84,6 +84,9 @@ module GeneratedUrlHelpersModule
   def pg_extras_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
+  def popup_shelter_url(*args); end
+
+  sig { params(args: T.untyped).returns(String) }
   def preview_view_component_url(*args); end
 
   sig { params(args: T.untyped).returns(String) }
