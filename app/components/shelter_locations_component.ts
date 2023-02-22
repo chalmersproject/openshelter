@@ -39,25 +39,6 @@ const ShelterLocationsComponentMapData = ({
   shelters,
   interactive,
 }: ShelterLocationsComponentMapParams) => {
-  // const geometry: GeoJSONGeometry | null = value ? parseWKT(value) : null;
-  // const points = resolve<LngLat[]>(() => {
-  //   switch (geometry?.type) {
-  //     case "Point": {
-  //       const [lng, lat] = geometry.coordinates;
-  //       const point = new mapboxgl.LngLat(lng, lat);
-  //       return [point];
-  //     }
-  //     case "MultiPoint": {
-  //       const positions = geometry.coordinates;
-  //       const points = positions.map(
-  //         ([lng, lat]) => new mapboxgl.LngLat(lng, lat),
-  //       );
-  //       return points;
-  //     }
-  //     default:
-  //       return [];
-  //   }
-  // });
 
   return {
     // == State ==
@@ -71,9 +52,20 @@ const ShelterLocationsComponentMapData = ({
         console.log({popupFrameUrl})
         const popup = new mapboxgl.Popup({ closeOnClick: true })
             .setLngLat(coordinates as [number, number])
-            .setHTML(`<div class="w-60 h-40 bg-white text-black text-sm p-2 rounded-md"><turbo-frame id="${popupFrameId}" src="${popupFrameUrl}"><p>Loading...</p></turbo-frame></div>`)
+            .setHTML(`<div class="w-60 h-40 bg-white text-black text-sm p-2 rounded-md"><turbo-frame id="${popupFrameId}" src="${popupFrameUrl}"><p>Loading...</p></turbo-frame></div>`);
 
-        new mapboxgl.Marker()
+        const el = document.createElement('div');
+        // el.className = 'mapboxgl-marker mapboxgl-marker-anchor-center';
+        console.log("marker element")
+        const svg = document.createElement('svg')
+        const svc_circle = `
+          <svg width='100' height='100'>
+            <circle cx='50' cy='50' r='40' stroke='green' stroke-width='4' fill='yellow' />
+          </svg>`;
+        svg.innerHTML = svc_circle
+        el.append(svg)
+        console.log(el)
+        new mapboxgl.Marker(el)
           .setLngLat(coordinates as [number, number])
           .setPopup(popup)
           .addTo(target);
