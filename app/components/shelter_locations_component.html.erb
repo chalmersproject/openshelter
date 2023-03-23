@@ -16,6 +16,9 @@
       action: "shelter-locations-component:load->loading-overlay-component#stop",
     },
   ) do %>
+    <% Rails.logger.debug("SHELTER STUFF") %>
+    <% Rails.logger.debug(shelters) %>
+
     <div
       class="flex-1"
       x-data="ShelterLocationsComponentMap({ shelters, interactive })"

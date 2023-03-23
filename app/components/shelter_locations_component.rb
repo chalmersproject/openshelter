@@ -11,6 +11,7 @@ class ShelterLocationsComponent < ApplicationComponent
     super(**kwargs)
     @shelters = shelters
     @interactive = interactive
+    Rails.logger.debug("shelter locations component initialized")
   end
 
   private
@@ -22,7 +23,11 @@ class ShelterLocationsComponent < ApplicationComponent
         "id" => shelter.id,
         "location" => RGeo::GeoJSON.encode(shelter.location),
         "popupFrameId" => [dom_id(shelter), "popup"].join("_"),
-        "popupFrameUrl" => popup_shelter_path(shelter)
+        "popupFrameUrl" => popup_shelter_path(shelter),
+        "last_bedcount" => shelter.last_bedcount,
+        "last_headcount" => shelter.last_headcount,
+        "max_bedcount" => shelter.max_bedcount,
+        "max_headcount" => shelter.max_headcount
       }
     end
   end

@@ -1,0 +1,12 @@
+<%= turbo_stream.replace "#{dom_id(@shelter.popupFrameId)}_popup" do %>
+  <p><%= @shelter.name %></p>
+  <% puts("SHELTER POPUP") %>
+  <script>
+    console.log("SHELTER POPUP!")
+  </script>
+  <div class="columns-2">
+    <p>BUTTS!</p>
+    <p><%= @shelter.last_bedcount %> / <%= @shelter.max_bedcount %></p>
+    <p><%= @shelter.last_headcount %> / <%= @shelter.max_headcount %></p>
+  </div>
+<% end %>

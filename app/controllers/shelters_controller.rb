@@ -22,9 +22,14 @@ class SheltersController < ApplicationController
   end
 
   def popup
+    Rails.logger.warn("POPUP METHOD TRIGGERED!")
     @shelter = T.must(@shelter)
     authorize!(@shelter, to: :show?)
     respond_with(@shelter, layout: false)
+    Turbo::StreamsChannel.broadcast_update_to(
+                                        "shelter_data",
+                                        target:[@shelter.id, "popup"].join("_"),
+                                        partial: "shelter/popup")
   end
 
   def new
