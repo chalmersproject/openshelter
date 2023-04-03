@@ -23,8 +23,17 @@ class SheltersController < ApplicationController
 
   def popup
     @shelter = T.must(@shelter)
+    puts(["Shelter POPUP: ", @shelter.inspect])
     authorize!(@shelter, to: :show?)
-    respond_with(@shelter, layout: false)
+    # respond_with(@shelter, layout: false)
+    respond_to do |format|
+      format.turbo_stream {
+        render(turbo_stream: turbo_stream.replace(
+          [@shelter.id, "popup"].join("_"),
+          "fart"
+        ))
+        }
+    end
   end
 
   def new

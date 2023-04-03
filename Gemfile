@@ -10,6 +10,9 @@ gem "rails", "~> 7.0.3"
 gem "sprockets", "~> 4.0"
 gem "sprockets-rails"
 
+# use mapkick to render mapbox map
+gem "mapkick-rb"
+
 # Use PostgreSQL as the database for Active Record
 gem "pg", "~> 1.2"
 

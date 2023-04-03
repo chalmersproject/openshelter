@@ -1499,6 +1499,11 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
+mapkick@^0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/mapkick/-/mapkick-0.2.5.tgz#c9a5c1cd5320d6fceb6d01b63831915663ee79bd"
+  integrity sha512-Ucj+RQ4IIzbUosrZ0GHMtDqVOsgR5se2e7y0rQ3UADpNqAv6Tz7aO6d0mX+S/hS6afBtNBXlcQP7bU8qDNhunQ==
+
 memoize-one@^5.0.4:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/memoize-one/-/memoize-one-5.2.1.tgz#8337aa3c4335581839ec01c3d594090cebe8f00e"

@@ -24,3 +24,6 @@ import "./local-time";
 
 // Clean browser location (e.g. empty hashes)
 import "./clean-location";
+
+// import mapkick mapbox library
+import "mapkick/bundle";

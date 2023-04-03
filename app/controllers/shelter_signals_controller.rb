@@ -46,6 +46,15 @@ class ShelterSignalsController < ApplicationController
     respond_with(@signal)
   end
 
+  def measure
+    @signal = T.must(@signal)
+    authorize!(@signal)
+    respond_with(@signal)
+    respond_to do |format|
+      format.turbo_stream
+    end
+  end
+
   def destroy
     @signal = T.must(@signal)
     authorize!(@signal)

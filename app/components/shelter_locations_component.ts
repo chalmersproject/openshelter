@@ -49,10 +49,15 @@ const ShelterLocationsComponentMapData = ({
       context(this).$dispatch("shelter-locations-component-map:load");
       console.log(JSON.parse(JSON.stringify(shelters)))
       shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl}) => {
-        console.log({popupFrameUrl})
+
         const popup = new mapboxgl.Popup({ closeOnClick: true })
             .setLngLat(coordinates as [number, number])
-            .setHTML(`<div class="w-60 h-40 bg-white text-black text-sm p-2 rounded-md"><turbo-frame id="${popupFrameId}" src="${popupFrameUrl}"><p>Loading...</p></turbo-frame></div>`);
+            .setHTML(`
+              <div class="w-60 h-40 bg-white text-black text-sm p-2 rounded-md">
+                <turbo-frame id="${popupFrameId}" src="${popupFrameUrl}">
+                  <p>Loading...</p>
+                </turbo-frame>
+              </div>`);
 
         const shelter_marker = document.createElement('div')
         const svg_circle = `

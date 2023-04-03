@@ -1,7 +1,9 @@
 <%= turbo_frame_tag [dom_id(@shelter), "popup"].join("_") do %>
+<div>
   <p><%= @shelter.name %></p>
   <div class="columns-2">
     <p><%= @shelter.last_bedcount %> / <%= @shelter.max_bedcount %></p>
     <p><%= @shelter.last_headcount %> / <%= @shelter.max_headcount %></p>
   </div>
+</div>
 <% end %>

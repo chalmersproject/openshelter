@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "#{[dom_id(@shelter), "popup"].join("_")}" %>
+  <%= render "popup", shelter: @shelter %>
+<% end %>

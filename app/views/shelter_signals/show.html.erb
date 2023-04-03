@@ -6,7 +6,14 @@
     <div>
       <%= @signal.shelter.name %>
     </div>
-    <div>
+
+    <form action="measure" method="POST">
+      <label for="value">Value:</label>
+      <input type="int"  />
+      <input type="submit" />
+    </form>
+
+    <div id="measurements">
       <h3>Measurements</h3>
       <ul>
         <% @signal.measurements.each do |measurement| %>
