@@ -1,5 +1,6 @@
 // Initialize Turbo
 import "./turbo";
+import "@hotwired/turbo-rails";
 
 // Initialize Action Text
 import "./actiontext";

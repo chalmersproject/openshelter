@@ -453,6 +453,7 @@ GEM
       sorbet-runtime (>= 0.5.9204)
       unparser
     redcarpet (3.5.1)
+    redis (4.8.1)
     regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -690,6 +691,7 @@ DEPENDENCIES
   rails-pg-extras
   rails_feather (~> 0.1.0)
   rails_heroicon (~> 2.0)
+  redis (~> 4.6)
   responders!
   rgeo (~> 2.4)
   rgeo-activerecord (~> 7.0)
