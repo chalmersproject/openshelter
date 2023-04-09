@@ -6,7 +6,7 @@ class SheltersController < ApplicationController
 
   # == Filters ==
   before_action :authenticate_user!, only: %i[new edit create update destroy]
-  before_action :set_shelter, only: %i[show popup edit update destroy]
+  before_action :set_shelter, only: %i[show marker popup edit update destroy]
 
   # == Actions ==
   def index
@@ -24,6 +24,17 @@ class SheltersController < ApplicationController
   def popup
     @shelter = T.must(@shelter)
     authorize!(@shelter, to: :show?)
+    respond_with(@shelter, layout: false)
+  end
+
+  def marker
+    @shelter = T.must(@shelter)
+    authorize!(@shelter, to: :show?)
+
+    #
+    # calculate what percent green & red
+    # the circle should be colored in with
+    #
     respond_with(@shelter, layout: false)
   end
 

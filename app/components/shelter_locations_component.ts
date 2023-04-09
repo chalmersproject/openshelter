@@ -12,6 +12,8 @@ type Shelter = {
   readonly location: Point;
   readonly popupFrameId: string;
   readonly popupFrameUrl: string;
+  readonly markerFrameId: string;
+  readonly markerFrameUrl: string;
 }
 
 type ShelterLocationsComponentParams = {
@@ -47,9 +49,7 @@ const ShelterLocationsComponentMapData = ({
     // == Helpers ==
     handleLoad({ target }: MapboxEvent) {
       context(this).$dispatch("shelter-locations-component-map:load");
-      console.log(JSON.parse(JSON.stringify(shelters)))
-      shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl}) => {
-        console.log({popupFrameUrl})
+      shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl, markerFrameId, markerFrameUrl}) => {
         const popup = new mapboxgl.Popup({ closeOnClick: true })
             .setLngLat(coordinates as [number, number])
             .setHTML(`
@@ -62,9 +62,9 @@ const ShelterLocationsComponentMapData = ({
 
         const shelter_marker = document.createElement('div')
         const svg_circle = `
-          <svg width='50' height='50'>
-            <circle cx='25' cy='25' r='12.5' stroke='red' stroke-width='2' fill='red' fill-opacity='0.6' />
-          </svg>`;
+          <turbo-frame id="${markerFrameId}" src="${markerFrameUrl}">
+          </turbo-frame>
+          `;
         shelter_marker.innerHTML = svg_circle
 
         new mapboxgl.Marker(shelter_marker)

@@ -41,6 +41,7 @@ Rails.application.routes.draw do
     end
     member do # /shelters/:id/my_custom_action
       get :popup
+      get :marker
     end
   end
   resources :shelter_signals, path: "/signals"

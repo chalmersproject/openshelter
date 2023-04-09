@@ -1,7 +1,17 @@
 <%= turbo_frame_tag [dom_id(@shelter), "marker"].join("_") do %>
-  <p><%= @shelter.name %></p>
-  <div class="columns-2">
-    <p><%= @shelter.last_bedcount %> / <%= @shelter.max_bedcount %></p>
-    <p><%= @shelter.last_headcount %> / <%= @shelter.max_headcount %></p>
-  </div>
+
+  <% amount_red = (@shelter.last_headcount.to_f / @shelter.max_headcount) * 255 %>
+  <% amount_green = 255 - ((@shelter.last_headcount.to_f / @shelter.max_headcount) * 255) %>
+
+  <% puts(["Amount Green: ", amount_green, "Amount Red: ", amount_red]) %>
+  <% puts(["Last Headcount: ", @shelter.last_headcount, "Max Headcount: ", @shelter.max_headcount]) %>
+  <svg width='50' height='50'>
+    <circle cx='25'
+            cy='25'
+            r='12.5'
+            stroke="rgb(<%= amount_red.to_i %>, <%= amount_green.to_i %>, 20)"
+            fill="rgb(<%= amount_red.to_i %>, <%= amount_green.to_i %>, 20)"
+            stroke-width='2'
+            fill-opacity='0.8' />
+  </svg>
 <% end %>

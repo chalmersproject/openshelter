@@ -46,13 +46,36 @@ class ShelterMeasurement < ApplicationRecord
     target: shelter_popup_id
   }.tap { |shelter_data| puts(["SHETLER DATA FROM BROADCAST", shelter_data])}
 
-  after_update_commit -> {
+  #
+  # broadcast measurement update to popups on map
+  #
+  after_create_commit -> {
+    shelter_popup_id = "#{["shelter", self.shelter.id, 'popup'].join('_')}"
     broadcast_replace_to "shelter_measurements",
     partial: "shelters/popup",
     locals: {
       shelter: self.shelter
     },
-    target: "#{[self.shelter, 'popup'].join('_')}"
+    target: shelter_popup_id
+  }
+
+  #
+  # broadcast measurement update to markers on map
+  #
+  after_create_commit -> {
+
+
+    #
+    # calculate measurement percentages to be passed to marker
+    #
+
+    shelter_marker_id = "#{["shelter", self.shelter.id, 'marker'].join('_')}"
+    broadcast_update_to "shelter_measurements",
+    partial: "shelters/marker",
+    locals: {
+      shelter: self.shelter
+    },
+    target: shelter_marker_id
   }
 
   sig{ returns(Integer) }
