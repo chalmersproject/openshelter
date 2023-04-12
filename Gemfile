@@ -220,6 +220,10 @@ gem "local_time", "~> 2.1"
 # Geocode addresses with geocoder
 gem "geocoder", "~> 1.8"
 
+# chartkick for shelter data charts
+gem "chartkick"
+gem "groupdate", "~> 6.2"
+
 group :development, :test do
   # Warn about N+1 queries
   gem "bullet"
@@ -277,3 +281,5 @@ group :test do
 end
 
 gem "ruby-lsp", "~> 0.3.8", :group => :development
+
+

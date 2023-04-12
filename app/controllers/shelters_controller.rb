@@ -24,7 +24,7 @@ class SheltersController < ApplicationController
   def popup
     @shelter = T.must(@shelter)
     authorize!(@shelter, to: :show?)
-    respond_with(@shelter, layout: false)
+    respond_with(@shelter, layout: false, partial: "shelters/popup", locals: {shelter: @shelter})
   end
 
   def marker
@@ -35,7 +35,7 @@ class SheltersController < ApplicationController
     # calculate what percent green & red
     # the circle should be colored in with
     #
-    respond_with(@shelter, layout: false)
+    respond_with(@shelter, layout: false, partial: "shelters/marker", locals: {shelter: @shelter})
   end
 
   def new

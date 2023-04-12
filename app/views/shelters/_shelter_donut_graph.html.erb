@@ -1,0 +1,53 @@
+<section x-data="skillDisplay"
+    class="p-6 space-y-6 bg-gray-800 rounded-xl md:grid md:grid-cols-2 md:gap-4 sm:space-y-0">
+
+    <div class="flex items-center justify-center" x-data="{ circumference: 2 * 22 / 7 * 120 }">
+        <svg class="transform -rotate-90 w-40 h-40">
+            <circle cx="30" cy="30" r="15" stroke="currentColor" stroke-width="2" fill="transparent"
+                class="text-gray-700" />
+
+            <circle cx="30" cy="30" r="15" stroke="currentColor" stroke-width="2" fill="transparent"
+                :stroke-dasharray="circumference"
+                :stroke-dashoffset="circumference - 1 / 100 * circumference"
+                class="text-blue-500 " />
+        </svg>
+        <span class="absolute text-5xl" x-text="`${currentSkill.percent}%`">FHARTE</span>
+</section>
+
+<script>
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('skillDisplay', () => ({
+            skills: [{
+                    'title': 'HTML',
+                    'percent': '95',
+                },
+                {
+                    'title': 'CSS',
+                    'percent': '70',
+                },
+                {
+                    'title': 'Tailwind CSS',
+                    'percent': '90',
+                },
+                {
+                    'title': 'JavaScript',
+                    'percent': '70',
+                },
+                {
+                    'title': 'Alpine JS',
+                    'percent': '80',
+                }, {
+                    'title': 'PHP',
+                    'percent': '65',
+                }, {
+                    'title': 'Laravel',
+                    'percent': '75',
+                }
+            ],
+            currentSkill: {
+                'title': 'HTML',
+                'percent': '95',
+            }
+        }));
+    });
+</script>

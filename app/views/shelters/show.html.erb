@@ -7,6 +7,7 @@
   </section>
 <% end %>
 <%= render "shelters/layout", shelter: @shelter, class: "gap-y-8" do %>
+
   <section class="section-lg flex flex-col gap-y-2">
     <h1>
       <%= @shelter.name %>
@@ -37,6 +38,8 @@
         interactive: true,
         class: "h-[32rem] max-h-[calc(theme('height.screen')-theme('height.20'))]",
       ) %>
+
+
     </section>
   <% end %>
 <% end %>

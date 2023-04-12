@@ -51,7 +51,7 @@ class ShelterMeasurement < ApplicationRecord
   #
   after_create_commit -> {
     shelter_popup_id = "#{["shelter", self.shelter.id, 'popup'].join('_')}"
-    broadcast_replace_to "shelter_measurements",
+    broadcast_update_to "shelter_measurements",
     partial: "shelters/popup",
     locals: {
       shelter: self.shelter

@@ -50,14 +50,12 @@ const ShelterLocationsComponentMapData = ({
     handleLoad({ target }: MapboxEvent) {
       context(this).$dispatch("shelter-locations-component-map:load");
       shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl, markerFrameId, markerFrameUrl}) => {
-        const popup = new mapboxgl.Popup({ closeOnClick: true })
+        const popup = new mapboxgl.Popup({ closeOnClick: true, closeButton: false })
             .setLngLat(coordinates as [number, number])
             .setHTML(`
-              <div class="w-60 h-40 bg-white text-black text-sm p-2 rounded-md">
                 <turbo-frame id="${popupFrameId}" src="${popupFrameUrl}">
                   <p>Loading...</p>
                 </turbo-frame>
-              </div>
               `);
 
         const shelter_marker = document.createElement('div')
@@ -70,7 +68,8 @@ const ShelterLocationsComponentMapData = ({
         new mapboxgl.Marker(shelter_marker)
           .setLngLat(coordinates as [number, number])
           .setPopup(popup)
-          .addTo(target);
+          .addTo(target)
+          .togglePopup();
       });
     },
 
