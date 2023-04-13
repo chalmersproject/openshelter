@@ -1,57 +1,99 @@
 
+<%# Stolen from this codepen: https://codepen.io/janverstr/pen/PvPoaV?editors=1100 %>
 
-<div class="flex items-center justify-center" x-data="{ circumference: 2 * 22 / 7 * 120 }">
-    <svg class="transform -rotate-90" id="donut_graph">
-          <circle cx="30" cy="30" r="15" stroke="currentColor" stroke-width="2"
-            fill="transparent"
-            class="<%= @primary_color %>" />
 
-        <circle cx="30" cy="30" r="15" stroke="currentColor" stroke-width="2" fill="transparent"
-            :stroke-dasharray="circumference"
-            :stroke-dashoffset="circumference - 1 / 100 * circumference"
-            class="<%= @secondary_color %> " />
-    </svg>
+<%# CALCULATE CIRCLE MEASUREMENTS %>
+<% donut_graph_viewport_width = 100 %>
+<% donut_graph_viewport_height = donut_graph_viewport_width %>
+<% donut_graph_radius = donut_graph_viewport_width/2.25 %>
+<% donut_graph_circumference = 2*donut_graph_radius*PI %>
+<% donut_xy_coordinate = donut_graph_viewport_height/2 %>
 
+<% donut_ring_segment = (donut_graph_circumference / 3)*2 %>
+<% donut_ring_gap = donut_graph_circumference / 3 %>
+<% donut_ring_rotation = 150 %>
+
+<% donut_data_percentage = @displayed_value.to_f / @max_value %>
+<% donut_data_value_segment = donut_ring_segment * donut_data_percentage %>
+<% donut_data_gap_segment = (donut_ring_segment - donut_data_value_segment) + donut_ring_gap %>
+
+
+<% amount_red = donut_data_percentage * 255 %>
+<% amount_green = 255 - (donut_data_percentage * 255) %>
+
+<% puts(["Donut data percentage", donut_data_percentage, "donut_data_value_segment", donut_data_value_segment, "donut_data_gap_segment", donut_data_gap_segment, "@displayed_value", @displayed_value, "@max_value", @max_value]) %>
+
+<div class="donut-graph-item">
+  <svg width="100%" height="100%" viewBox="0 0 <%= donut_graph_viewport_width %> <%= donut_graph_viewport_height %> " class="donut">
+    <g transform = "rotate(<%= donut_ring_rotation %> <%= donut_xy_coordinate %> <%= donut_xy_coordinate %>)">
+      <circle class="donut-hole"
+              cx="<%=donut_xy_coordinate%>" cy="<%=donut_xy_coordinate%>"
+              r="<%= donut_graph_radius %>"
+              fill="#202020">
+      </circle>
+
+      <circle cx="<%=donut_xy_coordinate%>" cy="<%=donut_xy_coordinate%>"
+              r="<%= donut_graph_radius %>"
+              fill="transparent"
+              stroke-width="10"
+              stroke="#EBEBEBDD"
+              stroke-dasharray="<%= donut_ring_segment %>% <%= donut_ring_gap %>%"
+              >
+      </circle>
+
+      <circle cx="<%=donut_xy_coordinate%>" cy="<%=donut_xy_coordinate%>"
+              r="<%= donut_graph_radius %>"
+              stroke="rgba( <%= amount_red %>, <%= amount_green %>, 20, 0.8)"
+              fill="transparent"
+              stroke-width="10"
+              stroke-dasharray="<%= donut_data_value_segment %> <%= donut_data_gap_segment %>"
+              >
+      </circle>
+    </g>
+
+    <g>
+      <text y="50%"
+            transform="translate(0, 2)">
+        <tspan  x="50%"
+                text-anchor="middle"
+                font-size="1.2em"
+                fill="white">
+
+          <%= "#{@displayed_value} / #{@max_value}" %>
+
+        </tspan>
+      </text>
+
+      <text y="60%"
+            transform="translate(0, 10)">
+        <tspan  x="50%"
+                text-anchor="middle"
+                font-size="0.7em"
+                fill="white">
+
+          <%= @graph_title %>
+
+        </tspan>
+      </text>
+    </g>
+  </svg>
 </div>
-<script>
-    document.addEventListener('alpine:init', () => {
-      var donut_graph = document.getElementById('donut_graph')
-      var donut_graph_positionInfo = element.getBoundingClientRect();
-      var donut_graph_height = positionInfo.width;
-      console.log("Width of donut graph bounding box is: ", donut_graph_height)
+<style>
+  .donut-graph-item {
+    width: 100%;
+    font-size: 16px;
+    margin: 0 auto;
+    animation: donutfade 1s;
+}
 
-        Alpine.data('skillDisplay', () => ({
-            skills: [{
-                    'title': 'HTML',
-                    'percent': '95',
-                },
-                {
-                    'title': 'CSS',
-                    'percent': '70',
-                },
-                {
-                    'title': 'Tailwind CSS',
-                    'percent': '90',
-                },
-                {
-                    'title': 'JavaScript',
-                    'percent': '70',
-                },
-                {
-                    'title': 'Alpine JS',
-                    'percent': '80',
-                }, {
-                    'title': 'PHP',
-                    'percent': '65',
-                }, {
-                    'title': 'Laravel',
-                    'percent': '75',
-                }
-            ],
-            currentSkill: {
-                'title': 'HTML',
-                'percent': '95',
-            }
-        }));
-    });
-</script>
+@keyframes donutfade {
+  /* this applies to the whole svg item wrapper */
+    0% {
+        opacity: .2;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+</style>

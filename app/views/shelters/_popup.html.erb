@@ -24,9 +24,10 @@
 
     <%# SHELTER DATA %>
 
-    <div class="columns-2">
+    <div class="columns-2 py-2">
       <div>
         <%= render DonutGraphComponent.new(
+          graph_title: "Head Count",
           displayed_value: @shelter.last_headcount,
           max_value: @shelter.max_headcount,
           primary_color: "bg-primary-900",
@@ -35,9 +36,10 @@
       </div>
       <div>
         <%= render DonutGraphComponent.new(
-          displayed_value: @shelter.last_headcount,
-          max_value: @shelter.max_headcount,
-          primary_color: "bg-primary-500",
+          graph_title: "Bed Count",
+          displayed_value: @shelter.last_bedcount,
+          max_value: @shelter.max_bedcount,
+          primary_color: "bg-primary-900",
           secondary_color: "bg-gray-900"
         )%>
       </div>
