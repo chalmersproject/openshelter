@@ -44,7 +44,7 @@ class ShelterMeasurement < ApplicationRecord
       shelter: self.shelter
     },
     target: shelter_popup_id
-  }.tap { |shelter_data| puts(["SHETLER DATA FROM BROADCAST", shelter_data])}
+  }
 
   #
   # broadcast measurement update to popups on map

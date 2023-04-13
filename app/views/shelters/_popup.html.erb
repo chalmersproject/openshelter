@@ -23,10 +23,24 @@
     </div>
 
     <%# SHELTER DATA %>
-    <%= render "shelter_donut_graph", shelter: shelter %>
+
     <div class="columns-2">
-      <p><%= shelter.last_headcount %> / <%= shelter.max_headcount %></p>
-      <p><%= shelter.last_bedcount %> / <%= shelter.max_bedcount %></p>
+      <div>
+        <%= render DonutGraphComponent.new(
+          displayed_value: @shelter.last_headcount,
+          max_value: @shelter.max_headcount,
+          primary_color: "bg-primary-900",
+          secondary_color: "bg-gray-900"
+        )%>
+      </div>
+      <div>
+        <%= render DonutGraphComponent.new(
+          displayed_value: @shelter.last_headcount,
+          max_value: @shelter.max_headcount,
+          primary_color: "bg-primary-500",
+          secondary_color: "bg-gray-900"
+        )%>
+      </div>
     </div>
   </div>
 

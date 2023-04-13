@@ -1,21 +1,25 @@
-<section x-data="skillDisplay"
-    class="p-6 space-y-6 bg-gray-800 rounded-xl md:grid md:grid-cols-2 md:gap-4 sm:space-y-0">
 
-    <div class="flex items-center justify-center" x-data="{ circumference: 2 * 22 / 7 * 120 }">
-        <svg class="transform -rotate-90 w-40 h-40">
-            <circle cx="30" cy="30" r="15" stroke="currentColor" stroke-width="2" fill="transparent"
-                class="text-gray-700" />
 
-            <circle cx="30" cy="30" r="15" stroke="currentColor" stroke-width="2" fill="transparent"
-                :stroke-dasharray="circumference"
-                :stroke-dashoffset="circumference - 1 / 100 * circumference"
-                class="text-blue-500 " />
-        </svg>
-        <span class="absolute text-5xl" x-text="`${currentSkill.percent}%`">FHARTE</span>
-</section>
+<div class="flex items-center justify-center" x-data="{ circumference: 2 * 22 / 7 * 120 }">
+    <svg class="transform -rotate-90" id="donut_graph">
+          <circle cx="30" cy="30" r="15" stroke="currentColor" stroke-width="2"
+            fill="transparent"
+            class="<%= @primary_color %>" />
 
+        <circle cx="30" cy="30" r="15" stroke="currentColor" stroke-width="2" fill="transparent"
+            :stroke-dasharray="circumference"
+            :stroke-dashoffset="circumference - 1 / 100 * circumference"
+            class="<%= @secondary_color %> " />
+    </svg>
+
+</div>
 <script>
     document.addEventListener('alpine:init', () => {
+      var donut_graph = document.getElementById('donut_graph')
+      var donut_graph_positionInfo = element.getBoundingClientRect();
+      var donut_graph_height = positionInfo.width;
+      console.log("Width of donut graph bounding box is: ", donut_graph_height)
+
         Alpine.data('skillDisplay', () => ({
             skills: [{
                     'title': 'HTML',
