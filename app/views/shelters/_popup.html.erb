@@ -1,8 +1,8 @@
 <%= turbo_frame_tag [dom_id(shelter), "popup"].join("_") do %>
 
   <%# POPUP STYLING %>
-  <div class="w-60 h-60
-            bg-gray-900
+  <div class="w-60 h-90
+            bg-zinc-900
             rounded-lg
             border-zinc-800 shadow-md
             text-white text-sm
@@ -11,7 +11,7 @@
 
     <%# HEADER %>
     <%# HEADER BACKGROUND %>
-    <div class="bg-primary-900/65  rounded-lg
+    <div class="bg-primary-900/20  rounded-lg
               border-2 border-primary-900
               py-2 px-3 flex gap-x-1.5 sm:gap-x-2
               text-center">
@@ -24,27 +24,43 @@
 
     <%# SHELTER DATA %>
 
-    <div class="columns-2 py-2">
-      <div>
+    <div class="columns-2 py-2 ">
+      <div class="justify-center max-w-sm bg-primary-900/20 rounded-lg border-2 border-primary-900 p-2  overflow-hidden drop-shadow-2xl">
+        <p class="text-center py-2"> Headcount </p>
         <%= render DonutGraphComponent.new(
-          graph_title: "Head Count",
-          displayed_value: @shelter.last_headcount,
-          max_value: @shelter.max_headcount,
+          displayed_value: shelter.last_headcount,
+          max_value: shelter.max_headcount,
           primary_color: "bg-primary-900",
           secondary_color: "bg-gray-900"
         )%>
       </div>
-      <div>
+      <div class="max-w-sm bg-primary-900/20 rounded-lg border-2 border-primary-900 p-2  overflow-hidden drop-shadow-2xl">
+        <p class="text-center py-2"> Bedcount </p>
         <%= render DonutGraphComponent.new(
-          graph_title: "Bed Count",
-          displayed_value: @shelter.last_bedcount,
-          max_value: @shelter.max_bedcount,
+          displayed_value: shelter.last_bedcount,
+          max_value: shelter.max_bedcount,
           primary_color: "bg-primary-900",
           secondary_color: "bg-gray-900"
         )%>
       </div>
     </div>
+
+    <%# SHELTER TAGS %>
+    <div class="">
+      <div class="justify-center max-w-sm bg-primary-900/20 rounded-lg border-2 border-primary-900 p-2  overflow-hidden drop-shadow-2xl">
+          <div class="flex flex-wrap">
+            <% shelter.tags.each do |tag| %>
+              <div class="px-2">
+                <%= tag %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+    </div>
+    <div class="py-2">
+      <div class="justify-center max-w-sm bg-primary-900/20 rounded-lg border-2 border-primary-900 p-2  overflow-hidden drop-shadow-2xl">
+        FART
+        </div>
+    </div>
   </div>
-
-
 <% end %>

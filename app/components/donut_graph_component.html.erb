@@ -29,6 +29,7 @@
       <circle class="donut-hole"
               cx="<%=donut_xy_coordinate%>" cy="<%=donut_xy_coordinate%>"
               r="<%= donut_graph_radius %>"
+              fill="transparent"
               fill="#202020">
       </circle>
 
@@ -38,6 +39,7 @@
               stroke-width="10"
               stroke="#EBEBEBDD"
               stroke-dasharray="<%= donut_ring_segment %>% <%= donut_ring_gap %>%"
+              stroke-linecap="round"
               >
       </circle>
 
@@ -47,6 +49,7 @@
               fill="transparent"
               stroke-width="10"
               stroke-dasharray="<%= donut_data_value_segment %> <%= donut_data_gap_segment %>"
+              stroke-linecap="round"
               >
       </circle>
     </g>

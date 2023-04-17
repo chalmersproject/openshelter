@@ -3,7 +3,7 @@
 class DonutGraphComponent < ApplicationComponent
   include Math
 
-  def initialize(displayed_value:, max_value:, primary_color:, secondary_color:, graph_title:, **kwargs)
+  def initialize(displayed_value:, max_value:, primary_color:, secondary_color:, graph_title:"", **kwargs)
     super(**kwargs)
     @graph_title = graph_title
     @displayed_value = displayed_value

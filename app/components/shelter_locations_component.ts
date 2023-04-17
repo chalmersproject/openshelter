@@ -50,7 +50,7 @@ const ShelterLocationsComponentMapData = ({
     handleLoad({ target }: MapboxEvent) {
       context(this).$dispatch("shelter-locations-component-map:load");
       shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl, markerFrameId, markerFrameUrl}) => {
-        const popup = new mapboxgl.Popup({ closeOnClick: true, closeButton: false })
+        const popup = new mapboxgl.Popup({className: "shelter_measurement_popup", closeOnClick: true, closeButton: false })
             .setLngLat(coordinates as [number, number])
             .setHTML(`
                 <turbo-frame id="${popupFrameId}" src="${popupFrameUrl}">
