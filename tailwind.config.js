@@ -48,6 +48,7 @@ module.exports = {
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/line-clamp"),
+    require("tailwind-scrollbar")({ nocompatible: true }),
     plugin(({ addVariant }) => {
       addVariant("cloak", "&[x-cloak]");
     }),
