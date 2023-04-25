@@ -5,13 +5,13 @@
             rounded-lg
             border-zinc-800 shadow-md
             text-white text-sm
-            w-96 pt-1 pr-1">
+            w-96 pl-3 pr-2 pt-3 pb-3">
     <div class="w-full max-h-96
-                pl-3 pt-3 pr-2
-                overflow-scroll
+                pr-1
+                overflow-auto
                 scrollbar-thin
-                scrollbar-thumb-primary-200/90
-                scrollbar-track-border-zinc-800
+                scrollbar-thumb-primary-800
+                scrollbar-track-primary-900/20
                 scrollbar-thumb-rounded
                 ">
 
@@ -19,11 +19,12 @@
       <%# HEADER BACKGROUND %>
       <div class="bg-primary-900/20  rounded-lg
                 border-2 border-primary-900
-                py-2 px-3 flex gap-x-1.5 sm:gap-x-2
-                text-center">
+                py-2 px-3 flex justify-center content-center
+                gap-x-1.5 sm:gap-x-2
+                w-full">
 
         <%# SHELTER NAME TEXT %>
-        <h5 class="text-primary-100">
+        <h5 class="text-primary-100 text-center">
           <%= shelter.name %>
         </h5>
       </div>

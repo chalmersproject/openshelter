@@ -68,8 +68,8 @@ const ShelterLocationsComponentMapData = ({
         new mapboxgl.Marker(shelter_marker)
           .setLngLat(coordinates as [number, number])
           .setPopup(popup)
-          .addTo(target)
-          .togglePopup();
+          .addTo(target);
+          // .togglePopup();
       });
     },
 
