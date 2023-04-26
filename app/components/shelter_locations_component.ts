@@ -50,27 +50,41 @@ const ShelterLocationsComponentMapData = ({
     handleLoad({ target }: MapboxEvent) {
       context(this).$dispatch("shelter-locations-component-map:load");
       shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl, markerFrameId, markerFrameUrl}) => {
-        const popup = new mapboxgl.Popup({className: "shelter_measurement_popup", closeOnClick: true, closeButton: false })
+
+        const shelter_marker_markup = document.createElement('div')
+        const svg_circle = `
+          <turbo-frame id="${markerFrameId}" src="${markerFrameUrl}">
+          </turbo-frame>
+          `;
+        shelter_marker_markup.innerHTML = svg_circle;
+
+        const shelter_marker =  new mapboxgl.Marker(shelter_marker_markup)
+          .setLngLat(coordinates as [number, number])
+          .addTo(target);
+
+          // add listener for each time marker is clicked
+          //
+          // each time a marker is clicked a new popup is generated and assigned to the marker.
+          // this is a workaround to ensure the data in the popup is refreshed every time it is opened
+          //
+          shelter_marker.getElement().addEventListener('click', () => {
+            console.log("Shelter marker: " + markerFrameId + " was clicked!");
+            // dispatchEvent(new CustomEvent('submit', { bubbles: true }));
+
+            const popup = new mapboxgl.Popup({className: "shelter_measurement_popup", closeOnClick: true, closeButton: false })
             .setLngLat(coordinates as [number, number])
             .setHTML(`
                 <turbo-frame id="${popupFrameId}" src="${popupFrameUrl}">
                   <p>Loading...</p>
                 </turbo-frame>
               `);
-
-        const shelter_marker = document.createElement('div')
-        const svg_circle = `
-          <turbo-frame id="${markerFrameId}" src="${markerFrameUrl}">
-          </turbo-frame>
-          `;
-        shelter_marker.innerHTML = svg_circle
-
-        new mapboxgl.Marker(shelter_marker)
-          .setLngLat(coordinates as [number, number])
-          .setPopup(popup)
-          .addTo(target);
-          // .togglePopup();
+            shelter_marker.setPopup(popup);
+          });
       });
+
+
+
+
     },
 
     // == Lifecycle ==
