@@ -16,6 +16,31 @@
       <%= @shelter.about %>
     </div>
   </section>
+  <section class="flex justify-center ">
+    <%#  %>
+    <%# SHELTER DATA %>
+    <%#  %>
+    <div class="columns-2 py-2 max-w-72">
+      <div class="justify-center max-w-sm">
+        <p class="text-center py-2 "> Headcount </p>
+        <%= render DonutGraphComponent.new(
+          displayed_value: @shelter.last_headcount,
+          max_value: @shelter.max_headcount,
+          primary_color: "bg-primary-900",
+          secondary_color: "bg-gray-900"
+        )%>
+      </div>
+      <div class="justify-center max-w-sm">
+        <p class="text-center py-2"> Bedcount </p>
+        <%= render DonutGraphComponent.new(
+          displayed_value: @shelter.last_bedcount,
+          max_value: @shelter.max_bedcount,
+          primary_color: "bg-primary-900",
+          secondary_color: "bg-gray-900"
+        )%>
+      </div>
+    </div>
+  </section>
   <% if @shelter.location? %>
     <hr class="section-lg" />
     <section class="flex flex-col gap-y-4">

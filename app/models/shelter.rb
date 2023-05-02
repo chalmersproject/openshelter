@@ -141,6 +141,8 @@ class Shelter < ApplicationRecord
     end
   end
 
+  # == Broadcasts ==
+
   # == Helpers ==
   sig { returns(T.nilable(Geocoder::Result::Base)) }
   def geocode

@@ -13,6 +13,10 @@
   <div class="form-inputs">
     <%= f.input :name %>
     <%= f.input :slug unless new_record? %>
+    <div class="columns-2 py-2 ">
+      <%= f.input :max_headcount, label: "Maximum Client Capacity" %>
+      <%= f.input :max_bedcount, label: "Maximum Bed Capacity" %>
+    </div>
     <%= f.input :address, placeholder: "25 Augusta Ave, Toronto" %>
     <%= f.input :contact_email, label: "Contact Email" %>
     <%= f.input :contact_phone, label: "Contact Phone" %>

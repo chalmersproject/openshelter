@@ -85,6 +85,8 @@ class SheltersController < ApplicationController
       :name,
       :slug,
       :location,
+      :max_headcount,
+      :max_bedcount,
       :address,
       :contact_email,
       :contact_phone,

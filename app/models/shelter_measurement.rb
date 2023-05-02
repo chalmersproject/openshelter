@@ -34,18 +34,6 @@ class ShelterMeasurement < ApplicationRecord
   belongs_to :shelter, inverse_of: :measurements
   belongs_to :signal, class_name: "ShelterSignal", inverse_of: :measurements
 
-  after_create_commit -> {
-    shelter_popup_id = "#{["shelter", self.shelter.id, 'popup'].join('_')}"
-    puts(["SHELTER FOUND: ", self.shelter.name, "FART" ])
-    puts(["SHELTER Frame ID: ", shelter_popup_id])
-    broadcast_replace_to "shelter_measurements",
-    partial: "shelters/popup",
-    locals: {
-      shelter: self.shelter
-    },
-    target: shelter_popup_id
-  }
-
   #
   # broadcast measurement update to popups on map
   #
