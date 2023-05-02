@@ -69,7 +69,6 @@ const ShelterLocationsComponentMapData = ({
           //
           shelter_marker.getElement().addEventListener('click', () => {
             console.log("Shelter marker: " + markerFrameId + " was clicked!");
-            // dispatchEvent(new CustomEvent('submit', { bubbles: true }));
 
             const popup = new mapboxgl.Popup({className: "shelter_measurement_popup", closeOnClick: true, closeButton: false })
             .setLngLat(coordinates as [number, number])
@@ -81,10 +80,6 @@ const ShelterLocationsComponentMapData = ({
             shelter_marker.setPopup(popup);
           });
       });
-
-
-
-
     },
 
     // == Lifecycle ==
