@@ -171,6 +171,16 @@ gem "break", require: false
 # Show Postgres performance insights
 gem "rails-pg-extras"
 
+#
+# graphql gems for the API
+#
+gem 'graphql'
+
+group :development do
+  gem 'graphiql-rails'
+end
+
+
 # Show a healthcheck route
 gem "rails-healthcheck"
 
