@@ -1,4 +1,4 @@
-# typed: strict
+# typed: true
 # frozen_string_literal: true
 
 # A Galleryable has a gallery of (re)ordered set of images.

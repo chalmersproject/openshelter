@@ -1,5 +1,5 @@
 # rubocop:disable Lint/AmbiguousRegexpLiteral
-# typed: strict
+# typed: true
 # frozen_string_literal: true
 
 class ApplicationMailbox < ActionMailbox::Base

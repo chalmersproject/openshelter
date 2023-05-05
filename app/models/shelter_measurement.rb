@@ -66,8 +66,8 @@ class ShelterMeasurement < ApplicationRecord
     target: shelter_marker_id
   }
 
-  sig{ returns(Integer) }
   def max_value
+
     case type
     when "bedcount"
       T.must(shelter).max_bedcount

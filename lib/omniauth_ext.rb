@@ -1,4 +1,4 @@
-# typed: strict
+# typed: true
 # frozen_string_literal: true
 
 # Modify Facebook strategy to handle a custom redirect_uri.

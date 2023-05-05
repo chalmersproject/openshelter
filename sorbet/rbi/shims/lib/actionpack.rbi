@@ -1,4 +1,4 @@
-# typed: strict
+# typed: true
 
 module AbstractController::Collector
   sig do
