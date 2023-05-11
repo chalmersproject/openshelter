@@ -1,3 +1,4 @@
+# typed: true
 module Types
   class QueryType < Types::BaseObject
     # Add `node(id: ID!) and `nodes(ids: [ID!]!)`
@@ -21,6 +22,13 @@ module Types
       Shelter.find(id)
     end
 
+    #
+    # Get all Shelter Measurements
+    #
+    # field :shelter_measurements, [Types::ShelterMeasurement], null:false
+    # def shelter_measurements
+    #   ShelterMeasurement.all
+    # end
 
     # TODO: remove me
     field :test_field, String, null: false,

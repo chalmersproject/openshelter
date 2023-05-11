@@ -1,3 +1,4 @@
+# typed: false
 # frozen_string_literal: true
 
 module Types
@@ -5,8 +6,8 @@ module Types
     field :id, ID, null: false
     field :type, String, null: false
     field :value, Integer, null: false
-    field :shelter_id, Types::UuidType, null: false
-    field :signal_id, Types::UuidType, null: false
-    field :created_at, Types::TimestamptzType, null: false
+    field :shelter_id, ID, null: false
+    field :signal_id, ID, null: false
+    field :created_at, String, null: false
   end
 end
