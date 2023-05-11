@@ -6,8 +6,8 @@ class Mutations::CreateShelterMeasurement < Mutations::BaseMutation
   # a shelter measurment
   argument :signal_id, ID, required: true
   argument :shelter_id, ID  , required: true
-  argument :value, Integer, required: true
   argument :measurement_type, String, required: true
+  argument :value, Integer, required: true
 
 
   #
@@ -17,10 +17,10 @@ class Mutations::CreateShelterMeasurement < Mutations::BaseMutation
   field :shelter_measurement, Types::ShelterMeasurementType, null: false
   field :errors, [String], null: false
 
-  def resove(signal_id:, shelter_id:, value:, measurement_type:)
-    shelter_measurement = ShelterMeasurement.create!(
-      shelter_id: shelter_id,
+  def resolve(signal_id:, shelter_id:, value:, measurement_type:)
+    shelter_measurement = ShelterMeasurement.create(
       signal_id: signal_id,
+      shelter_id: shelter_id,
       type: measurement_type,
       value: value
     )
