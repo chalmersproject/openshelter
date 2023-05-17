@@ -24,7 +24,9 @@ class SheltersController < ApplicationController
   def popup
     @shelter = T.must(@shelter)
     authorize!(@shelter, to: :show?)
-    respond_with(@shelter, layout: false, partial: "shelters/popup", locals: {shelter: @shelter})
+    respond_with(@shelter,
+                  layout: false, partial: "shelters/popup",
+                  locals: {shelter: @shelter})
   end
 
   def marker
