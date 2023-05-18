@@ -34,6 +34,13 @@ class ShelterSignal < ApplicationRecord
            inverse_of: :signal,
            dependent: :destroy
 
+  has_many :api_keys,
+            class_name: "ApiKey",
+            inverse_of: :bearer,
+            as: :bearer,
+            dependent: :destroy
+
+
   # == Method
   sig { returns(String )}
   def name

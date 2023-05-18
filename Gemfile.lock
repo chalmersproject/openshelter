@@ -635,6 +635,7 @@ DEPENDENCIES
   annotate
   aws-sdk-core
   aws-sdk-s3 (~> 1.113)
+  bcrypt (~> 3.1.7)
   binding_of_caller
   bootsnap
   break

@@ -58,6 +58,14 @@ Rails.application.routes.draw do
     resources :gallery_frames, path: :gallery
   end
 
+  #
+  # API key management
+  #
+  post "/api-keys", to: "api_keys#create"
+  delete "/api-keys", to: "api_keys#destroy"
+  get "/api-keys", to: "api_keys#index"
+
+
   # == Internal ==
   scope :internal do
     scope controller: "internal", as: :internal do
