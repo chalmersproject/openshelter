@@ -6,6 +6,18 @@
     <div>
       <%= @signal.shelter.name %>
     </div>
+
+    <% if admin? %>
+      <h2>API Keys</h2>
+      <ul>
+      <% @signal.api_keys.each do |api_key| %>
+        <li>
+          <%= api_key.token %>
+        </li>
+      <% end %>
+      </ul>
+    <% end %>
+
     <div>
       <h3>Measurements</h3>
       <ul>

@@ -13,7 +13,7 @@ class ApiKeysController < ApplicationController
   #
   # only admins should be able to create api keys
   #
-  before_action :authenticate_user!, only: %i[create]
+  before_action :authenticate_user!, only: %i[index destroy create]
   # before_action :set_signal, only: %i[show edit update destroy]
 
   def index
@@ -21,7 +21,7 @@ class ApiKeysController < ApplicationController
   end
 
   def create
-    @api_key = ApiKey.create(api_key_params)
+    @api_key = ApiKey.create!(token: SecureRandom.hex)
   end
 
   def destroy

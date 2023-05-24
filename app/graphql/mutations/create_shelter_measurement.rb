@@ -17,10 +17,20 @@ class Mutations::CreateShelterMeasurement < Mutations::BaseMutation
   field :errors, [String], null: false
 
   def resolve(signal_id:, value:, signal_api_key:)
-    signal = ShelterSignal.find(id: signal_id)
 
-    shelter_measurement = signal.measure(value)
-    )
+    signal = ShelterSignal.find(signal_id)
+
+    #
+    # check if api key exists by searching by submitted token
+    #
+    shelter_measurement = if signal.api_keys.find_by(token: signal_api_key)
+      #
+      # if api key exists, make a signal measurement
+      #
+      signal.measure(value)
+    else
+      null
+    end
 
     if shelter_measurement.save
       {
