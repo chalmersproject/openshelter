@@ -48,8 +48,16 @@ Rails.application.routes.draw do
       get :marker
     end
   end
+
   resources :shelter_signals, path: "/signals"
 
+  #
+  # API key management
+  #
+  resources :api_keys, only: [:index, :new, :create, :destroy]
+  # post "/api-keys", to: "api_keys#create"
+  # delete "/api-keys", to: "api_keys#destroy"
+  # get "/api-keys", to: "api_keys#index"
   # == Pages ==
   resource :map, only: :show
 
@@ -58,12 +66,7 @@ Rails.application.routes.draw do
     resources :gallery_frames, path: :gallery
   end
 
-  #
-  # API key management
-  #
-  post "/api-keys", to: "api_keys#create"
-  delete "/api-keys", to: "api_keys#destroy"
-  get "/api-keys", to: "api_keys#index"
+
 
 
   # == Internal ==

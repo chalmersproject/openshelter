@@ -3,19 +3,32 @@
     <h1>
       <%= @signal.name %>
     </h1>
-    <div>
-      <%= @signal.shelter.name %>
-    </div>
 
+    <hr class="my-12 h-0.5 border-t-0
+            bg-neutral-100 opacity-100
+            dark:opacity-50" />
     <% if admin? %>
-      <h2>API Keys</h2>
+      <div class="flex gap-y-5">
+        <h2 class="flex-1">API Keys</h2>
+
+        <%= link_to 'New API Key',
+                    new_api_key_path,
+                    data: { tubro_frame: dom_id(ApiKey.new) },
+                    class: "flex-1 self-start btn btn-primary"
+                    %>
+      </div>
+
       <ul>
-      <% @signal.api_keys.each do |api_key| %>
-        <li>
-          <%= api_key.token %>
-        </li>
-      <% end %>
+
+        <%= turbo_frame_tag "api_keys" do %>
+          <%= render @api_keys %>
+        <% end %>
+
       </ul>
+
+    <hr class="my-12 h-0.5 border-t-0
+            bg-neutral-100 opacity-100
+            dark:opacity-50" />
     <% end %>
 
     <div>
