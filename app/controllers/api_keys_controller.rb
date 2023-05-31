@@ -22,7 +22,15 @@ class ApiKeysController < ApplicationController
   end
 
   def new
+    logger.debug("Shelter Signal ID: #{params[:shelter_signal]}")
     @api_key = ApiKey.new
+    @shelter_signal = ShelterSignal.find(params[:shelter_signal])
+    logger.debug("New api_key: #{@api_key}")
+    logger.debug("DOM ID: #{@api_key.id}")
+    # respond_to do |format|
+    #   format.turbo_stream
+    # end
+    # respond_with(@api_key, layout: false, locals: {api_key: @api_key})
   end
 
   def create

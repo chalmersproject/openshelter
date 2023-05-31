@@ -1,4 +1,4 @@
-<%= simple_form_for api_key, html: { class: "form-inputs" } do |api_key| %>
+<%= simple_form_for api_key, html: { class: "form-inputs" } do |form| %>
   <%# <% if api_key.errors.any? %>
   <%#  <div class="error-message">
         <%= api_key.errors.full_messages.to_sentence.capitalize %>
@@ -6,6 +6,6 @@
   <%# <% end %>
 
   <%= form.input :name, input_html: { autofocus: true } %>
-  <%= link_to "Cancel", api_keys_path, class: "btn btn--light" %>
+  <%= link_to "Cancel", shelter_signal_path, class: "btn btn--light" %>
   <%= form.submit class: "btn btn--secondary" %>
 <% end %>

@@ -49,12 +49,18 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :shelter_signals, path: "/signals"
+  resources :shelter_signals, path: "/signals" do
+    member do
+      get :new_api_key
+      post :create_api_key
+      post :destroy_api_key
+    end
+  end
 
   #
   # API key management
   #
-  resources :api_keys, only: [:index, :new, :create, :destroy]
+  # resources :api_keys, only: [:index, :new, :create, :destroy]
   # post "/api-keys", to: "api_keys#create"
   # delete "/api-keys", to: "api_keys#destroy"
   # get "/api-keys", to: "api_keys#index"

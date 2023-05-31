@@ -8,17 +8,21 @@
             bg-neutral-100 opacity-100
             dark:opacity-50" />
     <% if admin? %>
+      <%= debug ["signal ID below", @signal.id] %>
       <div class="flex gap-y-5">
         <h2 class="flex-1">API Keys</h2>
-
         <%= link_to 'New API Key',
-                    new_api_key_path,
+                    new_api_key_shelter_signal_path,
                     data: { tubro_frame: dom_id(ApiKey.new) },
                     class: "flex-1 self-start btn btn-primary"
                     %>
       </div>
 
+
       <ul>
+        <%= turbo_frame_tag dom_id(ApiKey.new) do %>
+          <h1></h1>
+        <% end %>
 
         <%= turbo_frame_tag "api_keys" do %>
           <%= render @api_keys %>

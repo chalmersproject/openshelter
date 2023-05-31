@@ -1,0 +1,2 @@
+<%= turbo_stream.prepend "api_keys", partial: "api_keys/api_key", locals: { api_key: @api_key } %>
+<%= turbo_stream.update ApiKey.new , "" %>

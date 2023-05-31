@@ -6,7 +6,8 @@ class ShelterSignalsController < ApplicationController
 
   # == Filters ==
   before_action :authenticate_user!, only: %i[new edit create update destroy]
-  before_action :set_signal, only: %i[new_api_key show edit update destroy]
+  before_action :set_signal, only: %i[new_api_key create_api_key destroy_api_key
+                                      show edit update destroy]
 
   # == Actions ==
   def index
@@ -45,10 +46,32 @@ class ShelterSignalsController < ApplicationController
   end
 
   def new_api_key
+    @api_key = ApiKey.new
+    @signal = T.must(@signal)
+  end
+
+  def create_api_key
+    @signal = T.must(@signal)
+    @api_key = ApiKey.new(api_key_params)
     if admin?
       @signal = T.must(@signal)
-      @signal.api_key.create!(token: SecureRandom.hex)
+      @signal.api_keys.create!(token: SecureRandom.hex,
+                                name: api_key_params["name"])
+
+      if @signal.api_key.save
+        respond_to do |format|
+          format.html do
+            redirect_to quotes_path, notice: "API KEY was succesfully created"
+          end
+          format.turbo_stream
+        end
+      else
+        render :new, status: :unprocessable_entity
+      end
     end
+  end
+
+  def destroy_api_key
   end
 
   def update
@@ -77,5 +100,11 @@ class ShelterSignalsController < ApplicationController
   def signal_params
     signal = T.cast(params.require(:shelter_signal), ActionController::Parameters)
     signal.permit(:type, :shelter_id)
+  end
+
+  sig { returns(ActionController::Parameters) }
+  def api_key_params
+    api_key = T.cast(params.require(:api_key), ActionController::Parameters)
+    api_key.permit(:name)
   end
 end

@@ -1,6 +1,8 @@
-  <%= turbo_frame_tag @api_key do %>
-    <%= debug @shelter_signal %>
+<div>
+  <div> Loading... </div>
+  <%= turbo_frame_tag dom_id(ApiKey.new) do %>
     <%= render ApiKeyFormComponent.new(api_key: @api_key,
                                       shelter_signal: @shelter_signal
                                       ) %>
   <% end %>
+</div>

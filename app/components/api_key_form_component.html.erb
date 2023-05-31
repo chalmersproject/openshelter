@@ -1,0 +1,14 @@
+<%= simple_form_for api_key, url: create_api_key_shelter_signal_path, html: { class: "form-inputs" } do |form| %>
+  <% if api_key.errors.any? %>
+    <div class="error-message">
+      <%= api_key.errors.full_messages.to_sentence.capitalize %>
+    </div>
+  <% end %>
+  <div class="flex gap-2">
+    <div class="flex-1">
+      <%= form.input :name, input_html: { autofocus: true, class:"text-primary-500"} %>
+    </div>
+    <%= link_to "Cancel", @shelter_signal_path, class: "btn btn--light flex-2" %>
+    <%= form.submit class: "btn btn--secondary flex-2" %>
+  </div>
+<% end %>
