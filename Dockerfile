@@ -101,4 +101,4 @@ EXPOSE 3000
 HEALTHCHECK --interval=10s --timeout=1s --start-period=15s --retries=3 CMD curl -f http://${HOST}:${PORT}/internal/status || exit 1
 
 # Configure entrypoint.
-ENTRYPOINT [ "/app/bin/run" ]
+CMD [ "/app/bin/run" ]

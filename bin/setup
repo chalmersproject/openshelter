@@ -30,12 +30,14 @@ FileUtils.chdir(APP_ROOT) do
   puts "\n== Installing husky githooks =="
   system("yarn husky install")
 
-  puts "\n== Initializing .env =="
-  if File.exist?(".env")
-    puts "Skipping: .env already exists"
-  else
-    FileUtils.cp(".env.example", ".env")
-    puts "Created .env from .env.example"
+  unless ENV["CI"]
+    puts "\n== Initializing .env =="
+    if File.exist?(".env")
+      puts "Skipping: .env already exists"
+    else
+      FileUtils.cp(".env.example", ".env")
+      puts "Created .env from .env.example"
+    end
   end
 
   puts "\n=> Starting database"
