@@ -2,6 +2,18 @@
 # frozen_string_literal: true
 
 module Rails
+  class << self
+    T::Sig::WithoutRuntime.sig { returns(T::Boolean) }
+    def server?
+      const_defined?(:Server)
+    end
+
+    T::Sig::WithoutRuntime.sig { returns(T::Boolean) }
+    def console?
+      const_defined?(:Console)
+    end
+  end
+
   # Ensure generators defined in 'lib/generators' are prioritized over
   # generators in 'lib/rails/generators'.
   module Generators
