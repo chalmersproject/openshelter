@@ -51,13 +51,7 @@ Rails.application.routes.draw do
 
   resources :shelter_signals, path: "/signals"
 
-  #
-  # API key management
-  #
-  resources :api_keys, only: [:index, :new, :create, :destroy]
-  # post "/api-keys", to: "api_keys#create"
-  # delete "/api-keys", to: "api_keys#destroy"
-  # get "/api-keys", to: "api_keys#index"
+
   # == Pages ==
   resource :map, only: :show
 

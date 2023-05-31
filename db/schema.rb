@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_05_25_183812) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_31_215832) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -52,17 +52,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_183812) do
     t.uuid "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
-  end
-
-  create_table "api_keys", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
-    t.integer "bearer_id", null: false
-    t.string "bearer_type", null: false
-    t.string "token", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "name", null: false
-    t.index ["bearer_id", "bearer_type"], name: "index_api_keys_on_bearer_id_and_bearer_type"
-    t.index ["token"], name: "index_api_keys_on_token", unique: true
   end
 
   create_table "good_job_processes", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -122,6 +111,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_05_25_183812) do
     t.uuid "shelter_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "secret_key", null: false
+    t.index ["secret_key"], name: "index_shelter_signals_on_secret_key", unique: true
     t.index ["shelter_id"], name: "index_shelter_signals_on_shelter_id"
     t.index ["type"], name: "index_shelter_signals_on_type"
   end

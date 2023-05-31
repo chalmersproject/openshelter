@@ -19,7 +19,8 @@ class ShelterSignalsController < ApplicationController
     @signal = T.must(@signal)
 
     if admin?
-      @api_keys = @signal.api_keys
+      # @api_keys = @signal.api_keys
+      puts("poo")
     end
 
     authorize!(@signal)
@@ -42,13 +43,6 @@ class ShelterSignalsController < ApplicationController
     authorize!(@signal)
     # binding.pry
     respond_with(@signal)
-  end
-
-  def new_api_key
-    if admin?
-      @signal = T.must(@signal)
-      @signal.api_key.create!(token: SecureRandom.hex)
-    end
   end
 
   def update
