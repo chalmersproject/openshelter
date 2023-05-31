@@ -38,9 +38,14 @@ FileUtils.chdir(APP_ROOT) do
     puts "Created .env from .env.example"
   end
 
-  puts "\n== Starting database =="
-  system!("docker compose up -d postgres --wait --no-log-prefix")
-  sleep(1)
+  puts "\n=> Starting database"
+  case ENV["CI"]
+  when "", nil
+    system! "docker compose up -d postgres --no-log-prefix"
+    sleep(2)
+  else
+    puts "Running on CI; skipping"
+  end
 
   puts "\n== Preparing database =="
   system!("bin/rails db:prepare")
