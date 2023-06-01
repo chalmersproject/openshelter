@@ -6,7 +6,7 @@ class ShelterSignalsController < ApplicationController
 
   # == Filters ==
   before_action :authenticate_user!, only: %i[new edit create update destroy]
-  before_action :set_signal, only: %i[new_api_key show edit update destroy]
+  before_action :set_signal, only: %i[show edit update destroy]
 
   # == Actions ==
   def index
@@ -19,8 +19,7 @@ class ShelterSignalsController < ApplicationController
     @signal = T.must(@signal)
 
     if admin?
-      # @api_keys = @signal.api_keys
-      puts("poo")
+      @secret_key = @signal.secret_key
     end
 
     authorize!(@signal)

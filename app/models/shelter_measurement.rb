@@ -34,6 +34,13 @@ class ShelterMeasurement < ApplicationRecord
   belongs_to :shelter, inverse_of: :measurements
   belongs_to :signal, class_name: "ShelterSignal", inverse_of: :measurements
 
+  # == Validations ==
+
+  # ensure measurement is not less than or greater than shelter value boundaries
+  validates :value, numericality: { greater_than_or_equal_to: 0,
+                                    less_than_or_equal_to: :max_value,
+                                    only_integer: true}
+
   #
   # broadcast measurement update to popups on map
   #

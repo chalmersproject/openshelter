@@ -5,6 +5,14 @@ class ChalmersSchema < GraphQL::Schema
   # For batch-loading (see https://graphql-ruby.org/dataloader/overview.html)
   use GraphQL::Dataloader
 
+  #
+  # show simplified error message on a .find not locating a record
+  # will trigger for all queries and mutations
+  #
+  rescue_from ActiveRecord::RecordNotFound do |error|
+    raise GraphQL::ExecutionError, "#{error.model} not found"
+  end
+
   # GraphQL-Ruby calls this when something goes wrong while running a query:
   def self.type_error(err, context)
     # if err.is_a?(GraphQL::InvalidNullError)
