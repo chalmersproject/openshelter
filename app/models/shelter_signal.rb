@@ -6,6 +6,7 @@
 # Table name: shelter_signals
 #
 #  id         :uuid             not null, primary key
+#  secret_key :string           not null
 #  type       :string           not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
@@ -13,6 +14,7 @@
 #
 # Indexes
 #
+#  index_shelter_signals_on_secret_key  (secret_key) UNIQUE
 #  index_shelter_signals_on_shelter_id  (shelter_id)
 #  index_shelter_signals_on_type        (type)
 #
@@ -25,6 +27,7 @@ class ShelterSignal < ApplicationRecord
 
   # == Attributes ==
   enumerize :type, in: %w[bedcount headcount]
+  attribute :secret_key, :string, default: -> { SecureRandom.hex(12) }
 
   # == Associations ==
   belongs_to :shelter

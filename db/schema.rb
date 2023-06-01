@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_01_27_224241) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_31_215832) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
@@ -111,6 +111,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_27_224241) do
     t.uuid "shelter_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "secret_key", null: false
+    t.index ["secret_key"], name: "index_shelter_signals_on_secret_key", unique: true
     t.index ["shelter_id"], name: "index_shelter_signals_on_shelter_id"
     t.index ["type"], name: "index_shelter_signals_on_type"
   end

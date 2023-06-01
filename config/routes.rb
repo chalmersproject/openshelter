@@ -48,7 +48,9 @@ Rails.application.routes.draw do
       get :marker
     end
   end
+
   resources :shelter_signals, path: "/signals"
+
 
   # == Pages ==
   resource :map, only: :show
@@ -57,6 +59,9 @@ Rails.application.routes.draw do
   scope :frames, module: :frames, only: :show do
     resources :gallery_frames, path: :gallery
   end
+
+
+
 
   # == Internal ==
   scope :internal do

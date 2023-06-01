@@ -17,6 +17,11 @@ class ShelterSignalsController < ApplicationController
 
   def show
     @signal = T.must(@signal)
+
+    if admin?
+      @secret_key = @signal.secret_key
+    end
+
     authorize!(@signal)
     respond_with(@signal)
   end

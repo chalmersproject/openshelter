@@ -3,9 +3,45 @@
     <h1>
       <%= @signal.name %>
     </h1>
-    <div>
-      <%= @signal.shelter.name %>
-    </div>
+
+    <hr class="my-12 h-0.5 border-t-0
+            bg-neutral-100 opacity-100
+            dark:opacity-50" />
+    <% if admin? %>
+      <div class="flex gap-y-5">
+        <h2 class="flex-1"> Signal Authentication </h2>
+
+      </div>
+      <ul>
+        <div class="<%= class_names(
+                          "my-3 p-2",
+                          "flex items-center gap-x-2",
+                          "border rounded-md",
+                          "bg-zinc-700/20 text-sm text-zinc-400",
+                          ) %>
+                        ">
+          <div>
+            <div>signal id</div>
+            <div class="flex-1 text-primary-500/90">
+              <%= @signal.id %>
+            </div>
+          </div>
+          <div>
+            <div>signal secret key</div>
+            <div class="flex-1 text-secondary-500/90">
+              <%= @signal.secret_key %>
+            </div>
+          </div>
+
+          <div class="flex-1 flex justify-end gap-2 items-center">
+            <%= @signal.created_at %>
+          </div>
+        </div>
+      </ul>
+      <hr class="my-12 h-0.5 border-t-0
+            bg-neutral-100 opacity-100
+            dark:opacity-50" />
+    <% end %>
     <div>
       <h3>Measurements</h3>
       <ul>
