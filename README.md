@@ -1,4 +1,4 @@
-# chalmersproject.com
+# openshelter
 
 _Fighting homelessness in Toronto, Ontario._
 

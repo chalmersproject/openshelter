@@ -19,20 +19,20 @@ class ApplicationRecord < ActiveRecord::Base
       unless Rails.const_defined?(:Server) || Rails.const_defined?(:Console)
         return
       end
-
-
+      
+      return unless Rails.server? || Rails.console?
+      
       Kernel.suppress(ActiveRecord::ConnectionNotEstablished) do
         missing_columns = column_names.map(&:to_s) - self.column_names
         if missing_columns.present?
-          subject =
-            if missing_columns.count == 1
-              "column '#{missing_columns.first}'"
-            else
-              missing_columns_sentence =
-                missing_columns.map { |name| "'#{name}'" }.to_sentence
-              "columns #{missing_columns_sentence}"
-            end
-          raise "missing #{subject} on #{model_name}"
+          subject = if missing_columns.count == 1
+            "column `#{missing_columns.first}'"
+          else
+            missing_columns_sentence =
+              missing_columns.map { |name| "`#{name}'" }.to_sentence
+            "columns #{missing_columns_sentence}"
+          end
+          raise "Missing #{subject} on #{model_name}"
         end
       end
     end
