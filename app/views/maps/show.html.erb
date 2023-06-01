@@ -1,26 +1,8 @@
+<%= turbo_stream_from "shelter_measurements" %>
 <div class="flex-1 flex flex-col relative">
-  <%= render LocationComponent.new(
-    location: "",
+  <%= render ShelterLocationsComponent.new(
+    shelters: @shelters,
     interactive: true,
     class: "flex-1 !rounded-none",
   ) %>
-  <div class="absolute inset-0 flex items-center justify-center">
-    <div class="<%= class_names(
-      "px-8 sm:px-12 py-6 rounded-md",
-      "backdrop-blur-[1px] bg-black/60",
-      "flex flex-col gap-y-2",
-    ) %>">
-      <div class="flex flex-col items-center pt-1">
-        <%= heroicon "wrench-screwdriver", class: "w-8 h-8 text-primary-500" %>
-      </div>
-      <div class="text-center">
-        <h3>
-          This map is under construction.
-        </h3>
-        <p class="text-sm text-zinc-500">
-          Please check back again later.
-        </p>
-      </div>
-    </div>
-  </div>
 </div>

@@ -1,5 +1,5 @@
 # rubocop:disable Layout/LineLength
-# typed: strict
+# typed: true
 # frozen_string_literal: true
 
 # This file should contain all the record creation needed to seed the database

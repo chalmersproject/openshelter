@@ -88,13 +88,13 @@ gem "addressable", "~> 2.8"
 gem "discard", "~> 1.2"
 
 # Use Redis adapter to run Action Cable in production
-# gem "redis", "~> 4.6"
+gem "redis", "~> 4.6"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
+gem "bcrypt", "~> 3.1.7"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[mingw mswin x64_mingw jruby]
@@ -171,6 +171,16 @@ gem "break", require: false
 # Show Postgres performance insights
 gem "rails-pg-extras"
 
+#
+# graphql gems for the API
+#
+gem 'graphql'
+
+group :development do
+  gem 'graphiql-rails'
+end
+
+
 # Show a healthcheck route
 gem "rails-healthcheck"
 
@@ -220,6 +230,10 @@ gem "local_time", "~> 2.1"
 # Geocode addresses with geocoder
 gem "geocoder", "~> 1.8"
 
+# chartkick for shelter data charts
+gem "chartkick"
+gem "groupdate", "~> 6.2"
+
 group :development, :test do
   # Warn about N+1 queries
   gem "bullet"
@@ -239,7 +253,7 @@ group :development do
 
   # Use Rubocop to lint code
   gem "rubocop", "~> 1.32", require: false
-  gem "rubocop-lsp", require: false
+  # gem "rubocop-lsp", require: false
   gem "rubocop-performance", require: false
   gem "rubocop-rails", require: false
   gem "rubocop-shopify", require: false
@@ -254,7 +268,7 @@ group :development do
   gem "stackprof"
 
   # Display a better error page during development
-  gem "better_errors"
+  # gem "better_errors"
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   gem "spring"
@@ -275,3 +289,6 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "ruby-lsp", "~> 0.3.8", :group => :development
+

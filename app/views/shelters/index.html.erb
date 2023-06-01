@@ -11,7 +11,7 @@
       </ul>
       <%= link_to(
         "New Shelter",
-        new_shelter_path,
+        [Shelter, action: :new],
         class: "self-start btn btn-primary",
       ) if signed_in? %>
     </div>

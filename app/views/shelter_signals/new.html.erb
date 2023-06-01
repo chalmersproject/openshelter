@@ -1,0 +1,14 @@
+<%# == Meta Tags == %>
+<% set_meta_tags title: "New Signal" %>
+
+<%# == Breadcrumbs == %>
+<% render "shelter_signals/breadcrumbs", signal: @signal %>
+<% breadcrumb "New", [@signal, action: :new] %>
+
+<%# == Main == %>
+<div class="layout">
+  <section class="section flex flex-col gap-y-2">
+    <h1>New Signal</h1>
+    <%= render ShelterSignalFormComponent.new(signal: @signal) %>
+  </section>
+</div>

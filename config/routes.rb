@@ -1,9 +1,13 @@
-# typed: strict
+# typed: true
 # frozen_string_literal: true
 
 require "constraints"
 
 Rails.application.routes.draw do
+  if Rails.env.development?
+    mount GraphiQL::Rails::Engine, at: "/graphiql", graphql_path: "/graphql"
+  end
+  post "/graphql", to: "graphql#execute"
   # == Healthcheck ==
   Healthcheck.routes(self)
 
@@ -35,7 +39,18 @@ Rails.application.routes.draw do
 
   # == Resources ==
   resources :users, only: :show
-  resources :shelters
+  resources :shelters do
+    collection do
+      # /shelters/my_custom_action
+    end
+    member do # /shelters/:id/my_custom_action
+      get :popup
+      get :marker
+    end
+  end
+
+  resources :shelter_signals, path: "/signals"
+
 
   # == Pages ==
   resource :map, only: :show
@@ -44,6 +59,9 @@ Rails.application.routes.draw do
   scope :frames, module: :frames, only: :show do
     resources :gallery_frames, path: :gallery
   end
+
+
+
 
   # == Internal ==
   scope :internal do

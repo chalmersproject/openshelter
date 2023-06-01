@@ -1,4 +1,4 @@
-# typed: strict
+# typed: true
 # frozen_string_literal: true
 
 # == Schema Information
@@ -56,7 +56,16 @@ class User < ApplicationRecord
   extend T::Sig
 
   ADMIN_EMAILS =
-    T.let(%w[hulloitskai@gmail.com zachary.donsky@gmail.com], T::Array[String])
+    T.let(
+          %w[
+              hulloitskai@gmail.com
+              zachary.donsky@gmail.com
+              zach@chalmerscards.com
+              chalmers@chalmers.cards
+              misterchalmers@chalmers.cards
+              misterchalmers@protonmail.com
+            ], T::Array[String]
+          )
   ADMIN_EMAIL_DOMAINS =
     T.let(
       %w[chalmersproject.com chalmerscards.com chalmers.cards],

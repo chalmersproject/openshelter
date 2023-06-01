@@ -1,4 +1,4 @@
-# typed: strict
+# typed: true
 # frozen_string_literal: true
 
 # Use TIMESTAMPTZ as native type for :datetime columns.

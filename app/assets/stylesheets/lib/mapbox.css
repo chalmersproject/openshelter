@@ -15,8 +15,16 @@
   }
 }
 
+.mapboxgl-popup-tip{
+ border-top-color: black;
+}
+
 .mapboxgl-popup {
   @apply !max-w-72;
+
+  .shelter_measurement_popup .mapboxgl-popup-tip {
+    border-top-color: black;
+  }
 
   .mapboxgl-popup-content {
     @apply !bg-transparent !p-0;
@@ -29,3 +37,4 @@
     }
   }
 }
+

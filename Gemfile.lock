@@ -125,10 +125,6 @@ GEM
     aws-sigv4 (1.5.1)
       aws-eventstream (~> 1, >= 1.0.2)
     bcrypt (3.1.18)
-    better_errors (2.9.1)
-      coderay (>= 1.0.0)
-      erubi (>= 1.0.0)
-      rack (>= 0.9.0)
     bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
@@ -150,6 +146,7 @@ GEM
       rack-test (>= 0.6.3)
       regexp_parser (>= 1.5, < 3.0)
       xpath (~> 3.2)
+    chartkick (5.0.1)
     childprocess (4.1.0)
     coderay (1.1.3)
     concurrent-ruby (1.1.10)
@@ -234,6 +231,12 @@ GEM
       railties (>= 6.0.0)
       thor (>= 0.14.1)
       webrick (>= 1.3)
+    graphiql-rails (1.9.0)
+      railties
+      sprockets-rails
+    graphql (2.0.21)
+    groupdate (6.2.0)
+      activesupport (>= 5.2)
     hashie (5.0.0)
     heya (0.7.0)
       rails (>= 5.2.3, < 7.1.0)
@@ -280,7 +283,7 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    language_server-protocol (3.16.0.3)
+    language_server-protocol (3.17.0.2)
     liquid (5.4.0)
     listen (3.7.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -337,6 +340,8 @@ GEM
     nio4r (2.5.8)
     nokogiri (1.13.8-arm64-darwin)
       racc (~> 1.4)
+    nokogiri (1.13.8-x86_64-darwin)
+      racc (~> 1.4)
     nokogiri (1.13.8-x86_64-linux)
       racc (~> 1.4)
     oauth2 (1.4.10)
@@ -381,6 +386,7 @@ GEM
     premailer-rails (1.11.1)
       actionmailer (>= 3)
       premailer (~> 1.7, >= 1.7.9)
+    prettier_print (1.2.0)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -454,6 +460,7 @@ GEM
       sorbet-runtime (>= 0.5.9204)
       unparser
     redcarpet (3.5.1)
+    redis (4.8.1)
     regexp_parser (2.5.0)
     reline (0.3.1)
       io-console (~> 0.5)
@@ -484,9 +491,6 @@ GEM
       unicode-display_width (>= 1.4.0, < 3.0)
     rubocop-ast (1.21.0)
       parser (>= 3.1.1.0)
-    rubocop-lsp (0.1.6)
-      language_server-protocol (>= 3.16)
-      rubocop (>= 1.0)
     rubocop-performance (1.14.3)
       rubocop (>= 1.7.0, < 2.0)
       rubocop-ast (>= 0.4.0)
@@ -498,6 +502,10 @@ GEM
       rubocop (~> 1.33)
     rubocop-sorbet (0.6.11)
       rubocop (>= 0.90.0)
+    ruby-lsp (0.3.8)
+      language_server-protocol (~> 3.17.0)
+      sorbet-runtime
+      syntax_tree (>= 5.0.0, < 6)
     ruby-next-core (0.15.2)
     ruby-pg-extras (4.8.1)
       pg
@@ -522,6 +530,7 @@ GEM
     sorbet (0.5.10346)
       sorbet-static (= 0.5.10346)
     sorbet-runtime (0.5.10346)
+    sorbet-static (0.5.10346-universal-darwin-20)
     sorbet-static (0.5.10346-universal-darwin-21)
     sorbet-static (0.5.10346-universal-darwin-22)
     sorbet-static (0.5.10346-x86_64-linux)
@@ -546,6 +555,8 @@ GEM
     stimulus-rails (1.1.0)
       railties (>= 6.0.0)
     strscan (3.0.4)
+    syntax_tree (5.2.0)
+      prettier_print (>= 1.2.0)
     tapioca (0.10.0)
       bundler (>= 1.17.3)
       netrc (>= 0.11.0)
@@ -609,7 +620,8 @@ GEM
     zeitwerk (2.6.0)
 
 PLATFORMS
-  arm64-darwin-21
+  x86_64-darwin-20
+  x86_64-darwin-2
   arm64-darwin-22
   x86_64-linux-e
 
@@ -624,13 +636,14 @@ DEPENDENCIES
   annotate
   aws-sdk-core
   aws-sdk-s3 (~> 1.113)
-  better_errors
+  bcrypt (~> 3.1.7)
   binding_of_caller
   bootsnap
   break
   bullet
   can_has_validations (~> 1.6)
   capybara
+  chartkick
   counter_culture (~> 3.2)
   cssbundling-rails
   debug
@@ -647,6 +660,9 @@ DEPENDENCIES
   friendly_id (~> 5.4)
   geocoder (~> 1.8)
   good_job (~> 3.1)
+  graphiql-rails
+  graphql
+  groupdate (~> 6.2)
   heya (~> 0.7.0)
   high_voltage (~> 3.1)
   honeybadger (~> 4.12)
@@ -688,16 +704,17 @@ DEPENDENCIES
   rails-pg-extras
   rails_feather (~> 0.1.0)
   rails_heroicon (~> 2.0)
+  redis (~> 4.6)
   responders!
   rgeo (~> 2.4)
   rgeo-activerecord (~> 7.0)
   rgeo-geojson (~> 2.1)
   rubocop (~> 1.32)
-  rubocop-lsp
   rubocop-performance
   rubocop-rails
   rubocop-shopify
   rubocop-sorbet
+  ruby-lsp (~> 0.3.8)
   ruby-vips (~> 2.1)
   selenium-webdriver
   shortuuid (~> 0.6.0)

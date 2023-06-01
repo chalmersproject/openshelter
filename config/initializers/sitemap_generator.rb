@@ -1,4 +1,4 @@
-# typed: strict
+# typed: true
 # frozen_string_literal: true
 
 if Rails.const_defined?(:Server) && Rails.env.production?

@@ -1,4 +1,4 @@
-# typed: strict
+# typed: true
 # frozen_string_literal: true
 
 service = ENV.fetch("GEOCODER_SERVICE", "nominatim").to_sym

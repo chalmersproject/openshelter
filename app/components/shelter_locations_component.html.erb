@@ -1,0 +1,25 @@
+<div
+  class="<%= class_names(
+    component_name,
+    "overflow-hidden",
+    "bg-zinc-800 rounded-md",
+    "flex flex-col",
+    other_classes,
+  ) %>"
+  x-data="<%= component_data(shelters: shelters, interactive: interactive?) %>"
+  <%= tag.attributes other_attributes %>
+>
+  <%= render LoadingOverlayComponent.new(
+    loading: true,
+    class: "flex-1 flex flex-col",
+    data: {
+      action: "shelter-locations-component:load->loading-overlay-component#stop",
+    },
+  ) do %>
+    <div
+      class="flex-1"
+      x-data="ShelterLocationsComponentMap({ shelters, interactive })"
+      x-on:shelter-locations-component-map:load="$dispatch('shelter-locations-component:load')"
+    ></div>
+  <% end %>
+</div>

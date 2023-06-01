@@ -9,7 +9,7 @@ module.exports = {
     "./app/helpers/**/*.rb",
     "./app/javascript/**/*.js",
     "./app/views/**/*.{html,html.erb}",
-    "./app/components/**/*.{rb,html,html.erb}",
+    "./app/components/**/*.{rb,html,html.erb,ts}",
     "./test/components/**/*.rb",
   ],
   safelist: ["hidden"],
@@ -48,6 +48,7 @@ module.exports = {
     require("@tailwindcss/aspect-ratio"),
     require("@tailwindcss/typography"),
     require("@tailwindcss/line-clamp"),
+    require("tailwind-scrollbar")({ nocompatible: true }),
     plugin(({ addVariant }) => {
       addVariant("cloak", "&[x-cloak]");
     }),

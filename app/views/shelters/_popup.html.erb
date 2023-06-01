@@ -1,0 +1,133 @@
+<%= turbo_frame_tag [dom_id(shelter), "popup"].join("_") do %>
+
+  <%# POPUP STYLING %>
+  <div class="bg-zinc-900
+            rounded-lg
+            border-zinc-800 shadow-md
+            text-white text-sm
+            w-96 pl-3 pr-1 pt-3 pb-3">
+    <div class="w-full max-h-96
+                pr-3
+                overflow-auto
+                scrollbar-thin
+                scrollbar-thumb-primary-900/60
+                scrollbar-track-primary-900/30
+                scrollbar-thumb-rounded
+                ">
+
+      <%# HEADER %>
+      <%# HEADER BACKGROUND %>
+      <div class="bg-primary-900/20  rounded-lg
+                border-2 border-primary-900
+                py-2 px-3 flex justify-center content-center
+                gap-x-1.5 sm:gap-x-2
+                w-full">
+
+        <%# SHELTER NAME TEXT %>
+        <h5 class="text-primary-100 text-center">
+          <%= shelter.name %>
+        </h5>
+      </div>
+
+      <%#  %>
+      <%# SHELTER DATA %>
+      <%#  %>
+      <div class="columns-2 py-2 ">
+        <div class="justify-center max-w-sm bg-primary-900/20 rounded-lg border-2 border-primary-900 p-2  overflow-hidden drop-shadow-2xl">
+          <p class="text-center py-2"> Headcount </p>
+          <%= render DonutGraphComponent.new(
+            displayed_value: shelter.last_headcount,
+            max_value: shelter.max_headcount,
+            primary_color: "bg-primary-900",
+            secondary_color: "bg-gray-900"
+          )%>
+        </div>
+        <div class="max-w-sm bg-primary-900/20 rounded-lg border-2 border-primary-900 p-2  overflow-hidden drop-shadow-2xl">
+          <p class="text-center py-2"> Bedcount </p>
+          <%= render DonutGraphComponent.new(
+            displayed_value: shelter.last_bedcount,
+            max_value: shelter.max_bedcount,
+            primary_color: "bg-primary-900",
+            secondary_color: "bg-gray-900"
+          )%>
+        </div>
+      </div>
+
+      <%#  %>
+      <%# SHELTER TAGS %>
+      <%#  %>
+      <div class="max-w-sm bg-primary-900/20 rounded-lg border-2 border-primary-900 p-2  overflow-hidden drop-shadow-2xl">
+            <div class="w-full border-b-2 border-primary-900 mb-2 py-1 text-lg font-bold">
+              Populations Served
+            </div>
+        <div class="justify-center">
+            <div class="flex flex-wrap">
+              <% shelter.tags.each do |tag| %>
+                <div class="m-1 py-1 px-2 gap-x-1.5 sm:gap-x-2 bg-primary-600/20 rounded-full border border-primary-900">
+                  <%= tag %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+      </div>
+
+      <%# Contact info %>
+      <div class="my-2 max-w-sm bg-primary-900/20 rounded-lg border-2 border-primary-900 p-2  overflow-hidden drop-shadow-2xl">
+        <div class="w-full border-b-2 border-primary-900 mb-2 py-1 text-lg font-bold">
+              Contact Information
+        </div>
+
+        <%#  %>
+        <%# PHONE NUMBER %>
+        <%#  %>
+        <div class="p-1">
+          <div class="mb-2 text-lg font-semibold text-primary-100">
+            <a href="tel:<%= shelter.contact_phone %>"><%= shelter.contact_phone %></a>
+          </div>
+
+          <%#  %>
+          <%# LOCATION %>
+          <%#  %>
+          <div class="flex rounded-lg border-2 border-primary-900 p-2">
+            <%#  %>
+            <%# LOCATION ICON %>
+            <%#  %>
+            <div class="w-1/5 flex content-center justify-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 25 25" stroke-width="1.5" stroke="currentColor" class="w-full h-full">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+              </svg>
+            </div>
+
+            <%#  %>
+            <%# ADDRESS %>
+            <%#  %>
+            <div class="w-4/5 border-l-2 border-primary-900 p-2">
+              <%= shelter.address %>
+            </div>
+
+          </div>
+            <div class="flex my-2 px-1 rounded-lg border-2 border-primary-900 p-2">
+              <%# WEB ICON %>
+              <div class="w-1/5 flex content-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-full h-full ">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 21a9.004 9.004 0 008.716-6.747M12 21a9.004 9.004 0 01-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 017.843 4.582M12 3a8.997 8.997 0 00-7.843 4.582m15.686 0A11.953 11.953 0 0112 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0121 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0112 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 013 12c0-1.605.42-3.113 1.157-4.418" />
+                </svg>
+              </div>
+              <%# WEB CONTACT %>
+              <div class="w-4/5 border-l-2 border-primary-900 p-2">
+                <div class="m-2 text-sm">
+                  <a href="mailto:<%= shelter.contact_email %>"><%= shelter.contact_email %></a>
+                </div>
+                <div class="m-2 text-sm">
+                  <a href="<%= shelter.website_url %>"><%= shelter.website_url %></a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

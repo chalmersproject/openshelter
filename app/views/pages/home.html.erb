@@ -12,11 +12,15 @@
     >
       <li>
         <%= heroicon :home, variant: "mini" %>
-        <%= link_to "Shelters", Shelter, class: "link" %>
+        <%= link_to "Shelters", :shelters, class: "link" %>
+      </li>
+      <li>
+        <%= heroicon :radio, variant: "mini" %>
+        <%= link_to "Signals", :shelter_signals, class: "link" %>
       </li>
       <li>
         <%= heroicon :map, variant: "mini" %>
-        <%= link_to "Map", Shelter, class: "link" %>
+        <%= link_to "Map", :map, class: "link" %>
       </li>
     </ul>
   </section>
