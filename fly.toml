@@ -10,9 +10,6 @@ kill_timeout = 5
   release_command = "bin/release"
   strategy = "canary"
 
-[env]
-  RAILS_STORAGE_SERVICE = "local"
-
 [[services]]
   protocol = "tcp"
   internal_port = 3000
