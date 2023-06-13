@@ -97,10 +97,15 @@ test:
 production:
   primary:
     <<: *default
-    database: <%= ENV.fetch("POSTGRES_DATABASE", "chalmers_production") %>
+    # database: <%= ENV.fetch("POSTGRES_DATABASE", "chalmers_production") %>
     pool: <%= ENV.fetch("RAILS_MAX_THREADS", 5).to_i + 3 + ENV.fetch("GOOD_JOB_MAX_THREADS", 5).to_i %>
-    # username: kai
-    # password: <%= ENV["DATABASE_PASSWORD"] %>
+    url: <%= ENV["POSTGRES_URL"] %>
+    database: <%= ENV["POSTGRES_DATABASE"] %>
+    host: <%= ENV["POSTGRES_HOST"] %>
+    port: <%= ENV["POSTGRES_PORT"] %>
+    username: <%= ENV["DATABASE_PASSWORD"] %>
+    password: <%= ENV["DATABASE_PASSWORD"] %>
+
   legacy:
     <<: *default
     url: <%= ENV["LEGACY_POSTGRES_URL"] %>
