@@ -27,7 +27,7 @@ Shelter.create!(
     },
     {
       name: "Dixon Hall George St 24 Hour Respite",
-      address: "354 George St Toronto ON M5A 2N3",
+      address: "354 George St, Toronto",
       contact_email: "354George.Intake@dixonhall.org",
       contact_phone: "647-888-1014",
       max_headcount: "50",
@@ -37,7 +37,7 @@ Shelter.create!(
     },
     {
       name: "Park Road 24 Hour Respite",
-      address: "21 Park Rd Toronto, ON M4W 2N1",
+      address: "21 Park Rd, Toronto",
       contact_email: "info@margarets.ca",
       contact_phone: "416-525-7070",
       max_headcount: "50",
@@ -47,7 +47,7 @@ Shelter.create!(
     },
     {
       name: "Progress Avenue 24 Hour Respite",
-      address: "705 Progress Ave Toronto ON M1H 2X1",
+      address: "705 Progress Ave, Toronto",
       contact_email: "warden@wardenwoods.com",
       contact_phone: "416-639-6766",
       max_headcount: "49",
@@ -57,7 +57,7 @@ Shelter.create!(
     },
     {
       name: "St Felix Fraser 24 Hour Respite",
-      address: "69 Fraser Ave, Toronto, ON.",
+      address: "69 Fraser Ave, Toronto.",
       contact_email: "info@stfelixcentre.org",
       contact_phone: "(416) 534-4554",
       max_headcount: "100",
@@ -67,7 +67,7 @@ Shelter.create!(
     },
     {
       name: "St Felix Augusta 24 hour respite",
-      address: "25 Augusta Avenue, Toronto Ontario",
+      address: "25 Augusta Avenue, Toronto",
       contact_email: "info@stfelixcentre.org",
       contact_phone: "(416) 203-1624",
       max_headcount: "50",
@@ -77,7 +77,7 @@ Shelter.create!(
     },
     {
       name: "Fred Victor Strachan",
-      address: "1A Strachan Ave Toronto ON M6K 3C3",
+      address: "1A Strachan Ave, Toronto",
       contact_email: "info@stfelixcentre.org",
       contact_phone: "4163384766",
       max_headcount: "100",
