@@ -66,9 +66,9 @@ Shelter.create!(
       website_url: "https://stfelixcentre.org",
     },
     {
-      name: "St Felix Augusta 24 hour respite",
+      name: "St Felix Augusta 24 Hour Respite",
       address: "25 Augusta Avenue, Toronto",
-      contact_email: "info@stfelixcentre.org",
+      contact_email: "volunteer@stfelixcentre.org",
       contact_phone: "(416) 203-1624",
       max_headcount: "50",
       max_bedcount: "50",
@@ -76,7 +76,7 @@ Shelter.create!(
       website_url: "https://stfelixcentre.org",
     },
     {
-      name: "Fred Victor Strachan",
+      name: "Fred Victor Strachan 24 Hour Respite",
       address: "1A Strachan Ave, Toronto",
       contact_email: "info@stfelixcentre.org",
       contact_phone: "4163384766",
