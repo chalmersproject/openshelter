@@ -1,0 +1,20 @@
+<%# TODO: Automatically set address when map pin is set. %>
+<%= simple_form_for(
+  signal,
+  data: {
+    turbo_frame: turbo_frame,
+  },
+  html: {
+    class: class_names(component_name, other_classes),
+    **other_attributes,
+  },
+) do |f| %>
+  <%= render FormNoticeComponent.new(form: f) %>
+  <div class="form-inputs">
+    <%= f.input :type %>
+    <%= f.input :shelter_id, collection: Shelter.all %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit "Create Signal" %>
+  </div>
+<% end %>
