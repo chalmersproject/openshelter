@@ -23,12 +23,24 @@ module Types
     end
 
     #
-    # Get all Shelter Measurements
+    # Get all data from shelter signal
     #
-    # field :shelter_measurements, [Types::ShelterMeasurement], null:false
-    # def shelter_measurements
-    #   ShelterMeasurement.all
-    # end
+    field :shelter_signal, Types::ShelterSignalType, null:false do
+      argument :id, ID, required: true
+    end
+    def shelter_signal(id:)
+      ShelterSignal.find(id).shelter_id
+    end
+
+    #
+    # Get most recent measurment made by shelter signal
+    #
+    field :shelter_signal_measurement_last, Types::ShelterMeasurementType, null:false do
+      argument :id, ID, required: true
+    end
+    def shelter_signal_measurement_last(id:)
+      ShelterMeasurement.where(signal_id: id).order("created_at DESC").first
+    end
 
     # TODO: remove me
     field :test_field, String, null: false,
