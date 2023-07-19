@@ -29,7 +29,17 @@ module Types
       argument :id, ID, required: true
     end
     def shelter_signal(id:)
-      ShelterSignal.find(id).shelter_id
+      ShelterSignal.where(signal_id: id)
+    end
+
+    #
+    # get shelter data from signal id
+    #
+    field :shelter_from_signal_id, Types::ShelterType, null:false do
+      argument :id, ID, required: true
+    end
+    def shelter_from_signal_id(id:)
+      Shelter.find(ShelterSignal.find(id).shelter_id)
     end
 
     #

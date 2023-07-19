@@ -28,6 +28,9 @@ class ShelterSignal < ApplicationRecord
   # == Attributes ==
   enumerize :type, in: %w[bedcount headcount]
   attribute :secret_key, :string, default: -> { SecureRandom.hex(12) }
+  attribute :id, type: :uuid
+  attribute :shelter_id, type: :uuid
+  attribute :type, type: :string
 
   # == Associations ==
   belongs_to :shelter
