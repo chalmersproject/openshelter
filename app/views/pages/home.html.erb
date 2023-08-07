@@ -1,27 +1,37 @@
-<div class="layout">
-  <section class="section flex flex-col gap-y-2">
-    <div>
-      <h3>This website is under active development.</h3>
-      <p class="text-sm text-zinc-400">Quick navigation:</p>
-    </div>
-    <ul
-      class="<%= class_names(
-        "[&>*]:flex [&>*]:items-center [&>*]:gap-x-1",
-        "[&_svg]:w-4 [&_svg]:h-4 [&_svg]:text-white",
-      ) %>"
-    >
-      <li>
-        <%= heroicon :home, variant: "mini" %>
-        <%= link_to "Shelters", :shelters, class: "link" %>
-      </li>
-      <li>
-        <%= heroicon :radio, variant: "mini" %>
-        <%= link_to "Signals", :shelter_signals, class: "link" %>
-      </li>
-      <li>
-        <%= heroicon :map, variant: "mini" %>
-        <%= link_to "Map", :map, class: "link" %>
-      </li>
-    </ul>
-  </section>
+<%= turbo_stream_from "shelter_measurements" %>
+<div class="flex-1 flex flex-col  relative">
+    <%= render ShelterLocationsComponent.new(
+      shelters: Shelter.all,
+      interactive: true,
+      class: "h-screen !rounded-none",
+    ) %>
+
+
+  <div class="layout">
+    <section class="section flex flex-col gap-y-2">
+      <div>
+        <h3>This website is under active development.</h3>
+        <p class="text-sm text-zinc-400">Quick navigation:</p>
+      </div>
+      <ul
+        class="<%= class_names(
+          "[&>*]:flex [&>*]:items-center [&>*]:gap-x-1",
+          "[&_svg]:w-4 [&_svg]:h-4 [&_svg]:text-white",
+        ) %>"
+      >
+        <li>
+          <%= heroicon :home, variant: "mini" %>
+          <%= link_to "Shelters", :shelters, class: "link" %>
+        </li>
+        <li>
+          <%= heroicon :radio, variant: "mini" %>
+          <%= link_to "Signals", :shelter_signals, class: "link" %>
+        </li>
+        <li>
+          <%= heroicon :map, variant: "mini" %>
+          <%= link_to "Map", :map, class: "link" %>
+        </li>
+      </ul>
+    </section>
+  </div>
 </div>
