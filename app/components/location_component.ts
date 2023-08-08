@@ -72,7 +72,7 @@ const LocationComponentMapData = ({
         style: "mapbox://styles/mapbox/dark-v10",
         center: first(points) || [-79.402593, 43.661732],
         zoom: 12.5,
-        cooperativeGestures: true,
+        cooperativeGestures: false,
         interactive,
       });
       if (interactive) {
