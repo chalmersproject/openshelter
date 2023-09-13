@@ -68,6 +68,10 @@ const ShelterLocationsComponentMapData = ({
           // this is a workaround to ensure the data in the popup is refreshed every time it is opened
           //
           shelter_marker.getElement().addEventListener('click', () => {
+          
+            this.map?.flyTo({
+              center:coordinates as [number,number]
+            });
             console.log("Shelter marker: " + markerFrameId + " was clicked!");
 
             const popup = new mapboxgl.Popup({className: "shelter_measurement_popup", closeOnClick: true, closeButton: false })
