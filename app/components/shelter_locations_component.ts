@@ -57,7 +57,14 @@ const ShelterLocationsComponentMapData = ({
           </turbo-frame>
           `;
         shelter_marker_markup.innerHTML = svg_circle;
-
+        this.map?.getContainer().addEventListener('click',(x)=>{
+          const targetElement = x.target
+          if (!targetElement.classList.contains("mapboxgl-canvas"))
+            return;
+          const val = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input");
+          const element : HTMLElement = val[0] as HTMLElement;
+          element.style.display = "initial";
+        })
         const shelter_marker =  new mapboxgl.Marker(shelter_marker_markup)
           .setLngLat(coordinates as [number, number])
           .addTo(target);
@@ -68,7 +75,9 @@ const ShelterLocationsComponentMapData = ({
           // this is a workaround to ensure the data in the popup is refreshed every time it is opened
           //
           shelter_marker.getElement().addEventListener('click', () => {
-          
+            const val = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input");
+            const element : HTMLElement = val[0] as HTMLElement;
+            element.style.display = "none";
             this.map?.flyTo({
               center:coordinates as [number,number]
             });
