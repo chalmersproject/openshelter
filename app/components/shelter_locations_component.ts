@@ -88,9 +88,13 @@ const ShelterLocationsComponentMapData = ({
             const val = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input");
             const element : HTMLElement = val[0] as HTMLElement;
             element.style.display = "none";
-            this.map?.flyTo({
-              center:coordinates as [number,number]
-            });
+
+            if (userAgent == "mobile"){
+              this.map?.flyTo({
+                center:coordinates as [number,number]
+              });
+            }
+
             console.log("Shelter marker: " + markerFrameId + " was clicked!");
 
             const popup = new mapboxgl.Popup({className: "shelter_measurement_popup", closeOnClick: true, closeButton: false })
