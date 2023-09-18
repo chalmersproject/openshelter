@@ -54,27 +54,25 @@ const ShelterLocationsComponentMapData = ({
     // == Helpers ==
     handleLoad({ target }: MapboxEvent) {
       context(this).$dispatch("shelter-locations-component-map:load");
-      shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl, markerFrameId, markerFrameUrl}) => {
-        if (userAgent == "desktop"){
-          console.log("Hello desktop");
-        }
-        else if (userAgent == "tablet" || userAgent == "mobile"){
-          console.log("Hello mobile");
-        }
-        const shelter_marker_markup = document.createElement('div')
-        const svg_circle = `
-          <turbo-frame id="${markerFrameId}" src="${markerFrameUrl}">
-          </turbo-frame>
-          `;
-        shelter_marker_markup.innerHTML = svg_circle;
-        this.map?.getContainer().addEventListener('click',(x)=>{
+      this.map?.getContainer().addEventListener('click',(x)=>{
+        if (userAgent == "mobile"){
           const targetElement = x.target
           if (!targetElement.classList.contains("mapboxgl-canvas"))
             return;
           const val = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input");
           const element : HTMLElement = val[0] as HTMLElement;
           element.style.display = "initial";
-        })
+        }
+      })
+
+      shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl, markerFrameId, markerFrameUrl}) => {
+        const shelter_marker_markup = document.createElement('div')
+        const svg_circle = `
+          <turbo-frame id="${markerFrameId}" src="${markerFrameUrl}">
+          </turbo-frame>
+          `;
+        shelter_marker_markup.innerHTML = svg_circle;
+
         const shelter_marker =  new mapboxgl.Marker(shelter_marker_markup)
           .setLngLat(coordinates as [number, number])
           .addTo(target);
@@ -85,11 +83,12 @@ const ShelterLocationsComponentMapData = ({
           // this is a workaround to ensure the data in the popup is refreshed every time it is opened
           //
           shelter_marker.getElement().addEventListener('click', () => {
-            const val = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input");
-            const element : HTMLElement = val[0] as HTMLElement;
-            element.style.display = "none";
 
             if (userAgent == "mobile"){
+              const val = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input");
+              const element : HTMLElement = val[0] as HTMLElement;
+              element.style.display = "none";
+
               this.map?.flyTo({
                 center:coordinates as [number,number]
               });
