@@ -88,9 +88,10 @@ const ShelterLocationsComponentMapData = ({
               const val = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input");
               const element : HTMLElement = val[0] as HTMLElement;
               element.style.display = "none";
+              const newCoords = coordinates as [number,number];
 
               this.map?.flyTo({
-                center:coordinates as [number,number]
+                center:[newCoords[0]+.006,newCoords[1]]
               });
             }
 
