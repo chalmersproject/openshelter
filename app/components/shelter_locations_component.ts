@@ -1,9 +1,5 @@
-import { parse as parseWKT } from "wellknown";
-import { resolve } from "app/javascript/helpers";
 import { context, register } from "app/javascript/alpine/helpers";
-import first from "lodash/first";
 
-import type { GeoJSONGeometry } from "wellknown";
 import type { Point } from "geojson"
 import { Map, MapboxEvent, LngLat } from "mapbox-gl";
 
