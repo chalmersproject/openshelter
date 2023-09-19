@@ -5,12 +5,14 @@ class ShelterLocationsComponent < ApplicationComponent
   extend T::Sig
 
   sig do
-    params(shelters: T::Enumerable[Shelter], interactive: T::Boolean, kwargs: T.untyped).void
+    params(shelters: T::Enumerable[Shelter], userAgent: String, interactive: T::Boolean,
+kwargs: T.untyped).void
   end
-  def initialize(shelters:, interactive: false, **kwargs)
+  def initialize(shelters:, interactive: false, userAgent:, **kwargs)
     super(**kwargs)
     @shelters = shelters
     @interactive = interactive
+    @userAgent = userAgent
   end
 
   private
@@ -32,5 +34,10 @@ class ShelterLocationsComponent < ApplicationComponent
   sig { returns(T::Boolean) }
   def interactive?
     @interactive
+  end
+
+  sig { returns(String) }
+  def userAgent?
+    @userAgent
   end
 end

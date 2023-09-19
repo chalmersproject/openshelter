@@ -19,15 +19,18 @@ type Shelter = {
 type ShelterLocationsComponentParams = {
   readonly shelters: Shelter[];
   readonly interactive?: boolean;
+  readonly userAgent?:string
 };
 
 const ShelterLocationsComponentData = ({
   shelters,
   interactive,
+  userAgent,
 }: ShelterLocationsComponentParams) => ({
   // == State ==
   shelters,
   interactive: !!interactive,
+  userAgent: userAgent
 });
 
 register("ShelterLocationsComponent", ShelterLocationsComponentData);
@@ -35,11 +38,13 @@ register("ShelterLocationsComponent", ShelterLocationsComponentData);
 type ShelterLocationsComponentMapParams = {
   readonly shelters: Shelter[];
   readonly interactive: boolean;
+  readonly userAgent:string | undefined;
 };
 
 const ShelterLocationsComponentMapData = ({
   shelters,
   interactive,
+  userAgent,
 }: ShelterLocationsComponentMapParams) => {
 
   return {
@@ -50,7 +55,12 @@ const ShelterLocationsComponentMapData = ({
     handleLoad({ target }: MapboxEvent) {
       context(this).$dispatch("shelter-locations-component-map:load");
       shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl, markerFrameId, markerFrameUrl}) => {
-
+        if (userAgent == "desktop"){
+          console.log("Hello desktop");
+        }
+        else if (userAgent == "tablet" || userAgent == "mobile"){
+          console.log("Hello mobile");
+        }
         const shelter_marker_markup = document.createElement('div')
         const svg_circle = `
           <turbo-frame id="${markerFrameId}" src="${markerFrameUrl}">

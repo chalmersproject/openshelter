@@ -31,4 +31,13 @@ module ApplicationHelper
   def flash?
     flash.any?
   end
+
+  sig { returns(String)}
+  def device
+    agent = request.user_agent
+    return "tablet" if /(tablet|ipad)|(android(?!.*mobile))/i.match?(agent)
+    return "mobile" if /Mobile/.match?(agent)
+    "desktop"
+  end
+
 end
