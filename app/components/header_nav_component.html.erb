@@ -9,12 +9,6 @@
   <%= tag.attributes other_attributes %>
 >
   <%= item do |i| %>
-    <%= active_link_to :root, active: :exclusive do %>
-      <%= i.icon :home %>
-      <%= i.label "Home" %>
-    <% end %>
-  <% end %>
-  <%= item do |i| %>
     <%= active_link_to :map, active: :exclusive do %>
       <%= i.icon :map %>
       <%= i.label "Map" %>
