@@ -50,16 +50,6 @@ const ShelterLocationsComponentMapData = ({
     // == Helpers ==
     handleLoad({ target }: MapboxEvent) {
       context(this).$dispatch("shelter-locations-component-map:load");
-      this.map?.getContainer().addEventListener('click',(x)=>{
-        if (userAgent == "mobile"){
-          const targetElement = x.target
-          if (!targetElement.classList.contains("mapboxgl-canvas"))
-            return;
-          const val = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input");
-          const element : HTMLElement = val[0] as HTMLElement;
-          element.style.display = "initial";
-        }
-      })
 
       shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl, markerFrameId, markerFrameUrl}) => {
         const shelter_marker_markup = document.createElement('div')
@@ -73,34 +63,40 @@ const ShelterLocationsComponentMapData = ({
           .setLngLat(coordinates as [number, number])
           .addTo(target);
 
+
           // add listener for each time marker is clicked
           //
           // each time a marker is clicked a new popup is generated and assigned to the marker.
           // this is a workaround to ensure the data in the popup is refreshed every time it is opened
           //
           shelter_marker.getElement().addEventListener('click', () => {
+            console.log("Shelter marker: " + markerFrameId + " was clicked!");
+
 
             if (userAgent == "mobile"){
-              const val = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input");
-              const element : HTMLElement = val[0] as HTMLElement;
-              element.style.display = "none";
+              const d = document.getElementsByClassName('shelter-detail-component')[0];
+              d.setAttribute('id',popupFrameId);
+              d.setAttribute('src',popupFrameUrl);
               const newCoords = coordinates as [number,number];
+              this.map?.flyTo({
+                center:[newCoords[0]+.006,newCoords[1]-.003]
+              });
 
+            }
+            else {
+              const newCoords = coordinates as [number,number];
               this.map?.flyTo({
                 center:[newCoords[0]+.006,newCoords[1]]
               });
+              const popup = new mapboxgl.Popup({className: "shelter_measurement_popup", closeOnClick: true, closeButton: false })
+              .setLngLat(coordinates as [number, number])
+              .setHTML(`
+                  <turbo-frame id="${popupFrameId}" src="${popupFrameUrl}">
+                    <p>Loading...</p>
+                  </turbo-frame>
+                `);
+              shelter_marker.setPopup(popup);
             }
-
-            console.log("Shelter marker: " + markerFrameId + " was clicked!");
-
-            const popup = new mapboxgl.Popup({className: "shelter_measurement_popup", closeOnClick: true, closeButton: false })
-            .setLngLat(coordinates as [number, number])
-            .setHTML(`
-                <turbo-frame id="${popupFrameId}" src="${popupFrameUrl}">
-                  <p>Loading...</p>
-                </turbo-frame>
-              `);
-            shelter_marker.setPopup(popup);
           });
       });
     },
@@ -125,6 +121,19 @@ const ShelterLocationsComponentMapData = ({
         );
       }
       this.map.once("load", this.handleLoad.bind(this));
+      this.map.once('idle',()=>{
+        const d = document.getElementsByClassName('mapboxgl-canvas-container')[0];
+        const shelterInfoComponent = document.createElement('div')
+        if (userAgent == 'mobile'){
+          shelterInfoComponent.setAttribute('class','absolute bottom-10 left-0 self-center h-fit w-screen');
+          const temp = `
+          <turbo-frame class="shelter-detail-component" id="" src="">
+          </turbo-frame>
+          `;
+          shelterInfoComponent.innerHTML = temp;
+          d.insertAdjacentElement('beforeend',shelterInfoComponent);
+        }
+      });
     },
     destroy() {
       if (this.map) {
