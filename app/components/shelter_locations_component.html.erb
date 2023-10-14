@@ -6,7 +6,7 @@
     "flex flex-col",
     other_classes,
   ) %>"
-  x-data="<%= component_data(shelters: shelters, interactive: interactive?) %>"
+  x-data="<%= component_data(shelters: shelters, interactive: interactive?, userAgent:userAgent?) %>"
   <%= tag.attributes other_attributes %>
 >
   <%= render LoadingOverlayComponent.new(
@@ -18,7 +18,7 @@
   ) do %>
     <div
       class="flex-1"
-      x-data="ShelterLocationsComponentMap({ shelters, interactive })"
+      x-data="ShelterLocationsComponentMap({ shelters, interactive, userAgent })"
       x-on:shelter-locations-component-map:load="$dispatch('shelter-locations-component:load')"
     ></div>
   <% end %>

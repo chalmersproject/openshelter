@@ -1,11 +1,8 @@
-import { parse as parseWKT } from "wellknown";
-import { resolve } from "app/javascript/helpers";
 import { context, register } from "app/javascript/alpine/helpers";
-import first from "lodash/first";
 
-import type { GeoJSONGeometry } from "wellknown";
 import type { Point } from "geojson"
 import { Map, MapboxEvent, LngLat } from "mapbox-gl";
+
 
 type Shelter = {
   readonly id: string;
@@ -19,15 +16,18 @@ type Shelter = {
 type ShelterLocationsComponentParams = {
   readonly shelters: Shelter[];
   readonly interactive?: boolean;
+  readonly userAgent?:string;
 };
 
 const ShelterLocationsComponentData = ({
   shelters,
   interactive,
+  userAgent,
 }: ShelterLocationsComponentParams) => ({
   // == State ==
   shelters,
   interactive: !!interactive,
+  userAgent: userAgent
 });
 
 register("ShelterLocationsComponent", ShelterLocationsComponentData);
@@ -35,11 +35,13 @@ register("ShelterLocationsComponent", ShelterLocationsComponentData);
 type ShelterLocationsComponentMapParams = {
   readonly shelters: Shelter[];
   readonly interactive: boolean;
+  readonly userAgent:string | undefined;
 };
 
 const ShelterLocationsComponentMapData = ({
   shelters,
   interactive,
+  userAgent,
 }: ShelterLocationsComponentMapParams) => {
 
   return {
@@ -49,8 +51,8 @@ const ShelterLocationsComponentMapData = ({
     // == Helpers ==
     handleLoad({ target }: MapboxEvent) {
       context(this).$dispatch("shelter-locations-component-map:load");
-      shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl, markerFrameId, markerFrameUrl}) => {
 
+      shelters.forEach(({location: { coordinates }, popupFrameId, popupFrameUrl, markerFrameId, markerFrameUrl}) => {
         const shelter_marker_markup = document.createElement('div')
         const svg_circle = `
           <turbo-frame id="${markerFrameId}" src="${markerFrameUrl}">
@@ -62,6 +64,7 @@ const ShelterLocationsComponentMapData = ({
           .setLngLat(coordinates as [number, number])
           .addTo(target);
 
+
           // add listener for each time marker is clicked
           //
           // each time a marker is clicked a new popup is generated and assigned to the marker.
@@ -69,15 +72,40 @@ const ShelterLocationsComponentMapData = ({
           //
           shelter_marker.getElement().addEventListener('click', () => {
             console.log("Shelter marker: " + markerFrameId + " was clicked!");
+            if (userAgent == "mobile"){
+              const d = document.getElementsByClassName('shelter-detail-component')[0];
+              if (!d) return;
 
-            const popup = new mapboxgl.Popup({className: "shelter_measurement_popup", closeOnClick: true, closeButton: false })
-            .setLngLat(coordinates as [number, number])
-            .setHTML(`
-                <turbo-frame id="${popupFrameId}" src="${popupFrameUrl}">
-                  <p>Loading...</p>
-                </turbo-frame>
-              `);
-            shelter_marker.setPopup(popup);
+              if (d.getAttribute('id') == popupFrameId){
+                d.classList.contains('hidden')? d.classList.remove('hidden') : d.classList.add('hidden');
+              }
+              else{
+                d.setAttribute('id',popupFrameId);
+                d.setAttribute('src',popupFrameUrl);
+                if (d.classList.contains('hidden')){
+                  d.classList.remove('hidden');
+                }
+                const newCoords = coordinates as [number,number];
+                this.map?.setZoom(12.5);
+                this.map?.flyTo({
+                  center:[newCoords[0],newCoords[1]-.015]
+                });
+              }
+            }
+            else {
+              const newCoords = coordinates as [number,number];
+              this.map?.flyTo({
+                center:[newCoords[0],newCoords[1]]
+              });
+              const popup = new mapboxgl.Popup({className: "shelter_measurement_popup", closeOnClick: true, closeButton: false })
+              .setLngLat(coordinates as [number, number])
+              .setHTML(`
+                  <turbo-frame id="${popupFrameId}" src="${popupFrameUrl}">
+                    <p>Loading...</p>
+                  </turbo-frame>
+                `);
+              shelter_marker.setPopup(popup);
+            }
           });
       });
     },
@@ -93,15 +121,42 @@ const ShelterLocationsComponentMapData = ({
         interactive,
       });
       if (interactive) {
-        this.map.addControl(
-          new MapboxGeocoder({
-            mapboxgl,
-            accessToken: mapboxgl.accessToken,
-            marker: false,
-          }),
-        );
+        // this.map.addControl(
+        //   new MapboxGeocoder({
+        //     mapboxgl,
+        //     accessToken: mapboxgl.accessToken,
+        //     marker: false,
+        //   }),
+        // );
       }
       this.map.once("load", this.handleLoad.bind(this));
+      this.map.once('idle',()=>{
+        const val = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input");
+        const element : HTMLElement = val[0] as HTMLElement;
+        element.style.display = "none";
+
+        const d = document.getElementsByClassName('mapboxgl-map')[0];
+        const shelterInfoComponent = document.createElement('div')
+        if (userAgent == 'mobile'){
+          shelterInfoComponent.setAttribute('class','absolute bottom-10 left-0 self-center h-fit w-screen');
+          const temp = `
+          <turbo-frame class="shelter-detail-component" id="" src="">
+          </turbo-frame>
+          `;
+          shelterInfoComponent.innerHTML = temp;
+          d.insertAdjacentElement('beforeend',shelterInfoComponent);
+        }
+      });
+      this.map.getCanvasContainer().addEventListener('click',(e)=>{
+        const target = e.target as HTMLElement;
+        if (target && target.localName == 'circle') return;
+        if (userAgent == 'mobile'){
+          const detailViewDiv = document.getElementsByClassName('shelter-detail-component')[0];
+          if (!detailViewDiv?.classList.contains('hidden')){
+            detailViewDiv?.classList.add('hidden');
+          }
+        }
+      })
     },
     destroy() {
       if (this.map) {

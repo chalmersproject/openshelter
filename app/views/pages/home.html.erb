@@ -3,6 +3,7 @@
     <%= render ShelterLocationsComponent.new(
       shelters: Shelter.all,
       interactive: true,
+      userAgent:device,
       class: "h-screen !rounded-none",
     ) %>
 
