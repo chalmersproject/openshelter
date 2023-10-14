@@ -76,6 +76,9 @@ const ShelterLocationsComponentMapData = ({
 
             if (userAgent == "mobile"){
               const d = document.getElementsByClassName('shelter-detail-component')[0];
+
+              if (!d) return;
+
               if (d.getAttribute('id') == popupFrameId){
                 d.classList.contains('hidden')? d.classList.remove('hidden') : d.classList.add('hidden');
               }
@@ -145,6 +148,16 @@ const ShelterLocationsComponentMapData = ({
           d.insertAdjacentElement('beforeend',shelterInfoComponent);
         }
       });
+      this.map.getCanvasContainer().addEventListener('click',(e)=>{
+        const target = e.target as HTMLElement;
+        if (target && target.localName == 'circle') return;
+        if (userAgent == 'mobile'){
+          const detailViewDiv = document.getElementsByClassName('shelter-detail-component')[0];
+          if (!detailViewDiv?.classList.contains('hidden')){
+            detailViewDiv?.classList.add('hidden');
+          }
+        }
+      })
     },
     destroy() {
       if (this.map) {
