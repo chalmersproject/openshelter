@@ -3,6 +3,7 @@ import { context, register } from "app/javascript/alpine/helpers";
 import type { Point } from "geojson"
 import { Map, MapboxEvent, LngLat } from "mapbox-gl";
 
+
 type Shelter = {
   readonly id: string;
   readonly location: Point;
@@ -15,7 +16,7 @@ type Shelter = {
 type ShelterLocationsComponentParams = {
   readonly shelters: Shelter[];
   readonly interactive?: boolean;
-  readonly userAgent?:string
+  readonly userAgent?:string;
 };
 
 const ShelterLocationsComponentData = ({
@@ -85,8 +86,9 @@ const ShelterLocationsComponentMapData = ({
                   d.classList.remove('hidden');
                 }
                 const newCoords = coordinates as [number,number];
+                this.map?.setZoom(12.5);
                 this.map?.flyTo({
-                  center:[newCoords[0]+.006,newCoords[1]-.003]
+                  center:[newCoords[0],newCoords[1]-.015]
                 });
               }
 
@@ -95,7 +97,7 @@ const ShelterLocationsComponentMapData = ({
             else {
               const newCoords = coordinates as [number,number];
               this.map?.flyTo({
-                center:[newCoords[0]+.006,newCoords[1]]
+                center:[newCoords[0],newCoords[1]]
               });
               const popup = new mapboxgl.Popup({className: "shelter_measurement_popup", closeOnClick: true, closeButton: false })
               .setLngLat(coordinates as [number, number])
