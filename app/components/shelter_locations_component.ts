@@ -72,11 +72,8 @@ const ShelterLocationsComponentMapData = ({
           //
           shelter_marker.getElement().addEventListener('click', () => {
             console.log("Shelter marker: " + markerFrameId + " was clicked!");
-
-
             if (userAgent == "mobile"){
               const d = document.getElementsByClassName('shelter-detail-component')[0];
-
               if (!d) return;
 
               if (d.getAttribute('id') == popupFrameId){
@@ -94,8 +91,6 @@ const ShelterLocationsComponentMapData = ({
                   center:[newCoords[0],newCoords[1]-.015]
                 });
               }
-
-
             }
             else {
               const newCoords = coordinates as [number,number];
