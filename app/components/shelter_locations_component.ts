@@ -75,12 +75,21 @@ const ShelterLocationsComponentMapData = ({
 
             if (userAgent == "mobile"){
               const d = document.getElementsByClassName('shelter-detail-component')[0];
-              d.setAttribute('id',popupFrameId);
-              d.setAttribute('src',popupFrameUrl);
-              const newCoords = coordinates as [number,number];
-              this.map?.flyTo({
-                center:[newCoords[0]+.006,newCoords[1]-.003]
-              });
+              if (d.getAttribute('id') == popupFrameId){
+                d.classList.contains('hidden')? d.classList.remove('hidden') : d.classList.add('hidden');
+              }
+              else{
+                d.setAttribute('id',popupFrameId);
+                d.setAttribute('src',popupFrameUrl);
+                if (d.classList.contains('hidden')){
+                  d.classList.remove('hidden');
+                }
+                const newCoords = coordinates as [number,number];
+                this.map?.flyTo({
+                  center:[newCoords[0]+.006,newCoords[1]-.003]
+                });
+              }
+
 
             }
             else {
