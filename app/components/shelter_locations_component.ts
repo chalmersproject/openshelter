@@ -122,7 +122,7 @@ const ShelterLocationsComponentMapData = ({
       }
       this.map.once("load", this.handleLoad.bind(this));
       this.map.once('idle',()=>{
-        const d = document.getElementsByClassName('mapboxgl-canvas-container')[0];
+        const d = document.getElementsByClassName('mapboxgl-map')[0];
         const shelterInfoComponent = document.createElement('div')
         if (userAgent == 'mobile'){
           shelterInfoComponent.setAttribute('class','absolute bottom-10 left-0 self-center h-fit w-screen');
