@@ -1,10 +1,6 @@
-> 1%
-not ie 11
-not edge <= 18
-not op_mini all
-Edge >= 79
-Firefox >= 67
-Chrome >= 63
-Safari >= 11.1
-Opera >= 50
-iOS >= 11
+last 4 Chrome version
+last 4 Firefox version
+last 4 Edge major versions
+last 4 Safari major versions
+last 4 iOS major versions
+Firefox ESR

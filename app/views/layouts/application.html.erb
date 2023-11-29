@@ -15,9 +15,6 @@
     <% if debug? %>
       <meta name="debug" content="<%= debug_targets %>">
     <% end %>
-    <meta name="honeybadger-api-key" content="<%= Honeybadger.config[:client_api_key] %>">
-    <meta name="honeybadger-revision" content="<%= Honeybadger.config[:revision] %>">
-    <meta name="fullstory-org-id" content="<%= ENV["FULLSTORY_ORG_ID"] %>">
     <% if user_signed_in? %>
       <meta name="honeybadger-context" content="<%= current_user.honeybadger_context.to_json %>">
       <meta name="fullstory-identity" content="<%= current_user.fullstory_identity.to_json %>">
@@ -26,7 +23,7 @@
     <%# == Meta: Informational == %>
     <%= display_meta_tags(
       reverse: true,
-      site: "Chalmers Project",
+      site: "OpenShelterSpace",
       description: "A guerilla project fighting homelessness in Toronto, " \
         "Ontario.",
       og: {
