@@ -131,9 +131,6 @@ const ShelterLocationsComponentMapData = ({
       }
       this.map.once("load", this.handleLoad.bind(this));
       this.map.once('idle',()=>{
-        const val = document.getElementsByClassName("mapboxgl-ctrl-geocoder--input");
-        const element : HTMLElement = val[0] as HTMLElement;
-        element.style.display = "none";
 
         const d = document.getElementsByClassName('mapboxgl-map')[0];
         const shelterInfoComponent = document.createElement('div')
